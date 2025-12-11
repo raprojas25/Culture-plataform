@@ -11,7 +11,8 @@ import {
   Phone,
   Menu,
   X,
-  MapPin
+  MapPin,
+  GalleryVertical
 } from 'lucide-react'
 // import ThemeToggle from './ThemeToggle'
 
@@ -27,6 +28,8 @@ const Header = () => {
     { path: '/directorio', label: 'Directorio', icon: <Users size={18} /> },
     { path: '/about', label: 'Nosotros', icon: <Info size={18} /> },
     { path: '/contacto', label: 'Contacto', icon: <Phone size={18} /> },
+{ path: '/galeria', label: 'Galeria', icon: <GalleryVertical size={18} /> },
+
   ]
 
   return (

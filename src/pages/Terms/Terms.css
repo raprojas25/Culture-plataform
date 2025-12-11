@@ -1,0 +1,219 @@
+/* Estilos para la página de Términos */
+.terms-container {
+  background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+}
+
+/* Estilos para el contenido de términos */
+.terms-content {
+  line-height: 1.8;
+}
+
+.terms-content h2 {
+  color: #1e293b;
+  margin-top: 2.5rem;
+  margin-bottom: 1rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 2px solid #ef4444;
+}
+
+.terms-content h3 {
+  color: #334155;
+  margin-top: 2rem;
+  margin-bottom: 1rem;
+}
+
+.terms-content p {
+  color: #475569;
+  margin-bottom: 1rem;
+}
+
+.terms-content ul {
+  list-style-type: none;
+  padding-left: 0;
+  margin-bottom: 1.5rem;
+}
+
+.terms-content li {
+  padding-left: 1.5rem;
+  position: relative;
+  margin-bottom: 0.5rem;
+  color: #475569;
+}
+
+.terms-content li::before {
+  content: "•";
+  color: #ef4444;
+  font-weight: bold;
+  position: absolute;
+  left: 0;
+}
+
+/* Estilos para las secciones interactivas */
+.terms-section {
+  animation: fadeIn 0.5s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Estilo para bloques de advertencia */
+.warning-block {
+  border-left: 4px solid #ef4444;
+  animation: pulseWarning 2s infinite;
+}
+
+@keyframes pulseWarning {
+  0%, 100% {
+    border-left-color: #ef4444;
+  }
+  50% {
+    border-left-color: #f87171;
+  }
+}
+
+/* Estilo para bloques de información */
+.info-block {
+  border-left: 4px solid #3b82f6;
+}
+
+/* Estilo para bloques de éxito */
+.success-block {
+  border-left: 4px solid #10b981;
+}
+
+/* Navegación sticky */
+.sticky-nav {
+  position: sticky;
+  top: 6rem;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .terms-content h2 {
+    font-size: 1.75rem;
+  }
+  
+  .terms-content h3 {
+    font-size: 1.5rem;
+  }
+  
+  .sticky-nav {
+    position: static;
+    margin-bottom: 2rem;
+  }
+}
+
+/* Estilos para checkboxes personalizados */
+.terms-checkbox {
+  accent-color: #ef4444;
+  width: 1.25rem;
+  height: 1.25rem;
+  border-radius: 0.375rem;
+  border: 2px solid #d1d5db;
+}
+
+.terms-checkbox:checked {
+  background-color: #ef4444;
+  border-color: #ef4444;
+}
+
+/* Estilos para enlaces dentro del contenido */
+.terms-content a {
+  color: #ef4444;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.terms-content a:hover {
+  color: #dc2626;
+}
+
+/* Scrollspy para navegación */
+.active-section-indicator {
+  position: relative;
+}
+
+.active-section-indicator::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 4px;
+  background: linear-gradient(to bottom, #ef4444, #f97316);
+  border-radius: 0 2px 2px 0;
+}
+
+/* Estilos de impresión */
+@media print {
+  .sticky-nav,
+  .acceptance-section,
+  .print-hide {
+    display: none;
+  }
+  
+  .terms-content {
+    font-size: 12pt;
+    line-height: 1.5;
+  }
+}
+
+/* Animación de scroll suave */
+html {
+  scroll-behavior: smooth;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  
+  .terms-section,
+  .warning-block {
+    animation: none;
+  }
+}
+
+/* Estilos para listas numeradas */
+.terms-numbered-list {
+  counter-reset: section;
+  list-style: none;
+}
+
+.terms-numbered-list li {
+  counter-increment: section;
+  margin-bottom: 1rem;
+}
+
+.terms-numbered-list li::before {
+  content: counter(section) ". ";
+  font-weight: bold;
+  color: #ef4444;
+  position: absolute;
+  left: 0;
+}
+
+/* Mejoras de accesibilidad */
+.terms-content :focus {
+  outline: 2px solid #ef4444;
+  outline-offset: 2px;
+}
+
+/* Estilo para bloques de código (si es necesario) */
+.terms-code-block {
+  background-color: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 0.5rem;
+  padding: 1rem;
+  font-family: 'Monaco', 'Consolas', monospace;
+  font-size: 0.875rem;
+  overflow-x: auto;
+}

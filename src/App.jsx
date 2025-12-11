@@ -12,7 +12,9 @@ import About from "./pages/About/About";
 //import About from './pages/About/About'
 import Contact from './pages/Contact/Contact'
 //import Terms from './pages/Terms/Terms'
-//import Gallery from './pages/Gallery/Gallery'
+import Gallery from './pages/Gallery/Gallery'
+import Profile from "./pages/Profile/Profile";
+import Terms from "./pages/Terms/Terms";
 //import './App.css'
 
 function App() {
@@ -29,7 +31,9 @@ function App() {
             <Route path="/directorio" element={<Directory />} />
  <Route path="/about" element={<About />} />
  <Route path="/contacto" element={<Contact />} />
-
+<Route path="/galeria" element={<Gallery />} />
+<Route path="/perfil" element={<Profile />}/>
+            <Route path="/terminos" element={<Terms />}/>
             {/*
             <Route path="/calendario" element={<CalendarPage />} />
             <Route path="/publicar-evento" element={<PublishEvent />} />

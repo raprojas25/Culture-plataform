@@ -1,0 +1,345 @@
+/* Estilos específicos para la página de perfil */
+
+/* Header con imagen de portada */
+.profile-header {
+  position: relative;
+  height: 16rem;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+}
+
+.profile-header::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 4rem;
+  background: linear-gradient(to bottom, transparent, #f9fafb);
+}
+
+/* Avatar del perfil */
+.profile-avatar {
+  width: 8rem;
+  height: 8rem;
+  border: 4px solid white;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+}
+
+/* Animación para el avatar */
+.profile-avatar-edit {
+  transition: all 0.2s ease;
+}
+
+.profile-avatar-edit:hover {
+  transform: scale(1.1);
+  box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.3);
+}
+
+/* Pestañas de navegación */
+.profile-tabs {
+  position: relative;
+}
+
+.profile-tabs::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(to right, transparent, #e5e7eb, transparent);
+}
+
+/* Tarjetas de estadísticas */
+.stats-card {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.stats-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+}
+
+/* Tabla de eventos */
+.events-table {
+  border-collapse: separate;
+  border-spacing: 0;
+}
+
+.events-table th {
+  position: sticky;
+  top: 0;
+  background: white;
+  z-index: 10;
+  box-shadow: 0 2px 0 #e5e7eb;
+}
+
+.events-table tr {
+  transition: background-color 0.2s ease;
+}
+
+.events-table tr:hover {
+  background-color: #f9fafb;
+}
+
+/* Tarjetas de eventos favoritos */
+.favorite-card {
+  transition: all 0.3s ease;
+}
+
+.favorite-card:hover {
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+}
+
+.favorite-card-image {
+  position: relative;
+  overflow: hidden;
+}
+
+.favorite-card-image::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.2), transparent 40%);
+}
+
+/* Notificaciones */
+.notification-item {
+  transition: all 0.2s ease;
+}
+
+.notification-item:hover {
+  background-color: #f8fafc;
+}
+
+.notification-unread {
+  position: relative;
+}
+
+.notification-unread::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 4px;
+  background: linear-gradient(to bottom, #3b82f6, #60a5fa);
+  border-radius: 0 2px 2px 0;
+}
+
+/* Toggle switches */
+.toggle-switch {
+  position: relative;
+  display: inline-block;
+}
+
+.toggle-switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.toggle-slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #d1d5db;
+  transition: .4s;
+  border-radius: 34px;
+}
+
+.toggle-slider:before {
+  position: absolute;
+  content: "";
+  height: 1.25rem;
+  width: 1.25rem;
+  left: 0.25rem;
+  bottom: 0.25rem;
+  background-color: white;
+  transition: .4s;
+  border-radius: 50%;
+}
+
+input:checked + .toggle-slider {
+  background-color: #ef4444;
+}
+
+input:checked + .toggle-slider:before {
+  transform: translateX(1.25rem);
+}
+
+/* Zona de peligro */
+.danger-zone {
+  border: 2px dashed #ef4444;
+  animation: pulseDanger 2s infinite;
+}
+
+@keyframes pulseDanger {
+  0%, 100% {
+    border-color: #ef4444;
+  }
+  50% {
+    border-color: #fca5a5;
+  }
+}
+
+/* Estilos para el modo edición */
+.edit-mode input,
+.edit-mode textarea {
+  background-color: #fef3c7;
+  border-color: #f59e0b;
+}
+
+.edit-mode input:focus,
+.edit-mode textarea:focus {
+  ring-color: #f59e0b;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .profile-header {
+    height: 12rem;
+  }
+  
+  .profile-avatar {
+    width: 6rem;
+    height: 6rem;
+  }
+  
+  .profile-tabs {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+  
+  .profile-tabs::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+/* Estilos para el estado de carga */
+.profile-loader {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 50vh;
+}
+
+.profile-loader-spinner {
+  border: 3px solid #f3f3f3;
+  border-top: 3px solid #ef4444;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Estilos para los logros */
+.achievement-card {
+  transition: all 0.3s ease;
+}
+
+.achievement-card:hover {
+  transform: translateY(-4px);
+  background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
+}
+
+/* Estilos para las badges de estado */
+.status-badge {
+  font-size: 0.75rem;
+  font-weight: 500;
+  padding: 0.25rem 0.75rem;
+  border-radius: 9999px;
+}
+
+.status-active {
+  background-color: #dcfce7;
+  color: #166534;
+}
+
+.status-pending {
+  background-color: #fef3c7;
+  color: #92400e;
+}
+
+.status-ended {
+  background-color: #f3f4f6;
+  color: #374151;
+}
+
+/* Scrollbar personalizado */
+.profile-scrollbar {
+  scrollbar-width: thin;
+  scrollbar-color: #ef4444 #f1f1f1;
+}
+
+.profile-scrollbar::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+.profile-scrollbar::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 3px;
+}
+
+.profile-scrollbar::-webkit-scrollbar-thumb {
+  background: #ef4444;
+  border-radius: 3px;
+}
+
+/* Animación de entrada */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fadeInUp {
+  animation: fadeInUp 0.5s ease-out;
+}
+
+/* Estilos de impresión */
+@media print {
+  .no-print {
+    display: none !important;
+  }
+  
+  .profile-content {
+    font-size: 12pt;
+  }
+}
+
+/* Mejoras de accesibilidad */
+.profile-content :focus {
+  outline: 2px solid #ef4444;
+  outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .stats-card,
+  .favorite-card,
+  .achievement-card,
+  .notification-item {
+    transition: none;
+  }
+  
+  .animate-fadeInUp {
+    animation: none;
+  }
+}
