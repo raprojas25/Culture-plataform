@@ -1,0 +1,31 @@
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
+
+@import 'leaflet/dist/leaflet.css';
+
+body {
+  font-family: 'Inter', sans-serif;
+}
+
+.leaflet-container {
+  width: 100%;
+  height: 100%;
+}
+
+.swiper-button-next,
+.swiper-button-prev {
+  color: #ef4444 !important;
+}
+
+.swiper-pagination-bullet-active {
+  background: #ef4444 !important;
+}
+
+.rbc-event {
+  background-color: #ef4444 !important;
+}
+
+.rbc-today {
+  background-color: #fef2f2 !important;
+}
