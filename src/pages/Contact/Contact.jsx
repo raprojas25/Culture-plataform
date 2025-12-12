@@ -20,6 +20,7 @@ import {
   AlertCircle,
   LinkIcon
 } from 'lucide-react'
+import { Link } from 'react-router-dom'
 
 const Contact = () => {
   const { register, handleSubmit, formState: { errors }, reset } = useForm()
@@ -331,9 +332,16 @@ const Contact = () => {
                       />
                       <label htmlFor="terms" className="text-sm text-gray-600">
                         Acepto que mis datos sean procesados de acuerdo con la 
-                        <a href="/privacidad" className="text-red-600 hover:underline ml-1">
+                        {/* <a href="/privacidad" className="text-red-600 hover:underline ml-1"> 
                           política de privacidad
                         </a>
+                      */}
+                      <Link 
+                          to="/terminos"
+                        className="text-red-600 hover:underline ml-1" 
+>
+                        {' '}Política de privacidad
+                      </Link>
                       </label>
                     </div>
 

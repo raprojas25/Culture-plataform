@@ -10,11 +10,15 @@ import Directory from "./pages/Directory/Directory";
 import About from "./pages/About/About";
 //import Admin from './pages/Admin/Admin'
 //import About from './pages/About/About'
-import Contact from './pages/Contact/Contact'
+import Contact from "./pages/Contact/Contact";
 //import Terms from './pages/Terms/Terms'
-import Gallery from './pages/Gallery/Gallery'
+import Gallery from "./pages/Gallery/Gallery";
 import Profile from "./pages/Profile/Profile";
 import Terms from "./pages/Terms/Terms";
+import Auth from "./pages/Auth/Auth";
+import Admin from "./pages/Admin/Admin";
+import EventDetail from "./pages/EventDetail/EventDetail";
+
 //import './App.css'
 
 function App() {
@@ -29,11 +33,14 @@ function App() {
             <Route path="/publicar-evento" element={<PublishEvent />} />
             <Route path="/calendario" element={<CalendarPage />} />
             <Route path="/directorio" element={<Directory />} />
- <Route path="/about" element={<About />} />
- <Route path="/contacto" element={<Contact />} />
-<Route path="/galeria" element={<Gallery />} />
-<Route path="/perfil" element={<Profile />}/>
-            <Route path="/terminos" element={<Terms />}/>
+            <Route path="/about" element={<About />} />
+            <Route path="/contacto" element={<Contact />} />
+            <Route path="/galeria" element={<Gallery />} />
+            <Route path="/perfil" element={<Profile />} />
+            <Route path="/terminos" element={<Terms />} />
+            <Route path="/auth" element={<Auth />}/>
+            <Route path="/admin" element={<Admin />}/>
+            <Route path="/evento" element={<EventDetail />}/>
             {/*
             <Route path="/calendario" element={<CalendarPage />} />
             <Route path="/publicar-evento" element={<PublishEvent />} />

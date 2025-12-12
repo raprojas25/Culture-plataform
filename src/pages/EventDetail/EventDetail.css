@@ -1,0 +1,271 @@
+/* Estilos específicos para la página de detalle de evento */
+
+/* Ajustes para el mapa de Leaflet */
+.leaflet-container {
+  font-family: 'Inter', sans-serif;
+  border-radius: 0.75rem;
+  z-index: 1;
+}
+
+.leaflet-popup-content {
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+}
+
+/* Galería de imágenes */
+.gallery-thumbnail {
+  transition: all 0.2s ease;
+}
+
+.gallery-thumbnail:hover {
+  transform: scale(1.05);
+}
+
+.gallery-thumbnail.active {
+  box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.5);
+}
+
+/* Swiper personalizado */
+.swiper-button-next,
+.swiper-button-prev {
+  color: #ef4444 !important;
+  background: rgba(255, 255, 255, 0.8);
+  width: 40px !important;
+  height: 40px !important;
+  border-radius: 50%;
+  backdrop-filter: blur(4px);
+}
+
+.swiper-button-next:after,
+.swiper-button-prev:after {
+  font-size: 20px !important;
+}
+
+.swiper-pagination-bullet {
+  width: 12px !important;
+  height: 12px !important;
+  background: #d1d5db !important;
+  opacity: 1 !important;
+}
+
+.swiper-pagination-bullet-active {
+  background: #ef4444 !important;
+}
+
+/* Estilos para el modal */
+.modal-overlay {
+  background: rgba(0, 0, 0, 0.8);
+  backdrop-filter: blur(4px);
+}
+
+/* Estilos para la descripción */
+.event-description {
+  line-height: 1.8;
+  color: #374151;
+}
+
+.event-description p {
+  margin-bottom: 1.5rem;
+}
+
+.event-description ul {
+  list-style-type: disc;
+  padding-left: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.event-description li {
+  margin-bottom: 0.5rem;
+}
+
+/* Estilo para el bloque de información */
+.info-block {
+  background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
+  border-left: 4px solid #d97706;
+}
+
+/* Tarjetas de eventos similares */
+.similar-event-card {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.similar-event-card:hover {
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+}
+
+/* Botones de acción flotantes */
+.floating-actions {
+  position: fixed;
+  bottom: 2rem;
+  right: 2rem;
+  z-index: 30;
+}
+
+@media (max-width: 768px) {
+  .floating-actions {
+    bottom: 1rem;
+    right: 1rem;
+  }
+}
+
+/* Estilos para las etiquetas */
+.event-tag {
+  transition: all 0.2s ease;
+}
+
+.event-tag:hover {
+  background-color: #fecaca;
+  color: #991b1b;
+  transform: translateY(-1px);
+}
+
+/* Animaciones de entrada */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fadeInUp {
+  animation: fadeInUp 0.5s ease-out;
+}
+
+/* Estilos de impresión */
+@media print {
+  .no-print {
+    display: none !important;
+  }
+  
+  .event-detail-print {
+    font-size: 12pt;
+    line-height: 1.5;
+  }
+  
+  .leaflet-container {
+    height: 400px !important;
+  }
+}
+
+/* Estilos para el sticky sidebar */
+.sticky-sidebar {
+  position: sticky;
+  top: 6rem;
+}
+
+@media (max-width: 1024px) {
+  .sticky-sidebar {
+    position: static;
+  }
+}
+
+/* Estilos para los botones de compartir */
+.share-btn {
+  transition: all 0.2s ease;
+}
+
+.share-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+}
+
+/* Estilos para el modal de reporte */
+.report-option {
+  transition: all 0.2s ease;
+}
+
+.report-option:hover {
+  background-color: #fee2e2;
+  border-color: #ef4444;
+}
+
+/* Scroll suave */
+html {
+  scroll-behavior: smooth;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  
+  .gallery-thumbnail,
+  .similar-event-card,
+  .event-tag,
+  .share-btn,
+  .report-option {
+    transition: none;
+  }
+}
+
+/* Mejoras de accesibilidad */
+.event-content :focus {
+  outline: 2px solid #ef4444;
+  outline-offset: 2px;
+}
+
+/* Estilos para el organizador verificado */
+.verified-badge {
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+/* Estilos para la galería de miniaturas */
+.thumbnail-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
+  gap: 8px;
+}
+
+/* Estilos responsive */
+@media (max-width: 768px) {
+  .event-title {
+    font-size: 1.5rem;
+  }
+  
+  .event-stats {
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+  
+  .event-stats > div {
+    flex: 1 0 45%;
+  }
+}
+
+/* Estilos para el loader */
+.event-loader {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 50vh;
+}
+
+.event-loader-spinner {
+  border: 3px solid #f3f3f3;
+  border-top: 3px solid #ef4444;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
