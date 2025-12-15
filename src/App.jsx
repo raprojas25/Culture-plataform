@@ -5,13 +5,10 @@ import Footer from "./components/Footer/Footer";
 import Home from "./pages/Home/Home";
 import CalendarPage from "./pages/CalendarPage/CalendarPage";
 import PublishEvent from "./pages/PublishEvent/PublishEvent";
-//import Categories from './pages/Categories/Categories'
+import Categories from "./pages/Categories/Categories";
 import Directory from "./pages/Directory/Directory";
 import About from "./pages/About/About";
-//import Admin from './pages/Admin/Admin'
-//import About from './pages/About/About'
 import Contact from "./pages/Contact/Contact";
-//import Terms from './pages/Terms/Terms'
 import Gallery from "./pages/Gallery/Gallery";
 import Profile from "./pages/Profile/Profile";
 import Terms from "./pages/Terms/Terms";
@@ -38,20 +35,11 @@ function App() {
             <Route path="/galeria" element={<Gallery />} />
             <Route path="/perfil" element={<Profile />} />
             <Route path="/terminos" element={<Terms />} />
-            <Route path="/auth" element={<Auth />}/>
-            <Route path="/admin" element={<Admin />}/>
-            <Route path="/evento" element={<EventDetail />}/>
-            {/*
-            <Route path="/calendario" element={<CalendarPage />} />
-            <Route path="/publicar-evento" element={<PublishEvent />} />
-            <Route path="/categorias" element={<Categories />} />
-            <Route path="/directorio" element={<Directory />} />
+            <Route path="/auth" element={<Auth />} />
             <Route path="/admin" element={<Admin />} />
-            <Route path="/nosotros" element={<About />} />
-            <Route path="/contacto" element={<Contact />} />
-            <Route path="/terminos" element={<Terms />} />
-            <Route path="/galeria" element={<Gallery />} />
-*/}
+            <Route path="/evento/:id" element={<EventDetail />} />
+            <Route path="/categorias" element={<Categories />} />
+            <Route path="/categorias/:categorySlug" element={<Categories />} />
           </Routes>
         </main>
 

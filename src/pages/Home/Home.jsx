@@ -101,38 +101,30 @@ const Home = () => {
             Descubre y comparte los eventos culturales, fiestas patronales y
             actividades más importantes de tu localidad.
           </p>
-          <div className="flex flex-col md:flex-row justify-center gap-4">
-            <motion.button
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              className="bg-white text-red-600 font-bold py-3 px-8 rounded-full hover:bg-gray-100 flex items-center justify-center gap-2"
-            >
-              <Link
-                to="/publicar-evento"
-              />
-              Publica tu Evento
 
-              <ChevronRight />
-              <Link/>
-            </motion.button>
-            <motion.button
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              className="bg-transparent border-2 border-white text-white font-bold py-3 px-8 rounded-full hover:bg-white hover:text-red-600 flex items-center justify-center gap-2"
-            >
-              Ver Calendario
-              <Calendar />
-            </motion.button>
-            <Link
-              to="/Calendario"
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              className="bg-transparent border-2 border-white text-white font-bold py-3 px-8 rounded-full hover:bg-white hover:text-red-600 flex items-center justify-center gap-2"
-            >
-              Ver Calendario
-              <Calendar />
-            </Link>
-          </div>
+          <div className="flex flex-col md:flex-row justify-center content-center gap-4">
+  <Link to="/publicar-evento">
+    <motion.button
+      whileHover={{ scale: 1.05 }}
+      whileTap={{ scale: 0.95 }}
+      className="bg-white text-red-600 font-bold py-3 px-8 rounded-full hover:bg-gray-100 flex items-center justify-center gap-2"
+    >
+      Publica tu Evento
+      <ChevronRight />
+    </motion.button>
+  </Link>
+  
+  <Link to="/calendario">
+    <motion.button
+      whileHover={{ scale: 1.05 }}
+      whileTap={{ scale: 0.95 }}
+      className="bg-transparent border-2 border-white text-white font-bold py-3 px-8 rounded-full hover:bg-white hover:text-red-600 flex items-center justify-center gap-2"
+    >
+      Ver Calendario
+      <Calendar />
+    </motion.button>
+  </Link>
+</div> 
         </div>
       </section>
 
