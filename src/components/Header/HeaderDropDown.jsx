@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import { Link, useLocation, useNavigate } from 'react-router-dom'
 import { motion, AnimatePresence } from 'framer-motion'
 import { 
@@ -24,6 +24,7 @@ import {
   ChevronDown,
   Settings,
   Bookmark,
+  ChevronRight,
   ChevronUp
 } from 'lucide-react'
 import './Header.css'
@@ -31,12 +32,16 @@ import './Header.css'
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const [isUserMenuOpen, setIsUserMenuOpen] = useState(false)
+  const [isEventsDropdownOpen, setIsEventsDropdownOpen] = useState(false)
+  const [isMobileEventsOpen, setIsMobileEventsOpen] = useState(false)
   const [darkMode, setDarkMode] = useState(false)
-  const [isLoggedIn, setIsLoggedIn] = useState(false) // Cambiar a false por defecto
+  const [isLoggedIn, setIsLoggedIn] = useState(true)
   const [user, setUser] = useState(null)
   const [scrollY, setScrollY] = useState(0)
   const location = useLocation()
   const navigate = useNavigate()
+  const dropdownRef = useRef(null)
+  const eventsDropdownRef = useRef(null)
 
   // Detectar scroll para efectos
   useEffect(() => {
@@ -61,7 +66,6 @@ const Header = () => {
 
   // Verificar autenticación (simulada)
   useEffect(() => {
-    // Simular verificación de sesión
     const token = localStorage.getItem('token')
     if (token) {
       setIsLoggedIn(true)
@@ -72,6 +76,21 @@ const Header = () => {
         avatar: 'https://ui-avatars.com/api/?name=Usuario+Ejemplo&background=ef4444&color=fff'
       })
     }
+  }, [])
+
+  // Cerrar dropdowns al hacer clic fuera
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+        setIsUserMenuOpen(false)
+      }
+      if (eventsDropdownRef.current && !eventsDropdownRef.current.contains(event.target)) {
+        setIsEventsDropdownOpen(false)
+      }
+    }
+
+    document.addEventListener('mousedown', handleClickOutside)
+    return () => document.removeEventListener('mousedown', handleClickOutside)
   }, [])
 
   const toggleDarkMode = () => {
@@ -105,13 +124,16 @@ const Header = () => {
 
   const navItems = [
     { path: '/', label: 'Inicio', icon: <Home size={18} /> },
-    { path: '/calendario', label: 'Calendario', icon: <Calendar size={18} /> },
-    { path: '/publicar-evento', label: 'Publicar', icon: <PlusCircle size={18} /> },
-    { path: '/categorias', label: 'Categorías', icon: <Layers size={18} /> },
     { path: '/directorio', label: 'Directorio', icon: <Users size={18} /> },
     { path: '/galeria', label: 'Galería', icon: <GalleryVertical size={18} /> },
     { path: '/about', label: 'Nosotros', icon: <Info size={18} /> },
     { path: '/contacto', label: 'Contacto', icon: <Phone size={18} /> },
+  ]
+
+  const eventsItems = [
+    { path: '/calendario', label: 'Calendario', icon: <Calendar size={16} /> },
+    { path: '/publicar-evento', label: 'Publicar Evento', icon: <PlusCircle size={16} /> },
+    { path: '/categorias', label: 'Categorías', icon: <Layers size={16} /> },
   ]
 
   const userMenuItems = [
@@ -121,6 +143,8 @@ const Header = () => {
     { label: 'Configuración', icon: <Settings size={16} />, action: () => navigate('/configuracion') },
     { label: 'Cerrar Sesión', icon: <LogOut size={16} />, action: handleLogout }
   ]
+
+  const isEventsActive = eventsItems.some(item => location.pathname === item.path)
 
   const headerVariants = {
     hidden: { y: -100 },
@@ -141,6 +165,22 @@ const Header = () => {
       opacity: 0, 
       height: 0,
       transition: { duration: 0.3 }
+    }
+  }
+
+  const dropdownVariants = {
+    hidden: { opacity: 0, y: -10, scale: 0.95 },
+    visible: { 
+      opacity: 1, 
+      y: 0, 
+      scale: 1,
+      transition: { duration: 0.2, ease: 'easeOut' }
+    },
+    exit: { 
+      opacity: 0, 
+      y: -10,
+      scale: 0.95,
+      transition: { duration: 0.15 }
     }
   }
 
@@ -177,7 +217,76 @@ const Header = () => {
 
           {/* Desktop Navigation */}
           <nav className="hidden lg:flex items-center space-x-1">
-            {navItems.map((item) => (
+            {navItems.slice(0, 1).map((item) => (
+              <Link
+                key={item.path}
+                to={item.path}
+                className={`flex items-center space-x-2 px-4 py-2 rounded-lg transition-all ${
+                  location.pathname === item.path
+                    ? 'bg-red-50 dark:bg-red-900/30 text-red-600 dark:text-red-400 font-semibold'
+                    : 'text-gray-600 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-800 hover:text-red-500 dark:hover:text-red-400'
+                }`}
+              >
+                {item.icon}
+                <span className="font-medium">{item.label}</span>
+              </Link>
+            ))}
+
+            {/* Events Dropdown */}
+            <div className="relative" ref={eventsDropdownRef}>
+              <button
+                onClick={() => setIsEventsDropdownOpen(!isEventsDropdownOpen)}
+                onMouseEnter={() => setIsEventsDropdownOpen(true)}
+                className={`flex items-center space-x-2 px-4 py-2 rounded-lg transition-all ${
+                  isEventsActive
+                    ? 'bg-red-50 dark:bg-red-900/30 text-red-600 dark:text-red-400 font-semibold'
+                    : 'text-gray-600 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-800 hover:text-red-500 dark:hover:text-red-400'
+                }`}
+              >
+                <Calendar size={18} />
+                <span className="font-medium">Eventos</span>
+                <ChevronDown 
+                  size={16} 
+                  className={`transition-transform duration-200 ${
+                    isEventsDropdownOpen ? 'rotate-180' : ''
+                  }`}
+                />
+              </button>
+
+              <AnimatePresence>
+                {isEventsDropdownOpen && (
+                  <motion.div
+                    variants={dropdownVariants}
+                    initial="hidden"
+                    animate="visible"
+                    exit="exit"
+                    onMouseLeave={() => setIsEventsDropdownOpen(false)}
+                    className="absolute left-0 top-full mt-2 w-56 bg-white dark:bg-gray-800 rounded-xl shadow-lg border border-gray-200 dark:border-gray-700 overflow-hidden z-50"
+                  >
+                    <div className="py-2">
+                      {eventsItems.map((item) => (
+                        <Link
+                          key={item.path}
+                          to={item.path}
+                          onClick={() => setIsEventsDropdownOpen(false)}
+                          className={`flex items-center space-x-3 px-4 py-3 hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors ${
+                            location.pathname === item.path
+                              ? 'text-red-600 dark:text-red-400 bg-red-50 dark:bg-red-900/20'
+                              : 'text-gray-700 dark:text-gray-300'
+                          }`}
+                        >
+                          {item.icon}
+                          <span className="font-medium">{item.label}</span>
+                        </Link>
+                      ))}
+                    </div>
+                  </motion.div>
+                )}
+              </AnimatePresence>
+            </div>
+
+            {/* Rest of navigation items */}
+            {navItems.slice(1).map((item) => (
               <Link
                 key={item.path}
                 to={item.path}
@@ -219,7 +328,7 @@ const Header = () => {
 
             {/* User Menu / Auth Buttons */}
             {isLoggedIn ? (
-              <div className="relative">
+              <div className="relative" ref={dropdownRef}>
                 <button
                   onClick={() => setIsUserMenuOpen(!isUserMenuOpen)}
                   className="flex items-center space-x-2 p-1 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800"
@@ -231,22 +340,23 @@ const Header = () => {
                       className="w-full h-full object-cover"
                     />
                   </div>
-                  {
-                    (!isUserMenuOpen)?
-                    <ChevronDown size={16} className='text-gray-500 dark:text-gray-400 transition-opacity'/>
-                    :<ChevronUp size={16} className='text-gray-500 dark:text-gray-400 transition-opacity'/>
-                  }
-                  {/* <ChevronDown size={16} className="text-gray-500 dark:text-gray-400" /> */}
+                  <ChevronDown 
+                    size={16} 
+                    className={`text-gray-500 dark:text-gray-400 transition-transform duration-200 ${
+                      isUserMenuOpen ? 'rotate-180' : ''
+                    }`}
+                  />
                 </button>
 
                 {/* User Dropdown Menu */}
                 <AnimatePresence>
                   {isUserMenuOpen && (
                     <motion.div
-                      initial={{ opacity: 0, y: 10 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      exit={{ opacity: 0, y: 10 }}
-                      className="absolute right-0 top-full mt-2 w-56 bg-white dark:bg-gray-800 rounded-xl shadow-lg border border-gray-200 dark:border-gray-700 overflow-hidden"
+                      variants={dropdownVariants}
+                      initial="hidden"
+                      animate="visible"
+                      exit="exit"
+                      className="absolute right-0 top-full mt-2 w-56 bg-white dark:bg-gray-800 rounded-xl shadow-lg border border-gray-200 dark:border-gray-700 overflow-hidden z-50"
                     >
                       <div className="p-4 border-b border-gray-100 dark:border-gray-700">
                         <p className="font-semibold text-gray-800 dark:text-white">{user?.name}</p>
@@ -261,7 +371,7 @@ const Header = () => {
                               item.action()
                               setIsUserMenuOpen(false)
                             }}
-                            className="w-full flex items-center space-x-3 px-3 py-2 rounded-lg hover:bg-gray-200 dark:hover:bg-gray-700 text-gray-700 dark:text-gray-300"
+                            className="w-full flex items-center space-x-3 px-3 py-2 rounded-lg hover:bg-gray-200 dark:hover:bg-gray-700 text-gray-700 dark:text-gray-300 transition-colors"
                           >
                             {item.icon}
                             <span>{item.label}</span>
@@ -327,7 +437,77 @@ const Header = () => {
 
                 {/* Navigation Links */}
                 <div className="p-2">
-                  {navItems.map((item) => (
+                  {/* Inicio */}
+                  <Link
+                    to="/"
+                    className={`flex items-center space-x-3 px-4 py-3 rounded-lg ${
+                      location.pathname === '/'
+                        ? 'bg-red-50 dark:bg-red-900/30 text-red-600 dark:text-red-400'
+                        : 'text-gray-700 dark:text-gray-300 hover:bg-red-50 hover:text-gray-400 dark:hover:bg-gray-700'
+                    }`}
+                    onClick={() => setIsMenuOpen(false)}
+                  >
+                    <Home size={18} />
+                    <span className="font-medium">Inicio</span>
+                  </Link>
+
+                  {/* Events Dropdown Mobile */}
+                  <div>
+                    <button
+                      onClick={() => setIsMobileEventsOpen(!isMobileEventsOpen)}
+                      className={`w-full flex items-center justify-between space-x-3 px-4 py-3 rounded-lg ${
+                        isEventsActive
+                          ? 'bg-red-50 dark:bg-red-900/30 text-red-600 dark:text-red-400'
+                          : 'text-gray-700 dark:text-gray-300 hover:bg-red-50 hover:text-gray-400 dark:hover:bg-gray-700'
+                      }`}
+                    >
+                      <div className="flex items-center space-x-3">
+                        <Calendar size={18} />
+                        <span className="font-medium">Eventos</span>
+                      </div>
+                      <ChevronRight 
+                        size={16} 
+                        className={`transition-transform duration-200 ${
+                          isMobileEventsOpen ? 'rotate-90' : ''
+                        }`}
+                      />
+                    </button>
+
+                    <AnimatePresence>
+                      {isMobileEventsOpen && (
+                        <motion.div
+                          initial={{ opacity: 0, height: 0 }}
+                          animate={{ opacity: 1, height: 'auto' }}
+                          exit={{ opacity: 0, height: 0 }}
+                          className="overflow-hidden"
+                        >
+                          <div className="ml-8 pl-4 border-l border-gray-200 dark:border-gray-700">
+                            {eventsItems.map((item) => (
+                              <Link
+                                key={item.path}
+                                to={item.path}
+                                className={`flex items-center space-x-3 px-4 py-3 rounded-lg ${
+                                  location.pathname === item.path
+                                    ? 'bg-red-50 dark:bg-red-900/30 text-red-600 dark:text-red-400'
+                                    : 'text-gray-700 dark:text-gray-300 hover:bg-red-50 hover:text-gray-400 dark:hover:bg-gray-700'
+                                }`}
+                                onClick={() => {
+                                  setIsMenuOpen(false)
+                                  setIsMobileEventsOpen(false)
+                                }}
+                              >
+                                {item.icon}
+                                <span className="font-medium">{item.label}</span>
+                              </Link>
+                            ))}
+                          </div>
+                        </motion.div>
+                      )}
+                    </AnimatePresence>
+                  </div>
+
+                  {/* Rest of navigation items */}
+                  {navItems.slice(1).map((item) => (
                     <Link
                       key={item.path}
                       to={item.path}

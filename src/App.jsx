@@ -1,6 +1,6 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { Toaster } from "react-hot-toast";
-import Header from "./components/Header/Header";
+import Header from "./components/Header/HeaderDropDown.jsx";
 import Footer from "./components/Footer/Footer";
 import Home from "./pages/Home/Home";
 import CalendarPage from "./pages/CalendarPage/CalendarPage";
@@ -14,7 +14,9 @@ import Profile from "./pages/Profile/Profile";
 import Terms from "./pages/Terms/Terms";
 import Auth from "./pages/Auth/Auth";
 import Admin from "./pages/Admin/Admin";
-import EventDetail from "./pages/EventDetail/EventDetail";
+import EventDetails from "./pages/EventDetail/EventDetail";
+// import EventDetail from "./pages/EventDetail/EventDetail";
+// import EventForm from "./pages/PublishEvent/PublicarEvento.jsx";
 
 //import './App.css'
 
@@ -37,7 +39,7 @@ function App() {
             <Route path="/terminos" element={<Terms />} />
             <Route path="/auth" element={<Auth />} />
             <Route path="/admin" element={<Admin />} />
-            <Route path="/evento/:id" element={<EventDetail />} />
+            <Route path="/evento/:id" element={<EventDetails />} />
             <Route path="/categorias" element={<Categories />} />
             <Route path="/categorias/:categorySlug" element={<Categories />} />
           </Routes>

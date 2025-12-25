@@ -28,7 +28,7 @@ const Home = () => {
       location: "Parque Central",
       category: "Gastronomía",
       image:
-        "https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?w-800",
+        "https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?w=800",
       featured: true,
     },
     {
@@ -38,7 +38,7 @@ const Home = () => {
       location: "Anfiteatro Municipal",
       category: "Conciertos",
       image:
-        "https://images.unsplash.com/photo-1511379938547-c1f69419868d?w-800",
+        "https://images.unsplash.com/photo-1511379938547-c1f69419868d?w=800",
       featured: true,
     },
   ]);
@@ -149,6 +149,7 @@ const Home = () => {
               640: { slidesPerView: 2 },
               1024: { slidesPerView: 3 },
             }}
+            loop={true}
             className="pb-12"
           >
             {featuredEvents.map((event) => (

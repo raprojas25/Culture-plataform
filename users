@@ -1,0 +1,212 @@
+CREATE USER admin WITH PASSWORD '123456';
+CREATE DATABASE cultura_db OWNER admin;
+\l
+psql -U admin -d cultura_db
+\q
+\q
+CREATE TABLE users (
+  id SERIAL PRIMARY KEY,
+  username TEXT UNIQUE NOT NULL,
+  password TEXT NOT NULL
+);
+/ls
+\l
+\q
+\dt
+\dt
+\q
+\d users
+INSERT INTO users (username, password)
+VALUES ('primer_usuario', '123456');
+SELECT * FROM users;
+\q
+pg_ctl -D $PREFIX/var/lib/postgresql start
+\q
+psql -U admin
+\l
+\c cultura_db
+\conninfo
+\dt
+CREATE TABLE users (
+  id SERIAL PRIMARY KEY,
+  username TEXT UNIQUE NOT NULL,
+  password TEXT NOT NULL
+);
+\dt
+CREATE TABLE users (
+  id SERIAL PRIMARY KEY,
+  username TEXT UNIQUE NOT NULL,
+  password TEXT NOT NULL
+);
+\dt
+\q
+\dt
+\dn
+\dt *.*
+CREATE TABLE users (
+  id SERIAL PRIMARY KEY,
+  username TEXT UNIQUE NOT NULL,
+  password TEXT NOT NULL
+);
+\dt
+\q
+CREATE TABLE users (
+  id SERIAL PRIMARY KEY,
+  username TEXT UNIQUE NOT NULL,
+  password TEXT NOT NULL
+);
+\dt
+\q
+\dt
+CREATE TABLE users (
+  id SERIAL PRIMARY KEY,
+  username TEXT UNIQUE NOT NULL,
+  password TEXT NOT NULL
+);
+\dt
+\dt
+\q
+\c cultura_db
+CREATE TABLE users (
+  id SERIAL PRIMARY KEY,
+  username TEXT UNIQUE NOT NULL,
+  password TEXT NOT NULL
+);
+\dt
+\dt
+select * from user
+\dt
+\q
+GRANT ALL PRIVILEGES ON TABLE public.users TO admin;
+GRANT ALL PRIVILEGES ON SCHEMA public TO admin;
+\q
+ALTER TABLE public.users OWNER TO admin;
+culture_bd 
+\c cultura_db
+\dt
+\q
+DROP DATABASE cultura_db;
+DROP USER admin;
+ALTER TABLE users OWNER TO admin;
+ALTER SEQUENCE users_id_seq OWNER TO admin;
+CREATE USER admin WITH PASSWORD '123456';
+CREATE DATABASE cultura_db OWNER admin;
+\l
+psql -U admin -d cultura_db
+\q
+\conninfo
+CREATE TABLE users (
+  id SERIAL PRIMARY KEY,
+  username TEXT UNIQUE NOT NULL,
+  password TEXT NOT NULL
+);
+\dt
+\q
+INSERT INTO users (username, password)
+VALUES ('user1', '123456');
+\dt
+SELECT id, username FROM users;
+\l
+\q
+\d users;
+DELETE TABLE user
+\d users;
+DELETE * from TABLE user
+\d users;
+\d users;
+DELETE * from TABLE users
+\d users;
+\d users;
+DROP TABLE users
+\d users;
+\dt
+DELETE TABLE users
+\d users;
+\q
+DROP TABLE users;
+\d users;
+CREATE TABLE users (
+  id SERIAL PRIMARY KEY,
+  full_name TEXT NOT NULL,
+  email TEXT UNIQUE NOT NULL,
+  password TEXT NOT NULL,
+  phone TEXT,
+  location TEXT,
+  created_at TIMESTAMP DEFAULT NOW()
+);
+\d users;
+\q
+\dt
+\d
+\d users;
+\q
+\d users;
+\l users;
+\dt
+\q
+SELECT * FROM users;
+\q
+select * from users;
+\q
+select * from users;
+\q
+CREATE TABLE categorias (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    name VARCHAR(50) UNIQUE NOT NULL,
+    icon VARCHAR(50),
+    color VARCHAR(20)
+);
+CREATE TABLE categorias (
+    id SERIAL PRIMARY KEY,
+    name VARCHAR(50) UNIQUE NOT NULL,
+    icon VARCHAR(50),
+    color VARCHAR(20)
+);
+insert into table categorias (name, icon, color) value ('Feria', 'feria', 'verde');
+insert into categorias (name, icon, color) value ('Feria', 'feria', 'verde');
+insert into categorias (name, icon, color) values ('Feria', 'feria', 'verde');
+select * from categotias
+\\s
+\s
+select * from categorias
+\s
+\dt
+\s categorias;
+\s categorias
+\s "categorias"
+\s "categorias".
+\s "categorias";
+\dt 'categorias'
+select * from categorias
+\q
+drop table users;
+drop table categorias;
+\i migrations/001_create_roles.sql
+\i migrations/002_create_users.sql
+\q
+\i migrations/001_create_roles.sql
+\i migrations/002_create_users.sql
+\q
+\dt
+select * from roles;
+\q
+\h
+\st
+\t
+\lt
+\h
+\?
+\dt
+\?
+\s user;
+\s users;
+\l 'users';
+\l 'roles';
+\q
+\i migrations/003_create_refresh_tokens.sql
+\q
+\i migrations/003_create_refresh_tokens.sql
+\dt
+\i migrations/004_add_audit_users.sql
+\q
+\s users;

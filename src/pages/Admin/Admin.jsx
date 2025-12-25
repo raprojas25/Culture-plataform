@@ -89,7 +89,7 @@ const Admin = () => {
               </button>
 
               {/* Admin Menu */}
-              <div className="relative">
+              <div className="relative group">
                 <button className="flex items-center space-x-3 p-2 rounded-lg hover:bg-gray-100">
                   <div className="w-10 h-10 bg-gradient-to-r from-red-600 to-orange-500 rounded-full flex items-center justify-center text-white font-bold">
                     A

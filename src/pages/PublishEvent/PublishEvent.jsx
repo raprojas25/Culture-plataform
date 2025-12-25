@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { motion } from 'framer-motion'
 import { useForm } from 'react-hook-form'
 import toast from 'react-hot-toast'
+import { Link } from 'react-router-dom'
 import {
   Calendar,
   MapPin,
@@ -283,7 +284,7 @@ const PublishEvent = () => {
                   onChange={(e) => setIsFeatured(e.target.checked)}
                   className="sr-only peer"
                 />
-                <div className="w-14 h-7 bg-gray-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:left-[4px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-6 after:w-6 after:transition-all peer-checked:bg-red-600"></div>
+                <div className="w-14 h-7 bg-gray-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-7 peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:left-[4px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-6 after:w-6 after:transition-all peer-checked:bg-red-600"></div>
               </label>
             </div>
 
@@ -317,7 +318,7 @@ const PublishEvent = () => {
                 className="mt-1 mr-3"
               />
               <label htmlFor="terms" className="text-sm text-gray-600">
-                Acepto los <a href="/terminos" className="text-red-600 hover:underline">Términos y Condiciones</a> y autorizo la publicación de este evento.
+                Acepto los <Link to="/terminos" className="text-red-600 hover:underline">{ }Términos y Condiciones</Link> y autorizo la publicación de este evento.
               </label>
             </div>
 

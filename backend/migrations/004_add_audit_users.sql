@@ -1,0 +1,4 @@
+ALTER TABLE users
+ADD COLUMN last_login TIMESTAMP,
+ADD COLUMN last_ip VARCHAR(45),
+ADD COLUMN user_agent TEXT;
