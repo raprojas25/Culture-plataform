@@ -1,0 +1,7 @@
+CREATE TABLE categories (
+  id SERIAL PRIMARY KEY,
+  name VARCHAR(100) NOT NULL UNIQUE,
+  icon VARCHAR(100),
+  color VARCHAR(20),
+  created_at TIMESTAMP DEFAULT NOW()
+);

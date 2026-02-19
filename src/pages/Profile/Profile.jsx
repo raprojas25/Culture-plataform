@@ -37,8 +37,10 @@ import {
   FileText,
   MessageCircle,
   PlusCircle,
-  QrCode
+  QrCode,
+  Tag
 } from 'lucide-react'
+import { Button } from '../../components/ui/Button'
 
 const Profile = () => {
   const navigate = useNavigate()
@@ -214,6 +216,10 @@ const Profile = () => {
     if (window.confirm('¿Estás seguro de que quieres cerrar sesión?')) {
       navigate('/')
     }
+  }
+
+  const handleNavigate = () => {
+    navigate('/publicar-evento')
   }
 
   const handleSaveProfile = () => {
@@ -440,7 +446,7 @@ const Profile = () => {
               className="space-y-8"
             >
               {/* Estadísticas */}
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+              <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-6">
                 {[
                   { label: 'Eventos Publicados', value: stats.totalEvents, icon: <Calendar className="text-blue-600" />, change: '+2' },
                   { label: 'Eventos Favoritos', value: stats.favoriteEvents, icon: <Heart className="text-red-600" />, change: '+1' },
@@ -502,10 +508,15 @@ const Profile = () => {
                     ))}
                   </div>
 
-                  <button className="w-full mt-6 py-3 border border-gray-300 rounded-lg hover:bg-gray-50 flex items-center justify-center">
-                    <PlusCircle size={18} className="mr-2" />
+                  <Button
+                    variant='primary'
+                    size='lg'
+                    leftIcon={<PlusCircle size={20}/>}
+                    className='w-full mt-6'
+                    onClick={handleNavigate}
+                  >
                     Crear Nuevo Evento
-                  </button>
+                  </Button>
                 </div>
 
                 {/* Actividad reciente */}
@@ -575,35 +586,33 @@ const Profile = () => {
                       <h2 className="text-2xl font-bold">Mis Eventos</h2>
                       <p className="text-gray-600">Gestiona todos tus eventos publicados</p>
                     </div>
-                    <div className="flex items-center space-x-4 mt-4 md:mt-0">
+                    <div className="flex flex-col md:flex-row md:items-center justify-between md:space-x-4 space-y-2 mt-4 md:mt-0">
                       <div className="relative">
                         <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" size={20} />
                         <input
                           type="text"
                           placeholder="Buscar eventos..."
-                          className="pl-10 pr-4 py-2 border border-gray-300 rounded-lg"
+                          className="pl-10 pr-4 py-2 border border-gray-300 rounded-lg w-full sm:w-auto"
                         />
                       </div>
-                      <button className="px-4 py-2 border border-gray-300 rounded-lg hover:bg-gray-50 flex items-center">
-                        <Filter size={18} className="mr-2" />
-                        Filtrar
-                      </button>
+
                       <button 
                         onClick={() => navigate('/publicar-evento')}
-                        className="px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 flex items-center"
+                        className="px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 flex justify-center items-center"
                       >
                         <PlusCircle size={18} className="mr-2" />
                         Nuevo Evento
                       </button>
+
                     </div>
                   </div>
 
                   {/* Filtros rápidos */}
-                  <div className="flex flex-wrap gap-2 mt-6">
+                  <div className="flex overflow-x-auto gap-2 mt-6">
                     {['Todos', 'Activos', 'Pendientes', 'Finalizados', 'Destacados'].map((filter) => (
                       <button
                         key={filter}
-                        className="px-3 py-1 bg-gray-100 text-gray-700 rounded-full hover:bg-gray-200 text-sm"
+                        className="px-3 py-2 bg-gray-100 text-gray-700 rounded-full hover:bg-gray-200 text-sm"
                       >
                         {filter}
                       </button>
@@ -720,9 +729,9 @@ const Profile = () => {
               variants={fadeInUp}
             >
               <div className="bg-white rounded-xl shadow-lg p-6">
-                <div className="flex items-center justify-between mb-6">
+                <div className="flex flex-col md:flex-row items-center justify-between mb-6 space-y-2">
                   <h2 className="text-2xl font-bold">Eventos Favoritos</h2>
-                  <div className="flex items-center space-x-4">
+                  <div className="flex flex-col md:flex-row items-center space-x-4 space-y-2">
                     <div className="relative">
                       <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" size={20} />
                       <input
@@ -836,7 +845,8 @@ const Profile = () => {
                         onClick={markAllAsRead}
                         className="px-4 py-2 border border-gray-300 rounded-lg hover:bg-gray-50"
                       >
-                        Marcar todas como leídas
+                        <CheckCircle size={20} />
+                        <span className='hidden md:block'>Marcar todas como leídas</span>
                       </button>
                       <button className="p-2 hover:bg-gray-100 rounded-lg">
                         <Settings size={20} />

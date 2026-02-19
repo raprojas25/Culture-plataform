@@ -16,16 +16,15 @@ import {
   Apple,
   ArrowRight,
   ChevronLeft,
-  Shield,
   Key,
-  Home,
-  Calendar,
-  MapPin,
   UserPlus,
   LogIn,
-  Heart,
   Instagram,
 } from "lucide-react";
+import { Label } from "../../components/ui/Label";
+import { Button } from "../../components/ui/Button";
+import { Input } from "../../components/ui/Input";
+import { Benefit } from "./components/Benefit";
 
 const Auth = () => {
   const [isLogin, setIsLogin] = useState(false);
@@ -37,6 +36,7 @@ const Auth = () => {
   const [countdown, setCountdown] = useState(0);
 
   const navigate = useNavigate();
+
   const {
     register,
     handleSubmit,
@@ -44,6 +44,7 @@ const Auth = () => {
     formState: { errors },
     reset,
   } = useForm();
+
   const password = watch("password");
 
   // Countdown para reenvío de código
@@ -63,7 +64,7 @@ const Auth = () => {
       // LOGIN
       // =========================
       if (isLogin) {
-        const response = await fetch("http://localhost:3000/api/login", {
+        const response = await fetch("http://localhost:3000/api/auth/login", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
@@ -76,6 +77,8 @@ const Auth = () => {
 
         const result = await response.json();
 
+        setIsLogin(true);
+
         if (!response.ok) {
           throw new Error(result.error || "Credenciales incorrectas");
         }
@@ -84,6 +87,8 @@ const Auth = () => {
         localStorage.setItem("token", result.token);
         localStorage.setItem("user", JSON.stringify(result.user));
 
+        console.log(result.token);
+        console.log(result.user);
         toast.success("Sesión iniciada correctamente");
         navigate("/");
         return;
@@ -92,7 +97,7 @@ const Auth = () => {
       // =========================
       // REGISTRO
       // =========================
-      const response = await fetch("http://localhost:3000/api/register", {
+      const response = await fetch("http://localhost:3000/api/auth/register", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -120,6 +125,10 @@ const Auth = () => {
     }
   };
 
+  const handleSocialLogin = (provider) => {
+    toast(`Iniciando sesión con ${provider}...`);
+    // Implementar lógica de OAuth aquí
+  };
   const handleForgotPassword = async (data) => {
     setIsLoading(true);
 
@@ -146,11 +155,6 @@ const Auth = () => {
     }
   };
 
-  const handleSocialLogin = (provider) => {
-    toast(`Iniciando sesión con ${provider}...`);
-    // Implementar lógica de OAuth aquí
-  };
-
   const fadeInUp = {
     hidden: { opacity: 0, y: 20 },
     visible: { opacity: 1, y: 0, transition: { duration: 0.5 } },
@@ -167,23 +171,23 @@ const Auth = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100">
+    <div className="min-h-screen">
       <div className="container mx-auto px-4 py-8">
         <Link
           to="/"
-          className="inline-flex items-center text-gray-600 hover:text-red-600 mb-8"
+          className="inline-flex items-center text-gray-600 dark:text-gray-200 hover:text-red-600 mb-8"
         >
           <ChevronLeft size={20} />
           <span>Volver al inicio</span>
         </Link>
 
-        <div className="grid lg:grid-cols-2 gap-12 max-w-6xl mx-auto">
+        <div className="grid lg:grid-cols-2 gap-12 max-w-5xl mx-auto">
           {/* Columna izquierda: Formulario */}
           <motion.div
             initial="hidden"
             animate="visible"
             variants={fadeInUp}
-            className="bg-white rounded-2xl shadow-xl p-8 lg:p-12"
+            className="bg-white rounded-2xl shadow-xl p-8 lg:p-12 dark:bg-gray-800"
           >
             <div className="text-center mb-10">
               <div className="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-r from-red-600 to-orange-500 rounded-full mb-6">
@@ -194,14 +198,14 @@ const Auth = () => {
                 )}
               </div>
 
-              <h1 className="text-3xl font-bold text-gray-900 mb-2">
+              <h1 className="text-3xl font-bold text-gray-900 mb-2 dark:text-gray-400">
                 {isForgotPassword
                   ? "Recuperar Contraseña"
                   : isLogin
                     ? "Bienvenido de nuevo"
                     : "Únete a la comunidad"}
               </h1>
-              <p className="text-gray-600">
+              <p className="text-gray-600 dark:text-gray-300">
                 {isForgotPassword
                   ? "Te enviaremos un enlace para restablecer tu contraseña"
                   : isLogin
@@ -212,13 +216,13 @@ const Auth = () => {
 
             {/* Tabs Login/Registro */}
             {!isForgotPassword && (
-              <div className="flex bg-gray-100 rounded-xl p-1 mb-8">
+              <div className="flex bg-gray-100 dark:bg-gray-900/50 rounded-xl p-1 mb-8">
                 <button
                   onClick={() => setIsLogin(true)}
                   className={`flex-1 py-3 rounded-lg font-medium transition-all ${
                     isLogin
                       ? "bg-white shadow-sm text-red-600"
-                      : "text-gray-600 hover:text-gray-900"
+                      : "text-gray-600 dark:text-gray-400 hover:text-gray-900"
                   }`}
                 >
                   Iniciar Sesión
@@ -228,7 +232,7 @@ const Auth = () => {
                   className={`flex-1 py-3 rounded-lg font-medium transition-all ${
                     !isLogin
                       ? "bg-white shadow-sm text-red-600"
-                      : "text-gray-600 hover:text-gray-900"
+                      : "text-gray-600 dark:text-gray-400 hover:text-gray-900"
                   }`}
                 >
                   Registrarse
@@ -247,17 +251,19 @@ const Auth = () => {
                   onSubmit={handleSubmit(handleForgotPassword)}
                   className="space-y-6"
                 >
-                  <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-2">
-                      Correo Electrónico *
-                    </label>
+                  <div className="space-y-2">
+                    <Label>Correo Electrónico *</Label>
                     <div className="relative">
                       <Mail
                         className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400"
                         size={20}
                       />
-                      <input
+                      <Input
+                        variant="primary"
+                        size="lg"
+                        isLoading={isLoading}
                         type="email"
+                        placeholder="tu@email.com"
                         {...register("resetEmail", {
                           required: "El email es requerido",
                           pattern: {
@@ -265,8 +271,6 @@ const Auth = () => {
                             message: "Email inválido",
                           },
                         })}
-                        className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-transparent"
-                        placeholder="tu@email.com"
                       />
                     </div>
                     {errors.resetEmail && (
@@ -276,32 +280,34 @@ const Auth = () => {
                     )}
                   </div>
 
-                  <button
+                  <Button
+                    variant="primary"
+                    size="lg"
+                    leftIcon={!isLoading ? <Key size={20} /> : ""}
                     type="submit"
                     disabled={isLoading}
-                    className="w-full py-3 bg-red-600 text-white font-bold rounded-lg hover:bg-red-700 disabled:opacity-50 flex items-center justify-center gap-2"
+                    className="w-full"
                   >
                     {isLoading ? (
                       <>
-                        <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-white"></div>
+                        <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-white mr-4"></div>
                         Enviando...
                       </>
                     ) : (
-                      <>
-                        <Key size={20} />
-                        Enviar enlace de recuperación
-                      </>
+                      <>Enviar enlace de recuperación</>
                     )}
-                  </button>
+                  </Button>
 
-                  <button
+                  <Button
+                    variant="outline"
+                    size="lg"
+                    leftIcon={<ChevronLeft size={20} />}
                     type="button"
                     onClick={() => setIsForgotPassword(false)}
-                    className="w-full py-3 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 flex items-center justify-center gap-2"
+                    className="w-full"
                   >
-                    <ChevronLeft size={20} />
                     Volver al inicio de sesión
-                  </button>
+                  </Button>
                 </motion.form>
               ) : isLogin ? (
                 <motion.form
@@ -313,16 +319,17 @@ const Auth = () => {
                   className="space-y-6"
                 >
                   {/* Email */}
-                  <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-2">
-                      Correo Electrónico *
-                    </label>
+                  <div className="space-y-2">
+                    <Label>Correo Electrónico *</Label>
                     <div className="relative">
                       <Mail
                         className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400"
                         size={20}
                       />
-                      <input
+                      <Input
+                        variant="primary"
+                        size="lg"
+                        isLoading={isLoading}
                         type="email"
                         {...register("loginEmail", {
                           required: "El email es requerido",
@@ -331,7 +338,6 @@ const Auth = () => {
                             message: "Email inválido",
                           },
                         })}
-                        className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-transparent"
                         placeholder="tu@email.com"
                       />
                     </div>
@@ -343,16 +349,17 @@ const Auth = () => {
                   </div>
 
                   {/* Contraseña */}
-                  <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-2">
-                      Contraseña *
-                    </label>
+                  <div className="space-y-2">
+                    <Label>Contraseña *</Label>
                     <div className="relative">
                       <Lock
                         className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400"
                         size={20}
                       />
-                      <input
+                      <Input
+                        variant="password"
+                        size="lg"
+                        isLoading={isLoading}
                         type={showPassword ? "text" : "password"}
                         {...register("loginPassword", {
                           required: "La contraseña es requerida",
@@ -361,7 +368,6 @@ const Auth = () => {
                             message: "Mínimo 6 caracteres",
                           },
                         })}
-                        className="w-full pl-10 pr-12 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-transparent"
                         placeholder="••••••••"
                       />
                       <button
@@ -385,17 +391,17 @@ const Auth = () => {
 
                   {/* Recordar y olvidé contraseña */}
                   <div className="flex items-center justify-between">
-                    <label className="flex items-center">
+                    <div className="flex items-center space-x-3">
                       <input
                         type="checkbox"
                         {...register("rememberMe")}
+                        id="rememberMe"
                         className="rounded border-gray-300 text-red-600 focus:ring-red-500"
                       />
-                      <span className="ml-2 text-sm text-gray-600">
+                      <Label variant="secondary" htmlFor="rememberMe">
                         Recordarme
-                      </span>
-                    </label>
-
+                      </Label>
+                    </div>
                     <button
                       type="button"
                       onClick={() => setIsForgotPassword(true)}
@@ -406,10 +412,13 @@ const Auth = () => {
                   </div>
 
                   {/* Botón de inicio */}
-                  <button
+                  <Button
+                    variant="primary"
+                    size="lg"
+                    leftIcon={isLoading ? "" : <ArrowRight size={20} />}
                     type="submit"
                     disabled={isLoading}
-                    className="w-full py-3 bg-red-600 text-white font-bold rounded-lg hover:bg-red-700 disabled:opacity-50 flex items-center justify-center gap-2"
+                    className="w-full"
                   >
                     {isLoading ? (
                       <>
@@ -417,12 +426,9 @@ const Auth = () => {
                         Iniciando sesión...
                       </>
                     ) : (
-                      <>
-                        Iniciar Sesión
-                        <ArrowRight size={20} />
-                      </>
+                      <>Iniciar Sesión</>
                     )}
-                  </button>
+                  </Button>
                 </motion.form>
               ) : (
                 <motion.form
@@ -434,24 +440,23 @@ const Auth = () => {
                   className="space-y-6"
                 >
                   {/* Nombre completo */}
-                  <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-2">
-                      Nombre Completo *
-                    </label>
+                  <div className="space-y-2">
+                    <Label>Nombre Completo *</Label>
                     <div className="relative">
                       <User
                         className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400"
                         size={20}
                       />
-                      <input
+                      <Input
+                        variant="primary"
+                        size="lg"
                         {...register("fullName", {
                           required: "El nombre es requerido",
                           minLength: {
-                            value: 2,
-                            message: "Mínimo 2 caracteres",
+                            value: 10,
+                            message: "Mínimo 10 caracteres",
                           },
                         })}
-                        className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-transparent"
                         placeholder="Tu nombre completo"
                       />
                     </div>
@@ -463,16 +468,15 @@ const Auth = () => {
                   </div>
 
                   {/* Email */}
-                  <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-2">
-                      Correo Electrónico *
-                    </label>
+                  <div className="space-y-2">
+                    <Label>Correo Electrónico *</Label>
                     <div className="relative">
                       <Mail
                         className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400"
                         size={20}
                       />
-                      <input
+                      <Input
+                        size="lg"
                         type="email"
                         {...register("email", {
                           required: "El email es requerido",
@@ -481,7 +485,6 @@ const Auth = () => {
                             message: "Email inválido",
                           },
                         })}
-                        className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-transparent"
                         placeholder="tu@email.com"
                       />
                     </div>
@@ -493,53 +496,35 @@ const Auth = () => {
                   </div>
 
                   {/* Teléfono */}
-                  <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-2">
-                      Teléfono (WhatsApp)
-                    </label>
+                  <div className="space-y-2">
+                    <Label>Teléfono (WhatsApp)</Label>
+
                     <div className="relative">
                       <Phone
                         className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400"
                         size={20}
                       />
-                      <input
+                      <Input
+                        size="lg"
                         type="tel"
                         {...register("phone")}
-                        className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-transparent"
                         placeholder="987 654 321"
                       />
                     </div>
                   </div>
 
-                  {/* Ubicación */}
-                  <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-2">
-                      Distrito / Localidad
-                    </label>
-                    <div className="relative">
-                      <MapPin
-                        className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400"
-                        size={20}
-                      />
-                      <input
-                        {...register("location")}
-                        className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-transparent"
-                        placeholder="Ej: Centro, San Juan, etc."
-                      />
-                    </div>
-                  </div>
-
                   {/* Contraseña */}
-                  <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-2">
-                      Contraseña *
-                    </label>
+                  <div className="space-y-2">
+                    <Label>Contraseña *</Label>
                     <div className="relative">
                       <Lock
                         className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400"
                         size={20}
+
                       />
-                      <input
+                      <Input
+                        variant="password"
+                        size="lg"
                         type={showPassword ? "text" : "password"}
                         {...register("password", {
                           required: "La contraseña es requerida",
@@ -553,7 +538,6 @@ const Auth = () => {
                               "Debe incluir mayúsculas, minúsculas y números",
                           },
                         })}
-                        className="w-full pl-10 pr-12 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-transparent"
                         placeholder="••••••••"
                       />
                       <button
@@ -622,16 +606,16 @@ const Auth = () => {
                   </div>
 
                   {/* Confirmar Contraseña */}
-                  <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-2">
-                      Confirmar Contraseña *
-                    </label>
+                  <div className="space-y-2">
+                    <Label>Confirmar Contraseña *</Label>
                     <div className="relative">
                       <Lock
                         className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400"
                         size={20}
                       />
-                      <input
+                      <Input
+                        variant="password"
+                        size="lg"
                         type={showConfirmPassword ? "text" : "password"}
                         {...register("confirmPassword", {
                           required: "Confirma tu contraseña",
@@ -673,22 +657,22 @@ const Auth = () => {
                       })}
                       className="mt-1 mr-3 rounded border-gray-300 text-red-600 focus:ring-red-500"
                     />
-                    <label htmlFor="terms" className="text-sm text-gray-600">
+                    <Label variant="secondary" htmlFor="terms">
                       Acepto los{" "}
                       <Link
                         to="/terminos"
-                        className="text-red-600 hover:underline"
+                        className="text-red-500 hover:underline"
                       >
                         Términos y Condiciones
                       </Link>{" "}
                       y la
                       <Link
                         to="/privacidad"
-                        className="text-red-600 hover:underline ml-1"
+                        className="text-red-500 hover:underline ml-1"
                       >
                         Política de Privacidad
                       </Link>
-                    </label>
+                    </Label>
                   </div>
                   {errors.terms && (
                     <p className="mt-1 text-sm text-red-600">
@@ -704,20 +688,20 @@ const Auth = () => {
                       {...register("newsletter")}
                       className="mt-1 mr-3 rounded border-gray-300 text-red-600 focus:ring-red-500"
                     />
-                    <label
-                      htmlFor="newsletter"
-                      className="text-sm text-gray-600"
-                    >
-                      Quiero recibir información sobre eventos y novedades de la
-                      plataforma
-                    </label>
+                    <Label htmlFor="newsletter" variant="secondary">
+                      Quiero recibir información sobre eventos y novedades de la plataforma
+                    </Label>
                   </div>
 
                   {/* Botón de registro */}
-                  <button
+                  <Button
+                    variant="primary"
+                    size="lg"
+                    leftIcon={isLoading ? "" : <UserPlus size={20} />}
+                    rightIcon={isLoading ? "" : <ArrowRight size={20} />}
                     type="submit"
                     disabled={isLoading}
-                    className="w-full py-3 bg-gradient-to-r from-red-600 to-orange-500 text-white font-bold rounded-lg hover:from-red-700 hover:to-orange-600 disabled:opacity-50 flex items-center justify-center gap-2"
+                    className="w-full"
                   >
                     {isLoading ? (
                       <>
@@ -725,13 +709,9 @@ const Auth = () => {
                         Creando cuenta...
                       </>
                     ) : (
-                      <>
-                        <UserPlus size={20} />
-                        Crear Cuenta
-                        <ArrowRight size={20} />
-                      </>
+                      <>Crear Cuenta</>
                     )}
-                  </button>
+                  </Button>
                 </motion.form>
               )}
             </AnimatePresence>
@@ -741,10 +721,10 @@ const Auth = () => {
               <div className="my-8">
                 <div className="relative">
                   <div className="absolute inset-0 flex items-center">
-                    <div className="w-full border-t border-gray-300"></div>
+                    <div className="w-full border-t border-gray-300 dark:border-gray-500"></div>
                   </div>
                   <div className="relative flex justify-center text-sm">
-                    <span className="px-4 bg-white text-gray-500">
+                    <span className="px-4 bg-white text-gray-500 dark:bg-gray-500 dark:text-gray-200">
                       O continúa con
                     </span>
                   </div>
@@ -778,132 +758,24 @@ const Auth = () => {
 
             {/* Enlace para cambiar entre login/registro */}
             {!isForgotPassword && (
-              <div className="text-center">
-                <p className="text-gray-600">
+              <div className="flex justify-center items-center">
+                <Label variant="secondary">
                   {isLogin
                     ? "¿No tienes una cuenta?"
                     : "¿Ya tienes una cuenta?"}
-                  <button
-                    onClick={() => setIsLogin(!isLogin)}
-                    className="ml-2 text-red-600 font-medium hover:text-red-700"
-                  >
-                    {isLogin ? "Regístrate" : "Inicia sesión"}
-                  </button>
-                </p>
+                </Label>
+                <button
+                  onClick={() => setIsLogin(!isLogin)}
+                  className="ml-2 text-red-600 font-medium hover:text-red-700"
+                >
+                  {isLogin ? "Regístrate" : "Inicia sesión"}
+                </button>
               </div>
             )}
           </motion.div>
 
           {/* Columna derecha: Beneficios e información */}
-          <motion.div
-            initial="hidden"
-            animate="visible"
-            variants={fadeInUp}
-            transition={{ delay: 0.2 }}
-            className="lg:block hidden"
-          >
-            <div className="sticky top-8">
-              <div className="bg-gradient-to-br from-red-600 via-orange-500 to-yellow-500 rounded-2xl p-8 text-white h-full">
-                <div className="mb-10">
-                  <h2 className="text-3xl font-bold mb-4">
-                    Únete a nuestra comunidad cultural
-                  </h2>
-                  <p className="text-white/90 text-lg">
-                    Descubre todos los beneficios de ser parte de CulturaViva
-                  </p>
-                </div>
-
-                {/* Beneficios */}
-                <div className="space-y-6 mb-10">
-                  {[
-                    {
-                      icon: <Calendar className="text-yellow-300" size={24} />,
-                      title: "Eventos personalizados",
-                      description:
-                        "Recibe recomendaciones basadas en tus intereses",
-                    },
-                    {
-                      icon: <Heart className="text-pink-300" size={24} />,
-                      title: "Guarda tus favoritos",
-                      description: "Marca eventos y servicios que te gusten",
-                    },
-                    {
-                      icon: <User className="text-blue-300" size={24} />,
-                      title: "Perfil personal",
-                      description:
-                        "Crea tu perfil y comparte tus intereses culturales",
-                    },
-                    {
-                      icon: <Shield className="text-green-300" size={24} />,
-                      title: "Publica eventos",
-                      description:
-                        "Comparte tus propios eventos con la comunidad",
-                    },
-                  ].map((benefit, index) => (
-                    <motion.div
-                      key={index}
-                      variants={slideIn}
-                      initial="hidden"
-                      animate="visible"
-                      transition={{ delay: 0.1 * index }}
-                      className="flex items-start"
-                    >
-                      <div className="p-3 bg-white/10 rounded-xl mr-4">
-                        {benefit.icon}
-                      </div>
-                      <div>
-                        <h3 className="font-bold text-lg mb-1">
-                          {benefit.title}
-                        </h3>
-                        <p className="text-white/80">{benefit.description}</p>
-                      </div>
-                    </motion.div>
-                  ))}
-                </div>
-
-                {/* Estadísticas */}
-                <div className="bg-white/10 backdrop-blur-sm rounded-xl p-6 mb-8">
-                  <h3 className="font-bold text-xl mb-4">
-                    Nuestra comunidad crece
-                  </h3>
-                  <div className="grid grid-cols-3 gap-4 text-center">
-                    <div>
-                      <div className="text-2xl font-bold">5K+</div>
-                      <div className="text-sm text-white/80">Usuarios</div>
-                    </div>
-                    <div>
-                      <div className="text-2xl font-bold">500+</div>
-                      <div className="text-sm text-white/80">Eventos</div>
-                    </div>
-                    <div>
-                      <div className="text-2xl font-bold">25+</div>
-                      <div className="text-sm text-white/80">Comunidades</div>
-                    </div>
-                  </div>
-                </div>
-
-                {/* Testimonio */}
-                <div className="bg-white/10 backdrop-blur-sm rounded-xl p-6">
-                  <div className="flex items-center mb-4">
-                    <div className="w-12 h-12 rounded-full bg-white/20 flex items-center justify-center mr-4">
-                      <User size={24} />
-                    </div>
-                    <div>
-                      <h4 className="font-bold">María González</h4>
-                      <p className="text-sm text-white/80">
-                        Organizadora de eventos
-                      </p>
-                    </div>
-                  </div>
-                  <p className="italic text-white/90">
-                    "Gracias a CulturaViva he podido dar a conocer mis eventos
-                    tradicionales a toda la provincia. La comunidad es
-                    maravillosa."
-                  </p>
-                </div>
-              </div>
-            </div>
-          </motion.div>
+          <Benefit />
         </div>
 
         {/* Modal de verificación */}

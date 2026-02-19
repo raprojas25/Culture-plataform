@@ -77,7 +77,7 @@ const Admin = () => {
               </div>
             </div>
 
-            <div className="flex items-center space-x-4">
+            <div className="flex items-center space-x-4 hidden">
               {/* Notificaciones */}
               <button className="relative p-2 text-gray-600 hover:text-red-600">
                 <Bell size={22} />

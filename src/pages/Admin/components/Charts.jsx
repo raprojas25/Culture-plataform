@@ -127,7 +127,7 @@ const Charts = () => {
     <div className="p-6">
       {/* Selector de gráficos */}
       <div className="flex items-center justify-between mb-6">
-        <div className="flex space-x-2">
+        <div className="flex space-x-2 flex-wrap space-y-2">
           {[
             { id: 'line', label: 'Tendencia', icon: <TrendingUp size={18} /> },
             { id: 'bar', label: 'Categorías', icon: <BarChart3 size={18} /> },
@@ -158,7 +158,7 @@ const Charts = () => {
         key={activeChart}
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
-        className="h-80"
+        className="h-80 flex justify-center items-center"
       >
         {chartComponents[activeChart]}
       </motion.div>

@@ -25,17 +25,18 @@ import {
   Settings,
   Bookmark,
   ChevronRight,
-  ChevronUp
+  LayoutDashboard
 } from 'lucide-react'
 import './Header.css'
 
 const Header = () => {
+
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const [isUserMenuOpen, setIsUserMenuOpen] = useState(false)
   const [isEventsDropdownOpen, setIsEventsDropdownOpen] = useState(false)
   const [isMobileEventsOpen, setIsMobileEventsOpen] = useState(false)
   const [darkMode, setDarkMode] = useState(false)
-  const [isLoggedIn, setIsLoggedIn] = useState(true)
+  const [isLoggedIn, setIsLoggedIn] = useState(false)
   const [user, setUser] = useState(null)
   const [scrollY, setScrollY] = useState(0)
   const location = useLocation()
@@ -67,13 +68,21 @@ const Header = () => {
   // Verificar autenticación (simulada)
   useEffect(() => {
     const token = localStorage.getItem('token')
+    const user = localStorage.getItem('user')
     if (token) {
       setIsLoggedIn(true)
+      // setUser({
+      //   name: 'Usuario Ejemplo',
+      //   email: 'usuario@ejemplo.com',
+      //   role: 'user',
+      //   avatar: 'https://ui-avatars.com/api/?name=Usuario+Ejemplo&background=ef4444&color=fff'
+      // })
       setUser({
-        name: 'Usuario Ejemplo',
-        email: 'usuario@ejemplo.com',
-        role: 'user',
+        name: user.username,
+        email: user.email,
+        role: user.role_id,
         avatar: 'https://ui-avatars.com/api/?name=Usuario+Ejemplo&background=ef4444&color=fff'
+
       })
     }
   }, [])
@@ -128,11 +137,13 @@ const Header = () => {
     { path: '/galeria', label: 'Galería', icon: <GalleryVertical size={18} /> },
     { path: '/about', label: 'Nosotros', icon: <Info size={18} /> },
     { path: '/contacto', label: 'Contacto', icon: <Phone size={18} /> },
+    { path: '/dashboard', label: 'Dashboard', icon: <LayoutDashboard size={18} /> },
+
   ]
 
-  const eventsItems = [
-    { path: '/calendario', label: 'Calendario', icon: <Calendar size={16} /> },
+  const eventsItems = [ 
     { path: '/publicar-evento', label: 'Publicar Evento', icon: <PlusCircle size={16} /> },
+    { path: '/calendario', label: 'Calendario', icon: <Calendar size={16} /> },
     { path: '/categorias', label: 'Categorías', icon: <Layers size={16} /> },
   ]
 
@@ -196,19 +207,19 @@ const Header = () => {
       }`}
     >
       <div className="container mx-auto px-4 w-full">
-        <div className="flex items-center justify-around h-16">
+        <div className="flex items-center justify-between h-16">
           {/* Logo */}
           <Link to="/" className="flex items-center space-x-3">
-            <div className="relative">
+            <div className="relative hidden sm:block">
               <div className="w-10 h-10 bg-gradient-to-br from-red-500 to-orange-500 rounded-xl flex items-center justify-center">
                 <MapPin className="text-white" size={24} />
               </div>
               <div className="absolute -bottom-1 -right-1 w-4 h-4 bg-green-500 rounded-full border-2 border-white dark:border-gray-900"></div>
             </div>
             <div>
-              <h1 className="text-xl font-bold text-gray-800 dark:text-white">
+              <p className="text-xl font-bold text-gray-800 dark:text-white">
                 CulturaViva
-              </h1>
+              </p>
               <p className="text-xs text-gray-500 dark:text-gray-400">
                 Tu guía cultural
               </p>
@@ -320,7 +331,7 @@ const Header = () => {
 
             {/* Notifications */}
             {isLoggedIn && (
-              <button className="relative p-2 text-gray-600 dark:text-gray-300 hover:text-red-500 dark:hover:text-red-400">
+              <button className="relative p-2 text-gray-600 dark:text-gray-300 hover:text-red-500 dark:hover:text-red-400 hidden sm:block">
                 <Bell size={20} />
                 <span className="absolute top-1 right-1 w-2 h-2 bg-red-500 rounded-full"></span>
               </button>

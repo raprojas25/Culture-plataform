@@ -29,8 +29,8 @@ const Gallery = () => {
   // Categorías inspiradas en la cultura andina
   const categories = [
     { id: 'todas', name: 'Todas', color: 'bg-gray-100 text-gray-700', count: 48 },
-    { id: 'antiguas', name: 'Fotos Antiguas', color: 'bg-amber-50 text-amber-700', count: 12 },
-    { id: 'mejor-mes', name: 'Mejor Foto del Mes', color: 'bg-yellow-50 text-yellow-700', count: 6 },
+    { id: 'antiguas', name: 'Antiguas', color: 'bg-amber-50 text-amber-700', count: 12 },
+    { id: 'mejor-mes', name: 'Mes', color: 'bg-yellow-50 text-yellow-700', count: 6 },
     { id: 'patronales', name: 'Patronales', color: 'bg-red-50 text-red-700', count: 15 },
     { id: 'ferias', name: 'Ferias', color: 'bg-green-50 text-green-700', count: 10 },
     { id: 'bodas', name: 'Bodas', color: 'bg-pink-50 text-pink-700', count: 8 },
@@ -286,14 +286,14 @@ const Gallery = () => {
             
             {/* Barra de búsqueda */}
             <div className="max-w-2xl mx-auto">
-              <div className="relative">
-                <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400" size={20} />
+              <div className="relative flex items-center">
+                <Search className="absolute left-4   text-gray-100" size={20} />
                 <input
                   type="text"
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
                   placeholder="Buscar fotos por título, descripción o lugar..."
-                  className="w-full pl-12 pr-4 py-4 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 text-white placeholder-white/70 focus:outline-none focus:ring-2 focus:ring-white"
+                  className="w-full pl-12 pr-4 py-4 rounded-full bg-white/10 border border-white/20 text-white placeholder-white/70 focus:outline-none focus:ring-2 focus:ring-white"
                 />
                 {searchQuery && (
                   <button
@@ -346,7 +346,7 @@ const Gallery = () => {
 
               {/* Ordenar */}
               <div className="relative">
-                <select className="appearance-none bg-white border border-gray-300 rounded-lg pl-4 pr-10 py-2 focus:ring-2 focus:ring-red-500 focus:border-transparent">
+                <select className="appearance-none bg-white border border-gray-300 rounded-lg pl-4 pr-10 py-2 focus:ring-2 focus:ring-red-500 focus:border-transparent focus:outline-none ">
                   <option>Ordenar por: Más recientes</option>
                   <option>Más populares</option>
                   <option>Mejor valoradas</option>
@@ -364,14 +364,14 @@ const Gallery = () => {
               <h3 className="font-medium text-gray-700">Filtrar por categoría:</h3>
             </div>
             
-            <div className="flex flex-wrap gap-3">
+            <div className="flex items-center gap-2 overflow-x-auto">
               {categories.map((category) => (
                 <motion.button
                   key={category.id}
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
                   onClick={() => setActiveCategory(category.id)}
-                  className={`px-4 py-2 rounded-full font-medium text-sm transition-all ${
+                  className={`px-4 py-2 rounded-full font-normal text-sm transition-all ${
                     activeCategory === category.id
                       ? `${category.color.split(' ')[0]} border-2 ${category.color.split(' ')[1].replace('text-', 'border-')}`
                       : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
@@ -543,7 +543,7 @@ const Gallery = () => {
                 <motion.div
                   key={image.id}
                   variants={fadeInUp}
-                  className="group bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden hover:shadow-md transition-shadow"
+                  className="group bg-white rounded-xl shadow-sm border border-gray-200 overflow-auto hover:shadow-md transition-shadow"
                 >
                   <div className="flex flex-col md:flex-row">
                     {/* Imagen en vista lista */}
@@ -641,7 +641,7 @@ const Gallery = () => {
                 initial={{ scale: 0.9, opacity: 0 }}
                 animate={{ scale: 1, opacity: 1 }}
                 exit={{ scale: 0.9, opacity: 0 }}
-                className="relative max-w-6xl w-full max-h-[90vh] bg-white rounded-2xl overflow-hidden"
+                className="relative max-w-6xl w-full max-h-[90vh] bg-white rounded-2xl overflow-y-auto"
                 onClick={(e) => e.stopPropagation()}
               >
                 {/* Header del modal */}
@@ -711,7 +711,7 @@ const Gallery = () => {
 
                     <div>
                       <h4 className="font-bold text-gray-900 mb-2">Acciones</h4>
-                      <div className="flex space-x-3">
+                      <div className="flex flex-col sm:flex space-x-3">
                         <button
                           onClick={() => toggleFavorite(selectedImage.id)}
                           className="flex-1 px-4 py-2 border border-gray-300 rounded-lg hover:bg-gray-50 flex items-center justify-center"

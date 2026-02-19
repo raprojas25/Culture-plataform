@@ -1,37 +1,3 @@
-/*
-export const env = {
-  port: process.env.PORT,
-  jwtSecret: process.env.JWT_SECRET,
-};
-*/
-/*
-import dotenv from 'dotenv';
-
-dotenv.config();
-
-export const env = {
-  port: process.env.PORT || 3000,
-
-  db: {
-    host: process.env.DB_HOST || 'localhost',
-    port: process.env.DB_PORT || 5432,
-    name: process.env.DB_NAME,
-    user: process.env.DB_USER,
-    password: process.env.DB_PASSWORD,
-  },
-
-  jwtSecret: process.env.JWT_SECRET,
-};
-
-*/
-
-/*
-const pool = new Pool({
-  user: env.db.user,
-  database: env.db.name,
-});
-*/
-//claude
 import dotenv from 'dotenv';
 import { fileURLToPath } from 'url';
 import { dirname, resolve } from 'path';
@@ -83,3 +49,4 @@ console.log('   DB_PORT:', env.db.port);
 console.log('   DB_NAME:', env.db.name);
 console.log('   DB_USER:', env.db.user);
 console.log('   DB_PASSWORD:', env.db.password ? '***' : '(vacío)');
+

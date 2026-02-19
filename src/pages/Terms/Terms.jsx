@@ -22,6 +22,7 @@ import {
   Phone,
   ChevronRight
 } from 'lucide-react'
+import { Button } from '../../components/ui/Button'
 
 const Terms = () => {
   const [activeSection, setActiveSection] = useState('general')
@@ -108,7 +109,8 @@ const Terms = () => {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-gray-50 to-white py-12">
+    <div className="min-h-screen  py-12">
+      {/* bg-gradient-to-b from-gray-50 to-white */}
       <div className="container mx-auto px-4">
         {/* Encabezado */}
         <motion.div
@@ -817,23 +819,21 @@ const Terms = () => {
                 </div>
               </div>
 
-              <div className="mt-6 flex justify-between items-center">
+              <div className="mt-6 flex flex-col md:flex-row justify-between items-center space-y-4">
                 <p className="text-sm text-gray-500">
                   Al continuar, también aceptas nuestra{' '}
                   <Link to="/privacidad" className="text-red-600 hover:text-red-700">
                     Política de Privacidad
                   </Link>
                 </p>
-                <button
-                  disabled={!acceptedTerms}
-                  className={`px-6 py-3 rounded-lg font-medium ${
-                    acceptedTerms
-                      ? 'bg-red-600 text-white hover:bg-red-700'
-                      : 'bg-gray-100 text-gray-400 cursor-not-allowed'
-                  }`}
+                <Button
+                variant='danger'
+                size='lg'
+                disabled={!acceptedTerms}
+                className='w-full'
                 >
-                  Aceptar y Continuar
-                </button>
+                  Aceptar y continuar 
+                </Button>
               </div>
             </motion.div>
           </motion.div>

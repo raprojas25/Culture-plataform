@@ -233,7 +233,7 @@ const EventsTable = ({ isFullView = false }) => {
           <div className="text-sm text-gray-600">
             Seleccionados: <span className="font-medium">0</span> de {events.length} eventos
           </div>
-          <div className="flex space-x-3">
+          <div className="flex space-x-3 flex-wrap">
             <button
               onClick={() => handleApprove(events[0].id)}
               className="px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 flex items-center"

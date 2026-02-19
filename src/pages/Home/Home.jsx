@@ -86,7 +86,7 @@ const Home = () => {
   ];
 
   return (
-    <div className="space-y-16">
+    <div className="">
       {/* Hero Section */}
       <section className="relative bg-gradient-to-r from-red-600 to-orange-500 text-white py-20">
         <div className="container mx-auto px-4 text-center">
@@ -102,29 +102,29 @@ const Home = () => {
             actividades más importantes de tu localidad.
           </p>
 
-          <div className="flex flex-col md:flex-row justify-center content-center gap-4">
-  <Link to="/publicar-evento">
-    <motion.button
-      whileHover={{ scale: 1.05 }}
-      whileTap={{ scale: 0.95 }}
-      className="bg-white text-red-600 font-bold py-3 px-8 rounded-full hover:bg-gray-100 flex items-center justify-center gap-2"
-    >
-      Publica tu Evento
-      <ChevronRight />
-    </motion.button>
-  </Link>
-  
-  <Link to="/calendario">
-    <motion.button
-      whileHover={{ scale: 1.05 }}
-      whileTap={{ scale: 0.95 }}
-      className="bg-transparent border-2 border-white text-white font-bold py-3 px-8 rounded-full hover:bg-white hover:text-red-600 flex items-center justify-center gap-2"
-    >
-      Ver Calendario
-      <Calendar />
-    </motion.button>
-  </Link>
-</div> 
+          <div className="flex flex-col md:flex-row gap-4 justify-center items-center ">
+            <Link to="/publicar-evento">
+              <motion.button
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                className="bg-white text-red-600 font-bold py-3 px-8 rounded-full hover:bg-gray-100 flex items-center justify-center gap-2"
+              >
+                Publica tu Evento
+                <ChevronRight />
+              </motion.button>
+            </Link>
+
+            <Link to="/calendario">
+              <motion.button
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                className="bg-transparent border-2 border-white text-white font-bold py-3 px-8 rounded-full hover:bg-white hover:text-red-600 flex items-center justify-center gap-2"
+              >
+                Ver Calendario
+                <Calendar />
+              </motion.button>
+            </Link>
+          </div>
         </div>
       </section>
 
@@ -132,7 +132,9 @@ const Home = () => {
       <section className="py-8">
         <div className="container mx-auto px-4">
           <div className="flex items-center justify-between mb-8">
-            <h2 className="text-3xl font-bold">Eventos Destacados</h2>
+            <h2 className="text-2xl md:text-3xl font-bold">
+              Eventos Destacados
+            </h2>
             <button className="text-red-600 font-medium flex items-center gap-1">
               Ver todos <ChevronRight size={20} />
             </button>
@@ -162,9 +164,11 @@ const Home = () => {
       </section>
 
       {/* Próximos Eventos */}
-      <section className="py-8 bg-gray-50">
+      <section className="py-8 bg-gray-50 dark:bg-gray-900/50">
         <div className="container mx-auto px-4">
-          <h2 className="text-3xl font-bold mb-8">Próximos Eventos</h2>
+          <h2 className="text-2xl md:text-3xl font-bold mb-8">
+            Próximos Eventos
+          </h2>
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
             {upcomingEvents.map((event) => (
               <motion.div
@@ -198,7 +202,9 @@ const Home = () => {
       {/* Eventos por Categoría */}
       <section className="py-8">
         <div className="container mx-auto px-4">
-          <h2 className="text-3xl font-bold mb-8">Eventos por Categoría</h2>
+          <h2 className="text-2xl md:text-3xl font-bold mb-8">
+            Eventos por Categoría
+          </h2>
           <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-8 gap-4">
             {categories.map((category) => (
               <motion.div
@@ -220,7 +226,9 @@ const Home = () => {
       {/* Mapa de Eventos */}
       <section className="py-8">
         <div className="container mx-auto px-4">
-          <h2 className="text-3xl font-bold mb-8">Eventos en el Mapa</h2>
+          <h2 className="text-2xl md:text-3xl font-bold mb-8">
+            Eventos en el Mapa
+          </h2>
           <div className="bg-white rounded-xl shadow-lg overflow-hidden">
             <div className="h-96 bg-gray-200 flex items-center justify-center">
               <div className="text-center">
