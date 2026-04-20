@@ -109,7 +109,7 @@ export class EventController {
         return res.status(404).json({ error: 'Evento no encontrado' });
       }
 
-      res.json({ message: `Evento \${status}`, event });
+      res.json({ message: `Evento ${status}`, event });
     } catch (error) {
       res.status(500).json({ error: error.message });
     }

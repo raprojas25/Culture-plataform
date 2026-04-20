@@ -8,25 +8,25 @@ export class Event {
 
     // Construir filtros dinámicos
     if (filters.category_id) {
-      whereClauses.push(`category_id = ${paramIndex}`);
+      whereClauses.push(`category_id = $${paramIndex}`);
       queryParams.push(filters.category_id);
       paramIndex++;
     }
 
     if (filters.organizer_id) {
-      whereClauses.push(`organizer_id = ${paramIndex}`);
+      whereClauses.push(`organizer_id = $${paramIndex}`);
       queryParams.push(filters.organizer_id);
       paramIndex++;
     }
 
     if (filters.district_id) {
-      whereClauses.push(`district_id = ${paramIndex}`);
+      whereClauses.push(`district_id = $${paramIndex}`);
       queryParams.push(filters.district_id);
       paramIndex++;
     }
 
     if (filters.status) {
-      whereClauses.push(`status = ${paramIndex}`);
+      whereClauses.push(`status = $${paramIndex}`);
       queryParams.push(filters.status);
       paramIndex++;
     } else {
@@ -34,25 +34,25 @@ export class Event {
     }
 
     if (filters.price_type) {
-      whereClauses.push(`price_type = ${paramIndex}`);
+      whereClauses.push(`price_type = $${paramIndex}`);
       queryParams.push(filters.price_type);
       paramIndex++;
     }
 
     if (filters.start_date) {
-      whereClauses.push(`DATE(start_datetime) >= ${paramIndex}`);
+      whereClauses.push(`DATE(start_datetime) >= $${paramIndex}`);
       queryParams.push(filters.start_date);
       paramIndex++;
     }
 
     if (filters.end_date) {
-      whereClauses.push(`DATE(end_datetime) <= ${paramIndex}`);
+      whereClauses.push(`DATE(end_datetime) <= $${paramIndex}`);
       queryParams.push(filters.end_date);
       paramIndex++;
     }
 
     if (filters.featured_level) {
-      whereClauses.push(`featured_level >= ${paramIndex}`);
+      whereClauses.push(`featured_level >= $${paramIndex}`);
       queryParams.push(filters.featured_level);
       paramIndex++;
     }
@@ -81,7 +81,7 @@ export class Event {
        LEFT JOIN districts d ON e.district_id = d.id
        ${whereClause}
        ORDER BY e.featured_level DESC, e.created_at DESC
-       LIMIT ${paramIndex} OFFSET ${paramIndex + 1}`,
+       LIMIT $${paramIndex} OFFSET $${paramIndex + 1}`,
       queryParams
     );
 
@@ -113,7 +113,13 @@ export class Event {
               u.email as organizer_email,
               d.name as district_name,
               d.province as district_province,
-              (SELECT COUNT(*) FROM event_likes WHERE event_id = e.id) as likes_count
+              (SELECT COUNT(*) FROM event_likes WHERE event_id = e.id) as likes_count,
+              (SELECT JSON_AGG(images) FROM (
+                SELECT id, image_url, alt_text, order_index 
+                FROM event_images 
+                WHERE event_id = e.id 
+                ORDER BY order_index, created_at
+              ) images) as images
        FROM events e
        LEFT JOIN categories c ON e.category_id = c.id
        LEFT JOIN users u ON e.organizer_id = u.id
@@ -123,12 +129,6 @@ export class Event {
     );
     return result.rows[0];
   }
-// (SELECT JSON_AGG(images) FROM (
-//                 SELECT id, image_url, alt_text, order_index 
-//                 FROM event_images 
-//                 WHERE event_id = e.id 
-//                 ORDER BY order_index, created_at
-//               ) images) as images
 
   static async create(eventData) {
     const {
@@ -230,4 +230,236 @@ export class Event {
     return result.rows;
   }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 

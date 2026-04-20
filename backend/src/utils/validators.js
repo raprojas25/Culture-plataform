@@ -51,7 +51,7 @@ export const eventSchema = Joi.object({
 export const categorySchema = Joi.object({
   name: Joi.string().min(3).max(100).required(),
   icon: Joi.string().max(100),
-  color: Joi.string().pattern(/^#[0-9A-F]{6}\$/i),
+  color: Joi.string().pattern(/^#[0-9A-F]{6}$/i),
   description: Joi.string().required(),
   is_active: Joi.boolean().default(true)
 });

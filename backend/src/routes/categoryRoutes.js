@@ -15,6 +15,7 @@ router.use(authenticateToken, authorizeRoles(1));
 router.post('/', validateCategory, CategoryController.createCategory);
 router.put('/:id', validateCategory, CategoryController.updateCategory);
 router.delete('/:id', CategoryController.deleteCategory);
+router.patch('/:id/status', CategoryController.toggleStatus);
 
 export default router;
 

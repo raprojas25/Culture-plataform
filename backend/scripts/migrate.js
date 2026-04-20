@@ -42,21 +42,15 @@ const createTables = async () => {
       ON CONFLICT (name) DO NOTHING;
     `);
 
-// Tablas existentes (roles, users)...
-
     // Crear tabla districts
     await client.query(`
       CREATE TABLE IF NOT EXISTS districts (
         id SERIAL PRIMARY KEY,
         name VARCHAR(100) NOT NULL,
-        city VARCHAR(100),
         province VARCHAR(100),
-        country VARCHAR(100) DEFAULT 'Perú',
-        is_active BOOLEAN DEFAULT TRUE,
-        created_at TIMESTAMP DEFAULT NOW()
+        region VARCHAR(100)
       );
     `);
-
     // Crear tabla categories
     await client.query(`
       CREATE TABLE IF NOT EXISTS categories (
@@ -87,7 +81,9 @@ const createTables = async () => {
         price_type VARCHAR(20) DEFAULT 'free',
         price_amount NUMERIC(10,2),
         featured_level SMALLINT DEFAULT 0,
-        status VARCHAR(20) DEFAULT 'draft',
+        status VARCHAR(20)
+          CHECK (status IN ('draft','published','cancelled','completed'))
+          DEFAULT 'draft',
         main_image TEXT,
         views INTEGER DEFAULT 0,
         created_at TIMESTAMP DEFAULT NOW(),
@@ -118,18 +114,17 @@ const createTables = async () => {
         created_at TIMESTAMP DEFAULT NOW()
       );
     `);
-
-    // Insertar datos iniciales
+// Insertar roles por defecto
     await client.query(`
-      INSERT INTO districts (name, city, province) 
+      INSERT INTO roles (name, description) 
       VALUES 
-        ('Miraflores', 'Lima', 'Lima'),
-        ('Barranco', 'Lima', 'Lima'),
-        ('San Isidro', 'Lima', 'Lima'),
-        ('Cercado de Lima', 'Lima', 'Lima')
-      ON CONFLICT DO NOTHING;
+        ('admin', 'Administrador del sistema con acceso completo'),
+        ('organizer', 'Organizador de eventos'),
+        ('user', 'Usuario regular'),
+        ('moderator', 'Moderador de contenido')
+      ON CONFLICT (name) DO NOTHING;
     `);
-
+    // Insertar datos iniciales
     await client.query(`
       INSERT INTO categories (name, icon, color, description) 
       VALUES 
@@ -141,6 +136,32 @@ const createTables = async () => {
         ('Tecnología', 'tech', '#DDA0DD', 'Conferencias y meetups tecnológicos')
       ON CONFLICT (name) DO NOTHING;
     `);
+  //Insertar todos los distritos de la provincia Caylloma, Arequipa
+  await client.query(`
+      INSERT INTO districts (name, province, region) VALUES
+('Chivay', 'Caylloma', 'Arequipa'),
+('Achoma', 'Caylloma', 'Arequipa'),
+('Cabanaconde', 'Caylloma', 'Arequipa'),
+('Callalli', 'Caylloma', 'Arequipa'),
+('Caylloma', 'Caylloma', 'Arequipa'),
+('Coporaque', 'Caylloma', 'Arequipa'),
+('Huambo', 'Caylloma', 'Arequipa'),
+('Huanca', 'Caylloma', 'Arequipa'),
+('Ichupampa', 'Caylloma', 'Arequipa'),
+('Lari', 'Caylloma', 'Arequipa'),
+('Lluta', 'Caylloma', 'Arequipa'),
+('Maca', 'Caylloma', 'Arequipa'),
+('Madrigal', 'Caylloma', 'Arequipa'),
+('Majes', 'Caylloma', 'Arequipa'),
+('San Antonio de Chuca', 'Caylloma', 'Arequipa'),
+('Sibayo', 'Caylloma', 'Arequipa'),
+('Tapay', 'Caylloma', 'Arequipa'),
+('Tisco', 'Caylloma', 'Arequipa'),
+('Tuti', 'Caylloma', 'Arequipa'),
+('Yanque', 'Caylloma', 'Arequipa')
+ON CONFLICT DO NOTHING;
+`);
+
 
     await client.query('COMMIT');
     console.log('✅ Tablas creadas exitosamente');

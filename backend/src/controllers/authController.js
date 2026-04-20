@@ -1,11 +1,12 @@
-import { AuthService } from '../services/authService.js';
+import { AuthService } from "../services/authService.js";
+import { User } from "../models/User.js";
 
 export class AuthController {
   static async login(req, res) {
     try {
       const { email, password } = req.body;
       const ip = req.ip;
-      const userAgent = req.get('User-Agent');
+      const userAgent = req.get("User-Agent");
 
       const result = await AuthService.login(email, password, ip, userAgent);
       res.json(result);
@@ -37,9 +38,9 @@ export class AuthController {
       // req.user está establecido por el middleware de autenticación
       const user = await User.findById(req.user.id);
       if (!user) {
-        return res.status(404).json({ error: 'Usuario no encontrado' });
+        return res.status(404).json({ error: "Usuario no encontrado" });
       }
-      
+
       const { password_hash, ...userWithoutPassword } = user;
       res.json(userWithoutPassword);
     } catch (error) {
