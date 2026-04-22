@@ -155,7 +155,7 @@ export const UserDropdown = () => {
               <p className="text-sm text-gray-500 dark:text-gray-400 truncate">
                 {user?.email}
               </p>
-           </div>
+            </div>
 
             <div className="p-2">
               {userMenuItems.map((item, index) => (

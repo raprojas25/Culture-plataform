@@ -1,59 +1,56 @@
 import { Calendar, CheckCircle } from "lucide-react";
-import { motion } from 'framer-motion'
+import { motion } from "framer-motion";
 import { Heading } from "@/shared/components/ui/Heading";
 import { Paragraph } from "@/shared/components/ui/Paragraph";
 
 export const Benefit = () => {
-
   const staggerContainer = {
     hidden: { opacity: 0 },
     visible: {
       opacity: 1,
       transition: {
-        staggerChildren: 0.2
-      }
-    }
-  }
-const fadeInUp = {
+        staggerChildren: 0.2,
+      },
+    },
+  };
+  const fadeInUp = {
     hidden: { opacity: 0, y: 20 },
-    visible: { opacity: 1, y: 0, transition: { duration: 0.6 } }
-  }
-
+    visible: { opacity: 1, y: 0, transition: { duration: 0.6 } },
+  };
 
   // Beneficios
-const benefits = [
-  {
-    id: 1,
-    text: "Mayor visibilidad para tus eventos",
-    icon: <CheckCircle size={20} />,
-  },
-  {
-    id: 2,
-    text: "Conexión directa con la comunidad",
-    icon: <CheckCircle size={20} />,
-  },
-  {
-    id: 3,
-    text: "Herramientas gratuitas de gestión",
-    icon: <CheckCircle size={20} />,
-  },
-  {
-    id: 4,
-    text: "Acceso a proveedores confiables",
-    icon: <CheckCircle size={20} />,
-  },
-  {
-    id: 5,
-    text: "Promoción en redes sociales",
-    icon: <CheckCircle size={20} />,
-  },
-  {
-    id: 6,
-    text: "Estadísticas y análisis de asistencia",
-    icon: <CheckCircle size={20} />,
-  },
-];
-
+  const benefits = [
+    {
+      id: 1,
+      text: "Mayor visibilidad para tus eventos",
+      icon: <CheckCircle size={20} />,
+    },
+    {
+      id: 2,
+      text: "Conexión directa con la comunidad",
+      icon: <CheckCircle size={20} />,
+    },
+    {
+      id: 3,
+      text: "Herramientas gratuitas de gestión",
+      icon: <CheckCircle size={20} />,
+    },
+    {
+      id: 4,
+      text: "Acceso a proveedores confiables",
+      icon: <CheckCircle size={20} />,
+    },
+    {
+      id: 5,
+      text: "Promoción en redes sociales",
+      icon: <CheckCircle size={20} />,
+    },
+    {
+      id: 6,
+      text: "Estadísticas y análisis de asistencia",
+      icon: <CheckCircle size={20} />,
+    },
+  ];
 
   return (
     <motion.section
@@ -68,7 +65,7 @@ const benefits = [
           <Heading level="h2" align="center">
             Beneficios para la Comunidad
           </Heading>
-          <Paragraph size='lg' className="mb-8">
+          <Paragraph size="lg" className="mb-8">
             CulturaViva transforma la manera en que experimentamos y compartimos
             nuestra herencia cultural
           </Paragraph>
@@ -79,7 +76,7 @@ const benefits = [
                 <div className="p-2 bg-green-100 text-green-600 rounded-lg mr-4">
                   {benefit.icon}
                 </div>
-                <Paragraph color="muted" size="base" >
+                <Paragraph color="muted" size="base">
                   {benefit.text}
                 </Paragraph>
               </div>

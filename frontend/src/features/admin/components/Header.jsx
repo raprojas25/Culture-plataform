@@ -61,7 +61,7 @@ export const Header = ({ isOpen, onToggle }) => {
               placeholder="Search"
               className="w-full pl-10 pr-4 py-2.5 bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl text-slate-800 dark:text-white placeholder-slate-500 focus:outline-none focus: ring-2 focus:ring-red-500 focus:border-transparent transition-all"
             />
-            <Filter className="w-4 h-4 absolute right-3 top-1/2 transform -translate-y-1/2 text-slate-400"/>
+            <Filter className="w-4 h-4 absolute right-3 top-1/2 transform -translate-y-1/2 text-slate-400" />
             {/* <button */}
             {/*   type="button" */}
             {/*   className="absolute right-2 top-1/2 transform translate-y-1/2 p-1.5 text-slate-400 hover:text-slate-600 dark:hover:text-slate-300 " */}

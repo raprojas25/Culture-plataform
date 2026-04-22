@@ -1,9 +1,9 @@
-import { useState, useEffect } from 'react'
-import { useParams, useNavigate } from 'react-router-dom'
-import { motion, AnimatePresence } from 'framer-motion'
-import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet'
-import { Swiper, SwiperSlide } from 'swiper/react'
-import { Navigation, Pagination, Thumbs, FreeMode } from 'swiper/modules'
+import { useState, useEffect } from "react";
+import { useParams, useNavigate } from "react-router-dom";
+import { motion, AnimatePresence } from "framer-motion";
+import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Navigation, Pagination, Thumbs, FreeMode } from "swiper/modules";
 import {
   Calendar,
   MapPin,
@@ -30,49 +30,50 @@ import {
   Printer,
   Link as LinkIcon,
   CheckCircle,
-  XCircle
-} from 'lucide-react'
-import 'swiper/css'
-import 'swiper/css/navigation'
-import 'swiper/css/pagination'
-import 'swiper/css/thumbs'
-import 'leaflet/dist/leaflet.css'
+  XCircle,
+} from "lucide-react";
+import "swiper/css";
+import "swiper/css/navigation";
+import "swiper/css/pagination";
+import "swiper/css/thumbs";
+import "leaflet/dist/leaflet.css";
 
 // Fix para iconos de Leaflet
-import L from 'leaflet'
-delete L.Icon.Default.prototype._getIconUrl
+import L from "leaflet";
+delete L.Icon.Default.prototype._getIconUrl;
 L.Icon.Default.mergeOptions({
-  iconRetinaUrl: 'https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon-2x.png',
-  iconUrl: 'https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon.png',
-  shadowUrl: 'https://unpkg.com/leaflet@1.9.4/dist/images/marker-shadow.png'
-})
+  iconRetinaUrl:
+    "https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon-2x.png",
+  iconUrl: "https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon.png",
+  shadowUrl: "https://unpkg.com/leaflet@1.9.4/dist/images/marker-shadow.png",
+});
 
 const EventDetail = () => {
-  const { id } = useParams()
-  const navigate = useNavigate()
-  const [event, setEvent] = useState(null)
-  const [thumbsSwiper, setThumbsSwiper] = useState(null)
-  const [activeImage, setActiveImage] = useState(0)
-  const [isLiked, setIsLiked] = useState(false)
-  const [isSaved, setIsSaved] = useState(false)
-  const [showShareModal, setShowShareModal] = useState(false)
-  const [showContactModal, setShowContactModal] = useState(false)
-  const [showReportModal, setShowReportModal] = useState(false)
-  const [similarEvents, setSimilarEvents] = useState([])
-  const [position] = useState([-12.0464, -77.0428]) // Lima coordinates as example
+  const { id } = useParams();
+  const navigate = useNavigate();
+  const [event, setEvent] = useState(null);
+  const [thumbsSwiper, setThumbsSwiper] = useState(null);
+  const [activeImage, setActiveImage] = useState(0);
+  const [isLiked, setIsLiked] = useState(false);
+  const [isSaved, setIsSaved] = useState(false);
+  const [showShareModal, setShowShareModal] = useState(false);
+  const [showContactModal, setShowContactModal] = useState(false);
+  const [showReportModal, setShowReportModal] = useState(false);
+  const [similarEvents, setSimilarEvents] = useState([]);
+  const [position] = useState([-12.0464, -77.0428]); // Lima coordinates as example
 
   // Datos de ejemplo para el evento
   useEffect(() => {
     // Simulación de carga de datos
     const mockEvent = {
       id: id || 1,
-      title: 'Fiesta Patronal de San Juan Bautista',
-      category: 'Fiesta Patronal',
-      date: '24 Junio 2024',
-      time: '9:00 AM - 10:00 PM',
-      endDate: '26 Junio 2024',
-      location: 'Plaza Principal de Miraflores',
-      address: 'Av. Larco 123, Miraflores, Lima',
+      title: "Fiesta Patronal de San Juan Bautista",
+      category: "Fiesta Patronal",
+      date: "24 Junio 2024",
+      time: "9:00 AM - 10:00 PM",
+      endDate: "26 Junio 2024",
+      location: "Plaza Principal de Miraflores",
+      address: "Av. Larco 123, Miraflores, Lima",
       description: `Celebración tradicional en honor a San Juan Bautista, patrono de nuestro pueblo. Esta festividad reúne a toda la comunidad en un ambiente de alegría y tradición.
 
 La fiesta incluye:
@@ -84,7 +85,7 @@ La fiesta incluye:
 • Quema de castillos pirotécnicos al anochecer
 
 Esta celebración tiene más de 200 años de historia y es considerada Patrimonio Cultural Inmaterial de nuestra región. Familias enteras se reúnen cada año para mantener viva esta hermosa tradición.`,
-      
+
       detailedInfo: `**Horarios específicos:**
 - 9:00 AM: Misa de fiesta en la Iglesia Principal
 - 10:00 AM: Procesión por las calles del pueblo
@@ -106,135 +107,168 @@ Esta celebración tiene más de 200 años de historia y es considerada Patrimoni
 - Estacionamiento limitado
 - Transporte público disponible
 - Acceso para personas con discapacidad`,
-      
+
       organizer: {
-        name: 'Comité de Fiestas Patronales',
-        phone: '+51 987 654 321',
-        email: 'fiestasanjuan@comunidad.com',
-        website: 'www.fiestasanjuan.com',
+        name: "Comité de Fiestas Patronales",
+        phone: "+51 987 654 321",
+        email: "fiestasanjuan@comunidad.com",
+        website: "www.fiestasanjuan.com",
         verified: true,
         rating: 4.8,
-        eventsCount: 24
+        eventsCount: 24,
       },
-      
+
       images: [
-        'https://images.unsplash.com/photo-1511795409834-ef04bbd61622?w=1200&auto=format&fit=crop',
-        'https://images.unsplash.com/photo-1533174072545-7a4b6ad7a6c3?w=1200&auto=format&fit=crop',
-        'https://images.unsplash.com/photo-1460661419201-fd4cecdf8a8b?w=1200&auto=format&fit=crop',
-        'https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?w=1200&auto=format&fit=crop',
-        'https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=1200&auto=format&fit=crop'
+        "https://images.unsplash.com/photo-1511795409834-ef04bbd61622?w=1200&auto=format&fit=crop",
+        "https://images.unsplash.com/photo-1533174072545-7a4b6ad7a6c3?w=1200&auto=format&fit=crop",
+        "https://images.unsplash.com/photo-1460661419201-fd4cecdf8a8b?w=1200&auto=format&fit=crop",
+        "https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?w=1200&auto=format&fit=crop",
+        "https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=1200&auto=format&fit=crop",
       ],
-      
+
       gallery: [
-        { id: 1, url: 'https://images.unsplash.com/photo-1511795409834-ef04bbd61622?w=800', title: 'Procesión principal' },
-        { id: 2, url: 'https://images.unsplash.com/photo-1533174072545-7a4b6ad7a6c3?w=800', title: 'Danzas tradicionales' },
-        { id: 3, url: 'https://images.unsplash.com/photo-1460661419201-fd4cecdf8a8b?w=800', title: 'Feria gastronómica' },
-        { id: 4, url: 'https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?w=800', title: 'Bandas musicales' },
-        { id: 5, url: 'https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=800', title: 'Decoraciones' },
-        { id: 6, url: 'https://images.unsplash.com/photo-1511379938547-c1f69419868d?w=800', title: 'Actividades infantiles' }
+        {
+          id: 1,
+          url: "https://images.unsplash.com/photo-1511795409834-ef04bbd61622?w=800",
+          title: "Procesión principal",
+        },
+        {
+          id: 2,
+          url: "https://images.unsplash.com/photo-1533174072545-7a4b6ad7a6c3?w=800",
+          title: "Danzas tradicionales",
+        },
+        {
+          id: 3,
+          url: "https://images.unsplash.com/photo-1460661419201-fd4cecdf8a8b?w=800",
+          title: "Feria gastronómica",
+        },
+        {
+          id: 4,
+          url: "https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?w=800",
+          title: "Bandas musicales",
+        },
+        {
+          id: 5,
+          url: "https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=800",
+          title: "Decoraciones",
+        },
+        {
+          id: 6,
+          url: "https://images.unsplash.com/photo-1511379938547-c1f69419868d?w=800",
+          title: "Actividades infantiles",
+        },
       ],
-      
+
       stats: {
         views: 1245,
         likes: 289,
         shares: 156,
         saved: 89,
-        attending: 450
+        attending: 450,
       },
-      
-      price: 'Gratuito',
+
+      price: "Gratuito",
       featured: true,
       verified: true,
       capacity: 5000,
-      ageRestriction: 'Todas las edades',
-      dressCode: 'Vestimenta casual o tradicional',
-      parking: 'Disponible (limitado)',
-      publicTransport: 'Sí, rutas 301, 402, 505',
+      ageRestriction: "Todas las edades",
+      dressCode: "Vestimenta casual o tradicional",
+      parking: "Disponible (limitado)",
+      publicTransport: "Sí, rutas 301, 402, 505",
       coordinates: [-12.0464, -77.0428],
-      
-      tags: ['Fiesta Patronal', 'Tradicional', 'Comunidad', 'Gratuito', 'Familiar'],
-      
+
+      tags: [
+        "Fiesta Patronal",
+        "Tradicional",
+        "Comunidad",
+        "Gratuito",
+        "Familiar",
+      ],
+
       contactInfo: {
-        phone: '+51 987 654 321',
-        email: 'info@fiestasanjuan.com',
-        whatsapp: '+51 987 654 321',
-        facebook: 'facebook.com/fiestasanjuan',
-        instagram: '@fiestasanjuan'
-      }
-    }
+        phone: "+51 987 654 321",
+        email: "info@fiestasanjuan.com",
+        whatsapp: "+51 987 654 321",
+        facebook: "facebook.com/fiestasanjuan",
+        instagram: "@fiestasanjuan",
+      },
+    };
 
     const mockSimilarEvents = [
       {
         id: 2,
-        title: 'Festival de la Vendimia',
-        category: 'Fiesta Patronal',
-        date: '15 Julio 2024',
-        image: 'https://images.unsplash.com/photo-1518837695005-2083093ee35b?w=400',
-        location: 'Viñedos del Valle',
-        price: 'S/ 20'
+        title: "Festival de la Vendimia",
+        category: "Fiesta Patronal",
+        date: "15 Julio 2024",
+        image:
+          "https://images.unsplash.com/photo-1518837695005-2083093ee35b?w=400",
+        location: "Viñedos del Valle",
+        price: "S/ 20",
       },
       {
         id: 3,
-        title: 'Carnaval Andino',
-        category: 'Fiesta Tradicional',
-        date: '28 Julio 2024',
-        image: 'https://images.unsplash.com/photo-1511795409834-ef04bbd61622?w=400',
-        location: 'Plaza de Armas',
-        price: 'Gratuito'
+        title: "Carnaval Andino",
+        category: "Fiesta Tradicional",
+        date: "28 Julio 2024",
+        image:
+          "https://images.unsplash.com/photo-1511795409834-ef04bbd61622?w=400",
+        location: "Plaza de Armas",
+        price: "Gratuito",
       },
       {
         id: 4,
-        title: 'Feria Artesanal',
-        category: 'Feria',
-        date: '5 Agosto 2024',
-        image: 'https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=400',
-        location: 'Mercado Central',
-        price: 'Gratuito'
-      }
-    ]
+        title: "Feria Artesanal",
+        category: "Feria",
+        date: "5 Agosto 2024",
+        image:
+          "https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=400",
+        location: "Mercado Central",
+        price: "Gratuito",
+      },
+    ];
 
-    setEvent(mockEvent)
-    setSimilarEvents(mockSimilarEvents)
-  }, [id])
+    setEvent(mockEvent);
+    setSimilarEvents(mockSimilarEvents);
+  }, [id]);
 
   const handleShare = (platform) => {
-    const url = window.location.href
-    const text = `¡Mira este evento cultural: ${event?.title}!`
-    
+    const url = window.location.href;
+    const text = `¡Mira este evento cultural: ${event?.title}!`;
+
     const shareUrls = {
       facebook: `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(url)}`,
       twitter: `https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}&url=${encodeURIComponent(url)}`,
-      whatsapp: `https://wa.me/?text=${encodeURIComponent(text + ' ' + url)}`
-    }
+      whatsapp: `https://wa.me/?text=${encodeURIComponent(text + " " + url)}`,
+    };
 
     if (shareUrls[platform]) {
-      window.open(shareUrls[platform], '_blank', 'noopener,noreferrer')
+      window.open(shareUrls[platform], "_blank", "noopener,noreferrer");
     }
-    
-    setShowShareModal(false)
-  }
+
+    setShowShareModal(false);
+  };
 
   const copyLink = () => {
-    navigator.clipboard.writeText(window.location.href)
-    alert('¡Enlace copiado al portapapeles!')
-    setShowShareModal(false)
-  }
+    navigator.clipboard.writeText(window.location.href);
+    alert("¡Enlace copiado al portapapeles!");
+    setShowShareModal(false);
+  };
 
   const handleReport = (reason) => {
-    console.log('Evento reportado:', reason)
-    setShowReportModal(false)
-    alert('Gracias por tu reporte. Revisaremos este evento.')
-  }
+    console.log("Evento reportado:", reason);
+    setShowReportModal(false);
+    alert("Gracias por tu reporte. Revisaremos este evento.");
+  };
 
   const fadeInUp = {
     hidden: { opacity: 0, y: 20 },
-    visible: { opacity: 1, y: 0, transition: { duration: 0.5 } }
-  }
+    visible: { opacity: 1, y: 0, transition: { duration: 0.5 } },
+  };
 
   const slideIn = {
     hidden: { x: -20, opacity: 0 },
-    visible: { x: 0, opacity: 1, transition: { duration: 0.3 } }
-  }
+    visible: { x: 0, opacity: 1, transition: { duration: 0.3 } },
+  };
 
   if (!event) {
     return (
@@ -244,7 +278,7 @@ Esta celebración tiene más de 200 años de historia y es considerada Patrimoni
           <p>Cargando evento...</p>
         </div>
       </div>
-    )
+    );
   }
 
   return (
@@ -270,7 +304,12 @@ Esta celebración tiene más de 200 años de historia y es considerada Patrimoni
                 onClick={() => setIsLiked(!isLiked)}
                 className="p-2 hover:bg-gray-100 rounded-full"
               >
-                <Heart size={20} className={isLiked ? 'text-red-500 fill-red-500' : 'text-gray-500'} />
+                <Heart
+                  size={20}
+                  className={
+                    isLiked ? "text-red-500 fill-red-500" : "text-gray-500"
+                  }
+                />
               </button>
               <button
                 onClick={() => setShowShareModal(true)}
@@ -341,7 +380,9 @@ Esta celebración tiene más de 200 años de historia y es considerada Patrimoni
                         <button
                           onClick={() => setActiveImage(index)}
                           className={`w-full h-full rounded-lg overflow-hidden border-2 ${
-                            activeImage === index ? 'border-red-500' : 'border-transparent'
+                            activeImage === index
+                              ? "border-red-500"
+                              : "border-transparent"
                           }`}
                         >
                           <img
@@ -405,11 +446,15 @@ Esta celebración tiene más de 200 años de historia y es considerada Patrimoni
                 <div className="mt-4 p-4 bg-gray-50 rounded-lg">
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div>
-                      <h4 className="font-bold text-gray-900 mb-2">Dirección exacta:</h4>
+                      <h4 className="font-bold text-gray-900 mb-2">
+                        Dirección exacta:
+                      </h4>
                       <p className="text-gray-700">{event.address}</p>
                     </div>
                     <div>
-                      <h4 className="font-bold text-gray-900 mb-2">Cómo llegar:</h4>
+                      <h4 className="font-bold text-gray-900 mb-2">
+                        Cómo llegar:
+                      </h4>
                       <ul className="space-y-1 text-gray-700">
                         <li className="flex items-center">
                           <span className="w-2 h-2 bg-red-500 rounded-full mr-2"></span>
@@ -457,7 +502,9 @@ Esta celebración tiene más de 200 años de historia y es considerada Patrimoni
                       <div className="absolute inset-0 bg-black/0 group-hover:bg-black/40 transition-colors duration-300 flex items-center justify-center opacity-0 group-hover:opacity-100">
                         <Eye className="text-white" size={24} />
                       </div>
-                      <p className="text-sm text-gray-600 mt-2">{photo.title}</p>
+                      <p className="text-sm text-gray-600 mt-2">
+                        {photo.title}
+                      </p>
                     </motion.div>
                   ))}
                 </div>
@@ -503,15 +550,21 @@ Esta celebración tiene más de 200 años de historia y es considerada Patrimoni
                 {/* Estadísticas */}
                 <div className="flex items-center justify-between py-4 border-y border-gray-200 mb-4">
                   <div className="text-center">
-                    <div className="text-2xl font-bold">{event.stats.views}</div>
+                    <div className="text-2xl font-bold">
+                      {event.stats.views}
+                    </div>
                     <div className="text-sm text-gray-600">Vistas</div>
                   </div>
                   <div className="text-center">
-                    <div className="text-2xl font-bold">{event.stats.likes}</div>
+                    <div className="text-2xl font-bold">
+                      {event.stats.likes}
+                    </div>
                     <div className="text-sm text-gray-600">Me gusta</div>
                   </div>
                   <div className="text-center">
-                    <div className="text-2xl font-bold">{event.stats.attending}</div>
+                    <div className="text-2xl font-bold">
+                      {event.stats.attending}
+                    </div>
                     <div className="text-sm text-gray-600">Asistirán</div>
                   </div>
                 </div>
@@ -523,7 +576,9 @@ Esta celebración tiene más de 200 años de historia y es considerada Patrimoni
                     <div>
                       <p className="font-medium">{event.date}</p>
                       {event.endDate && (
-                        <p className="text-sm text-gray-600">Hasta {event.endDate}</p>
+                        <p className="text-sm text-gray-600">
+                          Hasta {event.endDate}
+                        </p>
                       )}
                     </div>
                   </div>
@@ -532,7 +587,9 @@ Esta celebración tiene más de 200 años de historia y es considerada Patrimoni
                     <Clock className="text-gray-400 mr-3" size={20} />
                     <div>
                       <p className="font-medium">{event.time}</p>
-                      <p className="text-sm text-gray-600">Duración aproximada</p>
+                      <p className="text-sm text-gray-600">
+                        Duración aproximada
+                      </p>
                     </div>
                   </div>
 
@@ -589,12 +646,12 @@ Esta celebración tiene más de 200 años de historia y es considerada Patrimoni
                     onClick={() => setIsLiked(!isLiked)}
                     className={`w-full py-3 rounded-lg font-medium flex items-center justify-center gap-2 ${
                       isLiked
-                        ? 'bg-red-600 text-white hover:bg-red-700'
-                        : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                        ? "bg-red-600 text-white hover:bg-red-700"
+                        : "bg-gray-100 text-gray-700 hover:bg-gray-200"
                     }`}
                   >
-                    <Heart size={20} className={isLiked ? 'fill-white' : ''} />
-                    {isLiked ? 'Quitar de favoritos' : 'Agregar a favoritos'}
+                    <Heart size={20} className={isLiked ? "fill-white" : ""} />
+                    {isLiked ? "Quitar de favoritos" : "Agregar a favoritos"}
                   </button>
 
                   <button
@@ -634,14 +691,22 @@ Esta celebración tiene más de 200 años de historia y es considerada Patrimoni
                   </div>
                   <div>
                     <div className="flex items-center">
-                      <h3 className="font-bold text-lg">{event.organizer.name}</h3>
+                      <h3 className="font-bold text-lg">
+                        {event.organizer.name}
+                      </h3>
                       {event.organizer.verified && (
-                        <CheckCircle className="ml-2 text-green-500" size={16} />
+                        <CheckCircle
+                          className="ml-2 text-green-500"
+                          size={16}
+                        />
                       )}
                     </div>
                     <div className="flex items-center text-sm text-gray-600">
                       <Star size={14} className="text-yellow-500 mr-1" />
-                      <span>{event.organizer.rating} • {event.organizer.eventsCount} eventos</span>
+                      <span>
+                        {event.organizer.rating} • {event.organizer.eventsCount}{" "}
+                        eventos
+                      </span>
                     </div>
                   </div>
                 </div>
@@ -655,11 +720,15 @@ Esta celebración tiene más de 200 años de historia y es considerada Patrimoni
                       <Phone size={16} className="mr-2 text-gray-500" />
                       Llamar
                     </span>
-                    <span className="text-gray-700 font-medium">{event.organizer.phone}</span>
+                    <span className="text-gray-700 font-medium">
+                      {event.organizer.phone}
+                    </span>
                   </button>
 
                   <button
-                    onClick={() => window.open(`mailto:${event.organizer.email}`)}
+                    onClick={() =>
+                      window.open(`mailto:${event.organizer.email}`)
+                    }
                     className="w-full flex items-center justify-between p-3 bg-gray-50 rounded-lg hover:bg-gray-100"
                   >
                     <span className="flex items-center">
@@ -672,7 +741,9 @@ Esta celebración tiene más de 200 años de historia y es considerada Patrimoni
                   </button>
 
                   <button
-                    onClick={() => window.open(event.organizer.website, '_blank')}
+                    onClick={() =>
+                      window.open(event.organizer.website, "_blank")
+                    }
                     className="w-full flex items-center justify-between p-3 bg-gray-50 rounded-lg hover:bg-gray-100"
                   >
                     <span className="flex items-center">
@@ -694,7 +765,9 @@ Esta celebración tiene más de 200 años de historia y es considerada Patrimoni
                 transition={{ delay: 0.3 }}
                 className="bg-white rounded-2xl shadow-lg p-6"
               >
-                <h2 className="text-xl font-bold mb-4">Información Adicional</h2>
+                <h2 className="text-xl font-bold mb-4">
+                  Información Adicional
+                </h2>
                 <div className="space-y-3">
                   <div className="flex justify-between">
                     <span className="text-gray-600">Restricción de edad:</span>
@@ -728,7 +801,7 @@ Esta celebración tiene más de 200 años de historia y es considerada Patrimoni
         >
           <div className="bg-white rounded-2xl shadow-lg p-8">
             <h2 className="text-3xl font-bold mb-6">Acerca de este evento</h2>
-            
+
             <div className="prose prose-lg max-w-none">
               <p className="text-gray-700 leading-relaxed">
                 {event.description}
@@ -822,24 +895,24 @@ Esta celebración tiene más de 200 años de historia y es considerada Patrimoni
               onClick={(e) => e.stopPropagation()}
             >
               <h3 className="text-xl font-bold mb-6">Compartir evento</h3>
-              
+
               <div className="grid grid-cols-4 gap-4 mb-6">
                 <button
-                  onClick={() => handleShare('facebook')}
+                  onClick={() => handleShare("facebook")}
                   className="p-4 bg-blue-100 rounded-xl hover:bg-blue-200 flex flex-col items-center"
                 >
                   <Facebook className="text-blue-600 mb-2" size={24} />
                   <span className="text-sm">Facebook</span>
                 </button>
                 <button
-                  onClick={() => handleShare('twitter')}
+                  onClick={() => handleShare("twitter")}
                   className="p-4 bg-blue-50 rounded-xl hover:bg-blue-100 flex flex-col items-center"
                 >
                   <Twitter className="text-blue-400 mb-2" size={24} />
                   <span className="text-sm">Twitter</span>
                 </button>
                 <button
-                  onClick={() => handleShare('whatsapp')}
+                  onClick={() => handleShare("whatsapp")}
                   className="p-4 bg-green-100 rounded-xl hover:bg-green-200 flex flex-col items-center"
                 >
                   <MessageCircle className="text-green-600 mb-2" size={24} />
@@ -891,8 +964,10 @@ Esta celebración tiene más de 200 años de historia y es considerada Patrimoni
               className="bg-white rounded-2xl p-6 max-w-md w-full"
               onClick={(e) => e.stopPropagation()}
             >
-              <h3 className="text-xl font-bold mb-4">Contactar al organizador</h3>
-              
+              <h3 className="text-xl font-bold mb-4">
+                Contactar al organizador
+              </h3>
+
               <div className="space-y-4 mb-6">
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-2">
@@ -926,8 +1001,8 @@ Esta celebración tiene más de 200 años de historia y es considerada Patrimoni
                 </button>
                 <button
                   onClick={() => {
-                    alert('Mensaje enviado al organizador')
-                    setShowContactModal(false)
+                    alert("Mensaje enviado al organizador");
+                    setShowContactModal(false);
                   }}
                   className="flex-1 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700"
                 >
@@ -960,15 +1035,15 @@ Esta celebración tiene más de 200 años de historia y es considerada Patrimoni
               <p className="text-gray-600 mb-6">
                 ¿Por qué quieres reportar este evento?
               </p>
-              
+
               <div className="space-y-3 mb-6">
                 {[
-                  'Contenido inapropiado',
-                  'Información falsa',
-                  'Evento duplicado',
-                  'Contenido ofensivo',
-                  'Spam o publicidad',
-                  'Otro motivo'
+                  "Contenido inapropiado",
+                  "Información falsa",
+                  "Evento duplicado",
+                  "Contenido ofensivo",
+                  "Spam o publicidad",
+                  "Otro motivo",
                 ].map((reason) => (
                   <button
                     key={reason}
@@ -991,7 +1066,7 @@ Esta celebración tiene más de 200 años de historia y es considerada Patrimoni
         )}
       </AnimatePresence>
     </div>
-  )
-}
+  );
+};
 
-export default EventDetail
+export default EventDetail;

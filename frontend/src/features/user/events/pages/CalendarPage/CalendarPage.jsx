@@ -1,8 +1,8 @@
-import { useState } from 'react'
-import { Calendar, momentLocalizer } from 'react-big-calendar'
-import moment from 'moment'
-import 'react-big-calendar/lib/css/react-big-calendar.css'
-import { motion } from 'framer-motion'
+import { useState } from "react";
+import { Calendar, momentLocalizer } from "react-big-calendar";
+import moment from "moment";
+import "react-big-calendar/lib/css/react-big-calendar.css";
+import { motion } from "framer-motion";
 import {
   Filter,
   MapPin,
@@ -10,63 +10,58 @@ import {
   List,
   Grid,
   Share2,
-  Facebook
-} from 'lucide-react'
+  Facebook,
+} from "lucide-react";
 
-const localizer = momentLocalizer(moment)
+const localizer = momentLocalizer(moment);
 
 const CalendarPage = () => {
-  const [view, setView] = useState('month')
-  const [date, setDate] = useState(new Date())
+  const [view, setView] = useState("month");
+  const [date, setDate] = useState(new Date());
   const [filters, setFilters] = useState({
-    type: '',
-    district: '',
-    dateRange: ''
-  })
+    type: "",
+    district: "",
+    dateRange: "",
+  });
 
   const events = [
     {
       id: 1,
-      title: 'Fiesta Patronal',
+      title: "Fiesta Patronal",
       start: new Date(2024, 5, 24),
       end: new Date(2024, 5, 26),
-      type: 'Fiesta Patronal',
-      district: 'Centro',
-      description: 'Fiesta tradicional con danzas y comida',
-      location: 'Plaza Principal',
-      contact: '987654321'
+      type: "Fiesta Patronal",
+      district: "Centro",
+      description: "Fiesta tradicional con danzas y comida",
+      location: "Plaza Principal",
+      contact: "987654321",
     },
     // ... más eventos
-  ]
+  ];
 
   const eventTypes = [
-    'Fiesta Patronal',
-    'Matrimonio',
-    'Feria',
-    'Concierto',
-    'Deporte',
-    'Gastronomía'
-  ]
+    "Fiesta Patronal",
+    "Matrimonio",
+    "Feria",
+    "Concierto",
+    "Deporte",
+    "Gastronomía",
+  ];
 
-  const districts = [
-    'Centro',
-    'Norte',
-    'Sur',
-    'Este',
-    'Oeste',
-    'Rural'
-  ]
+  const districts = ["Centro", "Norte", "Sur", "Este", "Oeste", "Rural"];
 
   const handleSelectEvent = (event) => {
     // Mostrar detalles del evento
-    console.log(event)
-  }
+    console.log(event);
+  };
 
   return (
     <div className="container mx-auto px-4 py-12">
       <div className="mb-10">
         <h1 className="text-4xl font-bold mb-4">Calendario de Eventos</h1>
-        <p className="text-gray-600">Explora todos los eventos culturales de la provincia</p>
+        <p className="text-gray-600">
+          Explora todos los eventos culturales de la provincia
+        </p>
       </div>
 
       <div className="grid lg:grid-cols-4 gap-8">
@@ -90,12 +85,16 @@ const CalendarPage = () => {
                 </label>
                 <select
                   value={filters.type}
-                  onChange={(e) => setFilters({...filters, type: e.target.value})}
+                  onChange={(e) =>
+                    setFilters({ ...filters, type: e.target.value })
+                  }
                   className="w-full px-4 py-2 border border-gray-300 rounded-lg"
                 >
                   <option value="">Todos los tipos</option>
-                  {eventTypes.map(type => (
-                    <option key={type} value={type}>{type}</option>
+                  {eventTypes.map((type) => (
+                    <option key={type} value={type}>
+                      {type}
+                    </option>
                   ))}
                 </select>
               </div>
@@ -107,12 +106,16 @@ const CalendarPage = () => {
                 </label>
                 <select
                   value={filters.district}
-                  onChange={(e) => setFilters({...filters, district: e.target.value})}
+                  onChange={(e) =>
+                    setFilters({ ...filters, district: e.target.value })
+                  }
                   className="w-full px-4 py-2 border border-gray-300 rounded-lg"
                 >
                   <option value="">Todos los distritos</option>
-                  {districts.map(district => (
-                    <option key={district} value={district}>{district}</option>
+                  {districts.map((district) => (
+                    <option key={district} value={district}>
+                      {district}
+                    </option>
                   ))}
                 </select>
               </div>
@@ -124,7 +127,9 @@ const CalendarPage = () => {
                 </label>
                 <select
                   value={filters.dateRange}
-                  onChange={(e) => setFilters({...filters, dateRange: e.target.value})}
+                  onChange={(e) =>
+                    setFilters({ ...filters, dateRange: e.target.value })
+                  }
                   className="w-full px-4 py-2 border border-gray-300 rounded-lg"
                 >
                   <option value="">Todo el tiempo</option>
@@ -138,20 +143,20 @@ const CalendarPage = () => {
               <div className="pt-4 border-t">
                 <div className="flex gap-2">
                   <button
-                    onClick={() => setView('month')}
-                    className={`flex-1 py-2 rounded-lg ${view === 'month' ? 'bg-red-600 text-white' : 'bg-gray-100'}`}
+                    onClick={() => setView("month")}
+                    className={`flex-1 py-2 rounded-lg ${view === "month" ? "bg-red-600 text-white" : "bg-gray-100"}`}
                   >
                     <CalendarIcon size={20} className="mx-auto" />
                   </button>
                   <button
-                    onClick={() => setView('week')}
-                    className={`flex-1 py-2 rounded-lg ${view === 'week' ? 'bg-red-600 text-white' : 'bg-gray-100'}`}
+                    onClick={() => setView("week")}
+                    className={`flex-1 py-2 rounded-lg ${view === "week" ? "bg-red-600 text-white" : "bg-gray-100"}`}
                   >
                     <Grid size={20} className="mx-auto" />
                   </button>
                   <button
-                    onClick={() => setView('agenda')}
-                    className={`flex-1 py-2 rounded-lg ${view === 'agenda' ? 'bg-red-600 text-white' : 'bg-gray-100'}`}
+                    onClick={() => setView("agenda")}
+                    className={`flex-1 py-2 rounded-lg ${view === "agenda" ? "bg-red-600 text-white" : "bg-gray-100"}`}
                   >
                     <List size={20} className="mx-auto" />
                   </button>
@@ -181,10 +186,10 @@ const CalendarPage = () => {
               onSelectEvent={handleSelectEvent}
               eventPropGetter={(event) => ({
                 style: {
-                  backgroundColor: '#ef4444',
-                  borderRadius: '4px',
-                  border: 'none'
-                }
+                  backgroundColor: "#ef4444",
+                  borderRadius: "4px",
+                  border: "none",
+                },
               })}
             />
           </div>
@@ -198,7 +203,9 @@ const CalendarPage = () => {
             <h2 className="text-2xl font-bold mb-4">Detalles del Evento</h2>
             <div className="grid md:grid-cols-2 gap-8">
               <div>
-                <h3 className="text-xl font-bold text-red-600 mb-2">Fiesta Patronal de San Juan</h3>
+                <h3 className="text-xl font-bold text-red-600 mb-2">
+                  Fiesta Patronal de San Juan
+                </h3>
                 <div className="space-y-3">
                   <div className="flex items-center text-gray-600">
                     <CalendarIcon size={18} className="mr-2" />
@@ -209,25 +216,31 @@ const CalendarPage = () => {
                     <span>Plaza Principal, Centro</span>
                   </div>
                   <p className="text-gray-700">
-                    Celebración tradicional con danzas, música y comida típica en honor a San Juan Bautista.
+                    Celebración tradicional con danzas, música y comida típica
+                    en honor a San Juan Bautista.
                   </p>
                   <div className="pt-4">
-                    <h4 className="font-bold mb-2">Contacto del Organizador:</h4>
+                    <h4 className="font-bold mb-2">
+                      Contacto del Organizador:
+                    </h4>
                     <p className="text-gray-600">Juan Pérez - 987654321</p>
                   </div>
                 </div>
               </div>
-              
+
               <div>
                 <div className="mb-6">
                   <h4 className="font-bold mb-2">Galería de Fotos:</h4>
                   <div className="grid grid-cols-3 gap-2">
-                    {[1, 2, 3].map(i => (
-                      <div key={i} className="aspect-square bg-gray-200 rounded-lg"></div>
+                    {[1, 2, 3].map((i) => (
+                      <div
+                        key={i}
+                        className="aspect-square bg-gray-200 rounded-lg"
+                      ></div>
                     ))}
                   </div>
                 </div>
-                
+
                 <div className="flex gap-3">
                   <button className="flex-1 bg-blue-600 text-white py-2 px-4 rounded-lg hover:bg-blue-700 flex items-center justify-center gap-2">
                     <Facebook size={20} />
@@ -244,7 +257,7 @@ const CalendarPage = () => {
         </motion.div>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default CalendarPage
+export default CalendarPage;

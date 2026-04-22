@@ -1,58 +1,60 @@
-import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { useForm, FormProvider } from 'react-hook-form';
-import { zodResolver } from '@hookform/resolvers/zod';
-import { z } from 'zod';
-import { ArrowLeft, MapPin, Save, Upload } from 'lucide-react';
-import { useEvents } from '../hooks/useEvents';
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { useForm, FormProvider } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { z } from "zod";
+import { ArrowLeft, MapPin, Save, Upload } from "lucide-react";
+import { useEvents } from "../hooks/useEvents";
 
-import { Button } from '@/shared/components/ui/Button';
-import { Input } from '@/shared/components/ui/Input';
-import Tabs from '@/shared/components/ui/Tabs';
-import { FormField } from '@/shared/components/forms/FormField';
+import { Button } from "@/shared/components/ui/Button";
+import { Input } from "@/shared/components/ui/Input";
+import Tabs from "@/shared/components/ui/Tabs";
+import { FormField } from "@/shared/components/forms/FormField";
 const eventSchema = z.object({
-  title: z.string().min(5, 'El título debe tener al menos 5 caracteres'),
-  description: z.string().min(20, 'La descripción debe tener al menos 20 caracteres'),
-  category_id: z.number().min(1, 'Selecciona una categoría'),
-  start_datetime: z.string().min(1, 'Fecha de inicio requerida'),
-  end_datetime: z.string().min(1, 'Fecha de fin requerida'),
+  title: z.string().min(5, "El título debe tener al menos 5 caracteres"),
+  description: z
+    .string()
+    .min(20, "La descripción debe tener al menos 20 caracteres"),
+  category_id: z.number().min(1, "Selecciona una categoría"),
+  start_datetime: z.string().min(1, "Fecha de inicio requerida"),
+  end_datetime: z.string().min(1, "Fecha de fin requerida"),
   district_id: z.number().optional(),
   address: z.string().optional(),
-  price_type: z.enum(['free', 'paid', 'donation']),
+  price_type: z.enum(["free", "paid", "donation"]),
   price_amount: z.number().optional(),
   featured_level: z.number().min(0).max(3).default(0),
-  status: z.enum(['draft', 'published']).default('draft'),
-  main_image: z.string().url('URL de imagen inválida').optional(),
+  status: z.enum(["draft", "published"]).default("draft"),
+  main_image: z.string().url("URL de imagen inválida").optional(),
 });
 
 export const CreateEvent = () => {
   const navigate = useNavigate();
   const { createNewEvent, isLoading } = useEvents();
-  const [activeTab, setActiveTab] = useState('basic');
+  const [activeTab, setActiveTab] = useState("basic");
 
   const methods = useForm({
     resolver: zodResolver(eventSchema),
     defaultValues: {
-      price_type: 'free',
+      price_type: "free",
       featured_level: 0,
-      status: 'draft',
+      status: "draft",
     },
   });
 
   const onSubmit = async (data) => {
     try {
       await createNewEvent(data);
-      navigate('/dashboard/events');
+      navigate("/dashboard/events");
     } catch (error) {
-      console.error('Error creating event:', error);
+      console.error("Error creating event:", error);
     }
   };
 
   const tabs = [
-    { id: 'basic', label: 'Información Básica' },
-    { id: 'location', label: 'Ubicación' },
-    { id: 'media', label: 'Multimedia' },
-    { id: 'settings', label: 'Configuración' },
+    { id: "basic", label: "Información Básica" },
+    { id: "location", label: "Ubicación" },
+    { id: "media", label: "Multimedia" },
+    { id: "settings", label: "Configuración" },
   ];
 
   return (
@@ -78,7 +80,7 @@ export const CreateEvent = () => {
         <div className="flex items-center space-x-3">
           <Button
             variant="secondary"
-            onClick={() => methods.setValue('status', 'draft')}
+            onClick={() => methods.setValue("status", "draft")}
             disabled={isLoading}
           >
             <Save className="w-4 h-4 mr-2" />
@@ -86,7 +88,7 @@ export const CreateEvent = () => {
           </Button>
           <Button
             variant="primary"
-            onClick={() => methods.setValue('status', 'published')}
+            onClick={() => methods.setValue("status", "published")}
             isLoading={isLoading}
           >
             Publicar Evento
@@ -98,24 +100,23 @@ export const CreateEvent = () => {
 
       <FormProvider {...methods}>
         <form onSubmit={methods.handleSubmit(onSubmit)} className="space-y-6">
-          {activeTab === 'basic' && (
+          {activeTab === "basic" && (
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div className="md:col-span-2">
-            <FormField
-  label="Titulo del Evento *"
-  name="titulo"
-  variant="primary"
-  size="md"
-  type="text"
+                <FormField
+                  label="Titulo del Evento *"
+                  name="titulo"
+                  variant="primary"
+                  size="md"
+                  type="text"
                   placeholder="Ej: Concierto de Rock Nacional"
-  error={methods.formState.errors.title}
-  isLoading={isLoading}
-                  {...methods.register('title')}
-
-/>
+                  error={methods.formState.errors.title}
+                  isLoading={isLoading}
+                  {...methods.register("title")}
+                />
                 <Input
                   label="Título del Evento"
-                  {...methods.register('title')}
+                  {...methods.register("title")}
                   error={methods.formState.errors.title?.message}
                   placeholder="Ej: Concierto de Rock Nacional"
                 />
@@ -125,7 +126,7 @@ export const CreateEvent = () => {
                   Descripción
                 </label>
                 <textarea
-                  {...methods.register('description')}
+                  {...methods.register("description")}
                   rows={6}
                   className="input resize-none"
                   placeholder="Describe tu evento en detalle..."
@@ -141,7 +142,7 @@ export const CreateEvent = () => {
                   Categoría
                 </label>
                 <select
-                  {...methods.register('category_id', { valueAsNumber: true })}
+                  {...methods.register("category_id", { valueAsNumber: true })}
                   className="input"
                 >
                   <option value="">Selecciona una categoría</option>
@@ -154,33 +155,35 @@ export const CreateEvent = () => {
                 <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
                   Tipo de Precio
                 </label>
-                <select {...methods.register('price_type')} className="input">
+                <select {...methods.register("price_type")} className="input">
                   <option value="free">Gratis</option>
                   <option value="paid">Pago</option>
                   <option value="donation">Donación</option>
                 </select>
               </div>
-              {methods.watch('price_type') === 'paid' && (
+              {methods.watch("price_type") === "paid" && (
                 <div>
                   <Input
                     label="Precio (S/)"
                     type="number"
                     step="0.01"
-                    {...methods.register('price_amount', { valueAsNumber: true })}
+                    {...methods.register("price_amount", {
+                      valueAsNumber: true,
+                    })}
                   />
                 </div>
               )}
             </div>
           )}
 
-          {activeTab === 'location' && (
+          {activeTab === "location" && (
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div>
                 <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
                   Distrito
                 </label>
                 <select
-                  {...methods.register('district_id', { valueAsNumber: true })}
+                  {...methods.register("district_id", { valueAsNumber: true })}
                   className="input"
                 >
                   <option value="">Selecciona un distrito</option>
@@ -192,7 +195,7 @@ export const CreateEvent = () => {
               <div>
                 <Input
                   label="Dirección"
-                  {...methods.register('address')}
+                  {...methods.register("address")}
                   placeholder="Av. Principal 123"
                 />
               </div>
@@ -201,7 +204,7 @@ export const CreateEvent = () => {
                   label="Latitud"
                   type="number"
                   step="any"
-                  {...methods.register('latitude', { valueAsNumber: true })}
+                  {...methods.register("latitude", { valueAsNumber: true })}
                 />
               </div>
               <div>
@@ -209,7 +212,7 @@ export const CreateEvent = () => {
                   label="Longitud"
                   type="number"
                   step="any"
-                  {...methods.register('longitude', { valueAsNumber: true })}
+                  {...methods.register("longitude", { valueAsNumber: true })}
                 />
               </div>
               <div className="md:col-span-2">
@@ -225,7 +228,7 @@ export const CreateEvent = () => {
             </div>
           )}
 
-          {activeTab === 'media' && (
+          {activeTab === "media" && (
             <div className="space-y-6">
               <div>
                 <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
@@ -252,14 +255,14 @@ export const CreateEvent = () => {
               <div>
                 <Input
                   label="URL de la Imagen"
-                  {...methods.register('main_image')}
+                  {...methods.register("main_image")}
                   placeholder="https://ejemplo.com/imagen.jpg"
                 />
               </div>
             </div>
           )}
 
-          {activeTab === 'settings' && (
+          {activeTab === "settings" && (
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div>
                 <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
@@ -267,7 +270,7 @@ export const CreateEvent = () => {
                 </label>
                 <Input
                   type="datetime-local"
-                  {...methods.register('start_datetime')}
+                  {...methods.register("start_datetime")}
                 />
               </div>
               <div>
@@ -276,7 +279,7 @@ export const CreateEvent = () => {
                 </label>
                 <Input
                   type="datetime-local"
-                  {...methods.register('end_datetime')}
+                  {...methods.register("end_datetime")}
                 />
               </div>
               <div>
@@ -284,7 +287,9 @@ export const CreateEvent = () => {
                   Nivel de Destacado
                 </label>
                 <select
-                  {...methods.register('featured_level', { valueAsNumber: true })}
+                  {...methods.register("featured_level", {
+                    valueAsNumber: true,
+                  })}
                   className="input"
                 >
                   <option value="0">Normal</option>
@@ -297,7 +302,7 @@ export const CreateEvent = () => {
                 <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
                   Estado
                 </label>
-                <select {...methods.register('status')} className="input">
+                <select {...methods.register("status")} className="input">
                   <option value="draft">Borrador</option>
                   <option value="published">Publicado</option>
                 </select>
@@ -310,21 +315,26 @@ export const CreateEvent = () => {
               type="button"
               variant="secondary"
               onClick={() => {
-                if (tabs.indexOf(tabs.find(t => t.id === activeTab)) > 0) {
-                  setActiveTab(tabs[tabs.indexOf(tabs.find(t => t.id === activeTab)) - 1].id);
+                if (tabs.indexOf(tabs.find((t) => t.id === activeTab)) > 0) {
+                  setActiveTab(
+                    tabs[tabs.indexOf(tabs.find((t) => t.id === activeTab)) - 1]
+                      .id,
+                  );
                 }
               }}
-              disabled={activeTab === 'basic'}
+              disabled={activeTab === "basic"}
             >
               Anterior
             </Button>
             <div className="flex space-x-3">
-              {activeTab !== 'settings' ? (
+              {activeTab !== "settings" ? (
                 <Button
                   type="button"
                   variant="primary"
                   onClick={() => {
-                    const currentIndex = tabs.findIndex(t => t.id === activeTab);
+                    const currentIndex = tabs.findIndex(
+                      (t) => t.id === activeTab,
+                    );
                     if (currentIndex < tabs.length - 1) {
                       setActiveTab(tabs[currentIndex + 1].id);
                     }
@@ -333,11 +343,7 @@ export const CreateEvent = () => {
                   Siguiente
                 </Button>
               ) : (
-                <Button
-                  type="submit"
-                  variant="primary"
-                  isLoading={isLoading}
-                >
+                <Button type="submit" variant="primary" isLoading={isLoading}>
                   Crear Evento
                 </Button>
               )}
@@ -348,4 +354,3 @@ export const CreateEvent = () => {
     </div>
   );
 };
-

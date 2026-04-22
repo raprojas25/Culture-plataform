@@ -226,7 +226,12 @@ export const UserForm = ({
         <div className="space-y-2">
           <Label htmlFor="password" className="flex items-center gap-2">
             <Lock className="w-4 h-4" />
-            Contraseña {isEdit && <span className="text-gray-400 text-xs">(dejar vacío para no cambiar)</span>}
+            Contraseña{" "}
+            {isEdit && (
+              <span className="text-gray-400 text-xs">
+                (dejar vacío para no cambiar)
+              </span>
+            )}
           </Label>
           <div className="relative">
             <Input
@@ -243,7 +248,9 @@ export const UserForm = ({
               type="button"
               onClick={() => setShowPassword(!showPassword)}
               className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600 dark:hover:text-gray-300"
-              aria-label={showPassword ? "Ocultar contraseña" : "Mostrar contraseña"}
+              aria-label={
+                showPassword ? "Ocultar contraseña" : "Mostrar contraseña"
+              }
             >
               {showPassword ? (
                 <EyeOff className="w-4 h-4" />
@@ -262,7 +269,10 @@ export const UserForm = ({
         {/* Confirmar Password (solo si hay password) */}
         {formData.password && (
           <div className="space-y-2">
-            <Label htmlFor="confirmPassword" className="flex items-center gap-2">
+            <Label
+              htmlFor="confirmPassword"
+              className="flex items-center gap-2"
+            >
               <Lock className="w-4 h-4" />
               Confirmar contraseña
             </Label>
@@ -281,7 +291,9 @@ export const UserForm = ({
                 type="button"
                 onClick={() => setShowNewPassword(!showNewPassword)}
                 className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600 dark:hover:text-gray-300"
-                aria-label={showNewPassword ? "Ocultar contraseña" : "Mostrar contraseña"}
+                aria-label={
+                  showNewPassword ? "Ocultar contraseña" : "Mostrar contraseña"
+                }
               >
                 {showNewPassword ? (
                   <EyeOff className="w-4 h-4" />

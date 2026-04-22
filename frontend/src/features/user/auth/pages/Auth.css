@@ -84,7 +84,7 @@
 }
 
 .custom-checkbox:checked::after {
-  content: '✓';
+  content: "✓";
   position: absolute;
   color: white;
   font-size: 14px;
@@ -134,7 +134,7 @@
   .auth-grid {
     grid-template-columns: 1fr;
   }
-  
+
   .benefits-column {
     display: none;
   }
@@ -157,9 +157,16 @@
 }
 
 @keyframes shake {
-  0%, 100% { transform: translateX(0); }
-  25% { transform: translateX(-5px); }
-  75% { transform: translateX(5px); }
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+  25% {
+    transform: translateX(-5px);
+  }
+  75% {
+    transform: translateX(5px);
+  }
 }
 
 /* Loading spinner */
@@ -171,7 +178,9 @@
 }
 
 @keyframes spin {
-  to { transform: rotate(360deg); }
+  to {
+    transform: rotate(360deg);
+  }
 }
 
 /* Custom scrollbar para modales */

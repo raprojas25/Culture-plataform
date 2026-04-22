@@ -4,10 +4,7 @@ import { useState } from "react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
 import { ChevronDown, ChevronUp, Loader2, Check } from "lucide-react";
-import {
-  CATEGORY_ICONS,
-  CATEGORY_COLORS,
-} from "./constants/categoryConstants";
+import { CATEGORY_ICONS, CATEGORY_COLORS } from "./constants/categoryConstants";
 import { AnimatePresence, motion } from "framer-motion";
 import { Button } from "@/shared/components/ui/Button.jsx";
 import { Label } from "@/shared/components/ui/Label.jsx";

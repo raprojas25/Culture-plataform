@@ -1,7 +1,6 @@
 import api from "@/shared/utils/api";
 
 export const authService = {
-
   login: async (credentials) => {
     try {
       const response = await api.post("/auth/login", credentials);
@@ -13,7 +12,7 @@ export const authService = {
     }
   },
   login: async (credentials) => {
-    const response = await api.post('/auth/login', credentials);
+    const response = await api.post("/auth/login", credentials);
     return response.data;
   },
 
@@ -22,7 +21,7 @@ export const authService = {
       const response = await api.post("/auth/register", userData);
       return response.data;
     } catch (error) {
-      console.log(error)
+      console.log(error);
       throw new Error(error.response?.data?.error || "Error al registrar");
     }
   },
@@ -36,8 +35,8 @@ export const authService = {
     const response = await api.post("/auth/refresh-token");
     return response.data;
   },
-  
-  // funciones que no sirven 
+
+  // funciones que no sirven
 
   logout: () => {
     localStorage.removeItem("token");

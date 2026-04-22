@@ -1,5 +1,5 @@
-import { useState, useEffect } from 'react'
-import { motion, AnimatePresence } from 'framer-motion'
+import { useState, useEffect } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import {
   BarChart3,
   Calendar,
@@ -24,44 +24,44 @@ import {
   Star,
   Activity,
   PieChart,
-  FileText
-} from 'lucide-react'
-import StatsCards from './components/StatsCards'
-import EventsTable from './components/EventsTable'
-import Charts from './components/Charts'
-import PendingEvents from './components/PendingEvents'
-import QuickActions from './components/QuickActions'
+  FileText,
+} from "lucide-react";
+import StatsCards from "./components/StatsCards";
+import EventsTable from "./components/EventsTable";
+import Charts from "./components/Charts";
+import PendingEvents from "./components/PendingEvents";
+import QuickActions from "./components/QuickActions";
 
 const Admin = () => {
-  const [activeTab, setActiveTab] = useState('overview')
-  const [notifications, setNotifications] = useState(3)
-  const [sidebarOpen, setSidebarOpen] = useState(false)
-  const [selectedEvents, setSelectedEvents] = useState([])
+  const [activeTab, setActiveTab] = useState("overview");
+  const [notifications, setNotifications] = useState(3);
+  const [sidebarOpen, setSidebarOpen] = useState(false);
+  const [selectedEvents, setSelectedEvents] = useState([]);
 
   const tabs = [
-    { id: 'overview', label: 'Resumen', icon: <Activity size={20} /> },
-    { id: 'events', label: 'Eventos', icon: <Calendar size={20} /> },
-    { id: 'users', label: 'Usuarios', icon: <Users size={20} /> },
-    { id: 'reports', label: 'Reportes', icon: <FileText size={20} /> },
-    { id: 'settings', label: 'Configuración', icon: <Settings size={20} /> }
-  ]
+    { id: "overview", label: "Resumen", icon: <Activity size={20} /> },
+    { id: "events", label: "Eventos", icon: <Calendar size={20} /> },
+    { id: "users", label: "Usuarios", icon: <Users size={20} /> },
+    { id: "reports", label: "Reportes", icon: <FileText size={20} /> },
+    { id: "settings", label: "Configuración", icon: <Settings size={20} /> },
+  ];
 
   const adminMenuItems = [
-    { id: 'profile', label: 'Mi Perfil', icon: <Users size={18} /> },
-    { id: 'settings', label: 'Configuración', icon: <Settings size={18} /> },
-    { id: 'help', label: 'Ayuda', icon: <AlertCircle size={18} /> },
-    { id: 'logout', label: 'Cerrar Sesión', icon: <LogOut size={18} /> }
-  ]
+    { id: "profile", label: "Mi Perfil", icon: <Users size={18} /> },
+    { id: "settings", label: "Configuración", icon: <Settings size={18} /> },
+    { id: "help", label: "Ayuda", icon: <AlertCircle size={18} /> },
+    { id: "logout", label: "Cerrar Sesión", icon: <LogOut size={18} /> },
+  ];
 
   const fadeIn = {
     hidden: { opacity: 0 },
-    visible: { opacity: 1, transition: { duration: 0.3 } }
-  }
+    visible: { opacity: 1, transition: { duration: 0.3 } },
+  };
 
   const slideIn = {
     hidden: { x: -20, opacity: 0 },
-    visible: { x: 0, opacity: 1, transition: { duration: 0.3 } }
-  }
+    visible: { x: 0, opacity: 1, transition: { duration: 0.3 } },
+  };
 
   return (
     <div className="min-h-screen ">
@@ -72,8 +72,12 @@ const Admin = () => {
             <div className="flex items-center">
               <Shield className="text-red-600 mr-3" size={28} />
               <div>
-                <h1 className="text-xl font-bold text-gray-900">Panel de Administración</h1>
-                <p className="text-sm text-gray-600">Control total de la plataforma</p>
+                <h1 className="text-xl font-bold text-gray-900">
+                  Panel de Administración
+                </h1>
+                <p className="text-sm text-gray-600">
+                  Control total de la plataforma
+                </p>
               </div>
             </div>
 
@@ -96,7 +100,9 @@ const Admin = () => {
                   </div>
                   <div className="text-left hidden md:block">
                     <p className="text-sm font-medium">Administrador</p>
-                    <p className="text-xs text-gray-500">admin@culturaviva.com</p>
+                    <p className="text-xs text-gray-500">
+                      admin@culturaviva.com
+                    </p>
                   </div>
                   <ChevronDown size={18} />
                 </button>
@@ -127,8 +133,8 @@ const Admin = () => {
                   onClick={() => setActiveTab(tab.id)}
                   className={`flex items-center px-4 py-3 font-medium text-sm border-b-2 transition-colors ${
                     activeTab === tab.id
-                      ? 'border-red-600 text-red-600'
-                      : 'border-transparent text-gray-600 hover:text-gray-900 hover:border-gray-300'
+                      ? "border-red-600 text-red-600"
+                      : "border-transparent text-gray-600 hover:text-gray-900 hover:border-gray-300"
                   }`}
                 >
                   {tab.icon}
@@ -158,7 +164,7 @@ const Admin = () => {
         {/* Contenido principal */}
         <main className="flex-1 overflow-x-auto">
           <AnimatePresence mode="wait">
-            {activeTab === 'overview' && (
+            {activeTab === "overview" && (
               <motion.div
                 key="overview"
                 initial="hidden"
@@ -171,10 +177,7 @@ const Admin = () => {
 
                 <div className="grid lg:grid-cols-3 gap-6">
                   {/* Eventos pendientes */}
-                  <motion.div
-                    variants={slideIn}
-                    className="lg:col-span-2"
-                  >
+                  <motion.div variants={slideIn} className="lg:col-span-2">
                     <div className="bg-white rounded-xl shadow-sm border border-gray-200">
                       <div className="p-6 border-b border-gray-200">
                         <div className="flex items-center justify-between">
@@ -192,9 +195,7 @@ const Admin = () => {
                   </motion.div>
 
                   {/* Acciones rápidas */}
-                  <motion.div
-                    variants={slideIn}
-                  >
+                  <motion.div variants={slideIn}>
                     <QuickActions />
                   </motion.div>
                 </div>
@@ -221,7 +222,10 @@ const Admin = () => {
                   <div className="p-6 border-b border-gray-200">
                     <div className="flex items-center justify-between">
                       <h2 className="text-xl font-bold flex items-center">
-                        <CheckCircle className="mr-2 text-green-600" size={20} />
+                        <CheckCircle
+                          className="mr-2 text-green-600"
+                          size={20}
+                        />
                         Eventos Recientemente Aprobados
                       </h2>
                       <button className="text-sm text-red-600 font-medium">
@@ -234,7 +238,7 @@ const Admin = () => {
               </motion.div>
             )}
 
-            {activeTab === 'events' && (
+            {activeTab === "events" && (
               <motion.div
                 key="events"
                 initial="hidden"
@@ -246,12 +250,19 @@ const Admin = () => {
                   <div className="p-6 border-b border-gray-200">
                     <div className="flex flex-col md:flex-row md:items-center justify-between">
                       <div>
-                        <h2 className="text-2xl font-bold">Gestión de Eventos</h2>
-                        <p className="text-gray-600">Administra todos los eventos de la plataforma</p>
+                        <h2 className="text-2xl font-bold">
+                          Gestión de Eventos
+                        </h2>
+                        <p className="text-gray-600">
+                          Administra todos los eventos de la plataforma
+                        </p>
                       </div>
                       <div className="flex items-center space-x-4 mt-4 md:mt-0">
                         <div className="relative">
-                          <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" size={20} />
+                          <Search
+                            className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400"
+                            size={20}
+                          />
                           <input
                             type="text"
                             placeholder="Buscar eventos..."
@@ -271,13 +282,20 @@ const Admin = () => {
 
                     {/* Filtros rápidos */}
                     <div className="flex flex-wrap gap-2 mt-6">
-                      {['Todos', 'Pendientes', 'Aprobados', 'Destacados', 'Rechazados', 'Este mes'].map((filter) => (
+                      {[
+                        "Todos",
+                        "Pendientes",
+                        "Aprobados",
+                        "Destacados",
+                        "Rechazados",
+                        "Este mes",
+                      ].map((filter) => (
                         <button
                           key={filter}
                           className={`px-3 py-1 rounded-full text-sm ${
-                            filter === 'Todos'
-                              ? 'bg-red-600 text-white'
-                              : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                            filter === "Todos"
+                              ? "bg-red-600 text-white"
+                              : "bg-gray-100 text-gray-700 hover:bg-gray-200"
                           }`}
                         >
                           {filter}
@@ -299,7 +317,7 @@ const Admin = () => {
         </main>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default Admin
+export default Admin;

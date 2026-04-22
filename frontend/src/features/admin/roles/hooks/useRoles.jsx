@@ -1,6 +1,6 @@
-import { useState, useCallback } from 'react';
-import { toast } from 'react-hot-toast';
-import { roleService } from '@/shared/services/roleService';
+import { useState, useCallback } from "react";
+import { toast } from "react-hot-toast";
+import { roleService } from "@/shared/services/roleService";
 
 export const useRoles = () => {
   const [roles, setRoles] = useState([]);
@@ -16,8 +16,8 @@ export const useRoles = () => {
       const data = await roleService.getAll();
       setRoles(data);
     } catch (err) {
-      setError(err.response?.data?.message || 'Error al cargar roles');
-      toast.error('Error al cargar roles');
+      setError(err.response?.data?.message || "Error al cargar roles");
+      toast.error("Error al cargar roles");
     } finally {
       setLoading(false);
     }
@@ -28,11 +28,11 @@ export const useRoles = () => {
     setLoading(true);
     try {
       const newRole = await roleService.create(roleData);
-      setRoles(prev => [...prev, newRole]);
-      toast.success('role creada exitosamente');
+      setRoles((prev) => [...prev, newRole]);
+      toast.success("role creada exitosamente");
       return { success: true, data: newRole };
     } catch (err) {
-      const errorMsg = err.response?.data?.message || 'Error al crear rol';
+      const errorMsg = err.response?.data?.message || "Error al crear rol";
       toast.error(errorMsg);
       return { success: false, error: errorMsg };
     } finally {
@@ -45,13 +45,14 @@ export const useRoles = () => {
     setLoading(true);
     try {
       const updatedRole = await roleService.update(id, roleData);
-      setRoles(prev => 
-        prev.map(cat => cat.id === id ? updatedRole : cat)
+      setRoles((prev) =>
+        prev.map((cat) => (cat.id === id ? updatedRole : cat)),
       );
-      toast.success('role actualizada exitosamente');
+      toast.success("role actualizada exitosamente");
       return { success: true, data: updatedRole };
     } catch (err) {
-      const errorMsg = err.response?.data?.message || 'Error al actualizar role';
+      const errorMsg =
+        err.response?.data?.message || "Error al actualizar role";
       toast.error(errorMsg);
       return { success: false, error: errorMsg };
     } finally {
@@ -64,11 +65,11 @@ export const useRoles = () => {
     setLoading(true);
     try {
       await roleService.delete(id);
-      setRoles(prev => prev.filter(cat => cat.id !== id));
-      toast.success('rol eliminado exitosamente');
+      setRoles((prev) => prev.filter((cat) => cat.id !== id));
+      toast.success("rol eliminado exitosamente");
       return { success: true };
     } catch (err) {
-      const errorMsg = err.response?.data?.message || 'Error al eliminar rol';
+      const errorMsg = err.response?.data?.message || "Error al eliminar rol";
       toast.error(errorMsg);
       return { success: false, error: errorMsg };
     } finally {
@@ -95,6 +96,6 @@ export const useRoles = () => {
     updateRole,
     deleteRole,
     loadPermissions,
-    permissions
+    permissions,
   };
 };

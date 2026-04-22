@@ -1,5 +1,5 @@
-import { useState } from 'react'
-import { motion } from 'framer-motion'
+import { useState } from "react";
+import { motion } from "framer-motion";
 import {
   PlusCircle,
   Download,
@@ -12,60 +12,64 @@ import {
   Calendar,
   MessageSquare,
   RefreshCw,
-  Shield
-} from 'lucide-react'
+  Shield,
+} from "lucide-react";
 
 const QuickActions = () => {
   const [actions] = useState([
     {
       id: 1,
-      title: 'Crear Evento Destacado',
-      description: 'Agregar evento manualmente',
+      title: "Crear Evento Destacado",
+      description: "Agregar evento manualmente",
       icon: <PlusCircle className="text-red-600" size={24} />,
-      color: 'bg-red-50 border-red-200',
-      action: () => console.log('Crear evento destacado')
+      color: "bg-red-50 border-red-200",
+      action: () => console.log("Crear evento destacado"),
     },
     {
       id: 2,
-      title: 'Enviar Notificación',
-      description: 'Notificar a todos los usuarios',
+      title: "Enviar Notificación",
+      description: "Notificar a todos los usuarios",
       icon: <Bell className="text-blue-600" size={24} />,
-      color: 'bg-blue-50 border-blue-200',
-      action: () => console.log('Enviar notificación')
+      color: "bg-blue-50 border-blue-200",
+      action: () => console.log("Enviar notificación"),
     },
     {
       id: 3,
-      title: 'Ver Reporte',
-      description: 'Descargar reporte mensual',
+      title: "Ver Reporte",
+      description: "Descargar reporte mensual",
       icon: <Download className="text-green-600" size={24} />,
-      color: 'bg-green-50 border-green-200',
-      action: () => console.log('Ver reporte')
+      color: "bg-green-50 border-green-200",
+      action: () => console.log("Ver reporte"),
     },
     {
       id: 4,
-      title: 'Moderar Comentarios',
-      description: 'Revisar contenido reportado',
+      title: "Moderar Comentarios",
+      description: "Revisar contenido reportado",
       icon: <Shield className="text-purple-600" size={24} />,
-      color: 'bg-purple-50 border-purple-200',
-      action: () => console.log('Moderar comentarios')
-    }
-  ])
+      color: "bg-purple-50 border-purple-200",
+      action: () => console.log("Moderar comentarios"),
+    },
+  ]);
 
   const [systemStatus, setSystemStatus] = useState({
-    platform: 'online',
-    database: 'online',
-    api: 'online',
-    storage: 'warning'
-  })
+    platform: "online",
+    database: "online",
+    api: "online",
+    storage: "warning",
+  });
 
   const getStatusColor = (status) => {
-    switch(status) {
-      case 'online': return 'bg-green-100 text-green-800'
-      case 'warning': return 'bg-yellow-100 text-yellow-800'
-      case 'offline': return 'bg-red-100 text-red-800'
-      default: return 'bg-gray-100 text-gray-800'
+    switch (status) {
+      case "online":
+        return "bg-green-100 text-green-800";
+      case "warning":
+        return "bg-yellow-100 text-yellow-800";
+      case "offline":
+        return "bg-red-100 text-red-800";
+      default:
+        return "bg-gray-100 text-gray-800";
     }
-  }
+  };
 
   return (
     <div className="space-y-6">
@@ -113,16 +117,25 @@ const QuickActions = () => {
             {Object.entries(systemStatus).map(([key, status]) => (
               <div key={key} className="flex items-center justify-between">
                 <div className="flex items-center">
-                  <div className={`w-2 h-2 rounded-full mr-3 ${
-                    status === 'online' ? 'bg-green-500' :
-                    status === 'warning' ? 'bg-yellow-500' :
-                    'bg-red-500'
-                  }`}></div>
+                  <div
+                    className={`w-2 h-2 rounded-full mr-3 ${
+                      status === "online"
+                        ? "bg-green-500"
+                        : status === "warning"
+                          ? "bg-yellow-500"
+                          : "bg-red-500"
+                    }`}
+                  ></div>
                   <span className="capitalize">{key}</span>
                 </div>
-                <span className={`px-3 py-1 rounded-full text-xs font-medium ${getStatusColor(status)}`}>
-                  {status === 'online' ? 'Operativo' :
-                   status === 'warning' ? 'Advertencia' : 'Inactivo'}
+                <span
+                  className={`px-3 py-1 rounded-full text-xs font-medium ${getStatusColor(status)}`}
+                >
+                  {status === "online"
+                    ? "Operativo"
+                    : status === "warning"
+                      ? "Advertencia"
+                      : "Inactivo"}
                 </span>
               </div>
             ))}
@@ -138,7 +151,10 @@ const QuickActions = () => {
                   <span>78%</span>
                 </div>
                 <div className="w-full bg-gray-200 rounded-full h-2">
-                  <div className="bg-red-600 h-2 rounded-full" style={{ width: '78%' }}></div>
+                  <div
+                    className="bg-red-600 h-2 rounded-full"
+                    style={{ width: "78%" }}
+                  ></div>
                 </div>
               </div>
               <div>
@@ -147,7 +163,10 @@ const QuickActions = () => {
                   <span>45%</span>
                 </div>
                 <div className="w-full bg-gray-200 rounded-full h-2">
-                  <div className="bg-blue-600 h-2 rounded-full" style={{ width: '45%' }}></div>
+                  <div
+                    className="bg-blue-600 h-2 rounded-full"
+                    style={{ width: "45%" }}
+                  ></div>
                 </div>
               </div>
               <div>
@@ -156,7 +175,10 @@ const QuickActions = () => {
                   <span>32%</span>
                 </div>
                 <div className="w-full bg-gray-200 rounded-full h-2">
-                  <div className="bg-green-600 h-2 rounded-full" style={{ width: '32%' }}></div>
+                  <div
+                    className="bg-green-600 h-2 rounded-full"
+                    style={{ width: "32%" }}
+                  ></div>
                 </div>
               </div>
             </div>
@@ -175,10 +197,26 @@ const QuickActions = () => {
         <div className="p-6">
           <div className="space-y-4">
             {[
-              { user: 'Admin', action: 'Aprobó evento "Fiesta Patronal"', time: 'Hace 5 min' },
-              { user: 'Moderador', action: 'Rechazó comentario inapropiado', time: 'Hace 15 min' },
-              { user: 'Sistema', action: 'Backup automático completado', time: 'Hace 1 hora' },
-              { user: 'Admin', action: 'Actualizó configuración de pago', time: 'Hace 2 horas' }
+              {
+                user: "Admin",
+                action: 'Aprobó evento "Fiesta Patronal"',
+                time: "Hace 5 min",
+              },
+              {
+                user: "Moderador",
+                action: "Rechazó comentario inapropiado",
+                time: "Hace 15 min",
+              },
+              {
+                user: "Sistema",
+                action: "Backup automático completado",
+                time: "Hace 1 hora",
+              },
+              {
+                user: "Admin",
+                action: "Actualizó configuración de pago",
+                time: "Hace 2 horas",
+              },
             ].map((activity, index) => (
               <div key={index} className="flex items-start">
                 <div className="w-8 h-8 bg-gray-100 rounded-full flex items-center justify-center mr-3">
@@ -186,7 +224,8 @@ const QuickActions = () => {
                 </div>
                 <div>
                   <p className="text-sm">
-                    <span className="font-medium">{activity.user}</span> {activity.action}
+                    <span className="font-medium">{activity.user}</span>{" "}
+                    {activity.action}
                   </p>
                   <p className="text-xs text-gray-500">{activity.time}</p>
                 </div>
@@ -199,7 +238,7 @@ const QuickActions = () => {
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default QuickActions
+export default QuickActions;

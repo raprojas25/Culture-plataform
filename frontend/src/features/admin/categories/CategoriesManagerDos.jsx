@@ -1,12 +1,12 @@
-import { useState, useEffect, useMemo } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import { 
-  Plus, 
-  Search, 
-  Filter, 
+import { useState, useEffect, useMemo } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import {
+  Plus,
+  Search,
+  Filter,
   MoreVertical,
-  Edit2, 
-  Trash2, 
+  Edit2,
+  Trash2,
   Eye,
   CheckCircle,
   XCircle,
@@ -14,25 +14,26 @@ import {
   Download,
   ChevronDown,
   AlertCircle,
-  Tag
-} from 'lucide-react';
-import RegisterCategoryModal from '../categories/modals/RegisterCategoryModal';
-import { useCategories } from '@/shared/hooks/useCategories';
+  Tag,
+} from "lucide-react";
+import RegisterCategoryModal from "../categories/modals/RegisterCategoryModal";
+import { useCategories } from "@/shared/hooks/useCategories";
 // import ConfirmModal from '../../components/modals/ConfirmModal';
 // import './AdminComponents.css';
 
 const CategoriesManagerDos = () => {
-  const { categories, fetchCategories, deleteCategory, loading } = useCategories();
-  const [searchTerm, setSearchTerm] = useState('');
-  const [selectedStatus, setSelectedStatus] = useState('all');
-  const [sortBy, setSortBy] = useState('name');
-  const [sortOrder, setSortOrder] = useState('asc');
+  const { categories, fetchCategories, deleteCategory, loading } =
+    useCategories();
+  const [searchTerm, setSearchTerm] = useState("");
+  const [selectedStatus, setSelectedStatus] = useState("all");
+  const [sortBy, setSortBy] = useState("name");
+  const [sortOrder, setSortOrder] = useState("asc");
   const [selectedRows, setSelectedRows] = useState([]);
   const [showCreateModal, setShowCreateModal] = useState(false);
   const [showDeleteModal, setShowDeleteModal] = useState(false);
   const [categoryToDelete, setCategoryToDelete] = useState(null);
   const [actionMenu, setActionMenu] = useState(null);
-  const [bulkAction, setBulkAction] = useState('');
+  const [bulkAction, setBulkAction] = useState("");
 
   // Cargar categorías al montar
   useEffect(() => {
@@ -41,19 +42,22 @@ const CategoriesManagerDos = () => {
   // Filtrar y ordenar categorías
   const filteredCategories = useMemo(() => {
     let result = [...categories];
-    console.log('categories:', categories);
+    console.log("categories:", categories);
     // Filtrar por búsqueda
     if (searchTerm) {
-      result = result.filter(category =>
-        category.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        category.description?.toLowerCase().includes(searchTerm.toLowerCase())
+      result = result.filter(
+        (category) =>
+          category.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+          category.description
+            ?.toLowerCase()
+            .includes(searchTerm.toLowerCase()),
       );
     }
-  
+
     // Filtrar por estado
-    if (selectedStatus !== 'all') {
-      result = result.filter(category => 
-        selectedStatus === 'active' ? category.isActive : !category.isActive
+    if (selectedStatus !== "all") {
+      result = result.filter((category) =>
+        selectedStatus === "active" ? category.isActive : !category.isActive,
       );
     }
 
@@ -62,15 +66,15 @@ const CategoriesManagerDos = () => {
       let aValue, bValue;
 
       switch (sortBy) {
-        case 'name':
+        case "name":
           aValue = a.name.toLowerCase();
           bValue = b.name.toLowerCase();
           break;
-        case 'events':
+        case "events":
           aValue = a.eventCount || 0;
           bValue = b.eventCount || 0;
           break;
-        case 'created':
+        case "created":
           aValue = new Date(a.createdAt);
           bValue = new Date(b.createdAt);
           break;
@@ -79,7 +83,7 @@ const CategoriesManagerDos = () => {
           bValue = b.name;
       }
 
-      if (sortOrder === 'asc') {
+      if (sortOrder === "asc") {
         return aValue > bValue ? 1 : -1;
       } else {
         return aValue < bValue ? 1 : -1;
@@ -91,17 +95,15 @@ const CategoriesManagerDos = () => {
 
   const handleSelectAll = (checked) => {
     if (checked) {
-      setSelectedRows(filteredCategories.map(cat => cat.id));
+      setSelectedRows(filteredCategories.map((cat) => cat.id));
     } else {
       setSelectedRows([]);
     }
   };
 
   const handleSelectRow = (id) => {
-    setSelectedRows(prev =>
-      prev.includes(id)
-        ? prev.filter(rowId => rowId !== id)
-        : [...prev, id]
+    setSelectedRows((prev) =>
+      prev.includes(id) ? prev.filter((rowId) => rowId !== id) : [...prev, id],
     );
   };
 
@@ -119,14 +121,16 @@ const CategoriesManagerDos = () => {
   };
 
   const handleBulkAction = async () => {
-    if (bulkAction === 'delete' && selectedRows.length > 0) {
-      const confirm = window.confirm(`¿Eliminar ${selectedRows.length} categorías?`);
+    if (bulkAction === "delete" && selectedRows.length > 0) {
+      const confirm = window.confirm(
+        `¿Eliminar ${selectedRows.length} categorías?`,
+      );
       if (confirm) {
         // Aquí implementarías la eliminación masiva
-        console.log('Eliminar:', selectedRows);
+        console.log("Eliminar:", selectedRows);
       }
     }
-    setBulkAction('');
+    setBulkAction("");
   };
 
   const handleRefresh = () => {
@@ -136,21 +140,24 @@ const CategoriesManagerDos = () => {
   const handleExport = () => {
     // Lógica para exportar datos
     const dataStr = JSON.stringify(filteredCategories, null, 2);
-    const dataUri = 'data:application/json;charset=utf-8,'+ encodeURIComponent(dataStr);
-    const exportFileDefaultName = 'categorias.json';
-    
-    const linkElement = document.createElement('a');
-    linkElement.setAttribute('href', dataUri);
-    linkElement.setAttribute('download', exportFileDefaultName);
+    const dataUri =
+      "data:application/json;charset=utf-8," + encodeURIComponent(dataStr);
+    const exportFileDefaultName = "categorias.json";
+
+    const linkElement = document.createElement("a");
+    linkElement.setAttribute("href", dataUri);
+    linkElement.setAttribute("download", exportFileDefaultName);
     linkElement.click();
   };
 
   const StatusBadge = ({ isActive }) => (
-    <span className={`px-3 py-1 rounded-full text-xs font-medium flex items-center w-fit ${
-      isActive
-        ? 'bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-300'
-        : 'bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-300'
-    }`}>
+    <span
+      className={`px-3 py-1 rounded-full text-xs font-medium flex items-center w-fit ${
+        isActive
+          ? "bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-300"
+          : "bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-300"
+      }`}
+    >
       {isActive ? (
         <>
           <CheckCircle size={12} className="mr-1" />
@@ -167,15 +174,15 @@ const CategoriesManagerDos = () => {
 
   const tableVariants = {
     hidden: { opacity: 0 },
-    visible: { 
+    visible: {
       opacity: 1,
-      transition: { staggerChildren: 0.05 }
-    }
+      transition: { staggerChildren: 0.05 },
+    },
   };
 
   const rowVariants = {
     hidden: { opacity: 0, x: -20 },
-    visible: { opacity: 1, x: 0 }
+    visible: { opacity: 1, x: 0 },
   };
 
   return (
@@ -183,7 +190,9 @@ const CategoriesManagerDos = () => {
       {/* Header */}
       <div className="flex flex-col md:flex-row md:items-center justify-between mb-6 gap-4">
         <div>
-          <h2 className="text-xl font-bold text-gray-900 dark:text-white">Gestión de Categorías</h2>
+          <h2 className="text-xl font-bold text-gray-900 dark:text-white">
+            Gestión de Categorías
+          </h2>
           <p className="text-gray-600 dark:text-gray-400">
             Administra las categorías de eventos de la plataforma
           </p>
@@ -207,12 +216,12 @@ const CategoriesManagerDos = () => {
         </div>
 
         <button
-            onClick={() => setShowCreateModal(true)}
-            className="flex justify-center items-center space-x-2 px-4 py-2 bg-gradient-to-r from-red-500 to-orange-500 text-white rounded-lg hover:from-red-600 hover:to-orange-600"
-          >
-            <Plus size={20} />
-            <span>Nueva Categoría</span>
-          </button>
+          onClick={() => setShowCreateModal(true)}
+          className="flex justify-center items-center space-x-2 px-4 py-2 bg-gradient-to-r from-red-500 to-orange-500 text-white rounded-lg hover:from-red-600 hover:to-orange-600"
+        >
+          <Plus size={20} />
+          <span>Nueva Categoría</span>
+        </button>
       </div>
 
       {/* Filtros y búsqueda */}
@@ -220,7 +229,10 @@ const CategoriesManagerDos = () => {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
           <div className="col-span-1">
             <div className="relative">
-              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" size={20} />
+              <Search
+                className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400"
+                size={20}
+              />
               <input
                 type="text"
                 placeholder="Buscar categorías por nombre o descripción..."
@@ -253,10 +265,12 @@ const CategoriesManagerDos = () => {
             </select>
 
             <button
-              onClick={() => setSortOrder(sortOrder === 'asc' ? 'desc' : 'asc')}
+              onClick={() => setSortOrder(sortOrder === "asc" ? "desc" : "asc")}
               className="p-2.5 border border-gray-300 dark:border-gray-600 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700"
             >
-              <ChevronDown className={`transform ${sortOrder === 'desc' ? 'rotate-180' : ''}`} />
+              <ChevronDown
+                className={`transform ${sortOrder === "desc" ? "rotate-180" : ""}`}
+              />
             </button>
           </div>
         </div>
@@ -266,7 +280,10 @@ const CategoriesManagerDos = () => {
       {selectedRows.length > 0 && (
         <div className="flex items-center justify-between bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-xl p-4 mb-6">
           <div className="flex items-center space-x-3">
-            <AlertCircle className="text-blue-600 dark:text-blue-400" size={20} />
+            <AlertCircle
+              className="text-blue-600 dark:text-blue-400"
+              size={20}
+            />
             <span className="text-blue-800 dark:text-blue-300">
               {selectedRows.length} categorías seleccionadas
             </span>
@@ -298,7 +315,9 @@ const CategoriesManagerDos = () => {
         {loading ? (
           <div className="text-center py-12">
             <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-red-600 mx-auto mb-4"></div>
-            <p className="text-gray-600 dark:text-gray-400">Cargando categorías...</p>
+            <p className="text-gray-600 dark:text-gray-400">
+              Cargando categorías...
+            </p>
           </div>
         ) : filteredCategories.length === 0 ? (
           <div className="text-center py-12">
@@ -307,7 +326,9 @@ const CategoriesManagerDos = () => {
               No se encontraron categorías
             </h3>
             <p className="text-gray-600 dark:text-gray-400">
-              {searchTerm ? 'Intenta con otros términos de búsqueda' : 'Crea tu primera categoría'}
+              {searchTerm
+                ? "Intenta con otros términos de búsqueda"
+                : "Crea tu primera categoría"}
             </p>
           </div>
         ) : (
@@ -384,7 +405,7 @@ const CategoriesManagerDos = () => {
                   <td className="py-4 px-6">
                     <div className="max-w-xs">
                       <p className="text-gray-700 dark:text-gray-300 truncate">
-                        {category.description || 'Sin descripción'}
+                        {category.description || "Sin descripción"}
                       </p>
                     </div>
                   </td>
@@ -393,7 +414,9 @@ const CategoriesManagerDos = () => {
                       <span className="font-medium text-gray-900 dark:text-white">
                         {category.eventCount || 0}
                       </span>
-                      <span className="text-sm text-gray-500 ml-1">eventos</span>
+                      <span className="text-sm text-gray-500 ml-1">
+                        eventos
+                      </span>
                     </div>
                   </td>
                   <td className="py-4 px-6">
@@ -401,17 +424,22 @@ const CategoriesManagerDos = () => {
                   </td>
                   <td className="py-4 px-6">
                     <div className="text-sm text-gray-600 dark:text-gray-400">
-                      {new Date(category.createdAt).toLocaleDateString('es-ES', {
-                        day: '2-digit',
-                        month: 'short',
-                        year: 'numeric'
-                      })}
+                      {new Date(category.createdAt).toLocaleDateString(
+                        "es-ES",
+                        {
+                          day: "2-digit",
+                          month: "short",
+                          year: "numeric",
+                        },
+                      )}
                     </div>
                   </td>
                   <td className="py-4 px-6">
                     <div className="flex items-center space-x-2">
                       <button
-                        onClick={() => window.open(`/categorias/${category.slug}`, '_blank')}
+                        onClick={() =>
+                          window.open(`/categorias/${category.slug}`, "_blank")
+                        }
                         className="p-2 text-blue-600 hover:bg-blue-50 dark:hover:bg-blue-900/30 rounded-lg"
                         title="Ver en sitio"
                       >
@@ -420,7 +448,7 @@ const CategoriesManagerDos = () => {
                       <button
                         onClick={() => {
                           // Aquí iría la lógica para editar
-                          console.log('Editar:', category.id);
+                          console.log("Editar:", category.id);
                         }}
                         className="p-2 text-green-600 hover:bg-green-50 dark:hover:bg-green-900/30 rounded-lg"
                         title="Editar"
@@ -429,7 +457,11 @@ const CategoriesManagerDos = () => {
                       </button>
                       <div className="relative">
                         <button
-                          onClick={() => setActionMenu(actionMenu === category.id ? null : category.id)}
+                          onClick={() =>
+                            setActionMenu(
+                              actionMenu === category.id ? null : category.id,
+                            )
+                          }
                           className="p-2 text-gray-600 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg"
                         >
                           <MoreVertical size={18} />
@@ -446,17 +478,17 @@ const CategoriesManagerDos = () => {
                               <button
                                 onClick={() => {
                                   // Activar/desactivar
-                                  console.log('Toggle active:', category.id);
+                                  console.log("Toggle active:", category.id);
                                   setActionMenu(null);
                                 }}
                                 className="w-full text-left px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-700 text-gray-700 dark:text-gray-300"
                               >
-                                {category.isActive ? 'Desactivar' : 'Activar'}
+                                {category.isActive ? "Desactivar" : "Activar"}
                               </button>
                               <button
                                 onClick={() => {
                                   // Duplicar
-                                  console.log('Duplicar:', category.id);
+                                  console.log("Duplicar:", category.id);
                                   setActionMenu(null);
                                 }}
                                 className="w-full text-left px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-700 text-gray-700 dark:text-gray-300"
@@ -488,7 +520,8 @@ const CategoriesManagerDos = () => {
       {filteredCategories.length > 0 && (
         <div className="flex items-center justify-between mt-6">
           <div className="text-sm text-gray-600 dark:text-gray-400">
-            Mostrando {filteredCategories.length} de {categories.length} categorías
+            Mostrando {filteredCategories.length} de {categories.length}{" "}
+            categorías
           </div>
           <div className="flex items-center space-x-2">
             <button className="px-3 py-1 border border-gray-300 dark:border-gray-600 rounded hover:bg-gray-50 dark:hover:bg-gray-700">
@@ -513,7 +546,7 @@ const CategoriesManagerDos = () => {
       />
 
       {/* Modal de confirmación de eliminación */}
-{/*
+      {/*
       <ConfirmModal
         isOpen={showDeleteModal}
         onClose={() => {

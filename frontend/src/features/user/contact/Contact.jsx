@@ -38,9 +38,15 @@ const Contact = () => {
       title: "WhatsApp Business",
       description: "Respuesta en minutos",
       value: "+51 987 654 321",
-      icon: <MessageCircle className="text-green-500 dark:text-green-400" size={24} />,
+      icon: (
+        <MessageCircle
+          className="text-green-500 dark:text-green-400"
+          size={24}
+        />
+      ),
       action: "https://wa.me/51987654321",
-      color: "bg-green-50 border-green-200 dark:bg-green-900/20 dark:border-green-800",
+      color:
+        "bg-green-50 border-green-200 dark:bg-green-900/20 dark:border-green-800",
       buttonColor: "bg-green-600 hover:bg-green-700",
     },
     {
@@ -60,7 +66,8 @@ const Contact = () => {
       value: "@CulturaVivaOficial",
       icon: <Facebook className="text-blue-500 dark:text-blue-400" size={24} />,
       action: "https://facebook.com/CulturaVivaOficial",
-      color: "bg-blue-50 border-blue-200 dark:bg-blue-900/20 dark:border-blue-800",
+      color:
+        "bg-blue-50 border-blue-200 dark:bg-blue-900/20 dark:border-blue-800",
       buttonColor: "bg-blue-600 hover:bg-blue-700",
     },
     {
@@ -68,9 +75,12 @@ const Contact = () => {
       title: "Instagram",
       description: "Historias y mensajes",
       value: "@culturaviva_ok",
-      icon: <Instagram className="text-pink-500 dark:text-pink-400" size={24} />,
+      icon: (
+        <Instagram className="text-pink-500 dark:text-pink-400" size={24} />
+      ),
       action: "https://instagram.com/culturaviva_ok",
-      color: "bg-pink-50 border-pink-200 dark:bg-pink-900/20 dark:border-pink-800",
+      color:
+        "bg-pink-50 border-pink-200 dark:bg-pink-900/20 dark:border-pink-800",
       buttonColor: "bg-pink-600 hover:bg-pink-700",
     },
   ];
@@ -367,7 +377,10 @@ const Contact = () => {
                         })}
                         className="mt-1 mr-3 rounded border-gray-300 text-red-600 focus:ring-red-500 dark:border-gray-600"
                       />
-                      <label htmlFor="terms" className="text-sm text-gray-600 dark:text-gray-300">
+                      <label
+                        htmlFor="terms"
+                        className="text-sm text-gray-600 dark:text-gray-300"
+                      >
                         Acepto que mis datos sean procesados de acuerdo con la
                         <Link
                           to="/terminos"
@@ -448,7 +461,9 @@ const Contact = () => {
                             <p className="text-gray-600 text-sm mb-2 dark:text-gray-300">
                               {method.description}
                             </p>
-                            <p className="font-medium text-gray-900 dark:text-white">{method.value}</p>
+                            <p className="font-medium text-gray-900 dark:text-white">
+                              {method.value}
+                            </p>
                           </div>
                         </div>
                         <a
@@ -557,7 +572,10 @@ const Contact = () => {
                   { dept: "Publicidad", email: "publicidad@culturaviva.com" },
                   { dept: "Prensa", email: "prensa@culturaviva.com" },
                 ].map((department, index) => (
-                  <div key={index} className="bg-white dark:bg-gray-800 rounded-lg p-4 transition-colors">
+                  <div
+                    key={index}
+                    className="bg-white dark:bg-gray-800 rounded-lg p-4 transition-colors"
+                  >
                     <h3 className="font-bold text-sm mb-1 text-gray-900 dark:text-white">
                       {department.dept}
                     </h3>
@@ -585,17 +603,23 @@ const Contact = () => {
                     key={index}
                     className="flex justify-between items-center py-3 border-b border-gray-100 dark:border-gray-700 last:border-0"
                   >
-                    <span className="font-medium text-gray-900 dark:text-white">{schedule.day}</span>
-                    <span className="text-gray-600 dark:text-gray-300">{schedule.hours}</span>
+                    <span className="font-medium text-gray-900 dark:text-white">
+                      {schedule.day}
+                    </span>
+                    <span className="text-gray-600 dark:text-gray-300">
+                      {schedule.hours}
+                    </span>
                   </div>
                 ))}
               </div>
 
               <div className="mt-6 p-4 bg-yellow-50 dark:bg-yellow-900/50 rounded-lg transition-colors border border-yellow-500/50 dark:border-yellow-400/50">
                 <p className="text-sm text-yellow-600 dark:text-yellow-200">
-                  <span className="font-bold text-yellow-700 dark:text-yellow-400">Nota:</span> Para emergencias
-                  relacionadas con eventos en curso, puedes contactarnos por
-                  WhatsApp en cualquier momento.
+                  <span className="font-bold text-yellow-700 dark:text-yellow-400">
+                    Nota:
+                  </span>{" "}
+                  Para emergencias relacionadas con eventos en curso, puedes
+                  contactarnos por WhatsApp en cualquier momento.
                 </p>
               </div>
             </motion.div>
@@ -631,8 +655,13 @@ const Contact = () => {
                     className="border border-gray-200 dark:border-gray-700 rounded-lg p-4 hover:border-red-300 dark:hover:border-red-700 transition-colors cursor-pointer"
                   >
                     <div className="flex items-center justify-between">
-                      <span className="font-medium text-gray-900 dark:text-white">{faq.question}</span>
-                      <ChevronRight className="text-gray-400 dark:text-gray-500" size={20} />
+                      <span className="font-medium text-gray-900 dark:text-white">
+                        {faq.question}
+                      </span>
+                      <ChevronRight
+                        className="text-gray-400 dark:text-gray-500"
+                        size={20}
+                      />
                     </div>
                   </motion.div>
                 ))}
@@ -669,13 +698,18 @@ const Contact = () => {
               <div className="absolute inset-0 flex items-center justify-center">
                 <div className="text-center">
                   <div className="relative">
-                    <MapPin className="text-red-600 dark:text-red-400 mx-auto mb-4" size={48} />
+                    <MapPin
+                      className="text-red-600 dark:text-red-400 mx-auto mb-4"
+                      size={48}
+                    />
                     <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-24 h-24 bg-red-100 dark:bg-red-900/30 rounded-full animate-ping opacity-20"></div>
                   </div>
                   <p className="text-gray-700 dark:text-gray-200 font-medium">
                     Calle Principal 123, Plaza de Armas
                   </p>
-                  <p className="text-gray-600 dark:text-gray-300">[Provincia], [Región]</p>
+                  <p className="text-gray-600 dark:text-gray-300">
+                    [Provincia], [Región]
+                  </p>
                   <p className="text-sm text-gray-500 dark:text-gray-400 mt-2">
                     (Integrar con Google Maps o Leaflet)
                   </p>
@@ -728,22 +762,26 @@ const Contact = () => {
               {
                 icon: <Facebook size={24} />,
                 label: "Facebook",
-                color: "hover:bg-blue-100 hover:text-blue-600 dark:hover:bg-blue-900/30 dark:hover:text-blue-400",
+                color:
+                  "hover:bg-blue-100 hover:text-blue-600 dark:hover:bg-blue-900/30 dark:hover:text-blue-400",
               },
               {
                 icon: <Instagram size={24} />,
                 label: "Instagram",
-                color: "hover:bg-pink-100 hover:text-pink-600 dark:hover:bg-pink-900/30 dark:hover:text-pink-400",
+                color:
+                  "hover:bg-pink-100 hover:text-pink-600 dark:hover:bg-pink-900/30 dark:hover:text-pink-400",
               },
               {
                 icon: <MessageSquare size={24} />,
                 label: "WhatsApp",
-                color: "hover:bg-green-100 hover:text-green-600 dark:hover:bg-green-900/30 dark:hover:text-green-400",
+                color:
+                  "hover:bg-green-100 hover:text-green-600 dark:hover:bg-green-900/30 dark:hover:text-green-400",
               },
               {
                 icon: <Mail size={24} />,
                 label: "Newsletter",
-                color: "hover:bg-red-100 hover:text-red-600 dark:hover:bg-red-900/30 dark:hover:text-red-400",
+                color:
+                  "hover:bg-red-100 hover:text-red-600 dark:hover:bg-red-900/30 dark:hover:text-red-400",
               },
             ].map((social, index) => (
               <motion.a
@@ -753,8 +791,12 @@ const Contact = () => {
                 href="#"
                 className={`flex flex-col items-center p-6 bg-white dark:bg-gray-800 rounded-2xl shadow-lg border border-gray-200 dark:border-gray-700 ${social.color} transition-all`}
               >
-                <div className="mb-3 text-gray-700 dark:text-gray-200">{social.icon}</div>
-                <span className="font-medium text-gray-900 dark:text-white">{social.label}</span>
+                <div className="mb-3 text-gray-700 dark:text-gray-200">
+                  {social.icon}
+                </div>
+                <span className="font-medium text-gray-900 dark:text-white">
+                  {social.label}
+                </span>
               </motion.a>
             ))}
           </div>

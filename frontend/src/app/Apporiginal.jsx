@@ -33,10 +33,10 @@ import UserManager from "./pages/Admin/users/UserManager.jsx";
 import { Roles } from "./pages/Admin/Roles.jsx";
 function App() {
   return (
-    <Router>      
+    <Router>
       <GradientBackground>
-      <div className="min-h-screen flex flex-col ">
-        <Header />
+        <div className="min-h-screen flex flex-col ">
+          <Header />
 
           <main className="flex-grow">
             <Routes>
@@ -74,9 +74,9 @@ function App() {
             </Routes>
           </main>
 
-        <Footer />
-        <Toaster position="top-right" />        
-      </div>
+          <Footer />
+          <Toaster position="top-right" />
+        </div>
       </GradientBackground>
     </Router>
   );

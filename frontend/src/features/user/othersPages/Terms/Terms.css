@@ -71,7 +71,8 @@
 }
 
 @keyframes pulseWarning {
-  0%, 100% {
+  0%,
+  100% {
     border-left-color: #ef4444;
   }
   50% {
@@ -100,11 +101,11 @@
   .terms-content h2 {
     font-size: 1.75rem;
   }
-  
+
   .terms-content h3 {
     font-size: 1.5rem;
   }
-  
+
   .sticky-nav {
     position: static;
     margin-bottom: 2rem;
@@ -142,7 +143,7 @@
 }
 
 .active-section-indicator::before {
-  content: '';
+  content: "";
   position: absolute;
   left: 0;
   top: 0;
@@ -159,7 +160,7 @@
   .print-hide {
     display: none;
   }
-  
+
   .terms-content {
     font-size: 12pt;
     line-height: 1.5;
@@ -175,7 +176,7 @@ html {
   html {
     scroll-behavior: auto;
   }
-  
+
   .terms-section,
   .warning-block {
     animation: none;
@@ -213,7 +214,7 @@ html {
   border: 1px solid #e2e8f0;
   border-radius: 0.5rem;
   padding: 1rem;
-  font-family: 'Monaco', 'Consolas', monospace;
+  font-family: "Monaco", "Consolas", monospace;
   font-size: 0.875rem;
   overflow-x: auto;
 }

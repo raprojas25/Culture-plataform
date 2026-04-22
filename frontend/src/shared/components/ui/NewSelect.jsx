@@ -46,7 +46,7 @@ export const NewSelect = ({
   // Filtrar opciones según búsqueda
   const filteredOptions = useMemo(() => {
     return options.filter((opt) =>
-      getOptionLabel(opt).toLowerCase().includes(searchTerm.toLowerCase())
+      getOptionLabel(opt).toLowerCase().includes(searchTerm.toLowerCase()),
     );
   }, [options, searchTerm, getOptionLabel]);
 
@@ -68,7 +68,10 @@ export const NewSelect = ({
   // Cerrar al hacer clic fuera
   useEffect(() => {
     const handleClickOutside = (event) => {
-      if (containerRef.current && !containerRef.current.contains(event.target)) {
+      if (
+        containerRef.current &&
+        !containerRef.current.contains(event.target)
+      ) {
         setIsOpen(false);
         setSearchTerm("");
       }
@@ -109,7 +112,7 @@ export const NewSelect = ({
       case "ArrowDown":
         e.preventDefault();
         setHighlightedIndex((prev) =>
-          prev < filteredOptions.length - 1 ? prev + 1 : prev
+          prev < filteredOptions.length - 1 ? prev + 1 : prev,
         );
         break;
 
@@ -141,7 +144,9 @@ export const NewSelect = ({
     }
   };
 
-  const displayText = selectedOption ? getOptionLabel(selectedOption) : placeholder;
+  const displayText = selectedOption
+    ? getOptionLabel(selectedOption)
+    : placeholder;
 
   return (
     <div ref={containerRef} className="relative min-w-44 font-sans">
@@ -161,7 +166,9 @@ export const NewSelect = ({
         onClick={() => !disabled && setIsOpen(!isOpen)}
         onKeyDown={handleButtonKeyDown}
       >
-        <span className="flex-1 overflow-hidden overflow-ellipsis">{displayText}</span>
+        <span className="flex-1 overflow-hidden overflow-ellipsis">
+          {displayText}
+        </span>
         <ChevronDown
           size={20}
           className={`text-gray-600 dark:text-gray-300 transition-transform duration-200 ${
@@ -188,9 +195,14 @@ export const NewSelect = ({
             />
           )}
 
-          <ul ref={listRef} className="max-h-60 overflow-auto py-1 text-base sm:text-sm">
+          <ul
+            ref={listRef}
+            className="max-h-60 overflow-auto py-1 text-base sm:text-sm"
+          >
             {filteredOptions.length === 0 ? (
-              <li className="px-3 py-2 text-gray-500 dark:text-gray-400">No hay resultados</li>
+              <li className="px-3 py-2 text-gray-500 dark:text-gray-400">
+                No hay resultados
+              </li>
             ) : (
               filteredOptions.map((option, index) => {
                 const isSelected = selectedValue === getOptionValue(option);
@@ -211,7 +223,12 @@ export const NewSelect = ({
                     aria-selected={isSelected}
                   >
                     <span className="truncate">{getOptionLabel(option)}</span>
-                    {isSelected && <Check size={18} className="text-primary-600 dark:text-primary-200" />}
+                    {isSelected && (
+                      <Check
+                        size={18}
+                        className="text-primary-600 dark:text-primary-200"
+                      />
+                    )}
                   </li>
                 );
               })
@@ -226,4 +243,3 @@ export const NewSelect = ({
     </div>
   );
 };
-

@@ -35,13 +35,12 @@ export const Register = () => {
   const password = watch("password");
 
   const onSubmit = async (data) => {
-
     const formatData = {
       role_id: 3,
       username: data.username,
       email: data.email,
-      password: data.password
-     };
+      password: data.password,
+    };
 
     try {
       await signUp(formatData);
@@ -262,9 +261,7 @@ export const Register = () => {
                 </Link>
               </Label>
             </div>
-            {errors.terms && (
-              <ErrorMessage message={errors.terms?.message}/>
-            )}
+            {errors.terms && <ErrorMessage message={errors.terms?.message} />}
 
             {/* Newsletter */}
             <div className="flex items-start">
@@ -290,13 +287,7 @@ export const Register = () => {
               disabled={isLoading}
               className="w-full"
             >
-              {isLoading ? (
-                <>
-                  Creando cuenta...
-                </>
-              ) : (
-                <>Crear Cuenta</>
-              )}
+              {isLoading ? <>Creando cuenta...</> : <>Crear Cuenta</>}
             </Button>
           </motion.form>
 

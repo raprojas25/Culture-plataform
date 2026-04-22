@@ -1,13 +1,13 @@
-import { useState, useEffect } from 'react'
-import { Link, useLocation, useNavigate } from 'react-router-dom'
-import { motion, AnimatePresence } from 'framer-motion'
-import { 
-  Home, 
-  Calendar, 
-  PlusCircle, 
-  Layers, 
-  Users, 
-  Info, 
+import { useState, useEffect } from "react";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import { motion, AnimatePresence } from "framer-motion";
+import {
+  Home,
+  Calendar,
+  PlusCircle,
+  Layers,
+  Users,
+  Info,
   Phone,
   Menu,
   X,
@@ -24,135 +24,163 @@ import {
   ChevronDown,
   Settings,
   Bookmark,
-  ChevronUp
-} from 'lucide-react'
-import './Header.css'
+  ChevronUp,
+} from "lucide-react";
+import "./Header.css";
 
 const Header = () => {
-  const [isMenuOpen, setIsMenuOpen] = useState(false)
-  const [isUserMenuOpen, setIsUserMenuOpen] = useState(false)
-  const [darkMode, setDarkMode] = useState(false)
-  const [isLoggedIn, setIsLoggedIn] = useState(false) // Cambiar a false por defecto
-  const [user, setUser] = useState(null)
-  const [scrollY, setScrollY] = useState(0)
-  const location = useLocation()
-  const navigate = useNavigate()
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isUserMenuOpen, setIsUserMenuOpen] = useState(false);
+  const [darkMode, setDarkMode] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(false); // Cambiar a false por defecto
+  const [user, setUser] = useState(null);
+  const [scrollY, setScrollY] = useState(0);
+  const location = useLocation();
+  const navigate = useNavigate();
 
   // Detectar scroll para efectos
   useEffect(() => {
     const handleScroll = () => {
-      setScrollY(window.scrollY)
-    }
-    window.addEventListener('scroll', handleScroll)
-    return () => window.removeEventListener('scroll', handleScroll)
-  }, [])
+      setScrollY(window.scrollY);
+    };
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   // Detectar tema del sistema
   useEffect(() => {
-    if (localStorage.theme === 'dark' || 
-        (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
-      setDarkMode(true)
-      document.documentElement.classList.add('dark')
+    if (
+      localStorage.theme === "dark" ||
+      (!("theme" in localStorage) &&
+        window.matchMedia("(prefers-color-scheme: dark)").matches)
+    ) {
+      setDarkMode(true);
+      document.documentElement.classList.add("dark");
     } else {
-      setDarkMode(false)
-      document.documentElement.classList.remove('dark')
+      setDarkMode(false);
+      document.documentElement.classList.remove("dark");
     }
-  }, [])
+  }, []);
 
   // Verificar autenticación (simulada)
   useEffect(() => {
     // Simular verificación de sesión
-    const token = localStorage.getItem('token')
+    const token = localStorage.getItem("token");
     if (token) {
-      setIsLoggedIn(true)
+      setIsLoggedIn(true);
       setUser({
-        name: 'Usuario Ejemplo',
-        email: 'usuario@ejemplo.com',
-        role: 'user',
-        avatar: 'https://ui-avatars.com/api/?name=Usuario+Ejemplo&background=ef4444&color=fff'
-      })
+        name: "Usuario Ejemplo",
+        email: "usuario@ejemplo.com",
+        role: "user",
+        avatar:
+          "https://ui-avatars.com/api/?name=Usuario+Ejemplo&background=ef4444&color=fff",
+      });
     }
-  }, [])
+  }, []);
 
   const toggleDarkMode = () => {
     if (darkMode) {
-      document.documentElement.classList.remove('dark')
-      localStorage.theme = 'light'
+      document.documentElement.classList.remove("dark");
+      localStorage.theme = "light";
     } else {
-      document.documentElement.classList.add('dark')
-      localStorage.theme = 'dark'
+      document.documentElement.classList.add("dark");
+      localStorage.theme = "dark";
     }
-    setDarkMode(!darkMode)
-  }
+    setDarkMode(!darkMode);
+  };
 
   const handleLogin = () => {
-    navigate('/auth')
-    setIsMenuOpen(false)
-  }
+    navigate("/auth");
+    setIsMenuOpen(false);
+  };
 
   const handleRegister = () => {
-    navigate('/auth')
-    setIsMenuOpen(false)
-  }
+    navigate("/auth");
+    setIsMenuOpen(false);
+  };
 
   const handleLogout = () => {
-    localStorage.removeItem('token')
-    setIsLoggedIn(false)
-    setUser(null)
-    setIsUserMenuOpen(false)
-    navigate('/')
-  }
+    localStorage.removeItem("token");
+    setIsLoggedIn(false);
+    setUser(null);
+    setIsUserMenuOpen(false);
+    navigate("/");
+  };
 
   const navItems = [
-    { path: '/', label: 'Inicio', icon: <Home size={18} /> },
-    { path: '/calendario', label: 'Calendario', icon: <Calendar size={18} /> },
-    { path: '/publicar-evento', label: 'Publicar', icon: <PlusCircle size={18} /> },
-    { path: '/categorias', label: 'Categorías', icon: <Layers size={18} /> },
-    { path: '/directorio', label: 'Directorio', icon: <Users size={18} /> },
-    { path: '/galeria', label: 'Galería', icon: <GalleryVertical size={18} /> },
-    { path: '/about', label: 'Nosotros', icon: <Info size={18} /> },
-    { path: '/contacto', label: 'Contacto', icon: <Phone size={18} /> },
-  ]
+    { path: "/", label: "Inicio", icon: <Home size={18} /> },
+    { path: "/calendario", label: "Calendario", icon: <Calendar size={18} /> },
+    {
+      path: "/publicar-evento",
+      label: "Publicar",
+      icon: <PlusCircle size={18} />,
+    },
+    { path: "/categorias", label: "Categorías", icon: <Layers size={18} /> },
+    { path: "/directorio", label: "Directorio", icon: <Users size={18} /> },
+    { path: "/galeria", label: "Galería", icon: <GalleryVertical size={18} /> },
+    { path: "/about", label: "Nosotros", icon: <Info size={18} /> },
+    { path: "/contacto", label: "Contacto", icon: <Phone size={18} /> },
+  ];
 
   const userMenuItems = [
-    { label: 'Mi Perfil', icon: <User size={16} />, action: () => navigate('/perfil') },
-    { label: 'Mis Eventos', icon: <Calendar size={16} />, action: () => navigate('/mis-eventos') },
-    { label: 'Guardados', icon: <Bookmark size={16} />, action: () => navigate('/guardados') },
-    { label: 'Configuración', icon: <Settings size={16} />, action: () => navigate('/configuracion') },
-    { label: 'Cerrar Sesión', icon: <LogOut size={16} />, action: handleLogout }
-  ]
+    {
+      label: "Mi Perfil",
+      icon: <User size={16} />,
+      action: () => navigate("/perfil"),
+    },
+    {
+      label: "Mis Eventos",
+      icon: <Calendar size={16} />,
+      action: () => navigate("/mis-eventos"),
+    },
+    {
+      label: "Guardados",
+      icon: <Bookmark size={16} />,
+      action: () => navigate("/guardados"),
+    },
+    {
+      label: "Configuración",
+      icon: <Settings size={16} />,
+      action: () => navigate("/configuracion"),
+    },
+    {
+      label: "Cerrar Sesión",
+      icon: <LogOut size={16} />,
+      action: handleLogout,
+    },
+  ];
 
   const headerVariants = {
     hidden: { y: -100 },
-    visible: { 
+    visible: {
       y: 0,
-      transition: { type: 'spring', stiffness: 100, damping: 20 }
-    }
-  }
+      transition: { type: "spring", stiffness: 100, damping: 20 },
+    },
+  };
 
   const menuVariants = {
     hidden: { opacity: 0, height: 0 },
-    visible: { 
-      opacity: 1, 
-      height: 'auto',
-      transition: { duration: 0.3 }
+    visible: {
+      opacity: 1,
+      height: "auto",
+      transition: { duration: 0.3 },
     },
-    exit: { 
-      opacity: 0, 
+    exit: {
+      opacity: 0,
       height: 0,
-      transition: { duration: 0.3 }
-    }
-  }
+      transition: { duration: 0.3 },
+    },
+  };
 
   return (
-    <motion.header 
+    <motion.header
       initial="hidden"
       animate="visible"
       variants={headerVariants}
       className={`sticky top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        scrollY > 50 
-          ? 'bg-white/95 dark:bg-gray-900/95 backdrop-blur-md shadow-lg' 
-          : 'bg-white dark:bg-gray-900 shadow-sm'
+        scrollY > 50
+          ? "bg-white/95 dark:bg-gray-900/95 backdrop-blur-md shadow-lg"
+          : "bg-white dark:bg-gray-900 shadow-sm"
       }`}
     >
       <div className="container mx-auto px-4 w-full">
@@ -183,8 +211,8 @@ const Header = () => {
                 to={item.path}
                 className={`flex items-center space-x-2 px-4 py-2 rounded-lg transition-all ${
                   location.pathname === item.path
-                    ? 'bg-red-50 dark:bg-red-900/30 text-red-600 dark:text-red-400 font-semibold'
-                    : 'text-gray-600 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-800 hover:text-red-500 dark:hover:text-red-400'
+                    ? "bg-red-50 dark:bg-red-900/30 text-red-600 dark:text-red-400 font-semibold"
+                    : "text-gray-600 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-800 hover:text-red-500 dark:hover:text-red-400"
                 }`}
               >
                 {item.icon}
@@ -225,17 +253,23 @@ const Header = () => {
                   className="flex items-center space-x-2 p-1 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800"
                 >
                   <div className="w-8 h-8 rounded-full overflow-hidden border-2 border-red-500">
-                    <img 
-                      src={user?.avatar} 
+                    <img
+                      src={user?.avatar}
                       alt={user?.name}
                       className="w-full h-full object-cover"
                     />
                   </div>
-                  {
-                    (!isUserMenuOpen)?
-                    <ChevronDown size={16} className='text-gray-500 dark:text-gray-400 transition-opacity'/>
-                    :<ChevronUp size={16} className='text-gray-500 dark:text-gray-400 transition-opacity'/>
-                  }
+                  {!isUserMenuOpen ? (
+                    <ChevronDown
+                      size={16}
+                      className="text-gray-500 dark:text-gray-400 transition-opacity"
+                    />
+                  ) : (
+                    <ChevronUp
+                      size={16}
+                      className="text-gray-500 dark:text-gray-400 transition-opacity"
+                    />
+                  )}
                   {/* <ChevronDown size={16} className="text-gray-500 dark:text-gray-400" /> */}
                 </button>
 
@@ -249,17 +283,21 @@ const Header = () => {
                       className="absolute right-0 top-full mt-2 w-56 bg-white dark:bg-gray-800 rounded-xl shadow-lg border border-gray-200 dark:border-gray-700 overflow-hidden"
                     >
                       <div className="p-4 border-b border-gray-100 dark:border-gray-700">
-                        <p className="font-semibold text-gray-800 dark:text-white">{user?.name}</p>
-                        <p className="text-sm text-gray-500 dark:text-gray-400 truncate">{user?.email}</p>
+                        <p className="font-semibold text-gray-800 dark:text-white">
+                          {user?.name}
+                        </p>
+                        <p className="text-sm text-gray-500 dark:text-gray-400 truncate">
+                          {user?.email}
+                        </p>
                       </div>
-                      
+
                       <div className="p-2">
                         {userMenuItems.map((item, index) => (
                           <button
                             key={index}
                             onClick={() => {
-                              item.action()
-                              setIsUserMenuOpen(false)
+                              item.action();
+                              setIsUserMenuOpen(false);
                             }}
                             className="w-full flex items-center space-x-3 px-3 py-2 rounded-lg hover:bg-gray-200 dark:hover:bg-gray-700 text-gray-700 dark:text-gray-300"
                           >
@@ -316,7 +354,10 @@ const Header = () => {
                 {/* Search Bar Mobile */}
                 <div className="p-4 border-b border-gray-100 dark:border-gray-700">
                   <div className="relative">
-                    <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" size={20} />
+                    <Search
+                      className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400"
+                      size={20}
+                    />
                     <input
                       type="text"
                       placeholder="Buscar eventos..."
@@ -333,8 +374,8 @@ const Header = () => {
                       to={item.path}
                       className={`flex items-center space-x-3 px-4 py-3 rounded-lg ${
                         location.pathname === item.path
-                          ? 'bg-red-50 dark:bg-red-900/30 text-red-600 dark:text-red-400'
-                          : 'text-gray-700 dark:text-gray-300 hover:bg-red-50 hover:text-gray-400 dark:hover:bg-gray-700'
+                          ? "bg-red-50 dark:bg-red-900/30 text-red-600 dark:text-red-400"
+                          : "text-gray-700 dark:text-gray-300 hover:bg-red-50 hover:text-gray-400 dark:hover:bg-gray-700"
                       }`}
                       onClick={() => setIsMenuOpen(false)}
                     >
@@ -369,7 +410,7 @@ const Header = () => {
         </AnimatePresence>
       </div>
     </motion.header>
-  )
-}
+  );
+};
 
-export default Header
+export default Header;

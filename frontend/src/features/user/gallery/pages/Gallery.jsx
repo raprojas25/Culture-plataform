@@ -1,5 +1,5 @@
-import { useState, useEffect } from 'react'
-import { motion, AnimatePresence } from 'framer-motion'
+import { useState, useEffect } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import {
   Search,
   Filter,
@@ -16,250 +16,299 @@ import {
   Clock,
   Eye,
   X,
-  Maximize2
-} from 'lucide-react'
+  Maximize2,
+} from "lucide-react";
 
 const Gallery = () => {
-  const [activeCategory, setActiveCategory] = useState('todas')
-  const [selectedImage, setSelectedImage] = useState(null)
-  const [viewMode, setViewMode] = useState('grid') // 'grid' or 'list'
-  const [searchQuery, setSearchQuery] = useState('')
-  const [favorites, setFavorites] = useState([])
+  const [activeCategory, setActiveCategory] = useState("todas");
+  const [selectedImage, setSelectedImage] = useState(null);
+  const [viewMode, setViewMode] = useState("grid"); // 'grid' or 'list'
+  const [searchQuery, setSearchQuery] = useState("");
+  const [favorites, setFavorites] = useState([]);
 
   // Categorías inspiradas en la cultura andina
   const categories = [
-    { id: 'todas', name: 'Todas', color: 'bg-gray-100 text-gray-700', count: 48 },
-    { id: 'antiguas', name: 'Antiguas', color: 'bg-amber-50 text-amber-700', count: 12 },
-    { id: 'mejor-mes', name: 'Mes', color: 'bg-yellow-50 text-yellow-700', count: 6 },
-    { id: 'patronales', name: 'Patronales', color: 'bg-red-50 text-red-700', count: 15 },
-    { id: 'ferias', name: 'Ferias', color: 'bg-green-50 text-green-700', count: 10 },
-    { id: 'bodas', name: 'Bodas', color: 'bg-pink-50 text-pink-700', count: 8 },
-    { id: 'desfiles', name: 'Desfiles', color: 'bg-blue-50 text-blue-700', count: 7 },
-    { id: 'paisajes', name: 'Paisajes', color: 'bg-indigo-50 text-indigo-700', count: 14 }
-  ]
+    {
+      id: "todas",
+      name: "Todas",
+      color: "bg-gray-100 text-gray-700",
+      count: 48,
+    },
+    {
+      id: "antiguas",
+      name: "Antiguas",
+      color: "bg-amber-50 text-amber-700",
+      count: 12,
+    },
+    {
+      id: "mejor-mes",
+      name: "Mes",
+      color: "bg-yellow-50 text-yellow-700",
+      count: 6,
+    },
+    {
+      id: "patronales",
+      name: "Patronales",
+      color: "bg-red-50 text-red-700",
+      count: 15,
+    },
+    {
+      id: "ferias",
+      name: "Ferias",
+      color: "bg-green-50 text-green-700",
+      count: 10,
+    },
+    { id: "bodas", name: "Bodas", color: "bg-pink-50 text-pink-700", count: 8 },
+    {
+      id: "desfiles",
+      name: "Desfiles",
+      color: "bg-blue-50 text-blue-700",
+      count: 7,
+    },
+    {
+      id: "paisajes",
+      name: "Paisajes",
+      color: "bg-indigo-50 text-indigo-700",
+      count: 14,
+    },
+  ];
 
   // Paleta de colores inspirada en la cultura andina
   const andeanColors = [
-    '#dc2626', // Rojo andino
-    '#ea580c', // Naranja terracota
-    '#ca8a04', // Oro
-    '#16a34a', // Verde de la Pacha Mama
-    '#0891b2', // Azul del cielo
-    '#7c3aed', // Púrpura de los textiles
-    '#db2777', // Rosa de las flores
-    '#92400e'  // Marrón tierra
-  ]
+    "#dc2626", // Rojo andino
+    "#ea580c", // Naranja terracota
+    "#ca8a04", // Oro
+    "#16a34a", // Verde de la Pacha Mama
+    "#0891b2", // Azul del cielo
+    "#7c3aed", // Púrpura de los textiles
+    "#db2777", // Rosa de las flores
+    "#92400e", // Marrón tierra
+  ];
 
   // Datos de ejemplo para las imágenes
   const [images, setImages] = useState([
     {
       id: 1,
-      title: 'Procesión en los Andes',
-      description: 'Tradicional procesión en las alturas de la sierra',
-      category: 'patronales',
-      image: 'https://images.unsplash.com/photo-1511795409834-ef04bbd61622?w=800&auto=format&fit=crop',
-      date: '15 Jun 2023',
-      location: 'Comunidad Andina',
-      photographer: 'Juan Pérez',
+      title: "Procesión en los Andes",
+      description: "Tradicional procesión en las alturas de la sierra",
+      category: "patronales",
+      image:
+        "https://images.unsplash.com/photo-1511795409834-ef04bbd61622?w=800&auto=format&fit=crop",
+      date: "15 Jun 2023",
+      location: "Comunidad Andina",
+      photographer: "Juan Pérez",
       likes: 245,
       views: 1200,
       featured: true,
-      color: '#dc2626'
+      color: "#dc2626",
     },
     {
       id: 2,
-      title: 'Matrimonio Tradicional',
-      description: 'Boda con trajes típicos de la región',
-      category: 'bodas',
-      image: 'https://images.unsplash.com/photo-1519225421980-715cb0215aed?w=800&auto=format&fit=crop',
-      date: '22 Jul 2023',
-      location: 'Iglesia Colonial',
-      photographer: 'María López',
+      title: "Matrimonio Tradicional",
+      description: "Boda con trajes típicos de la región",
+      category: "bodas",
+      image:
+        "https://images.unsplash.com/photo-1519225421980-715cb0215aed?w=800&auto=format&fit=crop",
+      date: "22 Jul 2023",
+      location: "Iglesia Colonial",
+      photographer: "María López",
       likes: 189,
       views: 950,
       featured: false,
-      color: '#db2777'
+      color: "#db2777",
     },
     {
       id: 3,
-      title: 'Mercado Andino',
-      description: 'Feria artesanal con productos locales',
-      category: 'ferias',
-      image: 'https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=800&auto=format&fit=crop',
-      date: '30 Ago 2023',
-      location: 'Plaza Principal',
-      photographer: 'Carlos Ruiz',
+      title: "Mercado Andino",
+      description: "Feria artesanal con productos locales",
+      category: "ferias",
+      image:
+        "https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=800&auto=format&fit=crop",
+      date: "30 Ago 2023",
+      location: "Plaza Principal",
+      photographer: "Carlos Ruiz",
       likes: 312,
       views: 1800,
       featured: true,
-      color: '#16a34a'
+      color: "#16a34a",
     },
     {
       id: 4,
-      title: 'Cordillera al Amanecer',
-      description: 'Paisaje montañoso con los primeros rayos de sol',
-      category: 'paisajes',
-      image: 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800&auto=format&fit=crop',
-      date: '5 Sep 2023',
-      location: 'Cordillera Blanca',
-      photographer: 'Ana Torres',
+      title: "Cordillera al Amanecer",
+      description: "Paisaje montañoso con los primeros rayos de sol",
+      category: "paisajes",
+      image:
+        "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800&auto=format&fit=crop",
+      date: "5 Sep 2023",
+      location: "Cordillera Blanca",
+      photographer: "Ana Torres",
       likes: 423,
       views: 2100,
       featured: true,
-      color: '#0891b2'
+      color: "#0891b2",
     },
     {
       id: 5,
-      title: 'Desfile de Danzas',
-      description: 'Presentación de danzas tradicionales',
-      category: 'desfiles',
-      image: 'https://images.unsplash.com/photo-1533174072545-7a4b6ad7a6c3?w=800&auto=format&fit=crop',
-      date: '12 Oct 2023',
-      location: 'Anfiteatro Municipal',
-      photographer: 'Luis Gómez',
+      title: "Desfile de Danzas",
+      description: "Presentación de danzas tradicionales",
+      category: "desfiles",
+      image:
+        "https://images.unsplash.com/photo-1533174072545-7a4b6ad7a6c3?w=800&auto=format&fit=crop",
+      date: "12 Oct 2023",
+      location: "Anfiteatro Municipal",
+      photographer: "Luis Gómez",
       likes: 278,
       views: 1350,
       featured: false,
-      color: '#7c3aed'
+      color: "#7c3aed",
     },
     {
       id: 6,
-      title: 'Fiesta de los 80s',
-      description: 'Fotografía histórica de celebración comunal',
-      category: 'antiguas',
-      image: 'https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?w=800&auto=format&fit=crop',
-      date: '1985',
-      location: 'Centro del Pueblo',
-      photographer: 'Archivo Histórico',
+      title: "Fiesta de los 80s",
+      description: "Fotografía histórica de celebración comunal",
+      category: "antiguas",
+      image:
+        "https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?w=800&auto=format&fit=crop",
+      date: "1985",
+      location: "Centro del Pueblo",
+      photographer: "Archivo Histórico",
       likes: 156,
       views: 850,
       featured: false,
-      color: '#92400e'
+      color: "#92400e",
     },
     {
       id: 7,
-      title: 'Ganadora Septiembre',
-      description: 'Foto del mes: Ritual de la cosecha',
-      category: 'mejor-mes',
-      image: 'https://images.unsplash.com/photo-1460661419201-fd4cecdf8a8b?w=800&auto=format&fit=crop',
-      date: 'Sep 2023',
-      location: 'Campos de Cultivo',
-      photographer: 'Roberto Quispe',
+      title: "Ganadora Septiembre",
+      description: "Foto del mes: Ritual de la cosecha",
+      category: "mejor-mes",
+      image:
+        "https://images.unsplash.com/photo-1460661419201-fd4cecdf8a8b?w=800&auto=format&fit=crop",
+      date: "Sep 2023",
+      location: "Campos de Cultivo",
+      photographer: "Roberto Quispe",
       likes: 512,
       views: 2800,
       featured: true,
-      color: '#ca8a04'
+      color: "#ca8a04",
     },
     {
       id: 8,
-      title: 'Celebración de Carnaval',
-      description: 'Fiesta tradicional con agua y talco',
-      category: 'patronales',
-      image: 'https://images.unsplash.com/photo-1511795409834-ef04bbd61622?w=800&auto=format&fit=crop',
-      date: '20 Feb 2023',
-      location: 'Calles del Pueblo',
-      photographer: 'Sofía Mendoza',
+      title: "Celebración de Carnaval",
+      description: "Fiesta tradicional con agua y talco",
+      category: "patronales",
+      image:
+        "https://images.unsplash.com/photo-1511795409834-ef04bbd61622?w=800&auto=format&fit=crop",
+      date: "20 Feb 2023",
+      location: "Calles del Pueblo",
+      photographer: "Sofía Mendoza",
       likes: 198,
       views: 1100,
       featured: false,
-      color: '#ea580c'
+      color: "#ea580c",
     },
     {
       id: 9,
-      title: 'Boda en el Campo',
-      description: 'Celebración matrimonial en entorno rural',
-      category: 'bodas',
-      image: 'https://images.unsplash.com/photo-1465495976277-4387d4b0e4a6?w=800&auto=format&fit=crop',
-      date: '18 Nov 2023',
-      location: 'Caserío Rural',
-      photographer: 'Diego Castro',
+      title: "Boda en el Campo",
+      description: "Celebración matrimonial en entorno rural",
+      category: "bodas",
+      image:
+        "https://images.unsplash.com/photo-1465495976277-4387d4b0e4a6?w=800&auto=format&fit=crop",
+      date: "18 Nov 2023",
+      location: "Caserío Rural",
+      photographer: "Diego Castro",
       likes: 234,
       views: 1250,
       featured: false,
-      color: '#db2777'
+      color: "#db2777",
     },
     {
       id: 10,
-      title: 'Feria Ganadera',
-      description: 'Exposición de ganado y productos agrícolas',
-      category: 'ferias',
-      image: 'https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?w=800&auto=format&fit=crop',
-      date: '8 Jul 2023',
-      location: 'Campos de Exposición',
-      photographer: 'Pedro Vargas',
+      title: "Feria Ganadera",
+      description: "Exposición de ganado y productos agrícolas",
+      category: "ferias",
+      image:
+        "https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?w=800&auto=format&fit=crop",
+      date: "8 Jul 2023",
+      location: "Campos de Exposición",
+      photographer: "Pedro Vargas",
       likes: 267,
       views: 1400,
       featured: true,
-      color: '#16a34a'
+      color: "#16a34a",
     },
     {
       id: 11,
-      title: 'Lago Escondido',
-      description: 'Paisaje lacustre en las alturas',
-      category: 'paisajes',
-      image: 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800&auto=format&fit=crop',
-      date: '3 Oct 2023',
-      location: 'Laguna Andina',
-      photographer: 'Elena Rojas',
+      title: "Lago Escondido",
+      description: "Paisaje lacustre en las alturas",
+      category: "paisajes",
+      image:
+        "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800&auto=format&fit=crop",
+      date: "3 Oct 2023",
+      location: "Laguna Andina",
+      photographer: "Elena Rojas",
       likes: 389,
       views: 1950,
       featured: false,
-      color: '#0891b2'
+      color: "#0891b2",
     },
     {
       id: 12,
-      title: 'Foto Histórica 1950',
-      description: 'Primera escuela del pueblo',
-      category: 'antiguas',
-      image: 'https://images.unsplash.com/photo-1518837695005-2083093ee35b?w=800&auto=format&fit=crop',
-      date: '1950',
-      location: 'Escuela Primaria',
-      photographer: 'Archivo Municipal',
+      title: "Foto Histórica 1950",
+      description: "Primera escuela del pueblo",
+      category: "antiguas",
+      image:
+        "https://images.unsplash.com/photo-1518837695005-2083093ee35b?w=800&auto=format&fit=crop",
+      date: "1950",
+      location: "Escuela Primaria",
+      photographer: "Archivo Municipal",
       likes: 89,
       views: 600,
       featured: false,
-      color: '#92400e'
-    }
-  ])
+      color: "#92400e",
+    },
+  ]);
 
   // Filtrar imágenes basado en categoría y búsqueda
-  const filteredImages = images.filter(img => {
-    const matchesCategory = activeCategory === 'todas' || img.category === activeCategory
-    const matchesSearch = searchQuery === '' || 
+  const filteredImages = images.filter((img) => {
+    const matchesCategory =
+      activeCategory === "todas" || img.category === activeCategory;
+    const matchesSearch =
+      searchQuery === "" ||
       img.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
       img.description.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      img.location.toLowerCase().includes(searchQuery.toLowerCase())
-    
-    return matchesCategory && matchesSearch
-  })
+      img.location.toLowerCase().includes(searchQuery.toLowerCase());
+
+    return matchesCategory && matchesSearch;
+  });
 
   const toggleFavorite = (id) => {
     if (favorites.includes(id)) {
-      setFavorites(favorites.filter(favId => favId !== id))
+      setFavorites(favorites.filter((favId) => favId !== id));
     } else {
-      setFavorites([...favorites, id])
+      setFavorites([...favorites, id]);
     }
-  }
+  };
 
   const fadeInUp = {
     hidden: { opacity: 0, y: 20 },
-    visible: { opacity: 1, y: 0, transition: { duration: 0.5 } }
-  }
+    visible: { opacity: 1, y: 0, transition: { duration: 0.5 } },
+  };
 
   const staggerContainer = {
     hidden: { opacity: 0 },
     visible: {
       opacity: 1,
       transition: {
-        staggerChildren: 0.1
-      }
-    }
-  }
+        staggerChildren: 0.1,
+      },
+    },
+  };
 
   const scaleIn = {
     hidden: { scale: 0.8, opacity: 0 },
-    visible: { scale: 1, opacity: 1, transition: { duration: 0.3 } }
-  }
+    visible: { scale: 1, opacity: 1, transition: { duration: 0.3 } },
+  };
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-gray-50 to-white">
@@ -283,7 +332,7 @@ const Gallery = () => {
             <p className="text-xl md:text-2xl opacity-90 mb-8">
               Capturando la esencia de nuestras tradiciones
             </p>
-            
+
             {/* Barra de búsqueda */}
             <div className="max-w-2xl mx-auto">
               <div className="relative flex items-center">
@@ -297,7 +346,7 @@ const Gallery = () => {
                 />
                 {searchQuery && (
                   <button
-                    onClick={() => setSearchQuery('')}
+                    onClick={() => setSearchQuery("")}
                     className="absolute right-4 top-1/2 transform -translate-y-1/2"
                   >
                     <X size={20} className="text-white" />
@@ -323,7 +372,8 @@ const Gallery = () => {
                 Colección de Fotos
               </h2>
               <p className="text-gray-600">
-                {filteredImages.length} {filteredImages.length === 1 ? 'foto' : 'fotos'} encontradas
+                {filteredImages.length}{" "}
+                {filteredImages.length === 1 ? "foto" : "fotos"} encontradas
               </p>
             </div>
 
@@ -331,16 +381,26 @@ const Gallery = () => {
               {/* Botones de vista */}
               <div className="flex items-center bg-gray-100 rounded-lg p-1">
                 <button
-                  onClick={() => setViewMode('grid')}
-                  className={`p-2 rounded-md ${viewMode === 'grid' ? 'bg-white shadow-sm' : ''}`}
+                  onClick={() => setViewMode("grid")}
+                  className={`p-2 rounded-md ${viewMode === "grid" ? "bg-white shadow-sm" : ""}`}
                 >
-                  <Grid size={20} className={viewMode === 'grid' ? 'text-red-600' : 'text-gray-500'} />
+                  <Grid
+                    size={20}
+                    className={
+                      viewMode === "grid" ? "text-red-600" : "text-gray-500"
+                    }
+                  />
                 </button>
                 <button
-                  onClick={() => setViewMode('list')}
-                  className={`p-2 rounded-md ${viewMode === 'list' ? 'bg-white shadow-sm' : ''}`}
+                  onClick={() => setViewMode("list")}
+                  className={`p-2 rounded-md ${viewMode === "list" ? "bg-white shadow-sm" : ""}`}
                 >
-                  <List size={20} className={viewMode === 'list' ? 'text-red-600' : 'text-gray-500'} />
+                  <List
+                    size={20}
+                    className={
+                      viewMode === "list" ? "text-red-600" : "text-gray-500"
+                    }
+                  />
                 </button>
               </div>
 
@@ -352,7 +412,10 @@ const Gallery = () => {
                   <option>Mejor valoradas</option>
                   <option>Más antiguas</option>
                 </select>
-                <ChevronDown className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-500" size={16} />
+                <ChevronDown
+                  className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-500"
+                  size={16}
+                />
               </div>
             </div>
           </div>
@@ -361,9 +424,11 @@ const Gallery = () => {
           <div className="mb-8">
             <div className="flex items-center mb-4">
               <Filter size={20} className="text-gray-600 mr-2" />
-              <h3 className="font-medium text-gray-700">Filtrar por categoría:</h3>
+              <h3 className="font-medium text-gray-700">
+                Filtrar por categoría:
+              </h3>
             </div>
-            
+
             <div className="flex items-center gap-2 overflow-x-auto">
               {categories.map((category) => (
                 <motion.button
@@ -373,16 +438,18 @@ const Gallery = () => {
                   onClick={() => setActiveCategory(category.id)}
                   className={`px-4 py-2 rounded-full font-normal text-sm transition-all ${
                     activeCategory === category.id
-                      ? `${category.color.split(' ')[0]} border-2 ${category.color.split(' ')[1].replace('text-', 'border-')}`
-                      : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                      ? `${category.color.split(" ")[0]} border-2 ${category.color.split(" ")[1].replace("text-", "border-")}`
+                      : "bg-gray-100 text-gray-700 hover:bg-gray-200"
                   }`}
                 >
                   {category.name}
-                  <span className={`ml-2 px-2 py-1 rounded-full text-xs ${
-                    activeCategory === category.id
-                      ? 'bg-white/30'
-                      : 'bg-gray-200'
-                  }`}>
+                  <span
+                    className={`ml-2 px-2 py-1 rounded-full text-xs ${
+                      activeCategory === category.id
+                        ? "bg-white/30"
+                        : "bg-gray-200"
+                    }`}
+                  >
                     {category.count}
                   </span>
                 </motion.button>
@@ -406,10 +473,11 @@ const Gallery = () => {
                 No se encontraron fotos
               </h3>
               <p className="text-gray-600">
-                Intenta con otros términos de búsqueda o selecciona otra categoría
+                Intenta con otros términos de búsqueda o selecciona otra
+                categoría
               </p>
             </motion.div>
-          ) : viewMode === 'grid' ? (
+          ) : viewMode === "grid" ? (
             <motion.div
               key="grid-view"
               variants={staggerContainer}
@@ -431,7 +499,7 @@ const Gallery = () => {
                       alt={image.title}
                       className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                     />
-                    
+
                     {/* Overlay con acciones */}
                     <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                       <div className="absolute bottom-4 left-4 right-4">
@@ -440,9 +508,13 @@ const Gallery = () => {
                             onClick={() => toggleFavorite(image.id)}
                             className="p-2 bg-white/20 backdrop-blur-sm rounded-full hover:bg-white/30"
                           >
-                            <Heart 
-                              size={20} 
-                              className={favorites.includes(image.id) ? 'text-red-500 fill-red-500' : 'text-white'} 
+                            <Heart
+                              size={20}
+                              className={
+                                favorites.includes(image.id)
+                                  ? "text-red-500 fill-red-500"
+                                  : "text-white"
+                              }
                             />
                           </button>
                           <button
@@ -467,7 +539,7 @@ const Gallery = () => {
                         </span>
                       )}
                       <span className="px-3 py-1 bg-white/90 backdrop-blur-sm text-gray-800 text-xs font-medium rounded-full">
-                        {categories.find(c => c.id === image.category)?.name}
+                        {categories.find((c) => c.id === image.category)?.name}
                       </span>
                     </div>
 
@@ -489,13 +561,17 @@ const Gallery = () => {
                         onClick={() => toggleFavorite(image.id)}
                         className="text-gray-400 hover:text-red-500"
                       >
-                        <Heart 
-                          size={20} 
-                          className={favorites.includes(image.id) ? 'text-red-500 fill-red-500' : ''} 
+                        <Heart
+                          size={20}
+                          className={
+                            favorites.includes(image.id)
+                              ? "text-red-500 fill-red-500"
+                              : ""
+                          }
                         />
                       </button>
                     </div>
-                    
+
                     <p className="text-gray-600 text-sm mb-4 line-clamp-2">
                       {image.description}
                     </p>
@@ -555,7 +631,10 @@ const Gallery = () => {
                       />
                       <div className="absolute top-3 left-3">
                         <span className="px-2 py-1 bg-white/90 text-xs font-medium rounded">
-                          {categories.find(c => c.id === image.category)?.name}
+                          {
+                            categories.find((c) => c.id === image.category)
+                              ?.name
+                          }
                         </span>
                       </div>
                     </div>
@@ -571,15 +650,19 @@ const Gallery = () => {
                             {image.description}
                           </p>
                         </div>
-                        
+
                         <div className="flex items-center space-x-3 mt-2 md:mt-0">
                           <button
                             onClick={() => toggleFavorite(image.id)}
                             className="p-2 hover:bg-gray-100 rounded-full"
                           >
-                            <Heart 
-                              size={18} 
-                              className={favorites.includes(image.id) ? 'text-red-500 fill-red-500' : 'text-gray-400'} 
+                            <Heart
+                              size={18}
+                              className={
+                                favorites.includes(image.id)
+                                  ? "text-red-500 fill-red-500"
+                                  : "text-gray-400"
+                              }
                             />
                           </button>
                           <button className="p-2 hover:bg-gray-100 rounded-full">
@@ -695,10 +778,16 @@ const Gallery = () => {
                     </div>
 
                     <div>
-                      <h4 className="font-bold text-gray-900 mb-2">Categoría</h4>
+                      <h4 className="font-bold text-gray-900 mb-2">
+                        Categoría
+                      </h4>
                       <div className="flex flex-wrap gap-2">
                         <span className="px-3 py-1 bg-gray-100 text-gray-800 rounded-full text-sm">
-                          {categories.find(c => c.id === selectedImage.category)?.name}
+                          {
+                            categories.find(
+                              (c) => c.id === selectedImage.category,
+                            )?.name
+                          }
                         </span>
                         {selectedImage.featured && (
                           <span className="px-3 py-1 bg-yellow-100 text-yellow-800 rounded-full text-sm flex items-center">
@@ -716,11 +805,13 @@ const Gallery = () => {
                           onClick={() => toggleFavorite(selectedImage.id)}
                           className="flex-1 px-4 py-2 border border-gray-300 rounded-lg hover:bg-gray-50 flex items-center justify-center"
                         >
-                          <Heart 
-                            size={18} 
-                            className={`mr-2 ${favorites.includes(selectedImage.id) ? 'text-red-500 fill-red-500' : ''}`} 
+                          <Heart
+                            size={18}
+                            className={`mr-2 ${favorites.includes(selectedImage.id) ? "text-red-500 fill-red-500" : ""}`}
                           />
-                          {favorites.includes(selectedImage.id) ? 'Quitar favorito' : 'Agregar a favoritos'}
+                          {favorites.includes(selectedImage.id)
+                            ? "Quitar favorito"
+                            : "Agregar a favoritos"}
                         </button>
                         <button className="flex-1 px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 flex items-center justify-center">
                           <Download size={18} className="mr-2" />
@@ -745,7 +836,9 @@ const Gallery = () => {
             <div className="bg-white rounded-xl shadow-lg border border-gray-200 p-4">
               <div className="flex items-center mb-2">
                 <Heart className="text-red-500 fill-red-500 mr-2" size={20} />
-                <span className="font-medium">{favorites.length} favoritos</span>
+                <span className="font-medium">
+                  {favorites.length} favoritos
+                </span>
               </div>
               <button className="text-sm text-red-600 hover:text-red-700">
                 Ver colección →
@@ -755,7 +848,7 @@ const Gallery = () => {
         )}
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default Gallery
+export default Gallery;

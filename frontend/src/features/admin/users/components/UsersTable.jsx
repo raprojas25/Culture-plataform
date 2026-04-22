@@ -94,9 +94,7 @@ export const UsersTable = ({
       },
       {
         accessorKey: "role_name",
-        header: ({ column }) => (
-          <SortableHeader column={column} label="Rol" />
-        ),
+        header: ({ column }) => <SortableHeader column={column} label="Rol" />,
         cell: ({ getValue }) => {
           const role = getValue() || "Sin rol";
           const variantMap = {
@@ -116,10 +114,7 @@ export const UsersTable = ({
         accessorKey: "is_active",
         header: "Estado",
         cell: ({ getValue }) => (
-          <Badge
-            variant={getValue() ? "success" : "danger"}
-            size="sm"
-          >
+          <Badge variant={getValue() ? "success" : "danger"} size="sm">
             {getValue() ? "Activo" : "Inactivo"}
           </Badge>
         ),
@@ -156,7 +151,7 @@ export const UsersTable = ({
         enableSorting: false,
       },
     ],
-    [onEdit, onDelete, onToggleStatus]
+    [onEdit, onDelete, onToggleStatus],
   );
 
   // Crear instancia de la tabla
@@ -249,7 +244,7 @@ export const UsersTable = ({
                   >
                     {flexRender(
                       header.column.columnDef.header,
-                      header.getContext()
+                      header.getContext(),
                     )}
                   </th>
                 ))}
@@ -267,10 +262,7 @@ export const UsersTable = ({
                     key={cell.id}
                     className="px-6 py-4 whitespace-nowrap text-sm text-gray-900 dark:text-gray-300"
                   >
-                    {flexRender(
-                      cell.column.columnDef.cell,
-                      cell.getContext()
-                    )}
+                    {flexRender(cell.column.columnDef.cell, cell.getContext())}
                   </td>
                 ))}
               </tr>
@@ -284,13 +276,16 @@ export const UsersTable = ({
         <div className="text-sm text-gray-700 dark:text-gray-300">
           Mostrando{" "}
           <span className="font-medium">
-            {table.getState().pagination.pageIndex * table.getState().pagination.pageSize + 1}
+            {table.getState().pagination.pageIndex *
+              table.getState().pagination.pageSize +
+              1}
           </span>{" "}
           a{" "}
           <span className="font-medium">
             {Math.min(
-              (table.getState().pagination.pageIndex + 1) * table.getState().pagination.pageSize,
-              table.getFilteredRowModel().rows.length
+              (table.getState().pagination.pageIndex + 1) *
+                table.getState().pagination.pageSize,
+              table.getFilteredRowModel().rows.length,
             )}
           </span>{" "}
           de{" "}
@@ -325,35 +320,38 @@ export const UsersTable = ({
 
           {/* Page numbers */}
           <div className="flex items-center gap-1">
-            {Array.from({ length: Math.min(5, table.getPageCount()) }, (_, i) => {
-              const currentPage = table.getState().pagination.pageIndex;
-              const totalPages = table.getPageCount();
-              let pageIndex;
+            {Array.from(
+              { length: Math.min(5, table.getPageCount()) },
+              (_, i) => {
+                const currentPage = table.getState().pagination.pageIndex;
+                const totalPages = table.getPageCount();
+                let pageIndex;
 
-              if (totalPages <= 5) {
-                pageIndex = i;
-              } else if (currentPage < 3) {
-                pageIndex = i;
-              } else if (currentPage > totalPages - 4) {
-                pageIndex = totalPages - 5 + i;
-              } else {
-                pageIndex = currentPage - 2 + i;
-              }
+                if (totalPages <= 5) {
+                  pageIndex = i;
+                } else if (currentPage < 3) {
+                  pageIndex = i;
+                } else if (currentPage > totalPages - 4) {
+                  pageIndex = totalPages - 5 + i;
+                } else {
+                  pageIndex = currentPage - 2 + i;
+                }
 
-              return (
-                <button
-                  key={pageIndex}
-                  onClick={() => table.setPageIndex(pageIndex)}
-                  className={`min-w-[32px] h-8 px-2 text-sm font-medium rounded-md transition-colors ${
-                    pageIndex === currentPage
-                      ? "bg-red-500 text-white"
-                      : "text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700"
-                  }`}
-                >
-                  {pageIndex + 1}
-                </button>
-              );
-            })}
+                return (
+                  <button
+                    key={pageIndex}
+                    onClick={() => table.setPageIndex(pageIndex)}
+                    className={`min-w-[32px] h-8 px-2 text-sm font-medium rounded-md transition-colors ${
+                      pageIndex === currentPage
+                        ? "bg-red-500 text-white"
+                        : "text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700"
+                    }`}
+                  >
+                    {pageIndex + 1}
+                  </button>
+                );
+              },
+            )}
           </div>
 
           {/* Next page */}
@@ -388,7 +386,10 @@ export const UsersTable = ({
             value={table.getState().pagination.pageSize}
             onChange={(e) => {
               table.setPageSize(Number(e.target.value));
-              setPagination((prev) => ({ ...prev, pageSize: Number(e.target.value) }));
+              setPagination((prev) => ({
+                ...prev,
+                pageSize: Number(e.target.value),
+              }));
             }}
             className="px-3 py-1.5 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-300 text-sm focus:ring-2 focus:ring-red-500"
           >

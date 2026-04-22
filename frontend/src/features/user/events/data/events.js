@@ -35,7 +35,7 @@ export const events = [
 
   */
   // ... más eventos
-  
+
   {
     id: 1,
     title: "Fiesta Patronal de San Juan",
@@ -43,11 +43,12 @@ export const events = [
     time: "10:00 AM - 10:00 PM",
     location: "Plaza Principal de Miraflores",
     category: "Fiestas Patronales",
-    image: "https://images.unsplash.com/photo-1511795409834-ef04bbd61622?w=800&auto=format&fit=crop",
+    image:
+      "https://images.unsplash.com/photo-1511795409834-ef04bbd61622?w=800&auto=format&fit=crop",
     featured: true,
     price: "Gratuito",
     attending: 450,
-    description: "Celebración tradicional en honor a San Juan Bautista"
+    description: "Celebración tradicional en honor a San Juan Bautista",
   },
   {
     id: 2,
@@ -56,11 +57,12 @@ export const events = [
     time: "2:00 PM - 10:00 PM",
     location: "Parque Central",
     category: "Gastronomía",
-    image: "https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?w=800&auto=format&fit=crop",
+    image:
+      "https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?w=800&auto=format&fit=crop",
     featured: true,
     price: "S/ 20",
     attending: 320,
-    description: "Degustación de los mejores platos regionales"
+    description: "Degustación de los mejores platos regionales",
   },
   {
     id: 3,
@@ -69,11 +71,12 @@ export const events = [
     time: "7:00 PM - 11:00 PM",
     location: "Anfiteatro Municipal",
     category: "Conciertos",
-    image: "https://images.unsplash.com/photo-1511379938547-c1f69419868d?w=800&auto=format&fit=crop",
+    image:
+      "https://images.unsplash.com/photo-1511379938547-c1f69419868d?w=800&auto=format&fit=crop",
     featured: true,
     price: "S/ 30",
     attending: 280,
-    description: "Los mejores grupos de música andina en vivo"
+    description: "Los mejores grupos de música andina en vivo",
   },
   {
     id: 4,
@@ -82,9 +85,10 @@ export const events = [
     time: "3:00 PM - 6:00 PM",
     location: "Iglesia Principal",
     category: "Matrimonios",
-    image: "https://images.unsplash.com/photo-1465495976277-4387d4b0e4a6?w=800&auto=format&fit=crop",
+    image:
+      "https://images.unsplash.com/photo-1465495976277-4387d4b0e4a6?w=800&auto=format&fit=crop",
     price: "Invitación",
-    attending: 150
+    attending: 150,
   },
   {
     id: 5,
@@ -93,9 +97,10 @@ export const events = [
     time: "9:00 AM - 8:00 PM",
     location: "Mercado Municipal",
     category: "Ferias",
-    image: "https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=800&auto=format&fit=crop",
+    image:
+      "https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=800&auto=format&fit=crop",
     price: "Gratuito",
-    attending: 210
+    attending: 210,
   },
   {
     id: 6,
@@ -104,9 +109,10 @@ export const events = [
     time: "4:00 PM - 10:00 PM",
     location: "Coliseo",
     category: "Danzas",
-    image: "https://images.unsplash.com/photo-1518837695005-2083093ee35b?w=800&auto=format&fit=crop",
+    image:
+      "https://images.unsplash.com/photo-1518837695005-2083093ee35b?w=800&auto=format&fit=crop",
     price: "S/ 15",
-    attending: 180
+    attending: 180,
   },
   {
     id: 7,
@@ -115,39 +121,39 @@ export const events = [
     time: "8:00 AM - 5:00 PM",
     location: "Estadio",
     category: "Deportes",
-    image: "https://images.unsplash.com/photo-1461896836934-ffe607ba8211?w=800&auto=format&fit=crop",
+    image:
+      "https://images.unsplash.com/photo-1461896836934-ffe607ba8211?w=800&auto=format&fit=crop",
     price: "Gratuito",
-    attending: 310
-  }
-
-]
+    attending: 310,
+  },
+];
 
 export const pendingEvents = [
   {
     id: 101,
-    title: 'Boda Tradicional',
-    date: '30 Julio 2024',
-    location: 'Iglesia San Pedro',
-    category: 'Matrimonios',
-    organizer: 'Familia Rodríguez',
-    contact: '987654333',
-    submitted: '2024-01-15',
-    status: 'pending'
-  }
-]
+    title: "Boda Tradicional",
+    date: "30 Julio 2024",
+    location: "Iglesia San Pedro",
+    category: "Matrimonios",
+    organizer: "Familia Rodríguez",
+    contact: "987654333",
+    submitted: "2024-01-15",
+    status: "pending",
+  },
+];
 
 export const categories = [
-  { id: 1, name: 'Fiestas Patronales', count: 12, icon: '🎉' },
-  { id: 2, name: 'Matrimonios', count: 8, icon: '💍' },
-  { id: 3, name: 'Ferias', count: 15, icon: '🎪' },
-  { id: 4, name: 'Actividades Escolares', count: 10, icon: '🎓' },
-  { id: 5, name: 'Conciertos / Bailes', count: 20, icon: '🎵' },
-  { id: 6, name: 'Deportes', count: 18, icon: '⚽' },
-  { id: 7, name: 'Procesiones', count: 7, icon: '⛪' },
-  { id: 8, name: 'Gastronomía', count: 14, icon: '🍲' },
-  { id: 9, name: 'Danzas', count: 9, icon: '💃' },
-  { id: 10, name: 'Rituales / Tradición', count: 5, icon: '🕯️' }
-]
+  { id: 1, name: "Fiestas Patronales", count: 12, icon: "🎉" },
+  { id: 2, name: "Matrimonios", count: 8, icon: "💍" },
+  { id: 3, name: "Ferias", count: 15, icon: "🎪" },
+  { id: 4, name: "Actividades Escolares", count: 10, icon: "🎓" },
+  { id: 5, name: "Conciertos / Bailes", count: 20, icon: "🎵" },
+  { id: 6, name: "Deportes", count: 18, icon: "⚽" },
+  { id: 7, name: "Procesiones", count: 7, icon: "⛪" },
+  { id: 8, name: "Gastronomía", count: 14, icon: "🍲" },
+  { id: 9, name: "Danzas", count: 9, icon: "💃" },
+  { id: 10, name: "Rituales / Tradición", count: 5, icon: "🕯️" },
+];
 
 export const mockEvents = [
   {
@@ -157,11 +163,12 @@ export const mockEvents = [
     time: "10:00 AM - 10:00 PM",
     location: "Plaza Principal de Miraflores",
     category: "Fiestas Patronales",
-    image: "https://images.unsplash.com/photo-1511795409834-ef04bbd61622?w=800&auto=format&fit=crop",
+    image:
+      "https://images.unsplash.com/photo-1511795409834-ef04bbd61622?w=800&auto=format&fit=crop",
     featured: true,
     price: "Gratuito",
     attending: 450,
-    description: "Celebración tradicional en honor a San Juan Bautista"
+    description: "Celebración tradicional en honor a San Juan Bautista",
   },
   {
     id: 2,
@@ -170,10 +177,11 @@ export const mockEvents = [
     time: "2:00 PM",
     location: "Iglesia de San Pedro",
     category: "Matrimonios",
-    image: "https://images.unsplash.com/photo-1465495976277-4387d4b0e4a6?w=800&auto=format&fit=crop",
+    image:
+      "https://images.unsplash.com/photo-1465495976277-4387d4b0e4a6?w=800&auto=format&fit=crop",
     price: "Invitación",
     attending: 150,
-    description: "Matrimonio tradicional con costumbres andinas"
+    description: "Matrimonio tradicional con costumbres andinas",
   },
   {
     id: 3,
@@ -182,10 +190,11 @@ export const mockEvents = [
     time: "9:00 AM - 8:00 PM",
     location: "Mercado Municipal",
     category: "Ferias",
-    image: "https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=800&auto=format&fit=crop",
+    image:
+      "https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=800&auto=format&fit=crop",
     price: "Gratuito",
     attending: 320,
-    description: "Exposición y venta de artesanías locales"
+    description: "Exposición y venta de artesanías locales",
   },
   {
     id: 4,
@@ -194,10 +203,11 @@ export const mockEvents = [
     time: "4:00 PM - 10:00 PM",
     location: "Coliseo Municipal",
     category: "Danzas",
-    image: "https://images.unsplash.com/photo-1518837695005-2083093ee35b?w=800&auto=format&fit=crop",
+    image:
+      "https://images.unsplash.com/photo-1518837695005-2083093ee35b?w=800&auto=format&fit=crop",
     price: "S/ 20",
     attending: 280,
-    description: "Presentación de grupos de danza tradicional"
+    description: "Presentación de grupos de danza tradicional",
   },
   {
     id: 5,
@@ -206,11 +216,12 @@ export const mockEvents = [
     time: "7:00 PM",
     location: "Teatro Municipal",
     category: "Conciertos",
-    image: "https://images.unsplash.com/photo-1511379938547-c1f69419868d?w=800&auto=format&fit=crop",
+    image:
+      "https://images.unsplash.com/photo-1511379938547-c1f69419868d?w=800&auto=format&fit=crop",
     featured: true,
     price: "S/ 50",
     attending: 400,
-    description: "Noche de música criolla con artistas nacionales"
+    description: "Noche de música criolla con artistas nacionales",
   },
   {
     id: 6,
@@ -219,10 +230,11 @@ export const mockEvents = [
     time: "11:00 AM - 9:00 PM",
     location: "Parque Central",
     category: "Gastronomía",
-    image: "https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?w=800&auto=format&fit=crop",
+    image:
+      "https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?w=800&auto=format&fit=crop",
     price: "S/ 15",
     attending: 550,
-    description: "Degustación de platos típicos de la región"
+    description: "Degustación de platos típicos de la región",
   },
   {
     id: 7,
@@ -231,10 +243,11 @@ export const mockEvents = [
     time: "8:00 AM - 6:00 PM",
     location: "Estadio Regional",
     category: "Deportes",
-    image: "https://images.unsplash.com/photo-1461896836934-ffe607ba8211?w=800&auto=format&fit=crop",
+    image:
+      "https://images.unsplash.com/photo-1461896836934-ffe607ba8211?w=800&auto=format&fit=crop",
     price: "Gratuito",
     attending: 800,
-    description: "Competencia deportiva entre provincias"
+    description: "Competencia deportiva entre provincias",
   },
   {
     id: 8,
@@ -243,10 +256,11 @@ export const mockEvents = [
     time: "6:00 PM",
     location: "Centro Histórico",
     category: "Procesiones",
-    image: "https://images.unsplash.com/photo-1547827328-cae297ecf9a5?w=800&auto=format&fit=crop",
+    image:
+      "https://images.unsplash.com/photo-1547827328-cae297ecf9a5?w=800&auto=format&fit=crop",
     price: "Gratuito",
     attending: 1200,
-    description: "Procesión religiosa más grande de América"
+    description: "Procesión religiosa más grande de América",
   },
   {
     id: 9,
@@ -255,10 +269,11 @@ export const mockEvents = [
     time: "9:00 AM - 4:00 PM",
     location: "Colegio Nacional",
     category: "Actividades Escolares",
-    image: "https://images.unsplash.com/photo-1523050854058-8df90110c9f1?w=800&auto=format&fit=crop",
+    image:
+      "https://images.unsplash.com/photo-1523050854058-8df90110c9f1?w=800&auto=format&fit=crop",
     price: "Gratuito",
     attending: 300,
-    description: "Presentación de talentos estudiantiles"
+    description: "Presentación de talentos estudiantiles",
   },
   {
     id: 10,
@@ -267,11 +282,12 @@ export const mockEvents = [
     time: "7:00 AM",
     location: "Sacsayhuamán",
     category: "Rituales / Tradición",
-    image: "https://images.unsplash.com/photo-1529107386315-e1a2ed48a620?w=800&auto=format&fit=crop",
+    image:
+      "https://images.unsplash.com/photo-1529107386315-e1a2ed48a620?w=800&auto=format&fit=crop",
     featured: true,
     price: "S/ 100",
     attending: 2000,
-    description: "Ceremonia ancestral en honor al Dios Sol"
+    description: "Ceremonia ancestral en honor al Dios Sol",
   },
   {
     id: 11,
@@ -280,10 +296,11 @@ export const mockEvents = [
     time: "10:00 AM",
     location: "Plaza de Armas",
     category: "Fiestas Patronales",
-    image: "https://images.unsplash.com/photo-1519996529931-28324d5a630e?w=800&auto=format&fit=crop",
+    image:
+      "https://images.unsplash.com/photo-1519996529931-28324d5a630e?w=800&auto=format&fit=crop",
     price: "Gratuito",
     attending: 600,
-    description: "Celebración en honor a la Virgen del Carmen"
+    description: "Celebración en honor a la Virgen del Carmen",
   },
   {
     id: 12,
@@ -292,9 +309,10 @@ export const mockEvents = [
     time: "3:00 PM",
     location: "Municipalidad",
     category: "Matrimonios",
-    image: "https://images.unsplash.com/photo-1583939003579-730e3918a45a?w=800&auto=format&fit=crop",
+    image:
+      "https://images.unsplash.com/photo-1583939003579-730e3918a45a?w=800&auto=format&fit=crop",
     price: "Invitación",
     attending: 180,
-    description: "Ceremonia de matrimonio colectivo"
-  }
+    description: "Ceremonia de matrimonio colectivo",
+  },
 ];

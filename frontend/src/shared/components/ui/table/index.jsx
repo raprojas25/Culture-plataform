@@ -1,4 +1,3 @@
-
 // Table Component
 const Table = ({ children, className }) => {
   return <table className={`min-w-full  ${className}`}>{children}</table>;
@@ -20,14 +19,9 @@ const TableRow = ({ children, className }) => {
 };
 
 // TableCell Component
-const TableCell = ({
-  children,
-  isHeader = false,
-  className,
-}) => {
+const TableCell = ({ children, isHeader = false, className }) => {
   const CellTag = isHeader ? "th" : "td";
   return <CellTag className={` ${className}`}>{children}</CellTag>;
 };
 
 export { Table, TableHeader, TableBody, TableRow, TableCell };
-

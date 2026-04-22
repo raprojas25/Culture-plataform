@@ -83,5 +83,3 @@ export const sponsors = [
   { id: 5, name: "Universidad Local", logo: "🎓", url: "#" },
   { id: 6, name: "Asociación de Artesanos", logo: "🛠️", url: "#" },
 ];
-
-

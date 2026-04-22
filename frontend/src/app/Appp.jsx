@@ -49,7 +49,7 @@ import EventDetailsColca from "./pages/EventDetail/DetailColca.jsx";
 import NotFound from "./pages/NotFount";
 import { LayoutDashboard } from "./pages/dashboard/LayoutDashboard.jsx";
 import { Districts } from "./pages/dashboard/Districts.jsx";
-import CategoryManager from "./pages/Admin/categories/CategoryManager"
+import CategoryManager from "./pages/Admin/categories/CategoryManager";
 
 function App() {
   const { isDarkMode } = useThemeStore();
@@ -86,10 +86,7 @@ function App() {
             <Route path="/evento/:id" element={<EventDetail />} />
             <Route path="/categorias" element={<Categories />} />
             <Route path="/colca" element={<EventDetailsColca />} />
-            <Route
-                path="/categorias/:categorySlug"
-                element={<Categories />}
-              />
+            <Route path="/categorias/:categorySlug" element={<Categories />} />
           </Route>
 
           {/* Protected Dashboard Routes */}

@@ -1,11 +1,7 @@
-import { motion } from 'framer-motion';
-import { scaleIn } from '@/shared/utils/animations';
+import { motion } from "framer-motion";
+import { scaleIn } from "@/shared/utils/animations";
 
-export const ScaleIn = ({
-  children,
-  as = 'div',
-  ...props
-}) => {
+export const ScaleIn = ({ children, as = "div", ...props }) => {
   const MotionComponent = motion(as);
 
   return (
@@ -20,4 +16,3 @@ export const ScaleIn = ({
     </MotionComponent>
   );
 };
-

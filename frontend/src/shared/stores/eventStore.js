@@ -1,4 +1,4 @@
-import { create } from 'zustand';
+import { create } from "zustand";
 // import { Event, EventFilters } from '@/types/event.types';
 //
 // interface EventStore {
@@ -38,24 +38,28 @@ export const useEventStore = create((set) => ({
   },
   setEvents: (events) => set({ events }),
   setCurrentEvent: (event) => set({ currentEvent: event }),
-  setFilters: (filters) => set((state) => ({ 
-    filters: { ...state.filters, ...filters } 
-  })),
+  setFilters: (filters) =>
+    set((state) => ({
+      filters: { ...state.filters, ...filters },
+    })),
   setLoading: (loading) => set({ isLoading: loading }),
   setPagination: (pagination) => set({ pagination }),
-  addEvent: (event) => set((state) => ({ 
-    events: [event, ...state.events] 
-  })),
-  updateEvent: (id, updatedEvent) => set((state) => ({
-    events: state.events.map(event => 
-      event.id === id ? { ...event, ...updatedEvent } : event
-    ),
-    currentEvent: state.currentEvent?.id === id 
-      ? { ...state.currentEvent, ...updatedEvent } 
-      : state.currentEvent,
-  })),
-  removeEvent: (id) => set((state) => ({
-    events: state.events.filter(event => event.id !== id)
-  })),
+  addEvent: (event) =>
+    set((state) => ({
+      events: [event, ...state.events],
+    })),
+  updateEvent: (id, updatedEvent) =>
+    set((state) => ({
+      events: state.events.map((event) =>
+        event.id === id ? { ...event, ...updatedEvent } : event,
+      ),
+      currentEvent:
+        state.currentEvent?.id === id
+          ? { ...state.currentEvent, ...updatedEvent }
+          : state.currentEvent,
+    })),
+  removeEvent: (id) =>
+    set((state) => ({
+      events: state.events.filter((event) => event.id !== id),
+    })),
 }));
-

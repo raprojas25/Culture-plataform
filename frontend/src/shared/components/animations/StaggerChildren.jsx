@@ -1,9 +1,9 @@
-import { motion } from 'framer-motion';
-import { staggerItem } from '@/shared/utils/animations';
+import { motion } from "framer-motion";
+import { staggerItem } from "@/shared/utils/animations";
 
 export const StaggerChildren = ({
   children,
-  as = 'div',
+  as = "div",
   staggerDelay = 0.1,
   delayChildren = 0.2,
   ...props
@@ -38,4 +38,3 @@ export const StaggerChildren = ({
     </MotionComponent>
   );
 };
-

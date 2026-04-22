@@ -1,5 +1,5 @@
-import { useState, useCallback } from 'react';
-import { validateCategory } from '../utils/validators';
+import { useState, useCallback } from "react";
+import { validateCategory } from "../utils/validators";
 
 export const useFormValidation = (initialValues, schema, onSubmit) => {
   const [values, setValues] = useState(initialValues);
@@ -14,71 +14,83 @@ export const useFormValidation = (initialValues, schema, onSubmit) => {
   }, [values]);
 
   // Manejar cambios en los campos
-  const handleChange = useCallback((e) => {
-    const { name, value } = e.target;
-    
-    setValues(prev => ({
-      ...prev,
-      [name]: value
-    }));
+  const handleChange = useCallback(
+    (e) => {
+      const { name, value } = e.target;
 
-    // Validar campo individual cuando pierde el foco
-    if (touched[name]) {
-      const fieldError = validateCategory({ [name]: value })[name];
-      setErrors(prev => ({
+      setValues((prev) => ({
         ...prev,
-        [name]: fieldError || null
+        [name]: value,
       }));
-    }
-  }, [touched]);
+
+      // Validar campo individual cuando pierde el foco
+      if (touched[name]) {
+        const fieldError = validateCategory({ [name]: value })[name];
+        setErrors((prev) => ({
+          ...prev,
+          [name]: fieldError || null,
+        }));
+      }
+    },
+    [touched],
+  );
 
   // Manejar blur (campo tocado)
-  const handleBlur = useCallback((e) => {
-    const { name } = e.target;
-    setTouched(prev => ({ ...prev, [name]: true }));
-    
-    // Validar campo individual
-    const fieldError = validateCategory({ [name]: values[name] })[name];
-    setErrors(prev => ({
-      ...prev,
-      [name]: fieldError || null
-    }));
-  }, [values]);
+  const handleBlur = useCallback(
+    (e) => {
+      const { name } = e.target;
+      setTouched((prev) => ({ ...prev, [name]: true }));
+
+      // Validar campo individual
+      const fieldError = validateCategory({ [name]: values[name] })[name];
+      setErrors((prev) => ({
+        ...prev,
+        [name]: fieldError || null,
+      }));
+    },
+    [values],
+  );
 
   // Establecer valor manualmente
-  const setFieldValue = useCallback((name, value) => {
-    setValues(prev => ({
-      ...prev,
-      [name]: value
-    }));
-
-    if (touched[name]) {
-      const fieldError = validateCategory({ [name]: value })[name];
-      setErrors(prev => ({
+  const setFieldValue = useCallback(
+    (name, value) => {
+      setValues((prev) => ({
         ...prev,
-        [name]: fieldError || null
+        [name]: value,
       }));
-    }
-  }, [touched]);
+
+      if (touched[name]) {
+        const fieldError = validateCategory({ [name]: value })[name];
+        setErrors((prev) => ({
+          ...prev,
+          [name]: fieldError || null,
+        }));
+      }
+    },
+    [touched],
+  );
 
   // Enviar formulario
-  const handleSubmit = useCallback(async (e) => {
-    e.preventDefault();
-    
-    // Marcar todos los campos como tocados
-    const allTouched = Object.keys(values).reduce((acc, key) => {
-      acc[key] = true;
-      return acc;
-    }, {});
-    setTouched(allTouched);
+  const handleSubmit = useCallback(
+    async (e) => {
+      e.preventDefault();
 
-    // Validar formulario completo
-    const isValid = validateForm();
-    
-    if (isValid && onSubmit) {
-      await onSubmit(values);
-    }
-  }, [values, validateForm, onSubmit]);
+      // Marcar todos los campos como tocados
+      const allTouched = Object.keys(values).reduce((acc, key) => {
+        acc[key] = true;
+        return acc;
+      }, {});
+      setTouched(allTouched);
+
+      // Validar formulario completo
+      const isValid = validateForm();
+
+      if (isValid && onSubmit) {
+        await onSubmit(values);
+      }
+    },
+    [values, validateForm, onSubmit],
+  );
 
   // Reiniciar formulario
   const resetForm = useCallback(() => {
@@ -96,6 +108,6 @@ export const useFormValidation = (initialValues, schema, onSubmit) => {
     handleSubmit,
     setFieldValue,
     resetForm,
-    isValid: Object.keys(errors).length === 0
+    isValid: Object.keys(errors).length === 0,
   };
 };

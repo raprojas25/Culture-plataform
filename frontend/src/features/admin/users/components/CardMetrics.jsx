@@ -1,10 +1,5 @@
 import { Badge } from "@/shared/components/ui/Badge";
-import {
-  ArrowDownIcon,
-  ArrowUpIcon,
-  BoxIcon,
-  GroupIcon,
-} from "lucide-react";
+import { ArrowDownIcon, ArrowUpIcon, BoxIcon, GroupIcon } from "lucide-react";
 
 export const CardMetrics = () => {
   return (

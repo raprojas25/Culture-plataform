@@ -1,6 +1,6 @@
-import { useState } from 'react'
-import { motion } from 'framer-motion'
-import { Link } from 'react-router-dom'
+import { useState } from "react";
+import { motion } from "framer-motion";
+import { Link } from "react-router-dom";
 import {
   Shield,
   AlertTriangle,
@@ -20,93 +20,93 @@ import {
   AlertCircle,
   Mail,
   Phone,
-  ChevronRight
-} from 'lucide-react'
-import { Button } from '../../components/ui/Button'
+  ChevronRight,
+} from "lucide-react";
+import { Button } from "../../components/ui/Button";
 
 const Terms = () => {
-  const [activeSection, setActiveSection] = useState('general')
-  const [acceptedTerms, setAcceptedTerms] = useState(false)
+  const [activeSection, setActiveSection] = useState("general");
+  const [acceptedTerms, setAcceptedTerms] = useState(false);
 
   const sections = [
-    { id: 'general', title: 'General', icon: <BookOpen size={20} /> },
-    { id: 'allowed', title: 'Permitido', icon: <CheckCircle size={20} /> },
-    { id: 'prohibited', title: 'Prohibido', icon: <XCircle size={20} /> },
-    { id: 'rights', title: 'Derechos', icon: <Scale size={20} /> },
-    { id: 'privacy', title: 'Privacidad', icon: <Lock size={20} /> },
-    { id: 'contact', title: 'Contacto', icon: <Send size={20} /> }
-  ]
+    { id: "general", title: "General", icon: <BookOpen size={20} /> },
+    { id: "allowed", title: "Permitido", icon: <CheckCircle size={20} /> },
+    { id: "prohibited", title: "Prohibido", icon: <XCircle size={20} /> },
+    { id: "rights", title: "Derechos", icon: <Scale size={20} /> },
+    { id: "privacy", title: "Privacidad", icon: <Lock size={20} /> },
+    { id: "contact", title: "Contacto", icon: <Send size={20} /> },
+  ];
 
   const allowedContent = [
-    'Eventos culturales y tradiciones locales',
-    'Fiestas patronales y celebraciones comunitarias',
-    'Actividades educativas y escolares',
-    'Eventos deportivos y recreativos',
-    'Ferias, mercados y exposiciones artesanales',
-    'Conciertos y presentaciones artísticas',
-    'Matrimonios y celebraciones familiares',
-    'Eventos gastronómicos y muestras culinarias',
-    'Procesiones y actividades religiosas tradicionales',
-    'Talleres y actividades de capacitación'
-  ]
+    "Eventos culturales y tradiciones locales",
+    "Fiestas patronales y celebraciones comunitarias",
+    "Actividades educativas y escolares",
+    "Eventos deportivos y recreativos",
+    "Ferias, mercados y exposiciones artesanales",
+    "Conciertos y presentaciones artísticas",
+    "Matrimonios y celebraciones familiares",
+    "Eventos gastronómicos y muestras culinarias",
+    "Procesiones y actividades religiosas tradicionales",
+    "Talleres y actividades de capacitación",
+  ];
 
   const prohibitedContent = [
-    { 
-      title: 'Contenido Político',
-      description: 'Propaganda, campañas políticas o contenido partidario'
+    {
+      title: "Contenido Político",
+      description: "Propaganda, campañas políticas o contenido partidario",
     },
-    { 
-      title: 'Ventas Directas',
-      description: 'Multinivel, pirámides, venta de productos no relacionados'
+    {
+      title: "Ventas Directas",
+      description: "Multinivel, pirámides, venta de productos no relacionados",
     },
-    { 
-      title: 'Contenido Adulto',
-      description: 'Material explícito, contenido sexual o inapropiado'
+    {
+      title: "Contenido Adulto",
+      description: "Material explícito, contenido sexual o inapropiado",
     },
-    { 
-      title: 'Estafas y Fraudes',
-      description: 'Engaños, ofertas falsas o actividades ilegales'
+    {
+      title: "Estafas y Fraudes",
+      description: "Engaños, ofertas falsas o actividades ilegales",
     },
-    { 
-      title: 'Discriminación',
-      description: 'Contenido racista, sexista, homofóbico o discriminatorio'
+    {
+      title: "Discriminación",
+      description: "Contenido racista, sexista, homofóbico o discriminatorio",
     },
-    { 
-      title: 'Violencia',
-      description: 'Apología a la violencia o contenido violento'
+    {
+      title: "Violencia",
+      description: "Apología a la violencia o contenido violento",
     },
-    { 
-      title: 'Spam',
-      description: 'Publicidad masiva no solicitada o repetitiva'
+    {
+      title: "Spam",
+      description: "Publicidad masiva no solicitada o repetitiva",
     },
-    { 
-      title: 'Derechos de Autor',
-      description: 'Contenido protegido sin autorización'
-    }
-  ]
+    {
+      title: "Derechos de Autor",
+      description: "Contenido protegido sin autorización",
+    },
+  ];
 
   const userResponsibilities = [
-    'Proporcionar información veraz y actualizada',
-    'Respetar los derechos de otros usuarios',
-    'Mantener la confidencialidad de su cuenta',
-    'Reportar contenido inapropiado',
-    'Respetar las leyes locales y nacionales',
-    'No suplantar identidades'
-  ]
+    "Proporcionar información veraz y actualizada",
+    "Respetar los derechos de otros usuarios",
+    "Mantener la confidencialidad de su cuenta",
+    "Reportar contenido inapropiado",
+    "Respetar las leyes locales y nacionales",
+    "No suplantar identidades",
+  ];
 
   const platformRights = [
-    'Rechazar o eliminar cualquier evento sin previo aviso',
-    'Moderar contenido que incumpla las normas',
-    'Suspender cuentas que violen los términos',
-    'Modificar estos términos en cualquier momento',
-    'Utilizar contenido para mejorar la plataforma (anonimizado)',
-    'Cooperar con autoridades en caso de requerimiento legal'
-  ]
+    "Rechazar o eliminar cualquier evento sin previo aviso",
+    "Moderar contenido que incumpla las normas",
+    "Suspender cuentas que violen los términos",
+    "Modificar estos términos en cualquier momento",
+    "Utilizar contenido para mejorar la plataforma (anonimizado)",
+    "Cooperar con autoridades en caso de requerimiento legal",
+  ];
 
   const fadeInUp = {
     hidden: { opacity: 0, y: 20 },
-    visible: { opacity: 1, y: 0, transition: { duration: 0.5 } }
-  }
+    visible: { opacity: 1, y: 0, transition: { duration: 0.5 } },
+  };
 
   return (
     <div className="min-h-screen  py-12">
@@ -124,15 +124,19 @@ const Terms = () => {
           </div>
           <h1 className="text-4xl font-bold mb-4">Términos y Condiciones</h1>
           <p className="text-gray-600 max-w-3xl mx-auto">
-            Normas de uso y publicación en la Plataforma de Actividades Culturales CulturaViva
+            Normas de uso y publicación en la Plataforma de Actividades
+            Culturales CulturaViva
           </p>
           <div className="flex items-center justify-center mt-4 text-sm text-gray-500">
             <Clock size={16} className="mr-2" />
-            <span>Última actualización: {new Date().toLocaleDateString('es-ES', { 
-              day: 'numeric', 
-              month: 'long', 
-              year: 'numeric' 
-            })}</span>
+            <span>
+              Última actualización:{" "}
+              {new Date().toLocaleDateString("es-ES", {
+                day: "numeric",
+                month: "long",
+                year: "numeric",
+              })}
+            </span>
           </div>
         </motion.div>
 
@@ -159,8 +163,8 @@ const Terms = () => {
                     onClick={() => setActiveSection(section.id)}
                     className={`w-full flex items-center p-3 rounded-lg mb-1 transition-colors ${
                       activeSection === section.id
-                        ? 'bg-red-50 text-red-600 border-l-4 border-red-600'
-                        : 'text-gray-600 hover:bg-gray-50'
+                        ? "bg-red-50 text-red-600 border-l-4 border-red-600"
+                        : "text-gray-600 hover:bg-gray-50"
                     }`}
                   >
                     {section.icon}
@@ -178,11 +182,15 @@ const Terms = () => {
               className="mt-6 bg-amber-50 border border-amber-200 rounded-xl p-4"
             >
               <div className="flex items-start">
-                <AlertTriangle className="text-amber-600 mt-0.5 mr-3" size={20} />
+                <AlertTriangle
+                  className="text-amber-600 mt-0.5 mr-3"
+                  size={20}
+                />
                 <div>
                   <h4 className="font-bold text-amber-800">Importante</h4>
                   <p className="text-sm text-amber-700 mt-1">
-                    Al publicar un evento, aceptas automáticamente estos términos y condiciones.
+                    Al publicar un evento, aceptas automáticamente estos
+                    términos y condiciones.
                   </p>
                 </div>
               </div>
@@ -199,7 +207,7 @@ const Terms = () => {
           >
             <div className="bg-white rounded-2xl shadow-lg border border-gray-200">
               {/* Sección General */}
-              {activeSection === 'general' && (
+              {activeSection === "general" && (
                 <div className="p-8">
                   <div className="mb-8">
                     <h2 className="text-3xl font-bold mb-6 flex items-center">
@@ -207,48 +215,71 @@ const Terms = () => {
                       Términos Generales
                     </h2>
                     <p className="text-gray-700 text-lg mb-6">
-                      Bienvenido a CulturaViva. Estos términos y condiciones establecen las reglas para usar 
-                      nuestra plataforma y publicar eventos culturales.
+                      Bienvenido a CulturaViva. Estos términos y condiciones
+                      establecen las reglas para usar nuestra plataforma y
+                      publicar eventos culturales.
                     </p>
                   </div>
 
                   <div className="space-y-8">
                     <div>
-                      <h3 className="text-2xl font-bold mb-4">1. Aceptación de Términos</h3>
+                      <h3 className="text-2xl font-bold mb-4">
+                        1. Aceptación de Términos
+                      </h3>
                       <p className="text-gray-600 mb-4">
-                        Al acceder y utilizar esta plataforma, aceptas cumplir con estos términos y condiciones. 
-                        Si no estás de acuerdo con alguna parte, por favor no utilices nuestros servicios.
+                        Al acceder y utilizar esta plataforma, aceptas cumplir
+                        con estos términos y condiciones. Si no estás de acuerdo
+                        con alguna parte, por favor no utilices nuestros
+                        servicios.
                       </p>
                     </div>
 
                     <div>
-                      <h3 className="text-2xl font-bold mb-4">2. Definiciones</h3>
+                      <h3 className="text-2xl font-bold mb-4">
+                        2. Definiciones
+                      </h3>
                       <ul className="space-y-3 text-gray-600">
                         <li className="flex items-start">
                           <div className="w-2 h-2 bg-red-500 rounded-full mt-2 mr-3"></div>
-                          <span><strong>Plataforma:</strong> Sitio web y aplicaciones de CulturaViva</span>
+                          <span>
+                            <strong>Plataforma:</strong> Sitio web y
+                            aplicaciones de CulturaViva
+                          </span>
                         </li>
                         <li className="flex items-start">
                           <div className="w-2 h-2 bg-red-500 rounded-full mt-2 mr-3"></div>
-                          <span><strong>Usuario:</strong> Cualquier persona que acceda a la plataforma</span>
+                          <span>
+                            <strong>Usuario:</strong> Cualquier persona que
+                            acceda a la plataforma
+                          </span>
                         </li>
                         <li className="flex items-start">
                           <div className="w-2 h-2 bg-red-500 rounded-full mt=2 mr-3"></div>
-                          <span><strong>Organizador:</strong> Usuario que publica eventos</span>
+                          <span>
+                            <strong>Organizador:</strong> Usuario que publica
+                            eventos
+                          </span>
                         </li>
                         <li className="flex items-start">
                           <div className="w-2 h-2 bg-red-500 rounded-full mt-2 mr-3"></div>
-                          <span><strong>Evento:</strong> Actividad cultural publicada en la plataforma</span>
+                          <span>
+                            <strong>Evento:</strong> Actividad cultural
+                            publicada en la plataforma
+                          </span>
                         </li>
                       </ul>
                     </div>
 
                     <div>
-                      <h3 className="text-2xl font-bold mb-4">3. Proceso de Revisión</h3>
+                      <h3 className="text-2xl font-bold mb-4">
+                        3. Proceso de Revisión
+                      </h3>
                       <div className="bg-gray-50 rounded-xl p-6">
                         <div className="flex items-center mb-4">
                           <Filter className="text-blue-600 mr-3" size={24} />
-                          <h4 className="font-bold text-lg">Cómo revisamos los eventos</h4>
+                          <h4 className="font-bold text-lg">
+                            Cómo revisamos los eventos
+                          </h4>
                         </div>
                         <div className="space-y-4">
                           <div className="flex items-start">
@@ -256,8 +287,12 @@ const Terms = () => {
                               1
                             </div>
                             <div>
-                              <p className="font-medium">Recepción del evento</p>
-                              <p className="text-sm text-gray-600">Recibimos tu solicitud de publicación</p>
+                              <p className="font-medium">
+                                Recepción del evento
+                              </p>
+                              <p className="text-sm text-gray-600">
+                                Recibimos tu solicitud de publicación
+                              </p>
                             </div>
                           </div>
                           <div className="flex items-start">
@@ -266,7 +301,10 @@ const Terms = () => {
                             </div>
                             <div>
                               <p className="font-medium">Revisión manual</p>
-                              <p className="text-sm text-gray-600">Nuestro equipo verifica que cumpla con las normas</p>
+                              <p className="text-sm text-gray-600">
+                                Nuestro equipo verifica que cumpla con las
+                                normas
+                              </p>
                             </div>
                           </div>
                           <div className="flex items-start">
@@ -274,8 +312,12 @@ const Terms = () => {
                               3
                             </div>
                             <div>
-                              <p className="font-medium">Aprobación o rechazo</p>
-                              <p className="text-sm text-gray-600">Te notificamos el resultado en 24-48 horas</p>
+                              <p className="font-medium">
+                                Aprobación o rechazo
+                              </p>
+                              <p className="text-sm text-gray-600">
+                                Te notificamos el resultado en 24-48 horas
+                              </p>
                             </div>
                           </div>
                         </div>
@@ -283,11 +325,19 @@ const Terms = () => {
                     </div>
 
                     <div>
-                      <h3 className="text-2xl font-bold mb-4">4. Responsabilidades del Usuario</h3>
+                      <h3 className="text-2xl font-bold mb-4">
+                        4. Responsabilidades del Usuario
+                      </h3>
                       <div className="grid md:grid-cols-2 gap-4">
                         {userResponsibilities.map((responsibility, index) => (
-                          <div key={index} className="flex items-center p-3 bg-gray-50 rounded-lg">
-                            <UserCheck size={18} className="text-green-600 mr-3" />
+                          <div
+                            key={index}
+                            className="flex items-center p-3 bg-gray-50 rounded-lg"
+                          >
+                            <UserCheck
+                              size={18}
+                              className="text-green-600 mr-3"
+                            />
                             <span>{responsibility}</span>
                           </div>
                         ))}
@@ -298,7 +348,7 @@ const Terms = () => {
               )}
 
               {/* Sección Contenido Permitido */}
-              {activeSection === 'allowed' && (
+              {activeSection === "allowed" && (
                 <div className="p-8">
                   <div className="mb-8">
                     <h2 className="text-3xl font-bold mb-6 flex items-center">
@@ -306,7 +356,8 @@ const Terms = () => {
                       Contenido Permitido
                     </h2>
                     <p className="text-gray-700 text-lg mb-6">
-                      Promovemos eventos que enriquezcan nuestra cultura y fortalezcan la comunidad.
+                      Promovemos eventos que enriquezcan nuestra cultura y
+                      fortalezcan la comunidad.
                     </p>
                   </div>
 
@@ -360,7 +411,7 @@ const Terms = () => {
               )}
 
               {/* Sección Contenido Prohibido */}
-              {activeSection === 'prohibited' && (
+              {activeSection === "prohibited" && (
                 <div className="p-8">
                   <div className="mb-8">
                     <h2 className="text-3xl font-bold mb-6 flex items-center">
@@ -368,7 +419,8 @@ const Terms = () => {
                       Contenido Prohibido
                     </h2>
                     <p className="text-gray-700 text-lg mb-6">
-                      Para mantener una comunidad segura, estos contenidos son estrictamente prohibidos.
+                      Para mantener una comunidad segura, estos contenidos son
+                      estrictamente prohibidos.
                     </p>
                   </div>
 
@@ -386,16 +438,20 @@ const Terms = () => {
                             <XCircle className="text-red-600" size={24} />
                           </div>
                           <div>
-                            <h3 className="font-bold text-red-800 text-lg mb-2">{item.title}</h3>
+                            <h3 className="font-bold text-red-800 text-lg mb-2">
+                              {item.title}
+                            </h3>
                             <p className="text-red-700">{item.description}</p>
                             {index === 0 && (
                               <p className="text-sm text-red-600 mt-2">
-                                <strong>Incluye:</strong> Campañas electorales, propaganda partidaria, discursos políticos
+                                <strong>Incluye:</strong> Campañas electorales,
+                                propaganda partidaria, discursos políticos
                               </p>
                             )}
                             {index === 1 && (
                               <p className="text-sm text-red-600 mt-2">
-                                <strong>Ejemplos:</strong> Venta de productos piramidales, MLM, mercadeo en red
+                                <strong>Ejemplos:</strong> Venta de productos
+                                piramidales, MLM, mercadeo en red
                               </p>
                             )}
                           </div>
@@ -407,7 +463,9 @@ const Terms = () => {
                   <div className="mt-8 bg-gradient-to-r from-red-50 to-orange-50 rounded-xl p-6 border border-red-200">
                     <div className="flex items-center mb-4">
                       <AlertCircle className="text-red-600 mr-3" size={24} />
-                      <h3 className="font-bold text-red-800 text-lg">Consecuencias</h3>
+                      <h3 className="font-bold text-red-800 text-lg">
+                        Consecuencias
+                      </h3>
                     </div>
                     <div className="space-y-3">
                       <div className="flex items-center">
@@ -432,7 +490,7 @@ const Terms = () => {
               )}
 
               {/* Sección Derechos */}
-              {activeSection === 'rights' && (
+              {activeSection === "rights" && (
                 <div className="p-8">
                   <div className="mb-8">
                     <h2 className="text-3xl font-bold mb-6 flex items-center">
@@ -446,12 +504,19 @@ const Terms = () => {
 
                   <div className="space-y-8">
                     <div>
-                      <h3 className="text-2xl font-bold mb-4">Derechos de la Plataforma</h3>
+                      <h3 className="text-2xl font-bold mb-4">
+                        Derechos de la Plataforma
+                      </h3>
                       <div className="grid md:grid-cols-2 gap-4 mb-6">
                         {platformRights.map((right, index) => (
-                          <div key={index} className="flex items-start p-4 bg-purple-50 rounded-lg">
+                          <div
+                            key={index}
+                            className="flex items-start p-4 bg-purple-50 rounded-lg"
+                          >
                             <div className="w-8 h-8 bg-purple-100 rounded-full flex items-center justify-center mr-3 flex-shrink-0">
-                              <span className="font-bold text-purple-600">{index + 1}</span>
+                              <span className="font-bold text-purple-600">
+                                {index + 1}
+                              </span>
                             </div>
                             <span className="text-purple-800">{right}</span>
                           </div>
@@ -460,7 +525,9 @@ const Terms = () => {
                     </div>
 
                     <div>
-                      <h3 className="text-2xl font-bold mb-4">Derechos del Usuario</h3>
+                      <h3 className="text-2xl font-bold mb-4">
+                        Derechos del Usuario
+                      </h3>
                       <div className="bg-blue-50 rounded-xl p-6">
                         <div className="space-y-4">
                           <div className="flex items-start">
@@ -468,9 +535,12 @@ const Terms = () => {
                               <Eye className="text-blue-600" size={20} />
                             </div>
                             <div>
-                              <h4 className="font-bold text-blue-800">Transparencia</h4>
+                              <h4 className="font-bold text-blue-800">
+                                Transparencia
+                              </h4>
                               <p className="text-blue-700">
-                                Puedes ver por qué tu evento fue rechazado y apelar la decisión
+                                Puedes ver por qué tu evento fue rechazado y
+                                apelar la decisión
                               </p>
                             </div>
                           </div>
@@ -479,9 +549,12 @@ const Terms = () => {
                               <FileText className="text-blue-600" size={20} />
                             </div>
                             <div>
-                              <h4 className="font-bold text-blue-800">Propiedad</h4>
+                              <h4 className="font-bold text-blue-800">
+                                Propiedad
+                              </h4>
                               <p className="text-blue-700">
-                                Conservas los derechos sobre el contenido que publicas
+                                Conservas los derechos sobre el contenido que
+                                publicas
                               </p>
                             </div>
                           </div>
@@ -490,9 +563,12 @@ const Terms = () => {
                               <Lock className="text-blue-600" size={20} />
                             </div>
                             <div>
-                              <h4 className="font-bold text-blue-800">Privacidad</h4>
+                              <h4 className="font-bold text-blue-800">
+                                Privacidad
+                              </h4>
                               <p className="text-blue-700">
-                                Tu información personal está protegida según nuestra política
+                                Tu información personal está protegida según
+                                nuestra política
                               </p>
                             </div>
                           </div>
@@ -501,12 +577,17 @@ const Terms = () => {
                     </div>
 
                     <div>
-                      <h3 className="text-2xl font-bold mb-4">Monetización y Eventos Destacados</h3>
+                      <h3 className="text-2xl font-bold mb-4">
+                        Monetización y Eventos Destacados
+                      </h3>
                       <div className="bg-gradient-to-r from-yellow-50 to-amber-50 rounded-xl p-6 border border-yellow-200">
-                        <h4 className="font-bold text-yellow-800 mb-4">Eventos Destacados</h4>
+                        <h4 className="font-bold text-yellow-800 mb-4">
+                          Eventos Destacados
+                        </h4>
                         <div className="space-y-4">
                           <p className="text-yellow-700">
-                            Los eventos destacados son una opción paga que ofrece mayor visibilidad.
+                            Los eventos destacados son una opción paga que
+                            ofrece mayor visibilidad.
                           </p>
                           <ul className="space-y-2 text-yellow-700">
                             <li className="flex items-center">
@@ -527,7 +608,8 @@ const Terms = () => {
                             </li>
                           </ul>
                           <p className="text-sm text-yellow-600 mt-4">
-                            Los precios y condiciones específicas se detallan en el momento de la contratación.
+                            Los precios y condiciones específicas se detallan en
+                            el momento de la contratación.
                           </p>
                         </div>
                       </div>
@@ -537,7 +619,7 @@ const Terms = () => {
               )}
 
               {/* Sección Privacidad */}
-              {activeSection === 'privacy' && (
+              {activeSection === "privacy" && (
                 <div className="p-8">
                   <div className="mb-8">
                     <h2 className="text-3xl font-bold mb-6 flex items-center">
@@ -545,18 +627,25 @@ const Terms = () => {
                       Privacidad y Cookies
                     </h2>
                     <p className="text-gray-700 text-lg mb-6">
-                      Tu privacidad es importante para nosotros. Conoce cómo protegemos tus datos.
+                      Tu privacidad es importante para nosotros. Conoce cómo
+                      protegemos tus datos.
                     </p>
                   </div>
 
                   <div className="space-y-8">
                     <div>
-                      <h3 className="text-2xl font-bold mb-4">Política de Privacidad</h3>
+                      <h3 className="text-2xl font-bold mb-4">
+                        Política de Privacidad
+                      </h3>
                       <div className="bg-indigo-50 rounded-xl p-6">
-                        <h4 className="font-bold text-indigo-800 mb-4">Datos que Recopilamos</h4>
+                        <h4 className="font-bold text-indigo-800 mb-4">
+                          Datos que Recopilamos
+                        </h4>
                         <div className="grid md:grid-cols-2 gap-4">
                           <div className="p-4 bg-white rounded-lg">
-                            <h5 className="font-bold mb-2 text-indigo-700">Información Personal</h5>
+                            <h5 className="font-bold mb-2 text-indigo-700">
+                              Información Personal
+                            </h5>
                             <ul className="space-y-1 text-sm text-indigo-600">
                               <li>Nombre y apellidos</li>
                               <li>Correo electrónico</li>
@@ -565,7 +654,9 @@ const Terms = () => {
                             </ul>
                           </div>
                           <div className="p-4 bg-white rounded-lg">
-                            <h5 className="font-bold mb-2 text-indigo-700">Datos de Uso</h5>
+                            <h5 className="font-bold mb-2 text-indigo-700">
+                              Datos de Uso
+                            </h5>
                             <ul className="space-y-1 text-sm text-indigo-600">
                               <li>Eventos que visitas</li>
                               <li>Interacciones en la plataforma</li>
@@ -578,15 +669,20 @@ const Terms = () => {
                     </div>
 
                     <div>
-                      <h3 className="text-2xl font-bold mb-4">Uso de Cookies</h3>
+                      <h3 className="text-2xl font-bold mb-4">
+                        Uso de Cookies
+                      </h3>
                       <div className="bg-gray-50 rounded-xl p-6">
                         <p className="text-gray-700 mb-4">
-                          Utilizamos cookies para mejorar tu experiencia en la plataforma:
+                          Utilizamos cookies para mejorar tu experiencia en la
+                          plataforma:
                         </p>
                         <div className="space-y-3">
                           <div className="flex items-center">
                             <div className="w-3 h-3 bg-green-500 rounded-full mr-3"></div>
-                            <span>Cookies esenciales (funcionamiento del sitio)</span>
+                            <span>
+                              Cookies esenciales (funcionamiento del sitio)
+                            </span>
                           </div>
                           <div className="flex items-center">
                             <div className="w-3 h-3 bg-blue-500 rounded-full mr-3"></div>
@@ -598,38 +694,54 @@ const Terms = () => {
                           </div>
                           <div className="flex items-center">
                             <div className="w-3 h-3 bg-yellow-500 rounded-full mr-3"></div>
-                            <span>Cookies de publicidad (solo con consentimiento)</span>
+                            <span>
+                              Cookies de publicidad (solo con consentimiento)
+                            </span>
                           </div>
                         </div>
                         <p className="text-sm text-gray-600 mt-4">
-                          Puedes gestionar tus preferencias de cookies en cualquier momento desde la configuración.
+                          Puedes gestionar tus preferencias de cookies en
+                          cualquier momento desde la configuración.
                         </p>
                       </div>
                     </div>
 
                     <div>
-                      <h3 className="text-2xl font-bold mb-4">Tus Derechos de Privacidad</h3>
+                      <h3 className="text-2xl font-bold mb-4">
+                        Tus Derechos de Privacidad
+                      </h3>
                       <div className="grid md:grid-cols-2 gap-4">
                         <div className="p-4 bg-green-50 rounded-lg">
-                          <h4 className="font-bold text-green-800 mb-2">Acceso y Corrección</h4>
+                          <h4 className="font-bold text-green-800 mb-2">
+                            Acceso y Corrección
+                          </h4>
                           <p className="text-green-700 text-sm">
-                            Puedes acceder y corregir tus datos personales en cualquier momento
+                            Puedes acceder y corregir tus datos personales en
+                            cualquier momento
                           </p>
                         </div>
                         <div className="p-4 bg-green-50 rounded-lg">
-                          <h4 className="font-bold text-green-800 mb-2">Eliminación</h4>
+                          <h4 className="font-bold text-green-800 mb-2">
+                            Eliminación
+                          </h4>
                           <p className="text-green-700 text-sm">
-                            Tienes derecho a solicitar la eliminación de tus datos
+                            Tienes derecho a solicitar la eliminación de tus
+                            datos
                           </p>
                         </div>
                         <div className="p-4 bg-green-50 rounded-lg">
-                          <h4 className="font-bold text-green-800 mb-2">Portabilidad</h4>
+                          <h4 className="font-bold text-green-800 mb-2">
+                            Portabilidad
+                          </h4>
                           <p className="text-green-700 text-sm">
-                            Puedes solicitar una copia de tus datos en formato estándar
+                            Puedes solicitar una copia de tus datos en formato
+                            estándar
                           </p>
                         </div>
                         <div className="p-4 bg-green-50 rounded-lg">
-                          <h4 className="font-bold text-green-800 mb-2">Oposición</h4>
+                          <h4 className="font-bold text-green-800 mb-2">
+                            Oposición
+                          </h4>
                           <p className="text-green-700 text-sm">
                             Puedes oponerte al procesamiento de tus datos
                           </p>
@@ -651,7 +763,7 @@ const Terms = () => {
               )}
 
               {/* Sección Contacto */}
-              {activeSection === 'contact' && (
+              {activeSection === "contact" && (
                 <div className="p-8">
                   <div className="mb-8">
                     <h2 className="text-3xl font-bold mb-6 flex items-center">
@@ -659,17 +771,20 @@ const Terms = () => {
                       Contacto y Apelaciones
                     </h2>
                     <p className="text-gray-700 text-lg mb-6">
-                      ¿Tienes preguntas o necesitas apelar una decisión? Estamos aquí para ayudarte.
+                      ¿Tienes preguntas o necesitas apelar una decisión? Estamos
+                      aquí para ayudarte.
                     </p>
                   </div>
 
                   <div className="space-y-8">
                     <div>
-                      <h3 className="text-2xl font-bold mb-4">Apelar una Decisión</h3>
+                      <h3 className="text-2xl font-bold mb-4">
+                        Apelar una Decisión
+                      </h3>
                       <div className="bg-teal-50 rounded-xl p-6">
                         <p className="text-teal-700 mb-4">
-                          Si tu evento fue rechazado y consideras que cumple con nuestras políticas, 
-                          puedes apelar la decisión.
+                          Si tu evento fue rechazado y consideras que cumple con
+                          nuestras políticas, puedes apelar la decisión.
                         </p>
                         <div className="space-y-3">
                           <div className="flex items-start">
@@ -677,9 +792,12 @@ const Terms = () => {
                               1
                             </div>
                             <div>
-                              <p className="font-medium">Revisa el motivo de rechazo</p>
+                              <p className="font-medium">
+                                Revisa el motivo de rechazo
+                              </p>
                               <p className="text-sm text-teal-600">
-                                Encuentra el motivo en la notificación que recibiste
+                                Encuentra el motivo en la notificación que
+                                recibiste
                               </p>
                             </div>
                           </div>
@@ -688,9 +806,12 @@ const Terms = () => {
                               2
                             </div>
                             <div>
-                              <p className="font-medium">Prepara tu apelación</p>
+                              <p className="font-medium">
+                                Prepara tu apelación
+                              </p>
                               <p className="text-sm text-teal-600">
-                                Explica por qué consideras que tu evento cumple las normas
+                                Explica por qué consideras que tu evento cumple
+                                las normas
                               </p>
                             </div>
                           </div>
@@ -701,7 +822,8 @@ const Terms = () => {
                             <div>
                               <p className="font-medium">Envía tu apelación</p>
                               <p className="text-sm text-teal-600">
-                                Utiliza el formulario de contacto o el correo electrónico
+                                Utiliza el formulario de contacto o el correo
+                                electrónico
                               </p>
                             </div>
                           </div>
@@ -710,7 +832,9 @@ const Terms = () => {
                     </div>
 
                     <div>
-                      <h3 className="text-2xl font-bold mb-4">Canales de Contacto</h3>
+                      <h3 className="text-2xl font-bold mb-4">
+                        Canales de Contacto
+                      </h3>
                       <div className="grid md:grid-cols-2 gap-6">
                         <div className="p-6 bg-white border border-gray-200 rounded-xl">
                           <div className="flex items-center mb-4">
@@ -719,7 +843,9 @@ const Terms = () => {
                             </div>
                             <div>
                               <h4 className="font-bold">Correo Electrónico</h4>
-                              <p className="text-sm text-gray-600">Para consultas generales</p>
+                              <p className="text-sm text-gray-600">
+                                Para consultas generales
+                              </p>
                             </div>
                           </div>
                           <a
@@ -737,7 +863,9 @@ const Terms = () => {
                             </div>
                             <div>
                               <h4 className="font-bold">WhatsApp</h4>
-                              <p className="text-sm text-gray-600">Para consultas rápidas</p>
+                              <p className="text-sm text-gray-600">
+                                Para consultas rápidas
+                              </p>
                             </div>
                           </div>
                           <a
@@ -754,8 +882,12 @@ const Terms = () => {
                               <FileText className="text-green-600" size={24} />
                             </div>
                             <div>
-                              <h4 className="font-bold">Formulario de Contacto</h4>
-                              <p className="text-sm text-gray-600">Para apelaciones específicas</p>
+                              <h4 className="font-bold">
+                                Formulario de Contacto
+                              </h4>
+                              <p className="text-sm text-gray-600">
+                                Para apelaciones específicas
+                              </p>
                             </div>
                           </div>
                           <Link
@@ -770,20 +902,28 @@ const Terms = () => {
                     </div>
 
                     <div>
-                      <h3 className="text-2xl font-bold mb-4">Tiempos de Respuesta</h3>
+                      <h3 className="text-2xl font-bold mb-4">
+                        Tiempos de Respuesta
+                      </h3>
                       <div className="bg-gray-50 rounded-xl p-6">
                         <div className="space-y-4">
                           <div className="flex justify-between items-center">
                             <span>Consultas generales</span>
-                            <span className="font-bold text-green-600">24-48 horas</span>
+                            <span className="font-bold text-green-600">
+                              24-48 horas
+                            </span>
                           </div>
                           <div className="flex justify-between items-center">
                             <span>Apelaciones de eventos</span>
-                            <span className="font-bold text-yellow-600">3-5 días hábiles</span>
+                            <span className="font-bold text-yellow-600">
+                              3-5 días hábiles
+                            </span>
                           </div>
                           <div className="flex justify-between items-center">
                             <span>Solicitudes de eliminación de datos</span>
-                            <span className="font-bold text-red-600">10 días hábiles</span>
+                            <span className="font-bold text-red-600">
+                              10 días hábiles
+                            </span>
                           </div>
                         </div>
                       </div>
@@ -809,30 +949,37 @@ const Terms = () => {
                   className="mt-1 mr-4 w-5 h-5 rounded border-gray-300 text-red-600 focus:ring-red-500"
                 />
                 <div>
-                  <label htmlFor="acceptTerms" className="block font-bold text-gray-900 mb-2">
+                  <label
+                    htmlFor="acceptTerms"
+                    className="block font-bold text-gray-900 mb-2"
+                  >
                     Confirmo que he leído y acepto los Términos y Condiciones
                   </label>
                   <p className="text-gray-600 text-sm">
-                    Al marcar esta casilla, aceptas cumplir con todas las normas establecidas en este documento. 
-                    Esta aceptación es necesaria para publicar eventos en la plataforma.
+                    Al marcar esta casilla, aceptas cumplir con todas las normas
+                    establecidas en este documento. Esta aceptación es necesaria
+                    para publicar eventos en la plataforma.
                   </p>
                 </div>
               </div>
 
               <div className="mt-6 flex flex-col md:flex-row justify-between items-center space-y-4">
                 <p className="text-sm text-gray-500">
-                  Al continuar, también aceptas nuestra{' '}
-                  <Link to="/privacidad" className="text-red-600 hover:text-red-700">
+                  Al continuar, también aceptas nuestra{" "}
+                  <Link
+                    to="/privacidad"
+                    className="text-red-600 hover:text-red-700"
+                  >
                     Política de Privacidad
                   </Link>
                 </p>
                 <Button
-                variant='danger'
-                size='lg'
-                disabled={!acceptedTerms}
-                className='w-full'
+                  variant="danger"
+                  size="lg"
+                  disabled={!acceptedTerms}
+                  className="w-full"
                 >
-                  Aceptar y continuar 
+                  Aceptar y continuar
                 </Button>
               </div>
             </motion.div>
@@ -849,13 +996,15 @@ const Terms = () => {
           <div className="inline-flex items-center text-gray-500">
             <Globe size={16} className="mr-2" />
             <span className="text-sm">
-              Jurisdicción: {new Date().toLocaleDateString('es-ES', { year: 'numeric' })} - Plataforma de Actividades Culturales CulturaViva
+              Jurisdicción:{" "}
+              {new Date().toLocaleDateString("es-ES", { year: "numeric" })} -
+              Plataforma de Actividades Culturales CulturaViva
             </span>
           </div>
         </motion.div>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default Terms
+export default Terms;

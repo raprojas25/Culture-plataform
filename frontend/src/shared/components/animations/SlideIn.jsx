@@ -1,10 +1,10 @@
-import { motion } from 'framer-motion';
-import { slideIn } from '@/shared/utils/animations';
+import { motion } from "framer-motion";
+import { slideIn } from "@/shared/utils/animations";
 
 export const SlideIn = ({
   children,
-  direction = 'up',
-  as = 'div',
+  direction = "up",
+  as = "div",
   ...props
 }) => {
   const MotionComponent = motion(as);
@@ -21,4 +21,3 @@ export const SlideIn = ({
     </MotionComponent>
   );
 };
-

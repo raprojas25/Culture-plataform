@@ -1,18 +1,18 @@
-import { useEffect } from 'react';
+import { useEffect } from "react";
 
-import { useEventStore } from '../stores/eventStore';
-import { eventService } from '../services/eventService';
-import toast from 'react-hot-toast';
+import { useEventStore } from "../stores/eventStore";
+import { eventService } from "../services/eventService";
+import toast from "react-hot-toast";
 
 export const useEvents = () => {
-  const { 
-    events, 
-    filters, 
-    isLoading, 
+  const {
+    events,
+    filters,
+    isLoading,
     pagination,
-    setEvents, 
-    setLoading, 
-    setFilters, 
+    setEvents,
+    setLoading,
+    setFilters,
     setPagination,
     addEvent,
     updateEvent,
@@ -27,7 +27,7 @@ export const useEvents = () => {
       setEvents(response.data.events);
       setPagination(response.data.pagination);
     } catch (error) {
-      toast.error(error.response?.data?.error || 'Error cargando eventos');
+      toast.error(error.response?.data?.error || "Error cargando eventos");
     } finally {
       setLoading(false);
     }
@@ -39,7 +39,7 @@ export const useEvents = () => {
       const event = await eventService.getEventById(id);
       return event;
     } catch (error) {
-      toast.error(error.response?.data?.error || 'Error cargando evento');
+      toast.error(error.response?.data?.error || "Error cargando evento");
       throw error;
     } finally {
       setLoading(false);
@@ -51,10 +51,10 @@ export const useEvents = () => {
       setLoading(true);
       const event = await eventService.createEvent(eventData);
       addEvent(event);
-      toast.success('Evento creado exitosamente');
+      toast.success("Evento creado exitosamente");
       return event;
     } catch (error) {
-      toast.error(error.response?.data?.error || 'Error creando evento');
+      toast.error(error.response?.data?.error || "Error creando evento");
       throw error;
     } finally {
       setLoading(false);
@@ -66,10 +66,10 @@ export const useEvents = () => {
       setLoading(true);
       const event = await eventService.updateEvent(id, eventData);
       updateEvent(id, event);
-      toast.success('Evento actualizado exitosamente');
+      toast.success("Evento actualizado exitosamente");
       return event;
     } catch (error) {
-      toast.error(error.response?.data?.error || 'Error actualizando evento');
+      toast.error(error.response?.data?.error || "Error actualizando evento");
       throw error;
     } finally {
       setLoading(false);
@@ -81,9 +81,9 @@ export const useEvents = () => {
       setLoading(true);
       await eventService.deleteEvent(id);
       removeEvent(id);
-      toast.success('Evento eliminado exitosamente');
+      toast.success("Evento eliminado exitosamente");
     } catch (error) {
-      toast.error(error.response?.data?.error || 'Error eliminando evento');
+      toast.error(error.response?.data?.error || "Error eliminando evento");
       throw error;
     } finally {
       setLoading(false);
@@ -94,10 +94,12 @@ export const useEvents = () => {
     try {
       await eventService.likeEvent(id);
       // Update local state
-      updateEvent(id, { likes_count: (events.find(e => e.id === id)?.likes_count || 0) + 1 });
-      toast.success('Evento guardado en favoritos');
+      updateEvent(id, {
+        likes_count: (events.find((e) => e.id === id)?.likes_count || 0) + 1,
+      });
+      toast.success("Evento guardado en favoritos");
     } catch (error) {
-      toast.error(error.response?.data?.error || 'Error al dar like');
+      toast.error(error.response?.data?.error || "Error al dar like");
     }
   };
 
@@ -105,10 +107,15 @@ export const useEvents = () => {
     try {
       await eventService.unlikeEvent(id);
       // Update local state
-      updateEvent(id, { likes_count: Math.max(0, (events.find(e => e.id === id)?.likes_count || 1) - 1) });
-      toast.success('Like removido');
+      updateEvent(id, {
+        likes_count: Math.max(
+          0,
+          (events.find((e) => e.id === id)?.likes_count || 1) - 1,
+        ),
+      });
+      toast.success("Like removido");
     } catch (error) {
-      toast.error(error.response?.data?.error || 'Error al remover like');
+      toast.error(error.response?.data?.error || "Error al remover like");
     }
   };
 
@@ -131,4 +138,3 @@ export const useEvents = () => {
     handleUnlikeEvent,
   };
 };
-

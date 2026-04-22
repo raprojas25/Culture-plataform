@@ -1,49 +1,53 @@
-import { useState } from 'react';
-import { motion } from 'framer-motion';
-import { Palette, Type, Image, Check, ChevronDown, ChevronUp } from 'lucide-react';
-import { useFormValidation } from '@/shared/hooks/useFormValidation';
-import { categorySchema } from '@/shared/utils/validators';
-import { CATEGORY_ICONS, CATEGORY_COLORS } from "@/features/categories/constants/categoryConstants";
+import { useState } from "react";
+import { motion } from "framer-motion";
+import {
+  Palette,
+  Type,
+  Image,
+  Check,
+  ChevronDown,
+  ChevronUp,
+} from "lucide-react";
+import { useFormValidation } from "@/shared/hooks/useFormValidation";
+import { categorySchema } from "@/shared/utils/validators";
+import {
+  CATEGORY_ICONS,
+  CATEGORY_COLORS,
+} from "@/features/categories/constants/categoryConstants";
 
 const CategoryForm = ({ onSubmit, loading, onCancel }) => {
-  const [selectedIcon, setSelectedIcon] = useState('🎉');
-  const [selectedColor, setSelectedColor] = useState('#ef4444');
+  const [selectedIcon, setSelectedIcon] = useState("🎉");
+  const [selectedColor, setSelectedColor] = useState("#ef4444");
   const [showColorPicker, setShowColorPicker] = useState(false);
 
-  const { 
-    values, 
-    errors, 
-    handleChange, 
-    handleSubmit, 
-    setFieldValue,
-    isValid 
-  } = useFormValidation(
-    {
-      name: '',
-      description: '',
-      icon: '🎉',
-      color: '#ef4444',
-    },
-    categorySchema,
-    async (formData) => {
-      const finalData = {
-        ...formData,
-        icon: selectedIcon,
-        color: selectedColor
-      };
-      onSubmit(finalData);
-    }
-  );
+  const { values, errors, handleChange, handleSubmit, setFieldValue, isValid } =
+    useFormValidation(
+      {
+        name: "",
+        description: "",
+        icon: "🎉",
+        color: "#ef4444",
+      },
+      categorySchema,
+      async (formData) => {
+        const finalData = {
+          ...formData,
+          icon: selectedIcon,
+          color: selectedColor,
+        };
+        onSubmit(finalData);
+      },
+    );
 
   const handleColorSelect = (color) => {
     setSelectedColor(color);
-    setFieldValue('color', color);
+    setFieldValue("color", color);
     setShowColorPicker(false);
   };
 
   const handleIconSelect = (icon) => {
     setSelectedIcon(icon);
-    setFieldValue('icon', icon);
+    setFieldValue("icon", icon);
   };
 
   return (
@@ -63,9 +67,9 @@ const CategoryForm = ({ onSubmit, loading, onCancel }) => {
           onChange={handleChange}
           placeholder="Ej: Deportes, Conciertos, Gastronomía"
           className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-red-500 focus:border-transparent focus:outline-none ${
-            errors.name 
-              ? 'border-red-500 dark:border-red-500' 
-              : 'border-gray-300 dark:border-gray-600'
+            errors.name
+              ? "border-red-500 dark:border-red-500"
+              : "border-gray-300 dark:border-gray-600"
           } bg-white dark:bg-gray-700 text-gray-900 dark:text-white`}
           disabled={loading}
         />
@@ -108,8 +112,8 @@ const CategoryForm = ({ onSubmit, loading, onCancel }) => {
               onClick={() => handleIconSelect(icon)}
               className={`p-2 rounded-lg text-2xl hover:scale-110 transition-transform ${
                 selectedIcon === icon
-                  ? 'bg-red-100 dark:bg-red-900/30 ring-2 ring-red-500'
-                  : 'bg-gray-100 dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600'
+                  ? "bg-red-100 dark:bg-red-900/30 ring-2 ring-red-500"
+                  : "bg-gray-100 dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600"
               }`}
               disabled={loading}
             >
@@ -127,12 +131,12 @@ const CategoryForm = ({ onSubmit, loading, onCancel }) => {
             Color de la categoría
           </div>
         </label>
-        
+
         <div className="relative">
           <div className="flex items-center space-x-4">
             {/* Color actual */}
             <div className="flex items-center space-x-3">
-              <div 
+              <div
                 className="w-12 h-12 rounded-lg border border-gray-300 dark:border-gray-600"
                 style={{ backgroundColor: selectedColor }}
               />
@@ -140,9 +144,7 @@ const CategoryForm = ({ onSubmit, loading, onCancel }) => {
                 <div className="font-mono text-sm text-gray-700 dark:text-gray-300">
                   {selectedColor}
                 </div>
-                <div className="text-xs text-gray-500">
-                  Color seleccionado
-                </div>
+                <div className="text-xs text-gray-500">Color seleccionado</div>
               </div>
             </div>
 
@@ -153,13 +155,11 @@ const CategoryForm = ({ onSubmit, loading, onCancel }) => {
               className="p-2 border border-gray-300 dark:border-gray-600 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 dark:text-white transition-all duration-200"
               disabled={loading}
             >
-              {
-                showColorPicker
-                ?
-                <ChevronDown size={20}/>
-                :
-                <ChevronUp size={20}/>
-              }
+              {showColorPicker ? (
+                <ChevronDown size={20} />
+              ) : (
+                <ChevronUp size={20} />
+              )}
             </button>
           </div>
 
@@ -186,7 +186,7 @@ const CategoryForm = ({ onSubmit, loading, onCancel }) => {
                   </button>
                 ))}
               </div>
-              
+
               {/* Input personalizado */}
               <div className="mt-4">
                 <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
@@ -228,8 +228,8 @@ const CategoryForm = ({ onSubmit, loading, onCancel }) => {
           disabled={!isValid || loading}
           className={`flex-1 py-3 px-4 rounded-lg font-medium transition-all ${
             !isValid || loading
-              ? 'bg-gray-300 dark:bg-gray-700 cursor-not-allowed'
-              : 'bg-gradient-to-r from-red-500 to-orange-500 hover:from-red-600 hover:to-orange-600 text-white shadow-lg hover:shadow-xl'
+              ? "bg-gray-300 dark:bg-gray-700 cursor-not-allowed"
+              : "bg-gradient-to-r from-red-500 to-orange-500 hover:from-red-600 hover:to-orange-600 text-white shadow-lg hover:shadow-xl"
           }`}
         >
           {loading ? (
@@ -238,7 +238,7 @@ const CategoryForm = ({ onSubmit, loading, onCancel }) => {
               Creando...
             </div>
           ) : (
-            'Crear Categoría'
+            "Crear Categoría"
           )}
         </button>
       </div>

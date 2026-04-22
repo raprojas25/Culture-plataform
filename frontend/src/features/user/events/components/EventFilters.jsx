@@ -1,9 +1,9 @@
-import React from 'react';
-import { Filter, X } from 'lucide-react';
-import { useForm } from 'react-hook-form';
+import React from "react";
+import { Filter, X } from "lucide-react";
+import { useForm } from "react-hook-form";
 
-import { Button } from '../../components/ui/Button';
-import { Input } from '../../components/ui/Input';
+import { Button } from "../../components/ui/Button";
+import { Input } from "../../components/ui/Input";
 
 export const EventFilters = ({
   filters,
@@ -21,12 +21,12 @@ export const EventFilters = ({
 
   const handleReset = () => {
     reset({
-      search: '',
+      search: "",
       category_id: undefined,
       district_id: undefined,
-      price_type: '',
-      start_date: '',
-      end_date: '',
+      price_type: "",
+      start_date: "",
+      end_date: "",
     });
     onFilterChange({
       page: 1,
@@ -61,7 +61,7 @@ export const EventFilters = ({
               Buscar
             </label>
             <Input
-              {...register('search')}
+              {...register("search")}
               placeholder="Buscar eventos..."
               className="w-full"
             />
@@ -72,10 +72,7 @@ export const EventFilters = ({
             <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
               Categoría
             </label>
-            <select
-              {...register('category_id')}
-              className="input"
-            >
+            <select {...register("category_id")} className="input">
               <option value="">Todas las categorías</option>
               {categories.map((cat) => (
                 <option key={cat.id} value={cat.id}>
@@ -90,10 +87,7 @@ export const EventFilters = ({
             <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
               Distrito
             </label>
-            <select
-              {...register('district_id')}
-              className="input"
-            >
+            <select {...register("district_id")} className="input">
               <option value="">Todos los distritos</option>
               {districts.map((dist) => (
                 <option key={dist.id} value={dist.id}>
@@ -108,10 +102,7 @@ export const EventFilters = ({
             <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
               Tipo de Precio
             </label>
-            <select
-              {...register('price_type')}
-              className="input"
-            >
+            <select {...register("price_type")} className="input">
               <option value="">Todos</option>
               <option value="free">Gratis</option>
               <option value="paid">Pago</option>
@@ -124,29 +115,21 @@ export const EventFilters = ({
             <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
               Fecha Desde
             </label>
-            <Input
-              type="date"
-              {...register('start_date')}
-              className="w-full"
-            />
+            <Input type="date" {...register("start_date")} className="w-full" />
           </div>
 
           <div>
             <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
               Fecha Hasta
             </label>
-            <Input
-              type="date"
-              {...register('end_date')}
-              className="w-full"
-            />
+            <Input type="date" {...register("end_date")} className="w-full" />
           </div>
 
           {/* Featured Only */}
           <div className="flex items-center">
             <input
               type="checkbox"
-              {...register('featured_level')}
+              {...register("featured_level")}
               id="featured"
               className="h-4 w-4 text-primary-600 focus:ring-primary-500 border-gray-300 rounded"
             />
@@ -168,4 +151,3 @@ export const EventFilters = ({
     </div>
   );
 };
-

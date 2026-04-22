@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 
 const CategoryBadge = ({ category, onClick, showStatus = true }) => {
   return (
@@ -7,19 +7,22 @@ const CategoryBadge = ({ category, onClick, showStatus = true }) => {
         inline-flex items-center gap-2 px-3 py-2 rounded-lg 
         transition-all duration-200 cursor-pointer
         hover:scale-105 active:scale-95
-        ${onClick ? 'hover:shadow-lg' : ''}
+        ${onClick ? "hover:shadow-lg" : ""}
         dark:bg-gray-800/50 bg-white
         border border-gray-200 dark:border-gray-700
       `}
       onClick={onClick}
     >
-      <div 
+      <div
         className="w-8 h-8 rounded-full flex items-center justify-center text-lg"
-        style={{ backgroundColor: `${category.color}20`, color: category.color }}
+        style={{
+          backgroundColor: `${category.color}20`,
+          color: category.color,
+        }}
       >
         {category.icon}
       </div>
-      
+
       <div className="flex flex-col">
         <span className="font-medium text-gray-900 dark:text-gray-100">
           {category.name}

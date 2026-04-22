@@ -1,11 +1,7 @@
-import { motion } from 'framer-motion';
-import { fadeInUp } from '@/shared/utils/animations';
+import { motion } from "framer-motion";
+import { fadeInUp } from "@/shared/utils/animations";
 
-export const FadeInUp = ({
-  children,
-  as = 'div',
-  ...props
-}) => {
+export const FadeInUp = ({ children, as = "div", ...props }) => {
   const MotionComponent = motion(as);
 
   return (
@@ -20,4 +16,3 @@ export const FadeInUp = ({
     </MotionComponent>
   );
 };
-

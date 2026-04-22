@@ -1,12 +1,11 @@
-import { motion } from 'framer-motion'
-import { ChevronRight } from 'lucide-react';
+import { motion } from "framer-motion";
+import { ChevronRight } from "lucide-react";
 
 export const CallAction = () => {
-
   const fadeInUp = {
     hidden: { opacity: 0, y: 20 },
-    visible: { opacity: 1, y: 0, transition: { duration: 0.6 } }
-  }
+    visible: { opacity: 1, y: 0, transition: { duration: 0.6 } },
+  };
 
   return (
     <motion.section

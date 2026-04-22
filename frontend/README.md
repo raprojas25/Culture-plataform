@@ -5,6 +5,7 @@
 ## 🚀 Características
 
 ### Para Usuarios
+
 - 🏠 **Página de inicio** con eventos destacados, próximos eventos y mapa interactivo
 - 🔐 **Autenticación** - Login, registro, gestión de perfil y recuperación de contraseña
 - 📅 **Calendario de eventos** - Visualización de eventos en formato calendario
@@ -15,6 +16,7 @@
 - ℹ️ **Página "Acerca de"** - Información sobre la plataforma
 
 ### Panel de Administración
+
 - 📊 **Dashboard** - Estadísticas, eventos pendientes, gráficos y acciones rápidas
 - 🎫 **Gestión de eventos** - CRUD completo con filtros (pendientes, aprobados, destacados, rechazados)
 - 👥 **Gestión de usuarios** - Listado y administración de usuarios
@@ -25,11 +27,13 @@
 ## 🛠️ Tecnologías
 
 ### Core
+
 - **React 18** - Biblioteca de interfaz de usuario
 - **Vite 5** - Herramienta de construcción y servidor de desarrollo
 - **React Router 6** - Enrutamiento del lado del cliente
 
 ### Estilos y UI
+
 - **Tailwind CSS 3** - Framework CSS utility-first
 - **Framer Motion** - Biblioteca de animaciones
 - **Lucide React** - Biblioteca de iconos
@@ -37,26 +41,31 @@
 - **Headless UI** - Componentes accesibles sin estilos
 
 ### Formularios y Validación
+
 - **React Hook Form** - Gestión de formularios
 - **Zod** y **Yup** - Validación de esquemas
 - **React Select** - Inputs select mejorados
 - **React DatePicker** - Selector de fechas
 
 ### Estado y Datos
+
 - **Zustand** - Gestión de estado ligera con persistencia
 - **Axios** - Cliente HTTP con interceptores JWT
 
 ### Visualización
+
 - **Chart.js** y **Recharts** - Gráficos y visualizaciones
 - **Leaflet** y **React Leaflet** - Mapas interactivos
 - **React Big Calendar** - Componente de calendario
 - **TanStack Table** - Tablas headless
 
 ### Notificaciones y Archivos
+
 - **React Hot Toast** - Notificaciones toast
 - **FilePond** - Carga de archivos
 
 ### Calidad de Código
+
 - **ESLint** - Linting de código
 - **PostCSS** y **Autoprefixer** - Procesamiento CSS
 
@@ -115,24 +124,28 @@ frontend/
 ## 🚀 Instalación
 
 1. **Clonar el repositorio**
+
    ```bash
    git clone <url-del-repositorio>
    cd cultura-platform/frontend
    ```
 
 2. **Instalar dependencias**
+
    ```bash
    npm install
    ```
 
 3. **Configurar variables de entorno**
-   
+
    Crea un archivo `.env` en la raíz del proyecto:
+
    ```env
    VITE_API_URL=http://localhost:3000/api
    ```
 
 4. **Iniciar el servidor de desarrollo**
+
    ```bash
    npm run dev
    ```
@@ -141,19 +154,19 @@ frontend/
 
 ## 📜 Scripts Disponibles
 
-| Comando | Descripción |
-|---------|-------------|
-| `npm run dev` | Inicia el servidor de desarrollo con HMR |
-| `npm run build` | Compila la aplicación para producción |
+| Comando           | Descripción                                             |
+| ----------------- | ------------------------------------------------------- |
+| `npm run dev`     | Inicia el servidor de desarrollo con HMR                |
+| `npm run build`   | Compila la aplicación para producción                   |
 | `npm run preview` | Vista previa de la compilación de producción localmente |
-| `npm run lint` | Ejecuta ESLint para verificar la calidad del código |
+| `npm run lint`    | Ejecuta ESLint para verificar la calidad del código     |
 
 ## 🔧 Configuración
 
 ### Variables de Entorno
 
-| Variable | Predeterminado | Descripción |
-|----------|----------------|-------------|
+| Variable       | Predeterminado              | Descripción                    |
+| -------------- | --------------------------- | ------------------------------ |
 | `VITE_API_URL` | `http://localhost:3000/api` | URL base de la API del backend |
 
 ### Tema y Estilos
@@ -166,6 +179,7 @@ frontend/
 ## 🔐 Autenticación
 
 La plataforma utiliza autenticación JWT con:
+
 - Interceptores Axios para manejo automático de tokens
 - Renovación automática de tokens expirados (401)
 - Estado persistente mediante `persist` de Zustand

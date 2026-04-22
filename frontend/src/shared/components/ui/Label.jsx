@@ -6,15 +6,11 @@ export const Label = ({
   disabled,
   ...props
 }) => {
-  const baseClasses =
-    "block";
+  const baseClasses = "block";
 
   const variants = {
-    primary:
-      "text-gray-700 dark:text-gray-300 font-medium",
-    secondary:
-      "text-gray-500 dark:text-gray-300 font-normal",
-
+    primary: "text-gray-700 dark:text-gray-300 font-medium",
+    secondary: "text-gray-500 dark:text-gray-300 font-normal",
   };
 
   const sizes = {

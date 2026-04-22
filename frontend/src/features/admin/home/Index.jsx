@@ -1,4 +1,3 @@
-import StatsCards from "../pages/Admin/components/StatsCards";
 import { motion, AnimatePresence } from "framer-motion";
 import {
   BarChart3,
@@ -27,8 +26,9 @@ import {
   FileText,
 } from "lucide-react";
 import { useState } from "react";
-import PendingEvents from "../pages/Admin/components/PendingEvents";
-import Charts from "../pages/Admin/components/Charts";
+import StatsCards from "./components/StatsCards";
+import PendingEvents from "./components/PendingEvents";
+import Charts from "./components/Charts";
 export const HomeAdmin = () => {
   const [notifications, setNotifications] = useState(3);
 
@@ -117,42 +117,41 @@ export const HomeAdmin = () => {
         {/* <MonthlySalesChart /> */}
       </div>
       <div className="col-span-12 space-y-6 xl:col-span-7">
-
-          {/* Eventos pendientes */}
-          <motion.div variants={slideIn} className="lg:col-span-2">
-            <div className="bg-white dark:bg-white/5 rounded-xl shadow-sm border border-gray-200 overflow-x-auto dark:border-gray-600">
-              <div className="p-6 border-b border-gray-200">
-                <div className="flex items-center justify-between flex-wrap">
-                  <h2 className="text-xl font-bold flex items-center dark:text-gray-200">
-                    <Clock className="mr-2 text-amber-600" size={20} />
-                    Eventos Pendientes
-                  </h2>
-                  <button className="text-sm text-red-600 font-medium">
-                    Ver todos
-                  </button>
-                </div>
+        {/* Eventos pendientes */}
+        <motion.div variants={slideIn} className="lg:col-span-2">
+          <div className="bg-white dark:bg-white/5 rounded-xl shadow-sm border border-gray-200 overflow-x-auto dark:border-gray-600">
+            <div className="p-6 border-b border-gray-200">
+              <div className="flex items-center justify-between flex-wrap">
+                <h2 className="text-xl font-bold flex items-center dark:text-gray-200">
+                  <Clock className="mr-2 text-amber-600" size={20} />
+                  Eventos Pendientes
+                </h2>
+                <button className="text-sm text-red-600 font-medium">
+                  Ver todos
+                </button>
               </div>
-              <PendingEvents />
             </div>
+            <PendingEvents />
+          </div>
         </motion.div>
 
         {/* <MonthlySalesChart /> */}
       </div>
 
       <div className="col-span-12 xl:col-span-5">
-                {/* Gráficos */}
-                <motion.div
-                  variants={slideIn}
-                  className="bg-white dark:bg-white/5 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700"
-                >
-                  <div className="p-6 border-b border-gray-200">
-                    <h2 className="text-xl font-bold flex items-center">
-                      <TrendingUp className="mr-2 text-blue-600" size={20} />
-                      Estadísticas de la Plataforma
-                    </h2>
-                  </div>
-                  <Charts />
-                </motion.div>
+        {/* Gráficos */}
+        <motion.div
+          variants={slideIn}
+          className="bg-white dark:bg-white/5 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700"
+        >
+          <div className="p-6 border-b border-gray-200">
+            <h2 className="text-xl font-bold flex items-center">
+              <TrendingUp className="mr-2 text-blue-600" size={20} />
+              Estadísticas de la Plataforma
+            </h2>
+          </div>
+          <Charts />
+        </motion.div>
       </div>
 
       <div className="col-span-12">{/* <StatisticsChart /> */}</div>

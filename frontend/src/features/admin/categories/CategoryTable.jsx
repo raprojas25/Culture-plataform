@@ -1,14 +1,14 @@
-import React from 'react';
-import { Edit2, Trash2, Eye, EyeOff, MoreVertical } from 'lucide-react';
-import { Menu, MenuButton, MenuItem, MenuItems } from '@headlessui/react';
-import CategoryBadge from './CategoryBadge';
+import React from "react";
+import { Edit2, Trash2, Eye, EyeOff, MoreVertical } from "lucide-react";
+import { Menu, MenuButton, MenuItem, MenuItems } from "@headlessui/react";
+import CategoryBadge from "./CategoryBadge";
 
-const CategoryTable = ({ 
-  categories, 
-  onEdit, 
-  onDelete, 
+const CategoryTable = ({
+  categories,
+  onEdit,
+  onDelete,
   onToggleStatus,
-  isLoading 
+  isLoading,
 }) => {
   if (isLoading) {
     return (
@@ -60,7 +60,7 @@ const CategoryTable = ({
         </thead>
         <tbody className="divide-y divide-gray-200 dark:divide-gray-700 bg-white dark:bg-gray-900">
           {categories.map((category) => (
-            <tr 
+            <tr
               key={category.id}
               className="hover:bg-gray-50 dark:hover:bg-gray-800/50 transition-colors"
             >
@@ -69,22 +69,25 @@ const CategoryTable = ({
               </td>
               <td className="px-6 py-4">
                 <p className="text-sm text-gray-600 dark:text-gray-300 max-w-xs truncate text-wrap">
-                  {category.description || 'Sin descripción'}
+                  {category.description || "Sin descripción"}
                 </p>
               </td>
               <td className="px-6 py-4 whitespace-nowrap">
-                <span className={`
+                <span
+                  className={`
                   inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium
-                  ${category.is_active 
-                    ? 'bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-400' 
-                    : 'bg-red-100 text-red-800 dark:bg-red-900/30 dark:text-red-400'
+                  ${
+                    category.is_active
+                      ? "bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-400"
+                      : "bg-red-100 text-red-800 dark:bg-red-900/30 dark:text-red-400"
                   }
-                `}>
-                  {category.is_active ? 'Activo' : 'Inactivo'}
+                `}
+                >
+                  {category.is_active ? "Activo" : "Inactivo"}
                 </span>
               </td>
               <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500 dark:text-gray-400">
-                {new Date(category.created_at).toLocaleDateString('es-ES')}
+                {new Date(category.created_at).toLocaleDateString("es-ES")}
               </td>
               <td className="px-6 py-4 whitespace-nowrap text-sm font-medium">
                 <Menu as="div" className="relative inline-block text-left">
@@ -99,10 +102,7 @@ const CategoryTable = ({
                             onClick={() => onEdit(category)}
                             className={`
                               flex items-center gap-2 w-full px-4 py-2 text-sm dark:text-gray-400
-                              ${active 
-                                ? 'bg-gray-100 dark:bg-gray-700' 
-                                : ''
-                              }
+                              ${active ? "bg-gray-100 dark:bg-gray-700" : ""}
                             `}
                           >
                             <Edit2 className="w-4 h-4" />
@@ -113,20 +113,19 @@ const CategoryTable = ({
                       <MenuItem>
                         {({ active }) => (
                           <button
-                            onClick={() => onToggleStatus(category.id, category.is_active)}
+                            onClick={() =>
+                              onToggleStatus(category.id, category.is_active)
+                            }
                             className={`
                               flex items-center gap-2 w-full px-4 py-2 text-sm dark:text-gray-400
-                              ${active 
-                                ? 'bg-gray-100 dark:bg-gray-700' 
-                                : ''
-                              }
+                              ${active ? "bg-gray-100 dark:bg-gray-700" : ""}
                             `}
                           >
                             {category.is_active ? (
                               <>
                                 <EyeOff className="w-4 h-4" />
                                 Desactivar
-                              </> 
+                              </>
                             ) : (
                               <>
                                 <Eye className="w-4 h-4" />
@@ -142,10 +141,7 @@ const CategoryTable = ({
                             onClick={() => onDelete(category.id)}
                             className={`
                               flex items-center gap-2 w-full px-4 py-2 text-sm text-red-600 dark:text-red-400
-                              ${active 
-                                ? 'bg-red-50 dark:bg-red-900/20' 
-                                : ''
-                              }
+                              ${active ? "bg-red-50 dark:bg-red-900/20" : ""}
                             `}
                           >
                             <Trash2 className="w-4 h-4" />

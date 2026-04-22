@@ -96,7 +96,7 @@ import React from "react";
 
 /**
  * Badge component con soporte para variantes, tamaños, iconos y dark mode.
- * 
+ *
  * @param {('default'|'success'|'warning'|'error'|'info'|'purple')} variant - Estilo de color
  * @param {('sm'|'md'|'lg')} size - Tamaño del badge
  * @param {React.ReactNode} icon - Icono opcional (se recomienda usar componentes SVG o librerías como lucide/react)
@@ -137,7 +137,8 @@ export const Badge = React.forwardRef(
       outline:
         "border border-gray-300 text-gray-700 dark:border-gray-600 dark:text-gray-300 bg-transparent",
       red: "bg-red-600 text-white",
-      purple:  'bg-violet-100 text-violet-800 dark:bg-violet-900/50 dark:text-violet-300',
+      purple:
+        "bg-violet-100 text-violet-800 dark:bg-violet-900/50 dark:text-violet-300",
     };
 
     // Tamaños y clases asociadas
@@ -180,7 +181,7 @@ export const Badge = React.forwardRef(
       >
         {LeftIcon && <LeftIcon className={iconSize} aria-hidden="true" />}
         {/* <span> */}
-          {children}
+        {children}
         {/* </span> */}
         {RightIcon && <RightIcon className={iconSize} aria-hidden="true" />}
       </Component>

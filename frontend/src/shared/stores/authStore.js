@@ -1,5 +1,5 @@
-import { create } from 'zustand';
-import { persist } from 'zustand/middleware';
+import { create } from "zustand";
+import { persist } from "zustand/middleware";
 
 export const useAuthStore = create()(
   persist(
@@ -8,19 +8,16 @@ export const useAuthStore = create()(
       token: null,
       isAuthenticated: false,
       isLoading: false,
-      login: (user, token) => 
-        set({ user, token, isAuthenticated: true }),
-      logout: () => 
-        set({ user: null, token: null, isAuthenticated: false }),
+      login: (user, token) => set({ user, token, isAuthenticated: true }),
+      logout: () => set({ user: null, token: null, isAuthenticated: false }),
       setLoading: (loading) => set({ isLoading: loading }),
-      updateUser: (updatedUser) => 
+      updateUser: (updatedUser) =>
         set((state) => ({
-          user: state.user ? { ...state.user, ...updatedUser } : null
+          user: state.user ? { ...state.user, ...updatedUser } : null,
         })),
     }),
     {
-      name: 'auth-storage',
-    }
-  )
+      name: "auth-storage",
+    },
+  ),
 );
-

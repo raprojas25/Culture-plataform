@@ -1,7 +1,6 @@
 import api from "../utils/api";
 
 export const categoriesService = {
-
   // getAll: async (includeInactive = false) => {
   //   const response = await api.get('/categories', {
   //     params: { include_inactive: includeInactive },

@@ -4,7 +4,7 @@ import { Button } from "../../components/ui/Button";
 import { motion } from "framer-motion";
 import { useForm } from "react-hook-form";
 
-const ForgotForm = ( isLoading ) => {
+const ForgotForm = (isLoading) => {
   const handleForgotPassword = async (data) => {
     setIsLoading(true);
 
@@ -30,7 +30,6 @@ const ForgotForm = ( isLoading ) => {
       setIsLoading(false);
     }
   };
-
 
   return (
     <motion.form
@@ -97,8 +96,7 @@ const ForgotForm = ( isLoading ) => {
         Volver al inicio de sesión
       </Button>
     </motion.form>
+  );
+};
 
-  )
-}
-
-export default ForgotForm
+export default ForgotForm;

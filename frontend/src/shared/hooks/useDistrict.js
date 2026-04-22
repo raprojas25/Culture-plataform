@@ -1,6 +1,6 @@
-import { useState, useCallback } from 'react';
-import { toast } from 'react-hot-toast';
-import { districtService } from '@/shared/services/districtService'
+import { useState, useCallback } from "react";
+import { toast } from "react-hot-toast";
+import { districtService } from "@/shared/services/districtService";
 
 export const useDistricts = () => {
   const [districts, setDistricts] = useState([]);
@@ -15,8 +15,8 @@ export const useDistricts = () => {
       const data = await districtService.getAll();
       setDistricts(data);
     } catch (err) {
-      setError(err.response?.data?.message || 'Error al cargar distritos');
-      toast.error('Error al cargar distritos');
+      setError(err.response?.data?.message || "Error al cargar distritos");
+      toast.error("Error al cargar distritos");
     } finally {
       setLoading(false);
     }
@@ -27,11 +27,11 @@ export const useDistricts = () => {
     setLoading(true);
     try {
       const newDistrict = await districtService.create(categoryData);
-      setDistricts(prev => [...prev, newDistrict]);
-      toast.success('distrito creada exitosamente');
+      setDistricts((prev) => [...prev, newDistrict]);
+      toast.success("distrito creada exitosamente");
       return { success: true, data: newDistrict };
     } catch (err) {
-      const errorMsg = err.response?.data?.message || 'Error al crear distrito';
+      const errorMsg = err.response?.data?.message || "Error al crear distrito";
       toast.error(errorMsg);
       return { success: false, error: errorMsg };
     } finally {
@@ -44,13 +44,14 @@ export const useDistricts = () => {
     setLoading(true);
     try {
       const updatedDistrict = await districtService.update(id, categoryData);
-      setDistricts(prev => 
-        prev.map(cat => cat.id === id ? updatedDistrict : cat)
+      setDistricts((prev) =>
+        prev.map((cat) => (cat.id === id ? updatedDistrict : cat)),
       );
-      toast.success('distrito actualizada exitosamente');
+      toast.success("distrito actualizada exitosamente");
       return { success: true, data: updatedDistrict };
     } catch (err) {
-      const errorMsg = err.response?.data?.message || 'Error al actualizar distrito';
+      const errorMsg =
+        err.response?.data?.message || "Error al actualizar distrito";
       toast.error(errorMsg);
       return { success: false, error: errorMsg };
     } finally {
@@ -63,11 +64,12 @@ export const useDistricts = () => {
     setLoading(true);
     try {
       await districtService.delete(id);
-      setDistricts(prev => prev.filter(cat => cat.id !== id));
-      toast.success('distrito eliminada exitosamente');
+      setDistricts((prev) => prev.filter((cat) => cat.id !== id));
+      toast.success("distrito eliminada exitosamente");
       return { success: true };
     } catch (err) {
-      const errorMsg = err.response?.data?.message || 'Error al eliminar distrito';
+      const errorMsg =
+        err.response?.data?.message || "Error al eliminar distrito";
       toast.error(errorMsg);
       return { success: false, error: errorMsg };
     } finally {
@@ -78,14 +80,17 @@ export const useDistricts = () => {
   // Cambiar estado
   const toggleDistrictStatus = useCallback(async (id, currentStatus) => {
     try {
-      const updatedDistrict = await districtService.toggleStatus(id, !currentStatus);
-      setDistricts(prev =>
-        prev.map(cat => cat.id === id ? updatedDistrict : cat)
+      const updatedDistrict = await districtService.toggleStatus(
+        id,
+        !currentStatus,
       );
-      toast.success(`distrito ${!currentStatus ? 'activada' : 'desactivada'}`);
+      setDistricts((prev) =>
+        prev.map((cat) => (cat.id === id ? updatedDistrict : cat)),
+      );
+      toast.success(`distrito ${!currentStatus ? "activada" : "desactivada"}`);
       return { success: true };
     } catch (err) {
-      toast.error('Error al cambiar estado');
+      toast.error("Error al cambiar estado");
       return { success: false };
     }
   }, []);
@@ -98,6 +103,6 @@ export const useDistricts = () => {
     createDistrict,
     updateDistrict,
     deleteDistrict,
-    toggleDistrictStatus
+    toggleDistrictStatus,
   };
 };

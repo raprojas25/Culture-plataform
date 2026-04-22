@@ -12,7 +12,11 @@ export const Modal = ({ isOpen, onClose, title, children, size = "md" }) => {
 
   return (
     <Transition appear show={isOpen} as={Fragment}>
-      <Dialog as="div" className={`relative z-50 ${sizeClasses[size]}`} onClose={onClose}>
+      <Dialog
+        as="div"
+        className={`relative z-50 ${sizeClasses[size]}`}
+        onClose={onClose}
+      >
         <Transition.Child
           as={Fragment}
           enter="ease-out duration-300"

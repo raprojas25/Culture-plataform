@@ -1,29 +1,23 @@
-import { motion, AnimatePresence } from 'framer-motion'
-import {
+import { motion, AnimatePresence } from "framer-motion";
+import { Facebook, Instagram } from "lucide-react";
 
-  Facebook,
-  Instagram,
-
-} from 'lucide-react'
-
-import { Paragraph } from '@/shared/components/ui/Paragraph'
-import { Heading } from '@/shared/components/ui/Heading'
-import { teamMembers } from '../data/data'
+import { Paragraph } from "@/shared/components/ui/Paragraph";
+import { Heading } from "@/shared/components/ui/Heading";
+import { teamMembers } from "../data/data";
 export const Equipo = () => {
- 
   const staggerContainer = {
     hidden: { opacity: 0 },
     visible: {
       opacity: 1,
       transition: {
-        staggerChildren: 0.2
-      }
-    }
-  }
-const fadeInUp = {
+        staggerChildren: 0.2,
+      },
+    },
+  };
+  const fadeInUp = {
     hidden: { opacity: 0, y: 20 },
-    visible: { opacity: 1, y: 0, transition: { duration: 0.6 } }
-  }
+    visible: { opacity: 1, y: 0, transition: { duration: 0.6 } },
+  };
 
   return (
     <motion.section
@@ -58,8 +52,10 @@ const fadeInUp = {
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"></div>
               <div className="absolute bottom-4 left-4 text-white">
-                <Heading level='h3'>{member.name}</Heading>
-                <Paragraph size='sm' className="opacity-90">{member.role}</Paragraph>
+                <Heading level="h3">{member.name}</Heading>
+                <Paragraph size="sm" className="opacity-90">
+                  {member.role}
+                </Paragraph>
               </div>
             </div>
             <div className="p-6">

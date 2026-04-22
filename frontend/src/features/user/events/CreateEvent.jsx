@@ -1,34 +1,49 @@
-import React, { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { useForm, FormProvider, Controller } from 'react-hook-form';
-import { zodResolver } from '@hookform/resolvers/zod';
-import { z } from 'zod';
-import { motion, AnimatePresence } from 'framer-motion';
-import { MapPin, Save, Upload, Calendar, DollarSign, Tag, FileText, Map } from 'lucide-react';
-import { useEvents } from '@/shared/hooks/useEvents';
-import { Button } from '@/shared/components/ui/Button';
-import Tabs from '@/shared/components/ui/Tabs';
-import { FormField } from '@/shared/components/forms/FormField';
-import { ErrorMessage } from '@/shared/components/forms/ErrorMessage';
-import Select from '@/shared/components/ui/Select';
-import { Label } from '@/shared/components/ui/Label';
-import { useCategories } from '@/shared/hooks/useCategories';
-import { useDistricts } from '@/shared/hooks/useDistrict';
-import { NewSelect } from '@/shared/components/ui/NewSelect';
+import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { useForm, FormProvider, Controller } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { z } from "zod";
+import { motion, AnimatePresence } from "framer-motion";
+import {
+  MapPin,
+  Save,
+  Upload,
+  Calendar,
+  DollarSign,
+  Tag,
+  FileText,
+  Map,
+} from "lucide-react";
+import { useEvents } from "@/shared/hooks/useEvents";
+import { Button } from "@/shared/components/ui/Button";
+import Tabs from "@/shared/components/ui/Tabs";
+import { FormField } from "@/shared/components/forms/FormField";
+import { ErrorMessage } from "@/shared/components/forms/ErrorMessage";
+import Select from "@/shared/components/ui/Select";
+import { Label } from "@/shared/components/ui/Label";
+import { useCategories } from "@/shared/hooks/useCategories";
+import { useDistricts } from "@/shared/hooks/useDistrict";
+import { NewSelect } from "@/shared/components/ui/NewSelect";
 
 const eventSchema = z.object({
-  title: z.string().min(5, 'El título debe tener al menos 5 caracteres'),
-  description: z.string().min(20, 'La descripción debe tener al menos 20 caracteres'),
-  category_id: z.coerce.number().min(1, 'Selecciona una categoría'),
-  start_datetime: z.string().min(1, 'Fecha de inicio requerida'),
-  end_datetime: z.string().min(1, 'Fecha de fin requerida'),
+  title: z.string().min(5, "El título debe tener al menos 5 caracteres"),
+  description: z
+    .string()
+    .min(20, "La descripción debe tener al menos 20 caracteres"),
+  category_id: z.coerce.number().min(1, "Selecciona una categoría"),
+  start_datetime: z.string().min(1, "Fecha de inicio requerida"),
+  end_datetime: z.string().min(1, "Fecha de fin requerida"),
   district_id: z.coerce.number().optional(),
   address: z.string().optional(),
-  price_type: z.enum(['free', 'paid', 'donation']),
+  price_type: z.enum(["free", "paid", "donation"]),
   price_amount: z.coerce.number().optional(),
   featured_level: z.number().min(0).max(3).default(0),
-  status: z.enum(['draft', 'published']).default('draft'),
-  main_image: z.string().url('URL de imagen inválida').optional().or(z.literal('')),
+  status: z.enum(["draft", "published"]).default("draft"),
+  main_image: z
+    .string()
+    .url("URL de imagen inválida")
+    .optional()
+    .or(z.literal("")),
   latitude: z.coerce.number().optional(),
   longitude: z.coerce.number().optional(),
 });
@@ -40,9 +55,9 @@ const tabVariants = {
 };
 
 const tabTransition = {
-  type: 'tween',
+  type: "tween",
   duration: 0.25,
-  ease: 'easeInOut',
+  ease: "easeInOut",
 };
 
 export const CreateEvent = () => {
@@ -60,28 +75,28 @@ export const CreateEvent = () => {
   } = useDistricts();
 
   const { createNewEvent, isLoading } = useEvents();
-  const [activeTab, setActiveTab] = React.useState('basic');
+  const [activeTab, setActiveTab] = React.useState("basic");
   const [filterCategoryData, setFilterCategoryData] = useState([]);
 
   const methods = useForm({
     resolver: zodResolver(eventSchema),
     defaultValues: {
-      title: '',
-      description: '',
-      category_id: '',
-      start_datetime: '',
-      end_datetime: '',
-      district_id: '',
-      address: '',
-      price_type: 'free',
-      price_amount: '',
+      title: "",
+      description: "",
+      category_id: "",
+      start_datetime: "",
+      end_datetime: "",
+      district_id: "",
+      address: "",
+      price_type: "free",
+      price_amount: "",
       featured_level: 0,
-      status: 'draft',
-      main_image: '',
-      latitude: '',
-      longitude: '',
+      status: "draft",
+      main_image: "",
+      latitude: "",
+      longitude: "",
     },
-    mode: 'onTouched',
+    mode: "onTouched",
   });
 
   const {
@@ -97,94 +112,99 @@ export const CreateEvent = () => {
     fetchDistricts();
   }, [fetchCategories, fetchDistricts]);
 
-  const priceType = watch('price_type');
+  const priceType = watch("price_type");
 
   const onSubmit = async (data) => {
     try {
       await createNewEvent(data);
-      navigate('/dashboard/events');
+      navigate("/dashboard/events");
     } catch (error) {
-      console.error('Error creating event:', error);
+      console.error("Error creating event:", error);
     }
   };
 
   const handleSaveDraft = () => {
-    setValue('status', 'draft');
+    setValue("status", "draft");
     handleSubmit(onSubmit)();
   };
 
   const handlePublish = () => {
-    setValue('status', 'published');
+    setValue("status", "published");
     handleSubmit(onSubmit)();
   };
 
   const handleNext = () => {
-    if (activeTab === 'basic') {
-      const isValid = methods.trigger(['title', 'description', 'category_id', 'price_type']);
+    if (activeTab === "basic") {
+      const isValid = methods.trigger([
+        "title",
+        "description",
+        "category_id",
+        "price_type",
+      ]);
       isValid.then((valid) => {
-        if (valid) goToTab('next');
+        if (valid) goToTab("next");
       });
-    } else if (activeTab === 'location') {
-      goToTab('next');
-    } else if (activeTab === 'media') {
-      goToTab('next');
+    } else if (activeTab === "location") {
+      goToTab("next");
+    } else if (activeTab === "media") {
+      goToTab("next");
     }
   };
 
   const tabs = [
-    { id: 'basic', label: 'Información Básica' },
-    { id: 'location', label: 'Ubicación' },
-    { id: 'media', label: 'Multimedia' },
-    { id: 'settings', label: 'Configuración' },
+    { id: "basic", label: "Información Básica" },
+    { id: "location", label: "Ubicación" },
+    { id: "media", label: "Multimedia" },
+    { id: "settings", label: "Configuración" },
   ];
 
-  const tabOrder = ['basic', 'location', 'media', 'settings'];
+  const tabOrder = ["basic", "location", "media", "settings"];
   const currentIndex = tabOrder.indexOf(activeTab);
 
   const goToTab = (direction) => {
-    const newIndex = direction === 'next' ? currentIndex + 1 : currentIndex - 1;
+    const newIndex = direction === "next" ? currentIndex + 1 : currentIndex - 1;
     if (newIndex >= 0 && newIndex < tabOrder.length) {
       setActiveTab(tabOrder[newIndex]);
     }
   };
 
   const testData = {
-  "id": 4,
-  "name": "Arte",
-  "icon": "🎨",
-  "color": "#96CEB4",
-  "created_at": "2026-03-14T10:25:32.321Z",
-  "description": "Exposiciones de arte y galerías",
-  "is_active": true,
-  "events_count": 0
-}
+    id: 4,
+    name: "Arte",
+    icon: "🎨",
+    color: "#96CEB4",
+    created_at: "2026-03-14T10:25:32.321Z",
+    description: "Exposiciones de arte y galerías",
+    is_active: true,
+    events_count: 0,
+  };
   const categoriesFalso = [
-    { label: 'Conciertos', value: '1' },
-    { label: 'Teatro', value: '2' },
-    { label: 'Deportes', value: '3' },
+    { label: "Conciertos", value: "1" },
+    { label: "Teatro", value: "2" },
+    { label: "Deportes", value: "3" },
   ];
   const districtsFalso = [
-    { label: 'Miraflores', value: '1' },
-    { label: 'Barranco', value: '2' },
-    { label: 'San Isidro', value: '3' },
+    { label: "Miraflores", value: "1" },
+    { label: "Barranco", value: "2" },
+    { label: "San Isidro", value: "3" },
   ];
-  
+
   const priceTypeOptions = [
-    { label: 'Gratis', value: 'free' },
-    { label: 'Pago', value: 'paid' },
-    { label: 'Donación', value: 'donation' },
+    { label: "Gratis", value: "free" },
+    { label: "Pago", value: "paid" },
+    { label: "Donación", value: "donation" },
   ];
 
   const featuredLevelOptions = [
-    { label: 'Normal', value: '0' },
-    { label: 'Destacado', value: '1' },
-    { label: 'Muy Destacado', value: '2' },
-    { label: 'Super Destacado', value: '3' },
+    { label: "Normal", value: "0" },
+    { label: "Destacado", value: "1" },
+    { label: "Muy Destacado", value: "2" },
+    { label: "Super Destacado", value: "3" },
   ];
 
   const statusOptions = [
-    { label: 'Borrador', value: 'draft' },
-    { label: 'Publicado', value: 'published' },
+    { label: "Borrador", value: "draft" },
+    { label: "Publicado", value: "published" },
   ];
 
   return (
@@ -228,7 +248,7 @@ export const CreateEvent = () => {
       <FormProvider {...methods}>
         <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
           <AnimatePresence mode="wait">
-            {activeTab === 'basic' && (
+            {activeTab === "basic" && (
               <motion.div
                 key="basic"
                 variants={tabVariants}
@@ -249,7 +269,7 @@ export const CreateEvent = () => {
                     // icon={FileText}
                     error={errors.title}
                     isLoading={isLoading}
-                    {...register('title')}
+                    {...register("title")}
                   />
                 </div>
                 <div className="md:col-span-2">
@@ -263,16 +283,14 @@ export const CreateEvent = () => {
                     placeholder="Describe tu evento en detalle..."
                     error={errors.description}
                     isLoading={isLoading}
-                    {...register('description')}
+                    {...register("description")}
                   />
                 </div>
-                <div className='space-y-2'>
+                <div className="space-y-2">
                   <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">
                     Categoría *
                   </label>
-                  <Label>
-                    Categoría *
-                  </Label>
+                  <Label>Categoría *</Label>
                   <Controller
                     name="category_id"
                     control={methods.control}
@@ -313,10 +331,10 @@ export const CreateEvent = () => {
                     <ErrorMessage message={errors.price_type.message} />
                   )}
                 </div>
-                {priceType === 'paid' && (
+                {priceType === "paid" && (
                   <motion.div
                     initial={{ opacity: 0, height: 0 }}
-                    animate={{ opacity: 1, height: 'auto' }}
+                    animate={{ opacity: 1, height: "auto" }}
                     exit={{ opacity: 0, height: 0 }}
                     transition={tabTransition}
                   >
@@ -330,14 +348,14 @@ export const CreateEvent = () => {
                       placeholder="0.00"
                       error={errors.price_amount}
                       isLoading={isLoading}
-                      {...register('price_amount')}
+                      {...register("price_amount")}
                     />
                   </motion.div>
                 )}
               </motion.div>
             )}
 
-            {activeTab === 'location' && (
+            {activeTab === "location" && (
               <motion.div
                 key="location"
                 variants={tabVariants}
@@ -389,7 +407,7 @@ export const CreateEvent = () => {
                     // icon={MapPin}
                     error={errors.address}
                     isLoading={isLoading}
-                    {...register('address')}
+                    {...register("address")}
                   />
                 </div>
                 <div>
@@ -403,7 +421,7 @@ export const CreateEvent = () => {
                     placeholder="-12.0464"
                     error={errors.latitude}
                     isLoading={isLoading}
-                    {...register('latitude')}
+                    {...register("latitude")}
                   />
                 </div>
                 <div>
@@ -417,7 +435,7 @@ export const CreateEvent = () => {
                     placeholder="-77.0428"
                     error={errors.longitude}
                     isLoading={isLoading}
-                    {...register('longitude')}
+                    {...register("longitude")}
                   />
                 </div>
                 <div className="md:col-span-2">
@@ -433,7 +451,7 @@ export const CreateEvent = () => {
               </motion.div>
             )}
 
-            {activeTab === 'media' && (
+            {activeTab === "media" && (
               <motion.div
                 key="media"
                 variants={tabVariants}
@@ -451,7 +469,9 @@ export const CreateEvent = () => {
                     whileHover={{ scale: 1.01 }}
                     whileTap={{ scale: 0.99 }}
                     className="border-2 border-dashed border-gray-300 dark:border-gray-700 rounded-lg p-8 text-center cursor-pointer"
-                    onClick={() => document.getElementById('file-upload')?.click()}
+                    onClick={() =>
+                      document.getElementById("file-upload")?.click()
+                    }
                   >
                     <Upload className="w-12 h-12 text-gray-400 mx-auto mb-4" />
                     <p className="text-gray-600 dark:text-gray-400 mb-2">
@@ -482,13 +502,13 @@ export const CreateEvent = () => {
                     // icon={Upload}
                     error={errors.main_image}
                     isLoading={isLoading}
-                    {...register('main_image')}
+                    {...register("main_image")}
                   />
                 </div>
               </motion.div>
             )}
 
-            {activeTab === 'settings' && (
+            {activeTab === "settings" && (
               <motion.div
                 key="settings"
                 variants={tabVariants}
@@ -508,7 +528,7 @@ export const CreateEvent = () => {
                     // icon={Calendar}
                     error={errors.start_datetime}
                     isLoading={isLoading}
-                    {...register('start_datetime')}
+                    {...register("start_datetime")}
                   />
                 </div>
                 <div>
@@ -521,7 +541,7 @@ export const CreateEvent = () => {
                     // icon={Calendar}
                     error={errors.end_datetime}
                     isLoading={isLoading}
-                    {...register('end_datetime')}
+                    {...register("end_datetime")}
                   />
                 </div>
                 <div>
@@ -572,26 +592,18 @@ export const CreateEvent = () => {
             <Button
               type="button"
               variant="secondary"
-              onClick={() => goToTab('prev')}
+              onClick={() => goToTab("prev")}
               disabled={currentIndex === 0}
             >
               Anterior
             </Button>
             <div className="flex space-x-3">
-              {activeTab !== 'settings' ? (
-                <Button
-                  type="button"
-                  variant="primary"
-                  onClick={handleNext}
-                >
+              {activeTab !== "settings" ? (
+                <Button type="button" variant="primary" onClick={handleNext}>
                   Siguiente
                 </Button>
               ) : (
-                <Button
-                  type="submit"
-                  variant="primary"
-                  isLoading={isLoading}
-                >
+                <Button type="submit" variant="primary" isLoading={isLoading}>
                   Crear Evento
                 </Button>
               )}
@@ -602,4 +614,3 @@ export const CreateEvent = () => {
     </div>
   );
 };
-

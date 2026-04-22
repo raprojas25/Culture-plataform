@@ -1,9 +1,9 @@
-import React from 'react';
-import { Link, useNavigate } from 'react-router-dom';
-import { CalendarDays, Search, Bell, User } from 'lucide-react';
-import { ThemeToggle } from '../../components/ui/ThemeToggle';
-import { useAuthStore } from '../../stores/authStore';
-import { Button } from '../../components/ui/Button';
+import React from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { CalendarDays, Search, Bell, User } from "lucide-react";
+import { ThemeToggle } from "../../components/ui/ThemeToggle";
+import { useAuthStore } from "../../stores/authStore";
+import { Button } from "../../components/ui/Button";
 // import { UserAvatar } from '@/components/features/UserAvatar';
 
 export const Header = () => {
@@ -25,7 +25,7 @@ export const Header = () => {
 
           <div className="flex items-center space-x-4">
             <ThemeToggle />
-            
+
             {isAuthenticated ? (
               <>
                 <div className="relative">
@@ -46,16 +46,10 @@ export const Header = () => {
               </>
             ) : (
               <div className="flex items-center space-x-2">
-                <Button
-                  variant="outline"
-                  onClick={() => navigate('/login')}
-                >
+                <Button variant="outline" onClick={() => navigate("/login")}>
                   Iniciar Sesión
                 </Button>
-                <Button
-                  variant="primary"
-                  onClick={() => navigate('/register')}
-                >
+                <Button variant="primary" onClick={() => navigate("/register")}>
                   Registrarse
                 </Button>
               </div>
@@ -66,4 +60,3 @@ export const Header = () => {
     </header>
   );
 };
-

@@ -1,25 +1,25 @@
-import React, { useEffect, useState } from 'react';
-import { useParams, Link } from 'react-router-dom';
-import { 
-  Calendar, 
-  MapPin, 
-  DollarSign, 
-  Heart, 
-  Share2, 
+import React, { useEffect, useState } from "react";
+import { useParams, Link } from "react-router-dom";
+import {
+  Calendar,
+  MapPin,
+  DollarSign,
+  Heart,
+  Share2,
   Users,
   Clock,
   ArrowLeft,
-  Edit
-} from 'lucide-react';
-import { format } from 'date-fns';
-import { es } from 'date-fns/locale';
-import { useEvents } from '../../hooks/useEvents';
-import { useAuthStore } from '../../stores/authStore';
-import { Button } from '../../components/ui/Button';
-import { Badge } from '../../components/ui/Badge';
-import { Swiper, SwiperSlide } from 'swiper/react';
-import 'swiper/css';
-import { Pagination, Navigation } from 'swiper/modules';
+  Edit,
+} from "lucide-react";
+import { format } from "date-fns";
+import { es } from "date-fns/locale";
+import { useEvents } from "../../hooks/useEvents";
+import { useAuthStore } from "../../stores/authStore";
+import { Button } from "../../components/ui/Button";
+import { Badge } from "../../components/ui/Badge";
+import { Swiper, SwiperSlide } from "swiper/react";
+import "swiper/css";
+import { Pagination, Navigation } from "swiper/modules";
 
 export const EventDetails = () => {
   const { id } = useParams();
@@ -41,7 +41,7 @@ export const EventDetails = () => {
       const data = await fetchEventById(Number(id));
       setEvent(data);
     } catch (error) {
-      console.error('Error loading event:', error);
+      console.error("Error loading event:", error);
     } finally {
       setLoading(false);
     }
@@ -61,7 +61,7 @@ export const EventDetails = () => {
       });
     } else {
       navigator.clipboard.writeText(window.location.href);
-      alert('Enlace copiado al portapapeles');
+      alert("Enlace copiado al portapapeles");
     }
   };
 
@@ -80,7 +80,10 @@ export const EventDetails = () => {
           Evento no encontrado
         </h2>
         <Link to="/events">
-          <Button variant="primary" leftIcon={<ArrowLeft className="w-4 h-4" />}>
+          <Button
+            variant="primary"
+            leftIcon={<ArrowLeft className="w-4 h-4" />}
+          >
             Volver a eventos
           </Button>
         </Link>
@@ -127,7 +130,10 @@ export const EventDetails = () => {
       <div className="relative rounded-2xl overflow-hidden">
         <div className="aspect-w-16 aspect-h-7">
           <img
-            src={event.main_image || 'https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=1200'}
+            src={
+              event.main_image ||
+              "https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=1200"
+            }
             alt={event.title}
             className="w-full h-96 object-cover"
           />
@@ -146,9 +152,13 @@ export const EventDetails = () => {
                 <div className="flex items-center">
                   <Calendar className="w-5 h-5 mr-2" />
                   <span>
-                    {format(new Date(event.start_datetime), "EEEE d 'de' MMMM, yyyy", {
-                      locale: es,
-                    })}
+                    {format(
+                      new Date(event.start_datetime),
+                      "EEEE d 'de' MMMM, yyyy",
+                      {
+                        locale: es,
+                      },
+                    )}
                   </span>
                 </div>
                 <div className="flex items-center">
@@ -159,7 +169,10 @@ export const EventDetails = () => {
             </div>
             {user?.id === event.organizer_id && (
               <Link to={`/events/edit/${event.id}`}>
-                <Button variant="primary" leftIcon={<Edit className="w-4 h-4" />}>
+                <Button
+                  variant="primary"
+                  leftIcon={<Edit className="w-4 h-4" />}
+                >
                   Editar Evento
                 </Button>
               </Link>
@@ -223,11 +236,16 @@ export const EventDetails = () => {
                 <Calendar className="w-5 h-5 text-gray-500 dark:text-gray-400 mr-3" />
                 <div>
                   <p className="font-medium text-gray-900 dark:text-white">
-                    {format(new Date(event.start_datetime), "PPP", { locale: es })}
+                    {format(new Date(event.start_datetime), "PPP", {
+                      locale: es,
+                    })}
                   </p>
                   <p className="text-sm text-gray-600 dark:text-gray-400">
-                    {format(new Date(event.start_datetime), 'p', { locale: es })} -{' '}
-                    {format(new Date(event.end_datetime), 'p', { locale: es })}
+                    {format(new Date(event.start_datetime), "p", {
+                      locale: es,
+                    })}{" "}
+                    -{" "}
+                    {format(new Date(event.end_datetime), "p", { locale: es })}
                   </p>
                 </div>
               </div>
@@ -248,16 +266,16 @@ export const EventDetails = () => {
                 <DollarSign className="w-5 h-5 text-gray-500 dark:text-gray-400 mr-3" />
                 <div>
                   <p className="font-medium text-gray-900 dark:text-white">
-                    {event.price_type === 'free'
-                      ? 'Gratis'
-                      : event.price_type === 'paid'
-                      ? `S/ ${event.price_amount?.toFixed(2)}`
-                      : 'Donación'}
+                    {event.price_type === "free"
+                      ? "Gratis"
+                      : event.price_type === "paid"
+                        ? `S/ ${event.price_amount?.toFixed(2)}`
+                        : "Donación"}
                   </p>
                   <p className="text-sm text-gray-600 dark:text-gray-400">
-                    {event.price_type === 'free'
-                      ? 'Entrada libre'
-                      : 'Compra tu entrada'}
+                    {event.price_type === "free"
+                      ? "Entrada libre"
+                      : "Compra tu entrada"}
                   </p>
                 </div>
               </div>
@@ -284,11 +302,13 @@ export const EventDetails = () => {
                 <div className="flex items-center">
                   <Heart
                     className={`w-5 h-5 mr-2 cursor-pointer ${
-                      isLiked ? 'fill-red-500 text-red-500' : 'text-gray-400'
+                      isLiked ? "fill-red-500 text-red-500" : "text-gray-400"
                     }`}
                     onClick={handleLike}
                   />
-                  <span className="font-semibold">{event.likes_count || 0}</span>
+                  <span className="font-semibold">
+                    {event.likes_count || 0}
+                  </span>
                 </div>
               </div>
 
@@ -306,9 +326,9 @@ export const EventDetails = () => {
                       // Implement ticket purchase
                     }}
                   >
-                    {event.price_type === 'free'
-                      ? 'Registrarse Gratis'
-                      : 'Comprar Entrada'}
+                    {event.price_type === "free"
+                      ? "Registrarse Gratis"
+                      : "Comprar Entrada"}
                   </Button>
                   <Button
                     variant="outline"
@@ -350,4 +370,3 @@ export const EventDetails = () => {
     </div>
   );
 };
-

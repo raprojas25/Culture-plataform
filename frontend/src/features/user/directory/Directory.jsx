@@ -1,5 +1,5 @@
-import { useState } from 'react'
-import { motion } from 'framer-motion'
+import { useState } from "react";
+import { motion } from "framer-motion";
 import {
   Search,
   Filter,
@@ -11,46 +11,87 @@ import {
   Music,
   Camera,
   Utensils,
-  Truck
-} from 'lucide-react'
+  Truck,
+} from "lucide-react";
 
 const Directory = () => {
-  const [searchTerm, setSearchTerm] = useState('')
-  const [selectedCategory, setSelectedCategory] = useState('')
+  const [searchTerm, setSearchTerm] = useState("");
+  const [selectedCategory, setSelectedCategory] = useState("");
 
   const categories = [
-    { id: 'bands', name: 'Bandas', icon: <Music />, color: 'bg-purple-100 text-purple-600' },
-    { id: 'djs', name: 'DJs', icon: <Music />, color: 'bg-blue-100 text-blue-600' },
-    { id: 'sound', name: 'Sonido', icon: <Music />, color: 'bg-green-100 text-green-600' },
-    { id: 'chairs', name: 'Sillas/Toldos', icon: <Truck />, color: 'bg-yellow-100 text-yellow-600' },
-    { id: 'food', name: 'Comida', icon: <Utensils />, color: 'bg-red-100 text-red-600' },
-    { id: 'artisans', name: 'Artesanos', icon: <Utensils />, color: 'bg-orange-100 text-orange-600' },
-    { id: 'photographers', name: 'Fotógrafos', icon: <Camera />, color: 'bg-pink-100 text-pink-600' },
-    { id: 'producers', name: 'Productores', icon: <Truck />, color: 'bg-indigo-100 text-indigo-600' }
-  ]
+    {
+      id: "bands",
+      name: "Bandas",
+      icon: <Music />,
+      color: "bg-purple-100 text-purple-600",
+    },
+    {
+      id: "djs",
+      name: "DJs",
+      icon: <Music />,
+      color: "bg-blue-100 text-blue-600",
+    },
+    {
+      id: "sound",
+      name: "Sonido",
+      icon: <Music />,
+      color: "bg-green-100 text-green-600",
+    },
+    {
+      id: "chairs",
+      name: "Sillas/Toldos",
+      icon: <Truck />,
+      color: "bg-yellow-100 text-yellow-600",
+    },
+    {
+      id: "food",
+      name: "Comida",
+      icon: <Utensils />,
+      color: "bg-red-100 text-red-600",
+    },
+    {
+      id: "artisans",
+      name: "Artesanos",
+      icon: <Utensils />,
+      color: "bg-orange-100 text-orange-600",
+    },
+    {
+      id: "photographers",
+      name: "Fotógrafos",
+      icon: <Camera />,
+      color: "bg-pink-100 text-pink-600",
+    },
+    {
+      id: "producers",
+      name: "Productores",
+      icon: <Truck />,
+      color: "bg-indigo-100 text-indigo-600",
+    },
+  ];
 
   const services = [
     {
       id: 1,
-      name: 'Banda Los Andinos',
-      category: 'bands',
-      description: 'Música tradicional andina para todas tus fiestas',
-      phone: '987654321',
-      location: 'Centro',
-      price: 'S/ 800',
+      name: "Banda Los Andinos",
+      category: "bands",
+      description: "Música tradicional andina para todas tus fiestas",
+      phone: "987654321",
+      location: "Centro",
+      price: "S/ 800",
       rating: 4.8,
       reviews: 24,
-      featured: true
+      featured: true,
     },
     // ... más servicios
-  ]
+  ];
 
   return (
     <div className="container mx-auto px-4 py-12">
       <div className="text-center mb-12">
         <h1 className="text-4xl font-bold mb-4">Directorio Local</h1>
         <p className="text-gray-600 max-w-2xl mx-auto">
-          Encuentra los mejores servicios para tu evento. Desde bandas hasta decoración.
+          Encuentra los mejores servicios para tu evento. Desde bandas hasta
+          decoración.
         </p>
       </div>
 
@@ -77,7 +118,7 @@ const Directory = () => {
             Filtros
           </button>
         </div>
-        
+
         <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-8 gap-4">
           {categories.map((category) => (
             <motion.button
@@ -87,8 +128,8 @@ const Directory = () => {
               onClick={() => setSelectedCategory(category.id)}
               className={`flex flex-col items-center p-4 rounded-xl border-2 ${
                 selectedCategory === category.id
-                  ? 'border-red-500 bg-red-50'
-                  : 'border-gray-200 hover:border-red-300'
+                  ? "border-red-500 bg-red-50"
+                  : "border-gray-200 hover:border-red-300"
               }`}
             >
               <div className={`p-3 rounded-full ${category.color} mb-2`}>
@@ -128,7 +169,9 @@ const Directory = () => {
                 <div className="flex items-center bg-gray-100 px-3 py-1 rounded-full">
                   <Star size={16} className="text-yellow-500 mr-1" />
                   <span className="font-bold">{service.rating}</span>
-                  <span className="text-gray-500 text-sm ml-1">({service.reviews})</span>
+                  <span className="text-gray-500 text-sm ml-1">
+                    ({service.reviews})
+                  </span>
                 </div>
               </div>
 
@@ -140,7 +183,9 @@ const Directory = () => {
                 <div className="flex items-center justify-between">
                   <div className="flex items-center text-green-600">
                     <DollarSign size={20} />
-                    <span className="font-bold text-lg ml-1">{service.price}</span>
+                    <span className="font-bold text-lg ml-1">
+                      {service.price}
+                    </span>
                     <span className="text-gray-500 text-sm ml-1">/evento</span>
                   </div>
                   <div className="text-gray-500 text-sm">
@@ -174,8 +219,8 @@ const Directory = () => {
                       size={14}
                       className={`${
                         star <= Math.floor(service.rating)
-                          ? 'text-yellow-500 fill-yellow-500'
-                          : 'text-gray-300'
+                          ? "text-yellow-500 fill-yellow-500"
+                          : "text-gray-300"
                       }`}
                     />
                   ))}
@@ -196,7 +241,9 @@ const Directory = () => {
         className="mt-16 bg-gradient-to-r from-red-600 to-orange-500 rounded-2xl p-8 text-white"
       >
         <div className="max-w-3xl mx-auto text-center">
-          <h2 className="text-3xl font-bold mb-4">¿Eres un proveedor de servicios?</h2>
+          <h2 className="text-3xl font-bold mb-4">
+            ¿Eres un proveedor de servicios?
+          </h2>
           <p className="text-xl mb-8 opacity-90">
             Aumenta tu visibilidad y consigue más clientes
           </p>
@@ -214,7 +261,7 @@ const Directory = () => {
         </div>
       </motion.div>
     </div>
-  )
-}
+  );
+};
 
-export default Directory
+export default Directory;

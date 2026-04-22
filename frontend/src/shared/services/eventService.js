@@ -1,8 +1,8 @@
-import api from '../utils/api';
+import api from "../utils/api";
 
 export const eventService = {
   getEvents: async (filters) => {
-    const response = await api.get('/events', { params: filters });
+    const response = await api.get("/events", { params: filters });
     return response.data;
   },
 
@@ -12,7 +12,7 @@ export const eventService = {
   },
 
   createEvent: async (eventData) => {
-    const response = await api.post('/events', eventData);
+    const response = await api.post("/events", eventData);
     return response.data;
   },
 
@@ -47,13 +47,12 @@ export const eventService = {
   },
 
   getUpcomingEvents: async (limit = 5) => {
-    const response = await api.get('/events/upcoming', { params: { limit } });
+    const response = await api.get("/events/upcoming", { params: { limit } });
     return response.data;
   },
 
   getFeaturedEvents: async () => {
-    const response = await api.get('/events/featured');
+    const response = await api.get("/events/featured");
     return response.data;
   },
 };
-

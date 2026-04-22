@@ -100,7 +100,8 @@ const Home = () => {
             Eventos y Fiestas en [Provincia]
           </motion.h1>
           <p className="text-xl mb-10 max-w-2xl mx-auto">
-            Descubre y comparte los eventos culturales, fiestas patronales y actividades más importantes de tu localidad.
+            Descubre y comparte los eventos culturales, fiestas patronales y
+            actividades más importantes de tu localidad.
           </p>
 
           <div className="flex flex-col md:flex-row gap-4 justify-center items-center ">

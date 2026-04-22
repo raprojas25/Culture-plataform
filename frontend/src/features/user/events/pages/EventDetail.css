@@ -2,13 +2,13 @@
 
 /* Ajustes para el mapa de Leaflet */
 .leaflet-container {
-  font-family: 'Inter', sans-serif;
+  font-family: "Inter", sans-serif;
   border-radius: 0.75rem;
   z-index: 1;
 }
 
 .leaflet-popup-content {
-  font-family: 'Inter', sans-serif;
+  font-family: "Inter", sans-serif;
   font-size: 14px;
 }
 
@@ -90,7 +90,9 @@
 }
 
 .similar-event-card:hover {
-  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+  box-shadow:
+    0 20px 25px -5px rgba(0, 0, 0, 0.1),
+    0 10px 10px -5px rgba(0, 0, 0, 0.04);
 }
 
 /* Botones de acción flotantes */
@@ -140,12 +142,12 @@
   .no-print {
     display: none !important;
   }
-  
+
   .event-detail-print {
     font-size: 12pt;
     line-height: 1.5;
   }
-  
+
   .leaflet-container {
     height: 400px !important;
   }
@@ -192,7 +194,7 @@ html {
   html {
     scroll-behavior: auto;
   }
-  
+
   .gallery-thumbnail,
   .similar-event-card,
   .event-tag,
@@ -237,12 +239,12 @@ html {
   .event-title {
     font-size: 1.5rem;
   }
-  
+
   .event-stats {
     flex-wrap: wrap;
     gap: 1rem;
   }
-  
+
   .event-stats > div {
     flex: 1 0 45%;
   }
@@ -266,6 +268,10 @@ html {
 }
 
 @keyframes spin {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
 }

@@ -1,7 +1,7 @@
 // frontend/src/context/AuthContext.jsx
-import { createContext, useContext, useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
-import authService from '../services/authService';
+import { createContext, useContext, useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import authService from "../services/authService";
 
 const AuthContext = createContext({});
 
@@ -24,10 +24,10 @@ export const AuthProvider = ({ children }) => {
   const login = async (email, password) => {
     try {
       const result = await authService.login(email, password);
-      
-      localStorage.setItem('token', result.token);
-      localStorage.setItem('user', JSON.stringify(result.user));
-      
+
+      localStorage.setItem("token", result.token);
+      localStorage.setItem("user", JSON.stringify(result.user));
+
       setUser(result.user);
       return { success: true };
     } catch (error) {
@@ -47,7 +47,7 @@ export const AuthProvider = ({ children }) => {
   const logout = () => {
     authService.logout();
     setUser(null);
-    navigate('/login');
+    navigate("/login");
   };
 
   return (

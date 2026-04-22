@@ -1,12 +1,12 @@
-import React, { useState, useEffect } from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
-import { 
-  Calendar, 
-  MapPin, 
-  Clock, 
-  DollarSign, 
-  Users, 
-  Star, 
+import React, { useState, useEffect } from "react";
+import { useParams, useNavigate } from "react-router-dom";
+import {
+  Calendar,
+  MapPin,
+  Clock,
+  DollarSign,
+  Users,
+  Star,
   ChevronLeft,
   Share2,
   Heart,
@@ -29,10 +29,10 @@ import {
   Ticket,
   UserCircle,
   Info,
-  AlertCircle
-} from 'lucide-react';
+  AlertCircle,
+} from "lucide-react";
 // import { eventService } from '../services/api';
-import { Tab } from '@headlessui/react';
+import { Tab } from "@headlessui/react";
 
 const EventDetails = () => {
   const { id } = useParams();
@@ -43,7 +43,7 @@ const EventDetails = () => {
   const [isFavorite, setIsFavorite] = useState(false);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [darkMode, setDarkMode] = useState(() => {
-    const saved = localStorage.getItem('darkMode');
+    const saved = localStorage.getItem("darkMode");
     return saved ? JSON.parse(saved) : false;
   });
 
@@ -55,97 +55,152 @@ const EventDetails = () => {
     condorViewing: "6:00 AM - 10:00 AM",
     hotSprings: [
       { name: "La Calera", temp: "38°C", distance: "3.5 km" },
-      { name: "Chacapi", temp: "35°C", distance: "5 km" }
+      { name: "Chacapi", temp: "35°C", distance: "5 km" },
     ],
     viewpoints: [
       { name: "Cruz del Cóndor", altitude: "3,287 msnm" },
       { name: "Mirador de Tapay", altitude: "3,500 msnm" },
-      { name: "Antahuilque", altitude: "4,100 msnm" }
+      { name: "Antahuilque", altitude: "4,100 msnm" },
     ],
     traditionalDishes: [
       "Chuño colqueño",
       "Cuy chactado",
       "Rocoto relleno",
-      "Adobo arequipeño"
-    ]
+      "Adobo arequipeño",
+    ],
   };
 
   // Toggle dark mode
   useEffect(() => {
     if (darkMode) {
-      document.documentElement.classList.add('dark');
+      document.documentElement.classList.add("dark");
     } else {
-      document.documentElement.classList.remove('dark');
+      document.documentElement.classList.remove("dark");
     }
-    localStorage.setItem('darkMode', JSON.stringify(darkMode));
+    localStorage.setItem("darkMode", JSON.stringify(darkMode));
   }, [darkMode]);
 
   // Fetch evento
 
   const data = {
-              id: id || "1",
-              title: "Festival del Cóndor en el Cañón del Colca",
-              description: "Celebración ancestral que rinde homenaje al majestuoso cóndor andino, símbolo del Valle del Colca. Evento que combina tradiciones milenarias con expresiones culturales contemporáneas.",
-              short_description: "Vive la magia del Colca en su máximo esplendor",
-              category_name: "Festival Cultural",
-              category_id: 1,
-              start_datetime: "2025-06-24 06:00:00",
-              end_datetime: "2025-06-26 22:00:00",
-              address: "Cruz del Cóndor, Valle del Colca, Caylloma",
-              district_id: 3,
-              district_name: "Caylloma",
-              latitude: -15.6394,
-              longitude: -71.6392,
-              price_type: "free",
-              price: 0,
-              featured_level: 3,
-              capacity: 500,
-              available_seats: 320,
-              status: "published",
-              main_image: "https://images.unsplash.com/photo-1578662996442-48f60103fc96?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80",
-              organizer_name: "Comunidad Campesina del Colca",
-              organizer_email: "colca@cultura.pe",
-              images: [
-                { url: "https://images.unsplash.com/photo-1578662996442-48f60103fc96?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80", is_main: true },
-                { url: "https://images.unsplash.com/photo-1598894597313-b7e5d7e9b3f8?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80" },
-                { url: "https://images.unsplash.com/photo-1585504231056-20df6a9b5e8a?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80" }
-              ],
-              details: [
-                { section: "schedule", title: "06:00 AM", content: "Ceremonia ancestral de saludo al sol", order: 1 },
-                { section: "schedule", title: "08:00 AM", content: "Avistamiento de cóndores en Cruz del Cóndor", order: 2 },
-                { section: "schedule", title: "10:00 AM", content: "Feria artesanal de productos típicos", order: 3 },
-                { section: "schedule", title: "02:00 PM", content: "Demonstración de tejidos andinos", order: 4 },
-                { section: "schedule", title: "04:00 PM", content: "Danzas tradicionales: Wititi y Carnaval", order: 5 },
-                { section: "recommendations", content: "Llevar ropa abrigadora, protector solar y cámara fotográfica", order: 1 },
-                { section: "recommendations", content: "Aclimatarse 1-2 días antes por la altura", order: 2 },
-                { section: "recommendations", content: "Respetar las tradiciones y espacios sagrados", order: 3 },
-                { section: "important_info", content: "Altitud máxima: 4,910 msnm. Se recomienda chequeo médico previo", order: 1 },
-                { section: "important_info", content: "Prohibido alimentar a los cóndores", order: 2 }
-              ],
-              contact: {
-                name: "Comité de Turismo del Colca",
-                phone: "+51 987 654 321",
-                email: "turismo@colcavalley.pe",
-                website: "www.colcavalley.pe"
-              }
-            };
-setEvent(data);
-  
+    id: id || "1",
+    title: "Festival del Cóndor en el Cañón del Colca",
+    description:
+      "Celebración ancestral que rinde homenaje al majestuoso cóndor andino, símbolo del Valle del Colca. Evento que combina tradiciones milenarias con expresiones culturales contemporáneas.",
+    short_description: "Vive la magia del Colca en su máximo esplendor",
+    category_name: "Festival Cultural",
+    category_id: 1,
+    start_datetime: "2025-06-24 06:00:00",
+    end_datetime: "2025-06-26 22:00:00",
+    address: "Cruz del Cóndor, Valle del Colca, Caylloma",
+    district_id: 3,
+    district_name: "Caylloma",
+    latitude: -15.6394,
+    longitude: -71.6392,
+    price_type: "free",
+    price: 0,
+    featured_level: 3,
+    capacity: 500,
+    available_seats: 320,
+    status: "published",
+    main_image:
+      "https://images.unsplash.com/photo-1578662996442-48f60103fc96?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80",
+    organizer_name: "Comunidad Campesina del Colca",
+    organizer_email: "colca@cultura.pe",
+    images: [
+      {
+        url: "https://images.unsplash.com/photo-1578662996442-48f60103fc96?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80",
+        is_main: true,
+      },
+      {
+        url: "https://images.unsplash.com/photo-1598894597313-b7e5d7e9b3f8?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80",
+      },
+      {
+        url: "https://images.unsplash.com/photo-1585504231056-20df6a9b5e8a?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80",
+      },
+    ],
+    details: [
+      {
+        section: "schedule",
+        title: "06:00 AM",
+        content: "Ceremonia ancestral de saludo al sol",
+        order: 1,
+      },
+      {
+        section: "schedule",
+        title: "08:00 AM",
+        content: "Avistamiento de cóndores en Cruz del Cóndor",
+        order: 2,
+      },
+      {
+        section: "schedule",
+        title: "10:00 AM",
+        content: "Feria artesanal de productos típicos",
+        order: 3,
+      },
+      {
+        section: "schedule",
+        title: "02:00 PM",
+        content: "Demonstración de tejidos andinos",
+        order: 4,
+      },
+      {
+        section: "schedule",
+        title: "04:00 PM",
+        content: "Danzas tradicionales: Wititi y Carnaval",
+        order: 5,
+      },
+      {
+        section: "recommendations",
+        content: "Llevar ropa abrigadora, protector solar y cámara fotográfica",
+        order: 1,
+      },
+      {
+        section: "recommendations",
+        content: "Aclimatarse 1-2 días antes por la altura",
+        order: 2,
+      },
+      {
+        section: "recommendations",
+        content: "Respetar las tradiciones y espacios sagrados",
+        order: 3,
+      },
+      {
+        section: "important_info",
+        content:
+          "Altitud máxima: 4,910 msnm. Se recomienda chequeo médico previo",
+        order: 1,
+      },
+      {
+        section: "important_info",
+        content: "Prohibido alimentar a los cóndores",
+        order: 2,
+      },
+    ],
+    contact: {
+      name: "Comité de Turismo del Colca",
+      phone: "+51 987 654 321",
+      email: "turismo@colcavalley.pe",
+      website: "www.colcavalley.pe",
+    },
+  };
+  setEvent(data);
+
   const formatDate = (dateString) => {
     const date = new Date(dateString);
-    return date.toLocaleDateString('es-PE', {
-      weekday: 'long',
-      year: 'numeric',
-      month: 'long',
-      day: 'numeric'
+    return date.toLocaleDateString("es-PE", {
+      weekday: "long",
+      year: "numeric",
+      month: "long",
+      day: "numeric",
     });
   };
 
   const formatTime = (dateString) => {
     const date = new Date(dateString);
-    return date.toLocaleTimeString('es-PE', {
-      hour: '2-digit',
-      minute: '2-digit'
+    return date.toLocaleTimeString("es-PE", {
+      hour: "2-digit",
+      minute: "2-digit",
     });
   };
 
@@ -158,24 +213,24 @@ setEvent(data);
           url: window.location.href,
         });
       } catch (err) {
-        console.log('Error sharing:', err);
+        console.log("Error sharing:", err);
       }
     } else {
       navigator.clipboard.writeText(window.location.href);
-      alert('¡Enlace copiado al portapapeles!');
+      alert("¡Enlace copiado al portapapeles!");
     }
   };
 
   const handleRegister = () => {
     // Lógica de registro
-    console.log('Registrarse para el evento:', event.id);
+    console.log("Registrarse para el evento:", event.id);
   };
 
   const tabs = [
-    { name: 'Programa', icon: CalendarDays },
-    { name: 'Ubicación', icon: Map },
-    { name: 'Información', icon: Info },
-    { name: 'Galería', icon: Camera },
+    { name: "Programa", icon: CalendarDays },
+    { name: "Ubicación", icon: Map },
+    { name: "Información", icon: Info },
+    { name: "Galería", icon: Camera },
   ];
 
   return (
@@ -195,9 +250,11 @@ setEvent(data);
             <div className="flex items-center space-x-4">
               <button
                 onClick={() => setIsFavorite(!isFavorite)}
-                className={`p-2 rounded-full ${isFavorite ? 'bg-red-50 dark:bg-red-900/30 text-red-500' : 'bg-gray-100 dark:bg-gray-800 text-gray-500 hover:text-red-500'}`}
+                className={`p-2 rounded-full ${isFavorite ? "bg-red-50 dark:bg-red-900/30 text-red-500" : "bg-gray-100 dark:bg-gray-800 text-gray-500 hover:text-red-500"}`}
               >
-                <Heart className={`w-5 h-5 ${isFavorite ? 'fill-current' : ''}`} />
+                <Heart
+                  className={`w-5 h-5 ${isFavorite ? "fill-current" : ""}`}
+                />
               </button>
 
               <button
@@ -211,7 +268,11 @@ setEvent(data);
                 onClick={() => setDarkMode(!darkMode)}
                 className="p-2 rounded-full bg-gray-100 dark:bg-gray-800 text-gray-500 hover:text-amber-600 dark:hover:text-amber-400"
               >
-                {darkMode ? <Sun className="w-5 h-5" /> : <Moon className="w-5 h-5" />}
+                {darkMode ? (
+                  <Sun className="w-5 h-5" />
+                ) : (
+                  <Moon className="w-5 h-5" />
+                )}
               </button>
             </div>
           </div>
@@ -221,7 +282,7 @@ setEvent(data);
       {/* Hero Section */}
       <div className="relative overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/30 to-transparent z-10" />
-        
+
         {/*
         <img
           src={event.images?.[0]?.url || event.main_image}
@@ -235,11 +296,11 @@ setEvent(data);
               <Mountain className="w-4 h-4" />
               <span className="text-sm font-semibold">VALLE DEL COLCA</span>
             </div>
-            
+
             <h1 className="text-4xl md:text-6xl font-bold mb-4 leading-tight">
               {event.title}
             </h1>
-            
+
             <p className="text-xl opacity-90 max-w-3xl">
               {event.short_description}
             </p>
@@ -262,36 +323,53 @@ setEvent(data);
                 <div className="flex items-start space-x-3">
                   <Calendar className="w-5 h-5 text-amber-500 mt-1 flex-shrink-0" />
                   <div>
-                    <p className="text-sm text-gray-500 dark:text-gray-400">Fecha</p>
-                    <p className="font-semibold">{formatDate(event.start_datetime)}</p>
+                    <p className="text-sm text-gray-500 dark:text-gray-400">
+                      Fecha
+                    </p>
+                    <p className="font-semibold">
+                      {formatDate(event.start_datetime)}
+                    </p>
                   </div>
                 </div>
 
                 <div className="flex items-start space-x-3">
                   <Clock className="w-5 h-5 text-amber-500 mt-1 flex-shrink-0" />
                   <div>
-                    <p className="text-sm text-gray-500 dark:text-gray-400">Horario</p>
-                    <p className="font-semibold">{formatTime(event.start_datetime)} - {formatTime(event.end_datetime)}</p>
+                    <p className="text-sm text-gray-500 dark:text-gray-400">
+                      Horario
+                    </p>
+                    <p className="font-semibold">
+                      {formatTime(event.start_datetime)} -{" "}
+                      {formatTime(event.end_datetime)}
+                    </p>
                   </div>
                 </div>
 
                 <div className="flex items-start space-x-3">
                   <MapPin className="w-5 h-5 text-amber-500 mt-1 flex-shrink-0" />
                   <div>
-                    <p className="text-sm text-gray-500 dark:text-gray-400">Ubicación</p>
+                    <p className="text-sm text-gray-500 dark:text-gray-400">
+                      Ubicación
+                    </p>
                     <p className="font-semibold">{event.address}</p>
-                    <p className="text-sm text-gray-600 dark:text-gray-400">{event.district_name}</p>
+                    <p className="text-sm text-gray-600 dark:text-gray-400">
+                      {event.district_name}
+                    </p>
                   </div>
                 </div>
 
                 <div className="flex items-start space-x-3">
                   <DollarSign className="w-5 h-5 text-amber-500 mt-1 flex-shrink-0" />
                   <div>
-                    <p className="text-sm text-gray-500 dark:text-gray-400">Precio</p>
+                    <p className="text-sm text-gray-500 dark:text-gray-400">
+                      Precio
+                    </p>
                     <p className="font-semibold">
-                      {event.price_type === 'free' ? 'Gratuito' : 
-                       event.price_type === 'paid' ? `S/ ${event.price}` : 
-                       'Donación'}
+                      {event.price_type === "free"
+                        ? "Gratuito"
+                        : event.price_type === "paid"
+                          ? `S/ ${event.price}`
+                          : "Donación"}
                     </p>
                   </div>
                 </div>
@@ -299,14 +377,18 @@ setEvent(data);
                 <div className="flex items-start space-x-3">
                   <Users className="w-5 h-5 text-amber-500 mt-1 flex-shrink-0" />
                   <div>
-                    <p className="text-sm text-gray-500 dark:text-gray-400">Disponibilidad</p>
+                    <p className="text-sm text-gray-500 dark:text-gray-400">
+                      Disponibilidad
+                    </p>
                     <p className="font-semibold">
                       {event.available_seats} / {event.capacity} cupos
                     </p>
                     <div className="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2 mt-2">
-                      <div 
-                        className="bg-green-500 h-2 rounded-full" 
-                        style={{ width: `${(event.available_seats / event.capacity) * 100}%` }}
+                      <div
+                        className="bg-green-500 h-2 rounded-full"
+                        style={{
+                          width: `${(event.available_seats / event.capacity) * 100}%`,
+                        }}
                       ></div>
                     </div>
                   </div>
@@ -316,10 +398,15 @@ setEvent(data);
                   <div className="flex items-start space-x-3">
                     <Star className="w-5 h-5 text-amber-500 mt-1 flex-shrink-0" />
                     <div>
-                      <p className="text-sm text-gray-500 dark:text-gray-400">Destacado</p>
+                      <p className="text-sm text-gray-500 dark:text-gray-400">
+                        Destacado
+                      </p>
                       <div className="flex">
                         {[...Array(event.featured_level)].map((_, i) => (
-                          <Star key={i} className="w-4 h-4 text-amber-500 fill-current" />
+                          <Star
+                            key={i}
+                            className="w-4 h-4 text-amber-500 fill-current"
+                          />
                         ))}
                       </div>
                     </div>
@@ -343,15 +430,21 @@ setEvent(data);
                 </h4>
                 <div className="space-y-3">
                   <div className="flex items-center justify-between">
-                    <span className="text-sm text-gray-600 dark:text-gray-400">Altitud</span>
+                    <span className="text-sm text-gray-600 dark:text-gray-400">
+                      Altitud
+                    </span>
                     <span className="font-semibold">{colcaData.altitude}</span>
                   </div>
                   <div className="flex items-center justify-between">
-                    <span className="text-sm text-gray-600 dark:text-gray-400">Clima</span>
+                    <span className="text-sm text-gray-600 dark:text-gray-400">
+                      Clima
+                    </span>
                     <span className="font-semibold">{colcaData.climate}</span>
                   </div>
                   <div className="flex items-center justify-between">
-                    <span className="text-sm text-gray-600 dark:text-gray-400">Mejor época</span>
+                    <span className="text-sm text-gray-600 dark:text-gray-400">
+                      Mejor época
+                    </span>
                     <span className="font-semibold">{colcaData.bestTime}</span>
                   </div>
                 </div>
@@ -465,8 +558,8 @@ setEvent(data);
                     className={({ selected }) =>
                       `flex-1 py-4 px-6 rounded-xl text-center font-semibold transition-all duration-300 flex items-center justify-center space-x-2 ${
                         selected
-                          ? 'bg-amber-500 text-white shadow-md'
-                          : 'text-gray-600 dark:text-gray-400 hover:text-amber-600 dark:hover:text-amber-400'
+                          ? "bg-amber-500 text-white shadow-md"
+                          : "text-gray-600 dark:text-gray-400 hover:text-amber-600 dark:hover:text-amber-400"
                       }`
                     }
                   >
@@ -483,10 +576,10 @@ setEvent(data);
                     <h2 className="text-2xl font-bold text-gray-800 dark:text-white mb-6">
                       Programación del Festival
                     </h2>
-                    
+
                     <div className="space-y-6">
                       {event.details
-                        ?.filter(d => d.section === 'schedule')
+                        ?.filter((d) => d.section === "schedule")
                         .sort((a, b) => a.order - b.order)
                         .map((detail, index) => (
                           <div
@@ -495,10 +588,10 @@ setEvent(data);
                           >
                             <div className="flex-shrink-0 w-16 text-center">
                               <div className="text-lg font-bold text-amber-600 dark:text-amber-400">
-                                {detail.title.split(' ')[0]}
+                                {detail.title.split(" ")[0]}
                               </div>
                               <div className="text-sm text-gray-500 dark:text-gray-400">
-                                {detail.title.split(' ').slice(1).join(' ')}
+                                {detail.title.split(" ").slice(1).join(" ")}
                               </div>
                             </div>
                             <div className="flex-grow">
@@ -521,7 +614,7 @@ setEvent(data);
                     <h2 className="text-2xl font-bold text-gray-800 dark:text-white mb-6">
                       Ubicación y Accesos
                     </h2>
-                    
+
                     <div className="space-y-6">
                       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                         <div>
@@ -530,29 +623,44 @@ setEvent(data);
                           </h3>
                           <ul className="space-y-3">
                             <li className="flex items-start space-x-2">
-                              <span className="text-amber-500 font-bold">1.</span>
+                              <span className="text-amber-500 font-bold">
+                                1.
+                              </span>
                               <span>Desde Arequipa: 4 horas en bus</span>
                             </li>
                             <li className="flex items-start space-x-2">
-                              <span className="text-amber-500 font-bold">2.</span>
-                              <span>Transporte turístico disponible desde Chivay</span>
+                              <span className="text-amber-500 font-bold">
+                                2.
+                              </span>
+                              <span>
+                                Transporte turístico disponible desde Chivay
+                              </span>
                             </li>
                             <li className="flex items-start space-x-2">
-                              <span className="text-amber-500 font-bold">3.</span>
-                              <span>Colectivos desde Cabanaconde cada hora</span>
+                              <span className="text-amber-500 font-bold">
+                                3.
+                              </span>
+                              <span>
+                                Colectivos desde Cabanaconde cada hora
+                              </span>
                             </li>
                           </ul>
                         </div>
-                        
+
                         <div>
                           <h3 className="font-bold text-gray-800 dark:text-white mb-3">
                             Miradores del Valle
                           </h3>
                           <ul className="space-y-3">
                             {colcaData.viewpoints.map((viewpoint, index) => (
-                              <li key={index} className="flex justify-between items-center">
+                              <li
+                                key={index}
+                                className="flex justify-between items-center"
+                              >
                                 <span>{viewpoint.name}</span>
-                                <span className="text-sm text-gray-500">{viewpoint.altitude}</span>
+                                <span className="text-sm text-gray-500">
+                                  {viewpoint.altitude}
+                                </span>
                               </li>
                             ))}
                           </ul>
@@ -580,7 +688,7 @@ setEvent(data);
                     <h2 className="text-2xl font-bold text-gray-800 dark:text-white mb-6">
                       Información Importante
                     </h2>
-                    
+
                     <div className="space-y-8">
                       <div>
                         <h3 className="font-bold text-gray-800 dark:text-white mb-4">
@@ -588,7 +696,7 @@ setEvent(data);
                         </h3>
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                           {event.details
-                            ?.filter(d => d.section === 'recommendations')
+                            ?.filter((d) => d.section === "recommendations")
                             .map((detail, index) => (
                               <div
                                 key={index}
@@ -613,7 +721,9 @@ setEvent(data);
                               key={index}
                               className="text-center p-3 bg-amber-50 dark:bg-gray-700 rounded-lg hover:bg-amber-100 dark:hover:bg-gray-600 transition-colors"
                             >
-                              <span className="text-sm font-medium">{dish}</span>
+                              <span className="text-sm font-medium">
+                                {dish}
+                              </span>
                             </div>
                           ))}
                         </div>
@@ -630,12 +740,16 @@ setEvent(data);
                               className="flex items-center justify-between p-3 bg-blue-50 dark:bg-blue-900/20 rounded-lg"
                             >
                               <div>
-                                <span className="font-medium">{spring.name}</span>
+                                <span className="font-medium">
+                                  {spring.name}
+                                </span>
                                 <p className="text-sm text-gray-600 dark:text-gray-400">
                                   Temperatura: {spring.temp}
                                 </p>
                               </div>
-                              <span className="text-sm text-gray-500">{spring.distance}</span>
+                              <span className="text-sm text-gray-500">
+                                {spring.distance}
+                              </span>
                             </div>
                           ))}
                         </div>
@@ -650,7 +764,7 @@ setEvent(data);
                     <h2 className="text-2xl font-bold text-gray-800 dark:text-white mb-6">
                       Galería del Colca
                     </h2>
-                    
+
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                       {event.images?.map((img, index) => (
                         <div
@@ -684,7 +798,7 @@ setEvent(data);
                               <button
                                 key={index}
                                 onClick={() => setCurrentImageIndex(index)}
-                                className={`w-3 h-3 rounded-full ${index === currentImageIndex ? 'bg-white' : 'bg-white/50'}`}
+                                className={`w-3 h-3 rounded-full ${index === currentImageIndex ? "bg-white" : "bg-white/50"}`}
                               />
                             ))}
                           </div>
@@ -701,20 +815,21 @@ setEvent(data);
               <h2 className="text-2xl font-bold text-gray-800 dark:text-white mb-6">
                 Sobre el Evento
               </h2>
-              
+
               <div className="prose prose-lg dark:prose-invert max-w-none">
                 <p className="text-gray-700 dark:text-gray-300 leading-relaxed">
                   {event.description}
                 </p>
-                
+
                 <div className="mt-8 p-6 bg-gradient-to-r from-amber-50 to-orange-50 dark:from-gray-700 dark:to-gray-800 rounded-xl border-l-4 border-amber-500">
                   <h3 className="font-bold text-gray-800 dark:text-white mb-3">
                     🏔️ Tradición y Naturaleza
                   </h3>
                   <p className="text-gray-700 dark:text-gray-300">
-                    El Valle del Colca, uno de los cañones más profundos del mundo, es hogar de 
-                    comunidades que mantienen vivas sus tradiciones ancestrales. Este festival es 
-                    una oportunidad única para conectar con la cultura viva del Perú.
+                    El Valle del Colca, uno de los cañones más profundos del
+                    mundo, es hogar de comunidades que mantienen vivas sus
+                    tradiciones ancestrales. Este festival es una oportunidad
+                    única para conectar con la cultura viva del Perú.
                   </p>
                 </div>
               </div>
@@ -738,7 +853,7 @@ setEvent(data);
                 Patrimonio Cultural y Natural del Perú
               </p>
             </div>
-            
+
             <div className="flex items-center space-x-6">
               <button className="text-gray-600 dark:text-gray-400 hover:text-amber-600 dark:hover:text-amber-400">
                 Términos
@@ -752,7 +867,7 @@ setEvent(data);
               </button>
             </div>
           </div>
-          
+
           <div className="mt-8 pt-8 border-t border-gray-100 dark:border-gray-700 text-center text-gray-500 dark:text-gray-400 text-sm">
             <p>© 2024 Culture Platform. Todos los derechos reservados.</p>
             <p className="mt-2">El Valle del Colca, Arequipa - Perú</p>

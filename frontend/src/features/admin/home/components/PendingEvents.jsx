@@ -1,5 +1,5 @@
-import { useState } from 'react'
-import { motion } from 'framer-motion'
+import { useState } from "react";
+import { motion } from "framer-motion";
 import {
   CheckCircle,
   XCircle,
@@ -8,78 +8,78 @@ import {
   User,
   Calendar,
   MapPin,
-  AlertCircle
-} from 'lucide-react'
+  AlertCircle,
+} from "lucide-react";
 
 const PendingEvents = () => {
   const [pendingEvents, setPendingEvents] = useState([
     {
       id: 1,
-      name: 'Boda Tradicional',
-      organizer: 'Familia Rodríguez',
-      date: '30 Jul 2024',
-      location: 'Iglesia San Pedro',
-      submitted: '2024-01-15',
-      category: 'Matrimonio',
-      priority: 'high'
+      name: "Boda Tradicional",
+      organizer: "Familia Rodríguez",
+      date: "30 Jul 2024",
+      location: "Iglesia San Pedro",
+      submitted: "2024-01-15",
+      category: "Matrimonio",
+      priority: "high",
     },
     {
       id: 2,
-      name: 'Torneo de Fútbol',
-      organizer: 'Club Deportivo',
-      date: '18 Jul 2024',
-      location: 'Estadio Municipal',
-      submitted: '2024-01-14',
-      category: 'Deportes',
-      priority: 'medium'
+      name: "Torneo de Fútbol",
+      organizer: "Club Deportivo",
+      date: "18 Jul 2024",
+      location: "Estadio Municipal",
+      submitted: "2024-01-14",
+      category: "Deportes",
+      priority: "medium",
     },
     {
       id: 3,
-      name: 'Exposición de Arte',
-      organizer: 'Galería Local',
-      date: '25 Jul 2024',
-      location: 'Centro Cultural',
-      submitted: '2024-01-13',
-      category: 'Arte',
-      priority: 'low'
+      name: "Exposición de Arte",
+      organizer: "Galería Local",
+      date: "25 Jul 2024",
+      location: "Centro Cultural",
+      submitted: "2024-01-13",
+      category: "Arte",
+      priority: "low",
     },
     {
       id: 4,
-      name: 'Fiesta Infantil',
-      organizer: 'Padres de Familia',
-      date: '20 Jul 2024',
-      location: 'Parque Infantil',
-      submitted: '2024-01-12',
-      category: 'Infantil',
-      priority: 'medium'
-    }
-  ])
+      name: "Fiesta Infantil",
+      organizer: "Padres de Familia",
+      date: "20 Jul 2024",
+      location: "Parque Infantil",
+      submitted: "2024-01-12",
+      category: "Infantil",
+      priority: "medium",
+    },
+  ]);
 
   const handleApprove = (id) => {
-    setPendingEvents(pendingEvents.filter(event => event.id !== id))
-  }
+    setPendingEvents(pendingEvents.filter((event) => event.id !== id));
+  };
 
   const handleReject = (id) => {
-    setPendingEvents(pendingEvents.filter(event => event.id !== id))
-  }
+    setPendingEvents(pendingEvents.filter((event) => event.id !== id));
+  };
 
   const getPriorityColor = (priority) => {
     const colors = {
-      high: 'bg-red-100 text-red-800',
-      medium: 'bg-yellow-100 text-yellow-800',
-      low: 'bg-green-100 text-green-800'
-    }
-    return colors[priority]
-  }
+      high: "bg-red-100 text-red-800",
+      medium: "bg-yellow-100 text-yellow-800",
+      low: "bg-green-100 text-green-800",
+    };
+    return colors[priority];
+  };
 
   const getPriorityIcon = (priority) => {
     const icons = {
       high: <AlertCircle size={14} />,
       medium: <Clock size={14} />,
-      low: <Clock size={14} />
-    }
-    return icons[priority]
-  }
+      low: <Clock size={14} />,
+    };
+    return icons[priority];
+  };
 
   return (
     <div className="p-6">
@@ -106,10 +106,16 @@ const PendingEvents = () => {
                   <div>
                     <div className="flex items-center mb-1">
                       <h3 className="font-bold mr-3">{event.name}</h3>
-                      <span className={`flex items-center px-2 py-1 rounded-full text-xs ${getPriorityColor(event.priority)}`}>
+                      <span
+                        className={`flex items-center px-2 py-1 rounded-full text-xs ${getPriorityColor(event.priority)}`}
+                      >
                         {getPriorityIcon(event.priority)}
                         <span className="ml-1">
-                          {event.priority === 'high' ? 'Alta' : event.priority === 'medium' ? 'Media' : 'Baja'}
+                          {event.priority === "high"
+                            ? "Alta"
+                            : event.priority === "medium"
+                              ? "Media"
+                              : "Baja"}
                         </span>
                       </span>
                     </div>
@@ -184,7 +190,7 @@ const PendingEvents = () => {
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default PendingEvents
+export default PendingEvents;

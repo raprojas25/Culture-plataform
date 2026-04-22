@@ -1,23 +1,24 @@
-import React, { useEffect, useState } from 'react';
-import { Plus, Edit, Trash2, Eye, Filter } from 'lucide-react';
-import { Link } from 'react-router-dom';
-import { useEvents } from '@/shared/hooks/useEvents';
-import { Button } from '@/shared/components/ui/Button';
-import { Modal } from '@/shared/components/ui/Modal';
-import { DataTable } from '@/shared/components/ui/Table';
-import { format } from 'date-fns';
-import { es } from 'date-fns/locale';
+import React, { useEffect, useState } from "react";
+import { Plus, Edit, Trash2, Eye, Filter } from "lucide-react";
+import { Link } from "react-router-dom";
+import { useEvents } from "@/shared/hooks/useEvents";
+import { Button } from "@/shared/components/ui/Button";
+import { Modal } from "@/shared/components/ui/Modal";
+import { DataTable } from "@/shared/components/ui/Table";
+import { format } from "date-fns";
+import { es } from "date-fns/locale";
 import { toast, Toaster } from "react-hot-toast";
 
 export const Events = () => {
-  const { events,filters, isLoading, fetchEvents, deleteExistingEvent } = useEvents();
+  const { events, filters, isLoading, fetchEvents, deleteExistingEvent } =
+    useEvents();
   const [selectedEvent, setSelectedEvent] = useState(null);
   const [deleteModalOpen, setDeleteModalOpen] = useState(false);
 
   const columns = [
     {
-      header: 'Título',
-      accessorKey: 'title',
+      header: "Título",
+      accessorKey: "title",
       cell: ({ row }) => (
         <div className="flex items-center">
           <img
@@ -37,57 +38,65 @@ export const Events = () => {
       ),
     },
     {
-      header: 'Fecha',
-      accessorKey: 'start_datetime',
+      header: "Fecha",
+      accessorKey: "start_datetime",
       cell: ({ row }) => (
         <div>
           <p className="text-gray-900 dark:text-white">
-            {format(new Date(row.original.start_datetime), 'PP', { locale: es })}
+            {format(new Date(row.original.start_datetime), "PP", {
+              locale: es,
+            })}
           </p>
           <p className="text-sm text-gray-500 dark:text-gray-400">
-            {format(new Date(row.original.start_datetime), 'p', { locale: es })}
+            {format(new Date(row.original.start_datetime), "p", { locale: es })}
           </p>
         </div>
       ),
     },
     {
-      header: 'Estado',
-      accessorKey: 'status',
+      header: "Estado",
+      accessorKey: "status",
       cell: ({ row }) => {
         const status = row.original.status;
         const getStatusStyle = () => {
           switch (status) {
-            case 'published':
-              return 'bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200';
-            case 'draft':
-              return 'bg-yellow-100 text-yellow-800 dark:bg-yellow-900 dark:text-yellow-200';
-            case 'cancelled':
-              return 'bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-200';
+            case "published":
+              return "bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200";
+            case "draft":
+              return "bg-yellow-100 text-yellow-800 dark:bg-yellow-900 dark:text-yellow-200";
+            case "cancelled":
+              return "bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-200";
             default:
-              return 'bg-gray-100 text-gray-800 dark:bg-gray-900 dark:text-gray-200';
+              return "bg-gray-100 text-gray-800 dark:bg-gray-900 dark:text-gray-200";
           }
         };
         return (
-          <span className={`px-2 py-1 rounded-full text-xs font-medium ${getStatusStyle()}`}>
-            {status === 'published' ? 'Publicado' : 
-             status === 'draft' ? 'Borrador' : 
-             status === 'cancelled' ? 'Cancelado' : 'Completado'}
+          <span
+            className={`px-2 py-1 rounded-full text-xs font-medium ${getStatusStyle()}`}
+          >
+            {status === "published"
+              ? "Publicado"
+              : status === "draft"
+                ? "Borrador"
+                : status === "cancelled"
+                  ? "Cancelado"
+                  : "Completado"}
           </span>
         );
       },
     },
     {
-      header: 'Precio',
-      accessorKey: 'price_type',
+      header: "Precio",
+      accessorKey: "price_type",
       cell: ({ row }) => {
         const { price_type, price_amount } = row.original;
-        if (price_type === 'free') return 'Gratis';
-        if (price_type === 'paid') return `S/ ${price_amount?.toFixed(2)}`;
-        return 'Donación';
+        if (price_type === "free") return "Gratis";
+        if (price_type === "paid") return `S/ ${price_amount?.toFixed(2)}`;
+        return "Donación";
       },
     },
     {
-      header: 'Acciones',
+      header: "Acciones",
       cell: ({ row }) => (
         <div className="flex items-center space-x-2">
           <Link to={`/events/${row.original.id}`}>
@@ -131,7 +140,7 @@ export const Events = () => {
     fetchEvents();
   }, [filters.page, filters.limit]);
 
-  console.log(events)
+  console.log(events);
   return (
     <div className="space-y-6">
       <Toaster position="top-right" />
@@ -170,7 +179,7 @@ export const Events = () => {
       >
         <div className="space-y-4">
           <p className="text-gray-600 dark:text-gray-400">
-            ¿Estás seguro de que deseas eliminar el evento{' '}
+            ¿Estás seguro de que deseas eliminar el evento{" "}
             <strong>{selectedEvent?.title}</strong>? Esta acción no se puede
             deshacer.
           </p>
@@ -190,4 +199,3 @@ export const Events = () => {
     </div>
   );
 };
-

@@ -1,25 +1,21 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
-import { Calendar, MapPin, DollarSign, Heart } from 'lucide-react';
-import { format } from 'date-fns';
-import { es } from 'date-fns/locale';
+import React from "react";
+import { Link } from "react-router-dom";
+import { Calendar, MapPin, DollarSign, Heart } from "lucide-react";
+import { format } from "date-fns";
+import { es } from "date-fns/locale";
 
-import { Badge } from '@/shared/components/ui/Badge';
+import { Badge } from "@/shared/components/ui/Badge";
 
-export const EventCard = ({
-  event,
-  onLike,
-  isLiked = false,
-}) => {
+export const EventCard = ({ event, onLike, isLiked = false }) => {
   const getStatusBadge = (status) => {
     switch (status) {
-      case 'published':
+      case "published":
         return <Badge variant="success">Publicado</Badge>;
-      case 'draft':
+      case "draft":
         return <Badge variant="warning">Borrador</Badge>;
-      case 'cancelled':
+      case "cancelled":
         return <Badge variant="danger">Cancelado</Badge>;
-      case 'completed':
+      case "completed":
         return <Badge variant="info">Completado</Badge>;
       default:
         return null;
@@ -28,14 +24,14 @@ export const EventCard = ({
 
   const getPriceText = () => {
     switch (event.price_type) {
-      case 'free':
-        return 'Gratis';
-      case 'paid':
+      case "free":
+        return "Gratis";
+      case "paid":
         return `S/ ${event.price_amount?.toFixed(2)}`;
-      case 'donation':
-        return 'Donación';
+      case "donation":
+        return "Donación";
       default:
-        return '';
+        return "";
     }
   };
 
@@ -44,7 +40,10 @@ export const EventCard = ({
       {/* Image Section */}
       <div className="relative h-48 overflow-hidden">
         <img
-          src={event.main_image || 'https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=800'}
+          src={
+            event.main_image ||
+            "https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=800"
+          }
           alt={event.title}
           className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
         />
@@ -64,8 +63,8 @@ export const EventCard = ({
             <Heart
               className={`w-5 h-5 ${
                 isLiked
-                  ? 'fill-red-500 text-red-500'
-                  : 'text-gray-600 dark:text-gray-400'
+                  ? "fill-red-500 text-red-500"
+                  : "text-gray-600 dark:text-gray-400"
               }`}
             />
           </button>
@@ -129,4 +128,3 @@ export const EventCard = ({
     </div>
   );
 };
-

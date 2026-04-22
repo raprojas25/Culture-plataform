@@ -5,8 +5,8 @@ import { authService } from "../services/authService";
 import toast from "react-hot-toast";
 
 export const useAuth = () => {
-
-  const { user, token, isAuthenticated, isLoading, login, logout, setLoading } = useAuthStore();
+  const { user, token, isAuthenticated, isLoading, login, logout, setLoading } =
+    useAuthStore();
 
   const navigate = useNavigate();
   const location = useLocation();

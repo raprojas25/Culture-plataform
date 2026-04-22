@@ -207,9 +207,7 @@ export const Roles = () => {
             Administra los roles y permisos del sistema
           </p>
         </div>
-        <div className="">
-          
-        </div>
+        <div className=""></div>
         <Button
           variant="primary"
           leftIcon={<Plus className="w-4 h-4" />}
@@ -224,23 +222,23 @@ export const Roles = () => {
         </Button>
       </div>
       <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-6">
-          <div>
-            <h1 className="text-3xl font-bold text-gray-900 dark:text-gray-100">
-              Gestión de Categorías
-            </h1>
-            <p className="text-gray-600 dark:text-gray-400 mt-2">
-              Administra y organiza todas las categorías de la plataforma
-            </p>
-          </div>
-          <Button
-            variant="primary"
-            size="lg"
-            onClick={handleCreate}
-            leftIcon={<Plus size={25} />}
-          >
-            Nueva Categoría
-          </Button>
+        <div>
+          <h1 className="text-3xl font-bold text-gray-900 dark:text-gray-100">
+            Gestión de Categorías
+          </h1>
+          <p className="text-gray-600 dark:text-gray-400 mt-2">
+            Administra y organiza todas las categorías de la plataforma
+          </p>
         </div>
+        <Button
+          variant="primary"
+          size="lg"
+          onClick={handleCreate}
+          leftIcon={<Plus size={25} />}
+        >
+          Nueva Categoría
+        </Button>
+      </div>
 
       {/* Información de roles del sistema */}
       <div className="bg-gradient-to-r from-blue-50 to-indigo-50 dark:from-blue-900/20 dark:to-indigo-900/20 rounded-lg p-6">
@@ -330,8 +328,8 @@ export const Roles = () => {
                   key={permission.code}
                   className={`p-3 rounded-lg border cursor-pointer transition-colors ${
                     selectedPermissions.includes(permission.code)
-                      ? 'border-primary-500 bg-primary-50 dark:bg-primary-900/20'
-                      : 'border-gray-200 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-800'
+                      ? "border-primary-500 bg-primary-50 dark:bg-primary-900/20"
+                      : "border-gray-200 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-800"
                   }`}
                   onClick={() => togglePermission(permission.code)}
                 >

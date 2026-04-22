@@ -4,20 +4,19 @@ import { sponsors } from "../data/data";
 import { Heading } from "@/shared/components/ui/Heading";
 
 export const Aliados = () => {
-
   const staggerContainer = {
     hidden: { opacity: 0 },
     visible: {
       opacity: 1,
       transition: {
-        staggerChildren: 0.2
-      }
-    }
-  }
-const fadeInUp = {
+        staggerChildren: 0.2,
+      },
+    },
+  };
+  const fadeInUp = {
     hidden: { opacity: 0, y: 20 },
-    visible: { opacity: 1, y: 0, transition: { duration: 0.6 } }
-  }
+    visible: { opacity: 1, y: 0, transition: { duration: 0.6 } },
+  };
   return (
     <motion.section
       initial="hidden"

@@ -69,7 +69,9 @@ export const Description = () => {
                 <div className="text-4xl font-bold text-red-600">
                   {item.data}
                 </div>
-                <div className="text-gray-500 dark:text-gray-400">{item.text}</div>
+                <div className="text-gray-500 dark:text-gray-400">
+                  {item.text}
+                </div>
               </div>
             ))}
           </div>

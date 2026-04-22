@@ -24,7 +24,17 @@ import Categories from "@/features/user/events/pages/Categories/Categories";
 import EventDetail from "@/features/user/events/pages/EventDetail";
 import EventDetails from "@/features/user/events/pages/DetallesEvento";
 import { Events } from "@/features/admin/events/Events";
-
+import CalendarPage from "@/features/user/events/pages/CalendarPage/CalendarPage";
+import Directory from "@/features/user/directory/Directory";
+import Gallery from "@/features/user/gallery/pages/Gallery";
+import About from "@/features/user/about/About";
+import Contact from "@/features/user/contact/Contact";
+import Admin from "@/features/admin/home/Admin";
+import { DashboardDos } from "@/features/admin/stats/DashboardDos";
+import { HomeAdmin } from "@/features/admin/home/Index";
+import { Roles } from "@/features/admin/roles/Roles";
+import { Districts } from "@/features/admin/district/Districts";
+import EventDetailsColca from "@/features/user/events/pages/DetailColca";
 
 export const Rutas = () => {
   return (
@@ -41,24 +51,30 @@ export const Rutas = () => {
         {/* <Route path="eventos" element={<EventForm />} /> */}
         <Route path="publicar-evento" element={<CreateEvent />} />
         <Route path="publicar" element={<PublishEvent />} />
-        {/* <Route path="calendario" element={<CalendarPage />} /> */}
         <Route path="categorias" element={<Categories />} />
         <Route path="evento/:id" element={<EventDetail />} />
         <Route path="categorias/:categorySlug" element={<Categories />} />
+
+        <Route path="calendario" element={<CalendarPage />} />
+        <Route path="directorio" element={<Directory />} />
+        <Route path="galeria" element={<Gallery />} />
+        <Route path="about" element={<About />} />
+        <Route path="contacto" element={<Contact />} />
       </Route>
 
       <Route path="/dashboard" element={<LayoutDashboard />}>
-      <Route path="statsDos" element={<CategoryManagerDos />} />
-      <Route path="stats" element={<CategoryManager />} />
-      {/* <Route index element={<Admin />} /> */}
-      {/* <Route path="stats" element={<HomeAdmin />} /> */}
-      <Route path="eventos" element={<Events />} />
-      <Route path="usuarios" element={<Users />} />
-      {/* <Route path="roles" element={<Roles />} /> */}
-      <Route path="categorias" element={<CategoryManager />} />
-      {/* <Route path="distritos" element={<Districts />} /> */}
-      {/* <Route path="directorio" element={<EventDetailsColca />} /> */}
-    </Route>
+        <Route index element={<Admin />} />
+        <Route path="statsDos" element={<CategoryManagerDos />} />
+        {/* <Route path="stats" element={<DashboardDos />} /> */}
+        <Route path="stats" element={<HomeAdmin />} />
+        <Route path="eventos" element={<Events />} />
+
+        <Route path="usuarios" element={<Users />} />
+        <Route path="roles" element={<Roles />} />
+        <Route path="categorias" element={<CategoryManager />} />
+        <Route path="distritos" element={<Districts />} />
+        <Route path="directorio" element={<EventDetailsColca />} />
+      </Route>
       {/* 404 */}
       <Route path="*" element={<NotFount />} />
       <Route path="extras" element={<Extras />} />

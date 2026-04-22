@@ -1,18 +1,14 @@
-import React from 'react';
+import React from "react";
 import {
   useReactTable,
   getCoreRowModel,
   getPaginationRowModel,
   getSortedRowModel,
   flexRender,
-} from '@tanstack/react-table';
-import { ChevronLeft, ChevronRight } from 'lucide-react';
+} from "@tanstack/react-table";
+import { ChevronLeft, ChevronRight } from "lucide-react";
 
-export function DataTable({
-  data,
-  columns,
-  isLoading = false,
-}) {
+export function DataTable({ data, columns, isLoading = false }) {
   const table = useReactTable({
     data,
     columns,
@@ -42,7 +38,7 @@ export function DataTable({
                 >
                   {flexRender(
                     header.column.columnDef.header,
-                    header.getContext()
+                    header.getContext(),
                   )}
                 </th>
               ))}
@@ -51,7 +47,10 @@ export function DataTable({
         </thead>
         <tbody className="bg-white dark:bg-gray-900 divide-y divide-gray-200 dark:divide-gray-800">
           {table.getRowModel().rows.map((row) => (
-            <tr key={row.id} className="hover:bg-gray-50 dark:hover:bg-gray-800">
+            <tr
+              key={row.id}
+              className="hover:bg-gray-50 dark:hover:bg-gray-800"
+            >
               {row.getVisibleCells().map((cell) => (
                 <td
                   key={cell.id}
@@ -76,9 +75,9 @@ export function DataTable({
             <ChevronLeft className="w-4 h-4 dark:text-gray-300" />
           </button>
           <span className="text-sm text-gray-700 dark:text-gray-300">
-            Página{' '}
+            Página{" "}
             <strong>
-              {table.getState().pagination.pageIndex + 1} de{' '}
+              {table.getState().pagination.pageIndex + 1} de{" "}
               {table.getPageCount()}
             </strong>
           </span>
@@ -107,4 +106,3 @@ export function DataTable({
     </div>
   );
 }
-

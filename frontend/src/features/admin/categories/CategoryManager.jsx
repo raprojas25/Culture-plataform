@@ -10,7 +10,7 @@ import {
   Star,
 } from "lucide-react";
 import { toast, Toaster } from "react-hot-toast";
-import { useCategories } from "@/shared/hooks/useCategories"
+import { useCategories } from "@/shared/hooks/useCategories";
 import CategoryTable from "./CategoryTable";
 // import CategoryModal from "./CategoryModal";
 import CategoryBadge from "./CategoryBadge";

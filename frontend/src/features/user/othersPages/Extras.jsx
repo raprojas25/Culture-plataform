@@ -1,5 +1,5 @@
 import { Button } from "@/shared/components/ui/Button";
-import { Save, Trash2, ExternalLink } from "lucide-react";
+import { Save, Trash2, ExternalLink, Grid, PanelTop } from "lucide-react";
 import { useState } from "react";
 
 import { Badge } from "@/shared/components/ui/Badge";
@@ -25,10 +25,24 @@ import {
   TableHeader,
   TableRow,
 } from "@/shared/components/ui/table/index";
-
+import { FormProvider, useForm } from "react-hook-form";
+import { Paragraph } from "@/shared/components/ui/Paragraph";
+import Tabs from "@/shared/components/ui/Tabs";
+import Select from "@/shared/components/ui/Select";
+import { Heading } from "@/shared/components/ui/Heading";
 export const Extras = () => {
   const [isSaving, setIsSaving] = useState(false);
 
+  const [selected, setSelected] = useState();
+  const tabs = [
+    { id: "basic", label: "Información básica" },
+    { id: "details", label: "Detalles" },
+    { id: "tickets", label: "Entradas" },
+  ];
+  const [activeTab, setActiveTab] = useState("basic");
+  const [acepto, setAcepto] = useState(false);
+
+  const methods = useForm();
   const handleSave = async () => {
     setIsSaving(true);
     await new Promise((resolve) => setTimeout(resolve, 2000));
@@ -623,6 +637,93 @@ export const Extras = () => {
             getOptionValue={(opt) => opt.id}
           />
         </div>
+      </div>
+
+      <Select
+        options={[
+          { value: "1", label: "Opción 1" },
+          { value: "2", label: "Opción 2" },
+          { value: "3", label: "Opción 3" },
+          { value: "4", label: "uno" },
+          { value: "5", label: "dos" },
+          { value: "6", label: "seis" },
+        ]}
+        value={selected}
+        onChange={setSelected}
+        placeholder="Elige una opción"
+        searchable
+        searchPlaceholder="Filtrar..."
+        disabled={false}
+      />
+      <Paragraph size="sm" color="muted" margin>
+        Este es un párrafo grande con color suave y margen inferior.
+      </Paragraph>
+
+      <div className="mt-8 border border-slate-400 rounded-md p-4">
+        <Tabs tabs={tabs} activeTab={activeTab} onChange={setActiveTab} />
+
+        <FormProvider {...methods}>
+          <form className="space-y-6">
+            {activeTab === "basic" && (
+              <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
+                {/* tus campos */}
+                <Paragraph size="sm">texto inicio</Paragraph>
+              </div>
+            )}
+
+            {activeTab === "details" && <div>contenido de detalles</div>}
+
+            {activeTab === "tickets" && <div>contenido de entradas</div>}
+          </form>
+        </FormProvider>
+      </div>
+      <Heading level="h1" size="4xl" align="center">
+        Título principal centrado
+      </Heading>
+
+      <Heading level="h3" color="muted">
+        Subtítulo con color secundario
+      </Heading>
+
+      <div className="bg-white dark:bg-gray-800 rounded-lg px-6 py-8 border border-gray-900/5 shadow-xl  dark:ring-gray-200/5 mb-10">
+        <div>
+          <span className="inline-flex items-center justify-center rounded-md bg-indigo-500 p-2 shadow-lg">
+            <PanelTop className="h-6 w-6 stroke-white" />
+          </span>
+        </div>
+        <h3 className="text-gray-900 dark:text-white mt-5 text-base font-medium tracking-tight ">
+          Writes upside-down
+        </h3>
+        <p className="text-gray-500 dark:text-gray-400 mt-2 text-sm ">
+          The Zero Gravity Pen can be used to write in any orientation,
+          including upside-down. It even works in outer space.
+        </p>
+      </div>
+
+      {/* ejemplos */}
+      <div className="container flex items-center justify-center text-sm max-md:px-4 bg-gray-600 py-0.5">
+        <div className="flex justify-around items-center py-2 gap-4 w-full">
+          <div className=" bg-gray-900 text-indigo-500 p-2 rounded-sm ">
+            <Grid size={18} />
+          </div>
+          <div className=" bg-gray-900 text-white p-2 rounded-sm ">
+            <Grid size={18} />
+          </div>
+          <div className=" bg-gray-900 text-white p-2 rounded-sm ">
+            <Grid size={18} />
+          </div>
+          <div className=" bg-gray-900 text-white p-2 rounded-sm ">
+            <Grid size={18} />
+          </div>
+          <div className=" bg-gray-900 text-white p-2 rounded-sm ">
+            <Grid size={18} />
+          </div>
+          <div className=" bg-gray-900 text-white p-2 rounded-sm ">
+            <Grid size={18} />
+          </div>
+        </div>
+
+        {/* sekect copia  */}
       </div>
     </>
   );

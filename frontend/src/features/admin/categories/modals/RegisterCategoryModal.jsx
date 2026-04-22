@@ -1,73 +1,69 @@
-import { useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import { X, Plus, AlertCircle, CheckCircle } from 'lucide-react';
-import CategoryForm from '../CategoryForm';
+import { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import { X, Plus, AlertCircle, CheckCircle } from "lucide-react";
+import CategoryForm from "../CategoryForm";
 // import CategoryForm from './CategoryForm';
-import { useCategories } from '@/shared/hooks/useCategories';
-import './Modal.css';
+import { useCategories } from "@/shared/hooks/useCategories";
+import "./Modal.css";
 
-const RegisterCategoryModal = ({ isOpen,
-  onClose,
-  onSubmit,
-  initialData
-}) => {
+const RegisterCategoryModal = ({ isOpen, onClose, onSubmit, initialData }) => {
   const { createCategory, loading, error } = useCategories();
-  const [successMessage, setSuccessMessage] = useState('');
+  const [successMessage, setSuccessMessage] = useState("");
 
   const handleSubmit = async (formData) => {
     try {
       const response = await createCategory(formData);
-      
+
       if (response && response.success) {
-        setSuccessMessage('¡Categoría creada exitosamente!');
-        
+        setSuccessMessage("¡Categoría creada exitosamente!");
+
         // Limpiar mensaje después de 3 segundos
         setTimeout(() => {
-          setSuccessMessage('');
+          setSuccessMessage("");
           onSuccess?.(response.data);
           onClose();
         }, 2000);
       }
     } catch (err) {
-      console.error('Error al crear categoría:', err);
+      console.error("Error al crear categoría:", err);
     }
   };
 
   const handleClose = () => {
-    setSuccessMessage('');
+    setSuccessMessage("");
     onClose();
   };
 
   const modalVariants = {
-    hidden: { 
+    hidden: {
       opacity: 0,
       scale: 0.9,
-      y: 20
+      y: 20,
     },
-    visible: { 
+    visible: {
       opacity: 1,
       scale: 1,
       y: 0,
       transition: {
         type: "spring",
         stiffness: 300,
-        damping: 30
-      }
+        damping: 30,
+      },
     },
     exit: {
       opacity: 0,
       scale: 0.9,
       y: 20,
       transition: {
-        duration: 0.2
-      }
-    }
+        duration: 0.2,
+      },
+    },
   };
 
   const overlayVariants = {
     hidden: { opacity: 0 },
     visible: { opacity: 1 },
-    exit: { opacity: 0 }
+    exit: { opacity: 0 },
   };
 
   return (
@@ -160,13 +156,13 @@ const RegisterCategoryModal = ({ isOpen,
             {/*     onCancel={handleClose} */}
             {/*   /> */}
             {/* </div> */}
-            <div className='p-6'>
+            <div className="p-6">
               <CategoryForm
-              initialData={initialData}
-              // onSubmit={handleSubmit}
-              onSubmit={onSubmit}
-              onCancel={handleClose}
-              isLoading={loading}
+                initialData={initialData}
+                // onSubmit={handleSubmit}
+                onSubmit={onSubmit}
+                onCancel={handleClose}
+                isLoading={loading}
               />
             </div>
 

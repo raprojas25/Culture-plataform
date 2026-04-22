@@ -1,5 +1,5 @@
-import { useState } from 'react'
-import { Line, Bar, Doughnut } from 'react-chartjs-2'
+import { useState } from "react";
+import { Line, Bar, Doughnut } from "react-chartjs-2";
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -11,10 +11,10 @@ import {
   Title,
   Tooltip,
   Legend,
-  Filler
-} from 'chart.js'
-import { motion } from 'framer-motion'
-import { TrendingUp, BarChart3, PieChart } from 'lucide-react'
+  Filler,
+} from "chart.js";
+import { motion } from "framer-motion";
+import { TrendingUp, BarChart3, PieChart } from "lucide-react";
 
 ChartJS.register(
   CategoryScale,
@@ -26,102 +26,102 @@ ChartJS.register(
   Title,
   Tooltip,
   Legend,
-  Filler
-)
+  Filler,
+);
 
 const Charts = () => {
-  const [activeChart, setActiveChart] = useState('line')
+  const [activeChart, setActiveChart] = useState("line");
 
   const lineData = {
-    labels: ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul'],
+    labels: ["Ene", "Feb", "Mar", "Abr", "May", "Jun", "Jul"],
     datasets: [
       {
-        label: 'Eventos Publicados',
+        label: "Eventos Publicados",
         data: [12, 19, 15, 25, 22, 30, 48],
-        borderColor: 'rgb(239, 68, 68)',
-        backgroundColor: 'rgba(239, 68, 68, 0.1)',
+        borderColor: "rgb(239, 68, 68)",
+        backgroundColor: "rgba(239, 68, 68, 0.1)",
         fill: true,
-        tension: 0.4
+        tension: 0.4,
       },
       {
-        label: 'Usuarios Registrados',
+        label: "Usuarios Registrados",
         data: [100, 150, 180, 220, 250, 300, 400],
-        borderColor: 'rgb(59, 130, 246)',
-        backgroundColor: 'rgba(59, 130, 246, 0.1)',
+        borderColor: "rgb(59, 130, 246)",
+        backgroundColor: "rgba(59, 130, 246, 0.1)",
         fill: true,
-        tension: 0.4
-      }
-    ]
-  }
+        tension: 0.4,
+      },
+    ],
+  };
 
   const barData = {
-    labels: ['Fiestas', 'Conciertos', 'Deportes', 'Ferias', 'Gastronomía'],
+    labels: ["Fiestas", "Conciertos", "Deportes", "Ferias", "Gastronomía"],
     datasets: [
       {
-        label: 'Eventos por Categoría',
+        label: "Eventos por Categoría",
         data: [12, 19, 8, 15, 7],
         backgroundColor: [
-          'rgba(239, 68, 68, 0.8)',
-          'rgba(59, 130, 246, 0.8)',
-          'rgba(34, 197, 94, 0.8)',
-          'rgba(245, 158, 11, 0.8)',
-          'rgba(168, 85, 247, 0.8)'
+          "rgba(239, 68, 68, 0.8)",
+          "rgba(59, 130, 246, 0.8)",
+          "rgba(34, 197, 94, 0.8)",
+          "rgba(245, 158, 11, 0.8)",
+          "rgba(168, 85, 247, 0.8)",
         ],
         borderColor: [
-          'rgb(239, 68, 68)',
-          'rgb(59, 130, 246)',
-          'rgb(34, 197, 94)',
-          'rgb(245, 158, 11)',
-          'rgb(168, 85, 247)'
+          "rgb(239, 68, 68)",
+          "rgb(59, 130, 246)",
+          "rgb(34, 197, 94)",
+          "rgb(245, 158, 11)",
+          "rgb(168, 85, 247)",
         ],
-        borderWidth: 1
-      }
-    ]
-  }
+        borderWidth: 1,
+      },
+    ],
+  };
 
   const doughnutData = {
-    labels: ['Aprobados', 'Pendientes', 'Rechazados'],
+    labels: ["Aprobados", "Pendientes", "Rechazados"],
     datasets: [
       {
         data: [75, 15, 10],
         backgroundColor: [
-          'rgba(34, 197, 94, 0.8)',
-          'rgba(245, 158, 11, 0.8)',
-          'rgba(239, 68, 68, 0.8)'
+          "rgba(34, 197, 94, 0.8)",
+          "rgba(245, 158, 11, 0.8)",
+          "rgba(239, 68, 68, 0.8)",
         ],
         borderColor: [
-          'rgb(34, 197, 94)',
-          'rgb(245, 158, 11)',
-          'rgb(239, 68, 68)'
+          "rgb(34, 197, 94)",
+          "rgb(245, 158, 11)",
+          "rgb(239, 68, 68)",
         ],
-        borderWidth: 1
-      }
-    ]
-  }
+        borderWidth: 1,
+      },
+    ],
+  };
 
   const options = {
     responsive: true,
     plugins: {
       legend: {
-        position: 'top'
+        position: "top",
       },
       tooltip: {
-        mode: 'index',
-        intersect: false
-      }
+        mode: "index",
+        intersect: false,
+      },
     },
     scales: {
       y: {
-        beginAtZero: true
-      }
-    }
-  }
+        beginAtZero: true,
+      },
+    },
+  };
 
   const chartComponents = {
     line: <Line data={lineData} options={options} />,
     bar: <Bar data={barData} options={options} />,
-    doughnut: <Doughnut data={doughnutData} options={options} />
-  }
+    doughnut: <Doughnut data={doughnutData} options={options} />,
+  };
 
   return (
     <div className="p-6">
@@ -129,17 +129,17 @@ const Charts = () => {
       <div className="flex items-center justify-between mb-6">
         <div className="flex space-x-2 flex-wrap space-y-2">
           {[
-            { id: 'line', label: 'Tendencia', icon: <TrendingUp size={18} /> },
-            { id: 'bar', label: 'Categorías', icon: <BarChart3 size={18} /> },
-            { id: 'doughnut', label: 'Estados', icon: <PieChart size={18} /> }
+            { id: "line", label: "Tendencia", icon: <TrendingUp size={18} /> },
+            { id: "bar", label: "Categorías", icon: <BarChart3 size={18} /> },
+            { id: "doughnut", label: "Estados", icon: <PieChart size={18} /> },
           ].map((chart) => (
             <button
               key={chart.id}
               onClick={() => setActiveChart(chart.id)}
               className={`flex items-center px-4 py-2 rounded-lg ${
                 activeChart === chart.id
-                  ? 'bg-red-600 text-white'
-                  : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                  ? "bg-red-600 text-white"
+                  : "bg-gray-100 text-gray-700 hover:bg-gray-200"
               }`}
             >
               {chart.icon}
@@ -187,7 +187,7 @@ const Charts = () => {
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default Charts
+export default Charts;

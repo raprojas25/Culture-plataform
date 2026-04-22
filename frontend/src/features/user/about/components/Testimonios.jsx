@@ -8,7 +8,6 @@ import { Heading } from "@/shared/components/ui/Heading";
 import { Paragraph } from "@/shared/components/ui/Paragraph";
 import { testimonials } from "../data/data";
 export const Testimonios = () => {
-
   const fadeInUp = {
     hidden: { opacity: 0, y: 20 },
     visible: { opacity: 1, y: 0, transition: { duration: 0.6 } },
@@ -56,7 +55,9 @@ export const Testimonios = () => {
                   />
                 </div>
                 <div>
-                  <Heading level="h3" color="muted">{testimonial.name}</Heading>
+                  <Heading level="h3" color="muted">
+                    {testimonial.name}
+                  </Heading>
                   <Paragraph size="sm" color="muted">
                     {testimonial.role}
                   </Paragraph>

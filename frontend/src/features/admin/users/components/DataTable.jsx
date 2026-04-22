@@ -1,8 +1,6 @@
-
 import { DataTable } from "@/shared/components/ui/Table";
 
-export const DataTable = ({data, loading}) => {
-
+export const DataTable = ({ data, loading }) => {
   const columns = [
     {
       header: "Rol",
@@ -60,30 +58,29 @@ export const DataTable = ({data, loading}) => {
     {
       header: "Acciones",
       cell: ({ row }) => (
-          <div className="flex items-center space-x-2">
-            <Button
-              variant="outline"
-              size="sm"
-              onClick={() => handleEdit(row.original)}
-            >
-              <Edit className="w-4 h-4" />
-            </Button>
-            <Button
-              variant="outline"
-              size="sm"
-              onClick={() => handleDelete(row.original.id, row.original.name)}
-            >
-              <Trash2 className="w-4 h-4" />
-            </Button>
-          </div>
-        ),
+        <div className="flex items-center space-x-2">
+          <Button
+            variant="outline"
+            size="sm"
+            onClick={() => handleEdit(row.original)}
+          >
+            <Edit className="w-4 h-4" />
+          </Button>
+          <Button
+            variant="outline"
+            size="sm"
+            onClick={() => handleDelete(row.original.id, row.original.name)}
+          >
+            <Trash2 className="w-4 h-4" />
+          </Button>
+        </div>
+      ),
     },
   ];
 
   return (
-      <div className="bg-white dark:bg-gray-800 rounded-lg shadow-md overflow-hidden">
-        <DataTable data={data} columns={columns} isLoading={loading} />
-      </div>
-  )
-}
-
+    <div className="bg-white dark:bg-gray-800 rounded-lg shadow-md overflow-hidden">
+      <DataTable data={data} columns={columns} isLoading={loading} />
+    </div>
+  );
+};

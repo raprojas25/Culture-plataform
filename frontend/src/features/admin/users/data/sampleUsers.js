@@ -62,8 +62,7 @@ export const sampleUsers = [
     updated_at: "2026-04-01T09:15:30.000Z",
     last_login: "2026-04-10T16:45:00.000Z",
     last_ip: "192.168.1.100",
-    user_agent:
-      "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36",
+    user_agent: "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36",
     role_name: "organizer",
   },
   {
@@ -110,8 +109,7 @@ export const sampleUsers = [
     updated_at: "2026-04-09T12:00:00.000Z",
     last_login: "2026-04-10T20:30:00.000Z",
     last_ip: "192.168.1.103",
-    user_agent:
-      "Mozilla/5.0 (Linux; Android 13) AppleWebKit/537.36",
+    user_agent: "Mozilla/5.0 (Linux; Android 13) AppleWebKit/537.36",
     role_name: "user",
   },
   {

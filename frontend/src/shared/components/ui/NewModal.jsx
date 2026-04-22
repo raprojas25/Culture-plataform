@@ -127,12 +127,12 @@ import { X, Plus, AlertCircle } from "lucide-react";
 import { useEffect } from "react";
 
 export const NewModal = ({
-  showIcon = false,        // renombrado y con mejor nombre
+  showIcon = false, // renombrado y con mejor nombre
   isOpen,
   onClose,
   title,
   description,
-  footer,                  // ahora puede ser ReactNode
+  footer, // ahora puede ser ReactNode
   children,
   size = "md",
   closeOnOverlayClick = true,
@@ -214,7 +214,10 @@ export const NewModal = ({
                   </div>
                 )}
                 <div>
-                  <h2 id="modal-title" className="text-xl font-bold text-gray-900 dark:text-white">
+                  <h2
+                    id="modal-title"
+                    className="text-xl font-bold text-gray-900 dark:text-white"
+                  >
                     {title}
                   </h2>
                   {description && (

@@ -121,9 +121,9 @@ export const useCategories = () => {
 };
 
 */
-import { useState, useCallback } from 'react';
-import { toast } from 'react-hot-toast';
-import { categoriesService } from '@/shared/services/categoriesService';
+import { useState, useCallback } from "react";
+import { toast } from "react-hot-toast";
+import { categoriesService } from "@/shared/services/categoriesService";
 
 export const useCategories = () => {
   const [categories, setCategories] = useState([]);
@@ -138,8 +138,8 @@ export const useCategories = () => {
       const data = await categoriesService.getAll();
       setCategories(data);
     } catch (err) {
-      setError(err.response?.data?.message || 'Error al cargar categorías');
-      toast.error('Error al cargar categorías');
+      setError(err.response?.data?.message || "Error al cargar categorías");
+      toast.error("Error al cargar categorías");
     } finally {
       setLoading(false);
     }
@@ -150,11 +150,12 @@ export const useCategories = () => {
     setLoading(true);
     try {
       const newCategory = await categoriesService.create(categoryData);
-      setCategories(prev => [...prev, newCategory]);
-      toast.success('Categoría creada exitosamente');
+      setCategories((prev) => [...prev, newCategory]);
+      toast.success("Categoría creada exitosamente");
       return { success: true, data: newCategory };
     } catch (err) {
-      const errorMsg = err.response?.data?.message || 'Error al crear categoría';
+      const errorMsg =
+        err.response?.data?.message || "Error al crear categoría";
       toast.error(errorMsg);
       return { success: false, error: errorMsg };
     } finally {
@@ -167,13 +168,14 @@ export const useCategories = () => {
     setLoading(true);
     try {
       const updatedCategory = await categoriesService.update(id, categoryData);
-      setCategories(prev => 
-        prev.map(cat => cat.id === id ? updatedCategory : cat)
+      setCategories((prev) =>
+        prev.map((cat) => (cat.id === id ? updatedCategory : cat)),
       );
-      toast.success('Categoría actualizada exitosamente');
+      toast.success("Categoría actualizada exitosamente");
       return { success: true, data: updatedCategory };
     } catch (err) {
-      const errorMsg = err.response?.data?.message || 'Error al actualizar categoría';
+      const errorMsg =
+        err.response?.data?.message || "Error al actualizar categoría";
       toast.error(errorMsg);
       return { success: false, error: errorMsg };
     } finally {
@@ -186,11 +188,12 @@ export const useCategories = () => {
     setLoading(true);
     try {
       await categoriesService.delete(id);
-      setCategories(prev => prev.filter(cat => cat.id !== id));
-      toast.success('Categoría eliminada exitosamente');
+      setCategories((prev) => prev.filter((cat) => cat.id !== id));
+      toast.success("Categoría eliminada exitosamente");
       return { success: true };
     } catch (err) {
-      const errorMsg = err.response?.data?.message || 'Error al eliminar categoría';
+      const errorMsg =
+        err.response?.data?.message || "Error al eliminar categoría";
       toast.error(errorMsg);
       return { success: false, error: errorMsg };
     } finally {
@@ -201,14 +204,17 @@ export const useCategories = () => {
   // Cambiar estado
   const toggleCategoryStatus = useCallback(async (id, currentStatus) => {
     try {
-      const updatedCategory = await categoriesService.toggleStatus(id, !currentStatus);
-      setCategories(prev =>
-        prev.map(cat => cat.id === id ? updatedCategory : cat)
+      const updatedCategory = await categoriesService.toggleStatus(
+        id,
+        !currentStatus,
       );
-      toast.success(`Categoría ${!currentStatus ? 'activada' : 'desactivada'}`);
+      setCategories((prev) =>
+        prev.map((cat) => (cat.id === id ? updatedCategory : cat)),
+      );
+      toast.success(`Categoría ${!currentStatus ? "activada" : "desactivada"}`);
       return { success: true };
     } catch (err) {
-      toast.error('Error al cambiar estado');
+      toast.error("Error al cambiar estado");
       return { success: false };
     }
   }, []);
@@ -221,6 +227,6 @@ export const useCategories = () => {
     createCategory,
     updateCategory,
     deleteCategory,
-    toggleCategoryStatus
+    toggleCategoryStatus,
   };
 };

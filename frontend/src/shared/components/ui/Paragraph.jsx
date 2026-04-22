@@ -1,22 +1,22 @@
-import React from 'react';
+import React from "react";
 
 export const Paragraph = ({
   children,
-  size = 'base',
-  color = 'default',
+  size = "base",
+  color = "default",
   margin = false,
-  className = '',
+  className = "",
   ...props
 }) => {
   const sizeClasses = {
-    sm: 'text-sm',
-    base: 'text-base',
-    lg: 'text-lg',
+    sm: "text-sm",
+    base: "text-base",
+    lg: "text-lg",
   };
 
   const colorClasses = {
-    default: 'text-gray-700 dark:text-gray-300',
-    muted: 'text-gray-500 dark:text-gray-400',
+    default: "text-gray-700 dark:text-gray-300",
+    muted: "text-gray-500 dark:text-gray-400",
   };
 
   return (
@@ -24,7 +24,7 @@ export const Paragraph = ({
       className={`
         ${sizeClasses[size]}
         ${colorClasses[color]}
-        ${margin ? 'mb-4' : ''}
+        ${margin ? "mb-4" : ""}
         ${className}
       `}
       {...props}
@@ -33,4 +33,3 @@ export const Paragraph = ({
     </p>
   );
 };
-

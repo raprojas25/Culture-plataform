@@ -1,4 +1,4 @@
-import { Facebook, Instagram, Mail, Phone, MapPin } from 'lucide-react'
+import { Facebook, Instagram, Mail, Phone, MapPin } from "lucide-react";
 
 const Footer = () => {
   return (
@@ -12,7 +12,8 @@ const Footer = () => {
               <h2 className="text-xl font-bold">CulturaViva</h2>
             </div>
             <p className="text-gray-400 text-sm">
-              Conectamos a la comunidad con las actividades culturales de nuestra provincia.
+              Conectamos a la comunidad con las actividades culturales de
+              nuestra provincia.
             </p>
           </div>
 
@@ -20,10 +21,35 @@ const Footer = () => {
           <div>
             <h3 className="text-lg font-bold mb-4">Enlaces Rápidos</h3>
             <ul className="space-y-2">
-              <li><a href="/" className="text-gray-400 hover:text-white text-sm">Inicio</a></li>
-              <li><a href="/calendario" className="text-gray-400 hover:text-white text-sm">Calendario</a></li>
-              <li><a href="/publicar-evento" className="text-gray-400 hover:text-white text-sm">Publicar Evento</a></li>
-              <li><a href="/directorio" className="text-gray-400 hover:text-white text-sm">Directorio</a></li>
+              <li>
+                <a href="/" className="text-gray-400 hover:text-white text-sm">
+                  Inicio
+                </a>
+              </li>
+              <li>
+                <a
+                  href="/calendario"
+                  className="text-gray-400 hover:text-white text-sm"
+                >
+                  Calendario
+                </a>
+              </li>
+              <li>
+                <a
+                  href="/publicar-evento"
+                  className="text-gray-400 hover:text-white text-sm"
+                >
+                  Publicar Evento
+                </a>
+              </li>
+              <li>
+                <a
+                  href="/directorio"
+                  className="text-gray-400 hover:text-white text-sm"
+                >
+                  Directorio
+                </a>
+              </li>
             </ul>
           </div>
 
@@ -31,9 +57,30 @@ const Footer = () => {
           <div>
             <h3 className="text-lg font-bold mb-4">Legal</h3>
             <ul className="space-y-2">
-              <li><a href="/terminos" className="text-gray-400 hover:text-white text-sm">Términos y Condiciones</a></li>
-              <li><a href="/privacidad" className="text-gray-400 hover:text-white text-sm">Política de Privacidad</a></li>
-              <li><a href="/cookies" className="text-gray-400 hover:text-white text-sm">Cookies</a></li>
+              <li>
+                <a
+                  href="/terminos"
+                  className="text-gray-400 hover:text-white text-sm"
+                >
+                  Términos y Condiciones
+                </a>
+              </li>
+              <li>
+                <a
+                  href="/privacidad"
+                  className="text-gray-400 hover:text-white text-sm"
+                >
+                  Política de Privacidad
+                </a>
+              </li>
+              <li>
+                <a
+                  href="/cookies"
+                  className="text-gray-400 hover:text-white text-sm"
+                >
+                  Cookies
+                </a>
+              </li>
             </ul>
           </div>
 
@@ -47,7 +94,9 @@ const Footer = () => {
               </div>
               <div className="flex items-center">
                 <Mail size={16} className="mr-2 text-gray-400" />
-                <span className="text-sm text-gray-400">info@culturaviva.com</span>
+                <span className="text-sm text-gray-400">
+                  info@culturaviva.com
+                </span>
               </div>
               <div className="flex items-center space-x-3 pt-2">
                 <a href="#" className="hover:text-blue-400">
@@ -64,12 +113,13 @@ const Footer = () => {
         {/* Línea divisoria */}
         <div className="border-t border-gray-800 mt-8 pt-8 text-center">
           <p className="text-sm text-gray-400">
-            © {new Date().getFullYear()} Plataforma de Actividades Culturales. Todos los derechos reservados.
+            © {new Date().getFullYear()} Plataforma de Actividades Culturales.
+            Todos los derechos reservados.
           </p>
         </div>
       </div>
     </footer>
-  )
-}
+  );
+};
 
-export default Footer
+export default Footer;

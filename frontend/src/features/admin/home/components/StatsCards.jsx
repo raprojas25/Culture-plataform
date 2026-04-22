@@ -1,4 +1,4 @@
-import { motion } from 'framer-motion'
+import { motion } from "framer-motion";
 import {
   Calendar,
   Users,
@@ -7,85 +7,85 @@ import {
   Star,
   Eye,
   FileText,
-  AlertCircle
-} from 'lucide-react'
+  AlertCircle,
+} from "lucide-react";
 
 const StatsCards = () => {
   const stats = [
     {
-      title: 'Eventos este mes',
-      value: '48',
-      change: '+12%',
+      title: "Eventos este mes",
+      value: "48",
+      change: "+12%",
       icon: <Calendar className="text-blue-600" size={24} />,
-      color: 'bg-blue-50',
-      bg: 'bg-blue-200',
-      trend: 'up'
+      color: "bg-blue-50",
+      bg: "bg-blue-200",
+      trend: "up",
     },
     {
-      title: 'Usuarios Activos',
-      value: '1,234',
-      change: '+8%',
+      title: "Usuarios Activos",
+      value: "1,234",
+      change: "+8%",
       icon: <Users className="text-green-600" size={24} />,
-      color: 'bg-green-50',
-      bg: 'bg-green-200',
-      trend: 'up'
+      color: "bg-green-50",
+      bg: "bg-green-200",
+      trend: "up",
     },
     {
-      title: 'Eventos Destacados',
-      value: '15',
-      change: '+25%',
+      title: "Eventos Destacados",
+      value: "15",
+      change: "+25%",
       icon: <Star className="text-yellow-600" size={24} />,
-      color: 'bg-yellow-50',
-      bg: 'bg-yellow-200',
-      trend: 'up'
+      color: "bg-yellow-50",
+      bg: "bg-yellow-200",
+      trend: "up",
     },
     {
-      title: 'Ingresos (S/)',
-      value: '2,850',
-      change: '+18%',
+      title: "Ingresos (S/)",
+      value: "2,850",
+      change: "+18%",
       icon: <DollarSign className="text-purple-600" size={24} />,
-      color: 'bg-purple-50',
-      bg: 'bg-purple-200',
-      trend: 'up'
+      color: "bg-purple-50",
+      bg: "bg-purple-200",
+      trend: "up",
     },
     {
-      title: 'Pendientes',
-      value: '7',
-      change: '-3',
+      title: "Pendientes",
+      value: "7",
+      change: "-3",
       icon: <AlertCircle className="text-red-600" size={24} />,
-      color: 'bg-red-50',
-      bg: 'bg-red-200',
-      trend: 'down'
+      color: "bg-red-50",
+      bg: "bg-red-200",
+      trend: "down",
     },
     {
-      title: 'Visitas',
-      value: '5.2K',
-      change: '+32%',
+      title: "Visitas",
+      value: "5.2K",
+      change: "+32%",
       icon: <Eye className="text-indigo-600" size={24} />,
-      color: 'bg-indigo-50',
-      bg: 'bg-indigo-200',
-      trend: 'up'
-    }
-  ]
+      color: "bg-indigo-50",
+      bg: "bg-indigo-200",
+      trend: "up",
+    },
+  ];
 
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
       opacity: 1,
       transition: {
-        staggerChildren: 0.1
-      }
-    }
-  }
+        staggerChildren: 0.1,
+      },
+    },
+  };
 
   const itemVariants = {
     hidden: { y: 20, opacity: 0 },
     visible: {
       y: 0,
       opacity: 1,
-      transition: { duration: 0.3 }
-    }
-  }
+      transition: { duration: 0.3 },
+    },
+  };
 
   return (
     <motion.div
@@ -102,12 +102,12 @@ const StatsCards = () => {
           className={`${stat.color} rounded-xl p-6 border border-gray-200`}
         >
           <div className="flex items-center justify-between mb-4">
-            <div className={`p-2 rounded-lg ${stat.bg}`}>
-              {stat.icon}
-            </div>
-            <span className={`text-sm font-medium ${
-              stat.trend === 'up' ? 'text-green-600' : 'text-red-600'
-            }`}>
+            <div className={`p-2 rounded-lg ${stat.bg}`}>{stat.icon}</div>
+            <span
+              className={`text-sm font-medium ${
+                stat.trend === "up" ? "text-green-600" : "text-red-600"
+              }`}
+            >
               {stat.change}
             </span>
           </div>
@@ -118,7 +118,7 @@ const StatsCards = () => {
         </motion.div>
       ))}
     </motion.div>
-  )
-}
+  );
+};
 
-export default StatsCards
+export default StatsCards;

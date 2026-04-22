@@ -95,7 +95,7 @@
 }
 
 .active-category-border::before {
-  content: '';
+  content: "";
   position: absolute;
   inset: -2px;
   background: linear-gradient(45deg, #dc2626, #ea580c, #ca8a04);
@@ -118,16 +118,16 @@
   .gallery-card {
     margin-bottom: 1.5rem;
   }
-  
+
   .category-filters {
     overflow-x: auto;
     padding-bottom: 0.5rem;
   }
-  
+
   .category-filters::-webkit-scrollbar {
     height: 4px;
   }
-  
+
   .category-filters::-webkit-scrollbar-thumb {
     background: #dc2626;
     border-radius: 2px;

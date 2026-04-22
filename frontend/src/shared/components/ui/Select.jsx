@@ -10,8 +10,8 @@ const Select = ({
   name,
   disabled = false,
   searchable = false,
-  searchPlaceholder = 'Buscar...',
-// nuevas props
+  searchPlaceholder = "Buscar...",
+  // nuevas props
   getOptionLabel = (opt) => opt.label,
   getOptionValue = (opt) => opt.value,
   ...props
@@ -80,9 +80,9 @@ const Select = ({
     if (disabled) return;
 
     switch (e.key) {
-      case 'Escape':
+      case "Escape":
         if (searchTerm) {
-          setSearchTerm('');
+          setSearchTerm("");
         } else {
           setIsOpen(false);
           buttonRef.current?.focus();
@@ -90,7 +90,7 @@ const Select = ({
         e.preventDefault();
         break;
 
-      case 'Enter':
+      case "Enter":
         e.preventDefault();
         if (filteredOptions.length > 0 && highlightedIndex >= 0) {
           onChange(filteredOptions[highlightedIndex].value);
@@ -99,19 +99,19 @@ const Select = ({
         }
         break;
 
-      case 'ArrowDown':
+      case "ArrowDown":
         e.preventDefault();
         setHighlightedIndex((prev) =>
-          prev < filteredOptions.length - 1 ? prev + 1 : prev
+          prev < filteredOptions.length - 1 ? prev + 1 : prev,
         );
         break;
 
-      case 'ArrowUp':
+      case "ArrowUp":
         e.preventDefault();
         setHighlightedIndex((prev) => (prev > 0 ? prev - 1 : prev));
         break;
 
-      case 'Tab':
+      case "Tab":
         setIsOpen(false);
         break;
     }
@@ -119,7 +119,9 @@ const Select = ({
 
   // Determinar el texto a mostrar en el control
   // const displayText = selectedOption ? selectedOption.label : placeholder;
-  const displayText = selectedOption ? getOptionLabel(selectedOption) : placeholder;
+  const displayText = selectedOption
+    ? getOptionLabel(selectedOption)
+    : placeholder;
 
   // Manejar teclas en el botón principal
   const handleButtonKeyDown = (e) => {
@@ -180,20 +182,19 @@ const Select = ({
         >
           {searchable && (
             <input
-                ref={searchInputRef}
-                type="text"
-                className="
+              ref={searchInputRef}
+              type="text"
+              className="
                   w-full rounded-t-md  border-gray-300 bg-white px-3 py-2 text-sm
                   focus:border-primary-500 focus:outline-none focus:ring-1 focus:ring-primary-500
                   dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:focus:border-primary-400 dark:focus:ring-primary-400
                 "
-                placeholder={searchPlaceholder}
-                value={searchTerm}
-                // onChange={handleSearchChange}
-                onKeyDown={handleSearchKeyDown}
-                onChange={(e) => setSearchTerm(e.target.value)}
-              />
-
+              placeholder={searchPlaceholder}
+              value={searchTerm}
+              // onChange={handleSearchChange}
+              onKeyDown={handleSearchKeyDown}
+              onChange={(e) => setSearchTerm(e.target.value)}
+            />
           )}
 
           <ul
@@ -222,18 +223,16 @@ const Select = ({
                   }
                   role="option"
                   aria-selected={selectedOption?.value === option.value}
-
-                  >
-                    <span className="truncate">
-                      {getOptionLabel(option)}
-                    </span>
-                    {selectedOption?.value === option.value &&
-                      <Check 
-                        size={18}
-                        className="
+                >
+                  <span className="truncate">{getOptionLabel(option)}</span>
+                  {selectedOption?.value === option.value && (
+                    <Check
+                      size={18}
+                      className="
                         text-primary-600 dark:text-primary-200
-                      "/>
-                    }
+                      "
+                    />
+                  )}
                 </li>
               ))
             )}

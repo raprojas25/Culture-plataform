@@ -1,39 +1,39 @@
-import React from 'react';
-import { Calendar, Users, Tag, TrendingUp } from 'lucide-react';
+import React from "react";
+import { Calendar, Users, Tag, TrendingUp } from "lucide-react";
 // import { StatsCards } from '../../components/features/StatsCards';
-import { useAuthStore } from '../../stores/authStore';
+import { useAuthStore } from "@/shared/stores/authStore";
 
-export const Dashboard = () => {
+export const DashboardDos = () => {
   const { user } = useAuthStore();
 
   const stats = [
     {
-      title: 'Eventos Activos',
-      value: '24',
-      change: '+12%',
+      title: "Eventos Activos",
+      value: "24",
+      change: "+12%",
       icon: Calendar,
-      color: 'blue',
+      color: "blue",
     },
     {
-      title: 'Usuarios Registrados',
-      value: '156',
-      change: '+8%',
+      title: "Usuarios Registrados",
+      value: "156",
+      change: "+8%",
       icon: Users,
-      color: 'green',
+      color: "green",
     },
     {
-      title: 'Categorías',
-      value: '12',
-      change: '+2',
+      title: "Categorías",
+      value: "12",
+      change: "+2",
       icon: Tag,
-      color: 'purple',
+      color: "purple",
     },
     {
-      title: 'Ingresos Mensuales',
-      value: 'S/ 4,820',
-      change: '+23%',
+      title: "Ingresos Mensuales",
+      value: "S/ 4,820",
+      change: "+23%",
       icon: TrendingUp,
-      color: 'orange',
+      color: "orange",
     },
   ];
 
@@ -58,10 +58,26 @@ export const Dashboard = () => {
           </h2>
           <div className="space-y-4">
             {[
-              { user: 'Ana García', action: 'creó un nuevo evento', time: 'Hace 5 min' },
-              { user: 'Carlos López', action: 'actualizó su perfil', time: 'Hace 15 min' },
-              { user: 'María Torres', action: 'comentó en un evento', time: 'Hace 30 min' },
-              { user: 'Pedro Sánchez', action: 'registró un nuevo usuario', time: 'Hace 1 hora' },
+              {
+                user: "Ana García",
+                action: "creó un nuevo evento",
+                time: "Hace 5 min",
+              },
+              {
+                user: "Carlos López",
+                action: "actualizó su perfil",
+                time: "Hace 15 min",
+              },
+              {
+                user: "María Torres",
+                action: "comentó en un evento",
+                time: "Hace 30 min",
+              },
+              {
+                user: "Pedro Sánchez",
+                action: "registró un nuevo usuario",
+                time: "Hace 1 hora",
+              },
             ].map((activity, index) => (
               <div
                 key={index}
@@ -69,7 +85,7 @@ export const Dashboard = () => {
               >
                 <div>
                   <p className="text-gray-900 dark:text-white">
-                    <span className="font-semibold">{activity.user}</span>{' '}
+                    <span className="font-semibold">{activity.user}</span>{" "}
                     {activity.action}
                   </p>
                 </div>
@@ -123,4 +139,3 @@ export const Dashboard = () => {
     </div>
   );
 };
-

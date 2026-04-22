@@ -96,7 +96,12 @@ export const useUserStats = (options = {}) => {
     await fetchGrowthData({ period: "month" });
     await fetchRecentActivity(10);
     await fetchMostActiveUsers(10);
-  }, [fetchAllMetrics, fetchGrowthData, fetchRecentActivity, fetchMostActiveUsers]);
+  }, [
+    fetchAllMetrics,
+    fetchGrowthData,
+    fetchRecentActivity,
+    fetchMostActiveUsers,
+  ]);
 
   useEffect(() => {
     if (autoFetch) {

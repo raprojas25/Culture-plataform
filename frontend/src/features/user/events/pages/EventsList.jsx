@@ -1,17 +1,18 @@
-import React, { useEffect, useState } from 'react';
-import { Calendar, Grid, List } from 'lucide-react';
-import { useEvents } from '../../hooks/useEvents';
-import { EventFilters } from '../../components/features/EventFilters';
-import { EventCard } from '../../components/features/EventCard';
-import { Button } from '../../components/ui/Button';
-import { categoryService } from '../../services/categoryService';
+import React, { useEffect, useState } from "react";
+import { Calendar, Grid, List } from "lucide-react";
+import { useEvents } from "../../hooks/useEvents";
+import { EventFilters } from "../../components/features/EventFilters";
+import { EventCard } from "../../components/features/EventCard";
+import { Button } from "../../components/ui/Button";
+import { categoryService } from "../../services/categoryService";
 // import { Category } from '../../services/category.service';
 
 export const EventsList = () => {
-  const { events, filters, pagination, setFilters, fetchEvents, isLoading } = useEvents();
+  const { events, filters, pagination, setFilters, fetchEvents, isLoading } =
+    useEvents();
   const [categories, setCategories] = useState([]);
   const [districts, setDistricts] = useState([]);
-  const [viewMode, setViewMode] = useState('grid');
+  const [viewMode, setViewMode] = useState("grid");
 
   useEffect(() => {
     fetchCategories();
@@ -23,17 +24,17 @@ export const EventsList = () => {
       const data = await categoryService.getAll();
       setCategories(data);
     } catch (error) {
-      console.error('Error fetching categories:', error);
+      console.error("Error fetching categories:", error);
     }
   };
 
   const fetchDistricts = async () => {
     // Mock districts - implement API call when available
     setDistricts([
-      { id: 1, name: 'Miraflores', city: 'Lima' },
-      { id: 2, name: 'Barranco', city: 'Lima' },
-      { id: 3, name: 'San Isidro', city: 'Lima' },
-      { id: 4, name: 'Cercado', city: 'Lima' },
+      { id: 1, name: "Miraflores", city: "Lima" },
+      { id: 2, name: "Barranco", city: "Lima" },
+      { id: 3, name: "San Isidro", city: "Lima" },
+      { id: 4, name: "Cercado", city: "Lima" },
     ]);
   };
 
@@ -55,7 +56,8 @@ export const EventsList = () => {
             Descubre Eventos Culturales
           </h1>
           <p className="text-xl text-white/90 mb-8">
-            Encuentra los mejores eventos, conciertos, talleres y más en tu ciudad
+            Encuentra los mejores eventos, conciertos, talleres y más en tu
+            ciudad
           </p>
         </div>
       </div>
@@ -72,23 +74,23 @@ export const EventsList = () => {
       <div className="flex justify-between items-center">
         <div>
           <p className="text-gray-600 dark:text-gray-400">
-            Mostrando <span className="font-semibold">{events.length}</span> de{' '}
+            Mostrando <span className="font-semibold">{events.length}</span> de{" "}
             <span className="font-semibold">{pagination.total}</span> eventos
           </p>
         </div>
         <div className="flex items-center space-x-2">
           <div className="bg-gray-100 dark:bg-gray-800 rounded-lg p-1">
             <Button
-              variant={viewMode === 'grid' ? 'primary' : 'outline'}
+              variant={viewMode === "grid" ? "primary" : "outline"}
               size="sm"
-              onClick={() => setViewMode('grid')}
+              onClick={() => setViewMode("grid")}
             >
               <Grid className="w-4 h-4" />
             </Button>
             <Button
-              variant={viewMode === 'list' ? 'primary' : 'outline'}
+              variant={viewMode === "list" ? "primary" : "outline"}
               size="sm"
-              onClick={() => setViewMode('list')}
+              onClick={() => setViewMode("list")}
             >
               <List className="w-4 h-4" />
             </Button>
@@ -117,16 +119,16 @@ export const EventsList = () => {
         <>
           <div
             className={
-              viewMode === 'grid'
-                ? 'grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6'
-                : 'space-y-4'
+              viewMode === "grid"
+                ? "grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
+                : "space-y-4"
             }
           >
             {events.map((event) => (
               <EventCard
                 key={event.id}
                 event={event}
-                onLike={() => console.log('Like:', event.id)}
+                onLike={() => console.log("Like:", event.id)}
               />
             ))}
           </div>
@@ -142,13 +144,13 @@ export const EventsList = () => {
                       onClick={() => handlePageChange(page)}
                       className={`px-4 py-2 rounded-lg ${
                         page === pagination.page
-                          ? 'bg-primary-600 text-white'
-                          : 'bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700'
+                          ? "bg-primary-600 text-white"
+                          : "bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700"
                       }`}
                     >
                       {page}
                     </button>
-                  )
+                  ),
                 )}
               </nav>
             </div>
@@ -158,4 +160,3 @@ export const EventsList = () => {
     </div>
   );
 };
-

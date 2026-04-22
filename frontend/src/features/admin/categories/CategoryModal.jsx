@@ -1,6 +1,6 @@
-import React from 'react';
-import { X } from 'lucide-react';
-import { Dialog, DialogPanel, DialogTitle } from '@headlessui/react';
+import React from "react";
+import { X } from "lucide-react";
+import { Dialog, DialogPanel, DialogTitle } from "@headlessui/react";
 // import CategoryForm from "@/shared/components/modals/CategoryForm"
 
 const CategoryModal = ({
@@ -8,24 +8,23 @@ const CategoryModal = ({
   onClose,
   onSubmit,
   initialData,
-  isLoading
+  isLoading,
 }) => {
   return (
-    <Dialog 
-      open={isOpen} 
-      onClose={onClose} 
-      className="relative z-50"
-    >
+    <Dialog open={isOpen} onClose={onClose} className="relative z-50">
       {/* Fondo */}
-      <div className="fixed inset-0 bg-black/30 dark:bg-black/50 backdrop-blur-sm" aria-hidden="true" />
-      
+      <div
+        className="fixed inset-0 bg-black/30 dark:bg-black/50 backdrop-blur-sm"
+        aria-hidden="true"
+      />
+
       {/* Contenedor del modal */}
       <div className="fixed inset-0 flex items-center justify-center p-4 overflow-y-auto pb-4">
         <DialogPanel className="w-full max-w-2xl rounded-2xl bg-white dark:bg-gray-900 shadow-xl">
           {/* Header */}
           <div className="flex items-center justify-between p-6 border-b border-gray-200 dark:border-gray-700">
             <DialogTitle className="text-xl font-semibold text-gray-900 dark:text-gray-100">
-              {initialData ? 'Editar Categoría' : 'Nueva Categoría'}
+              {initialData ? "Editar Categoría" : "Nueva Categoría"}
             </DialogTitle>
             <button
               onClick={onClose}

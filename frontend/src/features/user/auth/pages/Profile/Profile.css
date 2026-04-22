@@ -8,7 +8,7 @@
 }
 
 .profile-header::after {
-  content: '';
+  content: "";
   position: absolute;
   bottom: 0;
   left: 0;
@@ -41,7 +41,7 @@
 }
 
 .profile-tabs::after {
-  content: '';
+  content: "";
   position: absolute;
   bottom: 0;
   left: 0;
@@ -57,7 +57,9 @@
 
 .stats-card:hover {
   transform: translateY(-4px);
-  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+  box-shadow:
+    0 20px 25px -5px rgba(0, 0, 0, 0.1),
+    0 10px 10px -5px rgba(0, 0, 0, 0.04);
 }
 
 /* Tabla de eventos */
@@ -88,7 +90,9 @@
 }
 
 .favorite-card:hover {
-  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+  box-shadow:
+    0 20px 25px -5px rgba(0, 0, 0, 0.1),
+    0 10px 10px -5px rgba(0, 0, 0, 0.04);
 }
 
 .favorite-card-image {
@@ -97,7 +101,7 @@
 }
 
 .favorite-card-image::after {
-  content: '';
+  content: "";
   position: absolute;
   top: 0;
   left: 0;
@@ -120,7 +124,7 @@
 }
 
 .notification-unread::before {
-  content: '';
+  content: "";
   position: absolute;
   left: 0;
   top: 0;
@@ -150,7 +154,7 @@
   right: 0;
   bottom: 0;
   background-color: #d1d5db;
-  transition: .4s;
+  transition: 0.4s;
   border-radius: 34px;
 }
 
@@ -162,7 +166,7 @@
   left: 0.25rem;
   bottom: 0.25rem;
   background-color: white;
-  transition: .4s;
+  transition: 0.4s;
   border-radius: 50%;
 }
 
@@ -181,7 +185,8 @@ input:checked + .toggle-slider:before {
 }
 
 @keyframes pulseDanger {
-  0%, 100% {
+  0%,
+  100% {
     border-color: #ef4444;
   }
   50% {
@@ -206,17 +211,17 @@ input:checked + .toggle-slider:before {
   .profile-header {
     height: 12rem;
   }
-  
+
   .profile-avatar {
     width: 6rem;
     height: 6rem;
   }
-  
+
   .profile-tabs {
     overflow-x: auto;
     -webkit-overflow-scrolling: touch;
   }
-  
+
   .profile-tabs::-webkit-scrollbar {
     display: none;
   }
@@ -240,8 +245,12 @@ input:checked + .toggle-slider:before {
 }
 
 @keyframes spin {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
 }
 
 /* Estilos para los logros */
@@ -319,7 +328,7 @@ input:checked + .toggle-slider:before {
   .no-print {
     display: none !important;
   }
-  
+
   .profile-content {
     font-size: 12pt;
   }
@@ -338,7 +347,7 @@ input:checked + .toggle-slider:before {
   .notification-item {
     transition: none;
   }
-  
+
   .animate-fadeInUp {
     animation: none;
   }

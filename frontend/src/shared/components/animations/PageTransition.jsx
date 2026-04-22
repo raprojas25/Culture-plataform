@@ -1,5 +1,5 @@
-import { motion, AnimatePresence } from 'framer-motion';
-import { useLocation } from 'react-router-dom';
+import { motion, AnimatePresence } from "framer-motion";
+import { useLocation } from "react-router-dom";
 
 export const PageTransition = ({ children }) => {
   const location = useLocation();
@@ -17,4 +17,3 @@ export const PageTransition = ({ children }) => {
     </AnimatePresence>
   );
 };
-

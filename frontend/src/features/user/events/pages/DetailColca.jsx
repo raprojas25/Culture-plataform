@@ -290,7 +290,7 @@ const EventDetailsColca = () => {
   return (
     <div className="min-h-screen bg-gradient-to-b from-amber-50 to-white dark:from-gray-900 dark:to-gray-800 transition-colors duration-300">
       {/* Header con navegación */}
-      <header className="sticky top-0 z-50 backdrop-blur-md bg-white/80 dark:bg-gray-900/80 border-b border-amber-100 dark:border-gray-700 hidden">
+      <header className="sticky top-0 z-50 backdrop-blur-md bg-white/80 dark:bg-gray-900/80 border-b border-amber-100 dark:border-gray-700 hidden md:block ">
         <div className="container mx-auto px-4 py-4">
           <div className="flex items-center justify-between">
             <button
@@ -342,29 +342,27 @@ const EventDetailsColca = () => {
           className="w-full h-[70vh] object-cover"
         />
 
-         {/* Overlay con acciones */}
+        {/* Overlay con acciones */}
         <div className="absolute top-5 right-4 z-30">
           <div className="flex items-center space-x-4 p-2">
-              <button
-                onClick={() => setIsFavorite(!isFavorite)}
-                className={`p-2 rounded-full ${isFavorite ? "bg-red-50 dark:bg-red-900/30 text-red-500" : "bg-gray-100 dark:bg-gray-800 text-gray-500 hover:text-red-500"}`}
-              >
-                <Heart
-                  className={`${isFavorite ? "fill-current" : ""}`}
+            <button
+              onClick={() => setIsFavorite(!isFavorite)}
+              className={`p-2 rounded-full ${isFavorite ? "bg-red-50 dark:bg-red-900/30 text-red-500" : "bg-gray-100 dark:bg-gray-800 text-gray-500 hover:text-red-500"}`}
+            >
+              <Heart
+                className={`${isFavorite ? "fill-current" : ""}`}
                 size={25}
-                />
-              </button>
+              />
+            </button>
 
-              <button
-                onClick={handleShare}
-                className="p-2 rounded-full bg-gray-100 dark:bg-gray-800 text-gray-500 hover:text-amber-600 dark:hover:text-amber-400"
-              >
-                <Share2 size={25} />
-              </button>
-
+            <button
+              onClick={handleShare}
+              className="p-2 rounded-full bg-gray-100 dark:bg-gray-800 text-gray-500 hover:text-amber-600 dark:hover:text-amber-400"
+            >
+              <Share2 size={25} />
+            </button>
           </div>
         </div>
-
 
         <div className="absolute bottom-10 left-0 right-0 z-20 text-white p-8">
           <div className="container mx-auto">

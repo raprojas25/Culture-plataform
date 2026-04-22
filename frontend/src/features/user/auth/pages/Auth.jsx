@@ -523,7 +523,6 @@ const Auth = () => {
                       <Lock
                         className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400"
                         size={20}
-
                       />
                       <Input
                         variant="password"
@@ -692,7 +691,8 @@ const Auth = () => {
                       className="mt-1 mr-3 rounded border-gray-300 text-red-600 focus:ring-red-500"
                     />
                     <Label htmlFor="newsletter" variant="secondary">
-                      Quiero recibir información sobre eventos y novedades de la plataforma
+                      Quiero recibir información sobre eventos y novedades de la
+                      plataforma
                     </Label>
                   </div>
 
