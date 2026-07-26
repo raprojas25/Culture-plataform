@@ -30,7 +30,6 @@ import Gallery from "@/features/user/gallery/pages/Gallery";
 import About from "@/features/user/about/About";
 import Contact from "@/features/user/contact/Contact";
 import Admin from "@/features/admin/home/Admin";
-import { DashboardDos } from "@/features/admin/stats/DashboardDos";
 import { HomeAdmin } from "@/features/admin/home/Index";
 import { Roles } from "@/features/admin/roles/Roles";
 import { Districts } from "@/features/admin/district/Districts";

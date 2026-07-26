@@ -551,7 +551,7 @@ export const Profile = () => {
                   <Button
                     variant="primary"
                     size="lg"
-                    leftIcon={<PlusCircle size={20} />}
+                    leftIcon={PlusCircle}
                     className="w-full mt-6"
                     onClick={handleNavigate}
                   >

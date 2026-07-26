@@ -11,11 +11,11 @@ export const authService = {
       );
     }
   },
-  login: async (credentials) => {
-    const response = await api.post("/auth/login", credentials);
-    return response.data;
-  },
-
+  // login: async (credentials) => {
+  //   const response = await api.post("/auth/login", credentials);
+  //   return response.data;
+  // },
+  //
   register: async (userData) => {
     try {
       const response = await api.post("/auth/register", userData);
